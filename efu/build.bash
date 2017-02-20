@@ -1,7 +1,7 @@
 #!/bin/bash
 
 BANNER=echo
-REPOBASE="git@github.com:ess-dmsc/"
+REPOBASE="http://github.com/ess-dmsc/"
 
 function errexit()
 {
