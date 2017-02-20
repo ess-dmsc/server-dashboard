@@ -37,9 +37,8 @@ function build_efu()
   COPYFILES="cspec.so cspec2.so nmx.so udp.so gencspec gencspecfile gennmxfile efu2"
 
   echo "Building event-formation-unit"
-  echo "NOKAFKA!"
   pushd event-formation-unit/prototype2
-    make NOKAFKA=y HDF5=y GRAYLOG=y V=y || errexit "make failed for EFU"
+    make NOKAFKA=$nokafka KAFKAINC=$kafkainc KAFKALIB=$kafkalib HDF5=y HDF5LIB=$hdf5lib GRAYLOG=y V=y || errexit "make failed for EFU"
     cp data/* $DDIR || errexit "cant copy data files"
     for cpfile in $COPYFILES
     do
@@ -95,6 +94,11 @@ function copy_utilities()
 
 BASEDIR=$(pwd)
 git status &>/dev/null && errexit "will not build within git repository please call from other directory"
+
+nokafka=$1
+kafkainc=$2
+kafkalib=$3
+hdf5lib=$4
 
 clone_projects
 
