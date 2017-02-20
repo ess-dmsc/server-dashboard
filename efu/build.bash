@@ -38,7 +38,8 @@ function build_efu()
 
   echo "Building event-formation-unit"
   pushd event-formation-unit/prototype2
-    make NOKAFKA=$nokafka KAFKAINC=$kafkainc KAFKALIB=$kafkalib HDF5=y HDF5LIB=$hdf5lib GRAYLOG=y V=y || errexit "make failed for EFU"
+    make NOKAFKA=$nokafka KAFKAINC=$kafkainc KAFKALIB=$kafkalib HDF5=y \
+         HDF5INC=$hdf5inc HDF5LIB=$hdf5lib   GRAYLOG=y V=y || errexit "make failed for EFU"
     cp data/* $DDIR || errexit "cant copy data files"
     for cpfile in $COPYFILES
     do
@@ -98,7 +99,8 @@ git status &>/dev/null && errexit "will not build within git repository please c
 nokafka=$1
 kafkainc=$2
 kafkalib=$3
-hdf5lib=$4
+hdf5inc=$4
+hdf5lib=$5
 
 clone_projects
 
