@@ -93,16 +93,17 @@ function copy_utilities()
   popd
 }
 
+BASEDIR=$(pwd)
 git status &>/dev/null && errexit "will not build within git repository please call from other directory"
 
 clone_projects
 
 make_directories
-IDIR=$(pwd)/output/inc
-ODIR=$(pwd)/output/bin
-DDIR=$(pwd)/output/data
-LDIR=$(pwd)/output/lib
-UDIR=$(pwd)/output/util
+IDIR=$BASEDIR/output/inc
+ODIR=$BASEDIR/output/bin
+DDIR=$BASEDIR/output/data
+LDIR=$BASEDIR/output/lib
+UDIR=$BASEDIR/output/util
 
 build_data_types
 build_h5cc
