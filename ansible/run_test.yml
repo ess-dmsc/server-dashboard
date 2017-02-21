@@ -1,15 +1,15 @@
 - hosts: efus
   tasks:
     - name: start cspec pipeline
-      shell: LD_LIBRARY_PATH=/opt/dm_group/usr/lib:../lib ./efu2 -d cspec -s 10
+      shell: LD_LIBRARY_PATH=/opt/dm_group/usr/lib:../lib ./efu2 -d cspec -s 10 -b itest02.dm.esss.dk:9092
       args:
         chdir: ~/output/bin
       async: 20
-      poll: 5
+      poll: 0
 
 - hosts: data-generators
   tasks:
     - name: start data generation
-      shell: ./gencspec -s 100 -t 100 -i itest01.dm.esss.dk
+      shell: LD_LIBRARY_PATH=/opt/dm_group/usr/lib:../lib ./gencspec -s 2 -t 100 -i 192.168.12.21
       args:
         chdir: ~/output/bin
