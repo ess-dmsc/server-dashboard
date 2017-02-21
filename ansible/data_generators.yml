@@ -1,0 +1,3 @@
+- hosts: data-generators
+  roles:
+    - data_generator
