@@ -99,11 +99,10 @@ function copy_utilities()
 BASEDIR=$(pwd)
 git status &>/dev/null && errexit "will not build within git repository please call from other directory"
 
-nokafka=$1
-kafkainc=$2
-kafkalib=$3
-hdf5inc=$4
-hdf5lib=$5
+kafkainc=$1
+kafkalib=$2
+hdf5inc=$3
+hdf5lib=$4
 
 clone_projects
 
