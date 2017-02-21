@@ -41,7 +41,7 @@ function build_efu()
 
   echo "Building event-formation-unit"
   pushd event-formation-unit/prototype2
-    make NDEBUG=y NOKAFKA=$nokafka KAFKAINC=$kafkainc KAFKALIB=$kafkalib HDF5=y \
+    make RELEASE=y KAFKAINC=$kafkainc KAFKALIB=$kafkalib HDF5=y \
          HDF5INC=$hdf5inc HDF5LIB=$hdf5lib   GRAYLOG=y V=y || errexit "make failed for EFU"
     cp data/* $DDIR || errexit "cant copy data files"
     for cpfile in $COPYFILES
