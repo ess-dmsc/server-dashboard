@@ -96,6 +96,11 @@ function copy_utilities()
   popd
 }
 
+function make_tar()
+{
+    tar czvf output.tar.gz output
+}
+
 BASEDIR=$(pwd)
 git status &>/dev/null && errexit "will not build within git repository please call from other directory"
 
@@ -119,5 +124,6 @@ build_graylog_logger
 build_efu
 
 copy_utilities
+make_tar
 
 $BANNER Done
