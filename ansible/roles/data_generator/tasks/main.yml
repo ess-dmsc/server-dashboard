@@ -1,5 +1,4 @@
 - name: packages are installed
-  become: yes
   unarchive:
     src: "{{ pipeline_src_dir }}/output.tar.gz"
-    dest: ~/output
+    dest: "~"
