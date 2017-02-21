@@ -10,6 +10,7 @@ function errexit()
   exit 1
 }
 
+########################################################################################
 function clone_projects()
 {
   echo "Cloning projects: "
@@ -22,6 +23,7 @@ function clone_projects()
   done
 }
 
+########################################################################################
 function build_data_types()
 {
   echo "Building streaming-data-types"
@@ -32,13 +34,14 @@ function build_data_types()
   popd
 }
 
+########################################################################################
 function build_efu()
 {
   COPYFILES="cspec.so cspec2.so nmx.so udp.so gencspec gencspecfile gennmxfile efu2"
 
   echo "Building event-formation-unit"
   pushd event-formation-unit/prototype2
-    make NOKAFKA=$nokafka KAFKAINC=$kafkainc KAFKALIB=$kafkalib HDF5=y \
+    make NDEBUG=y NOKAFKA=$nokafka KAFKAINC=$kafkainc KAFKALIB=$kafkalib HDF5=y \
          HDF5INC=$hdf5inc HDF5LIB=$hdf5lib   GRAYLOG=y V=y || errexit "make failed for EFU"
     cp data/* $DDIR || errexit "cant copy data files"
     for cpfile in $COPYFILES
