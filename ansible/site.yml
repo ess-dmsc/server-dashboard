@@ -1,1 +1,1 @@
-- include: data_generators.yml
+- include: pipeline.yml
