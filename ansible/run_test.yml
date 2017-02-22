@@ -7,6 +7,11 @@
       async: 20
       poll: 0
 
+    - name: load cspec calibration
+      shell: ./mgloadcal.py ../data/g1w113
+      args:
+        chdir: ~/output/util/efushell
+
 - hosts: data-generators
   tasks:
     - name: start data generation

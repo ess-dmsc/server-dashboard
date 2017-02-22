@@ -1,4 +1,4 @@
 - name: packages are installed
   unarchive:
-    src: "{{ pipeline_src_dir }}/output.tar.gz"
+    src: https://jenkins.esss.dk/dm/job/integration_test/lastSuccessfulBuild/artifact/output.tar.gz
     dest: "~"
