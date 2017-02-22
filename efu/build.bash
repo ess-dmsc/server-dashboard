@@ -3,6 +3,7 @@
 BANNER=echo
 REPOBASE="http://github.com/ess-dmsc/"
 
+########################################################################################
 function errexit()
 {
   echo "Error: $1"
@@ -28,8 +29,8 @@ function build_data_types()
 {
   echo "Building streaming-data-types"
   pushd streaming-data-types/build
-    cmake .. || errexit "cmake failed for streaming-data-types"
-    make || errexit "make failed for streaming-data-types"
+    cmake ..             || errexit "cmake failed for streaming-data-types"
+    make                 || errexit "make failed for streaming-data-types"
     cp schemas/*.h $IDIR || errexit "cant copy schema header files"
   popd
 }
@@ -41,37 +42,40 @@ function build_efu()
 
   echo "Building event-formation-unit"
   pushd event-formation-unit/prototype2
-    make RELEASE=y KAFKAINC=$kafkainc KAFKALIB=$kafkalib HDF5=y \
-         HDF5INC=$hdf5inc HDF5LIB=$hdf5lib   GRAYLOG=y V=y || errexit "make failed for EFU"
-    cp data/* $DDIR || errexit "cant copy data files"
+    make RELEASE=y HDF5=y GRAYLOG=y V=y          \
+         KAFKAINC=$KAFKAINC KAFKALIB=$KAFKALIB   \
+         HDF5INC=$HDF5INC   HDF5LIB=$HDF5LIB     || errexit "make failed for EFU"
     for cpfile in $COPYFILES
     do
       echo "Copying "$cpfile
-      cp $cpfile $ODIR || errexit "cant copy $cpfile to output dir"
+      cp $cpfile $ODIR                           || errexit "cant copy $cpfile to output dir"
     done
   popd
 }
 
+########################################################################################
 function build_h5cc()
 {
   echo "Building h5cc"
   pushd h5cc/build
-    cmake ../source || "cmake failed for h5cc"
-    make || errexit "make failed for h5cc"
-    cp lib* $LDIR || errexit "cant copy library files"
+    cmake ../source || errexit "cmake failed"
+    make            || errexit "make failed"
+    cp lib* $LDIR   || errexit "cant copy library files"
   popd
 }
 
+########################################################################################
 function build_graylog_logger()
 {
   echo "Building graylog-logger"
   pushd graylog-logger/graylog_logger/build
-    cmake ..
-    make || errexit "make failed for graylog-logger"
-    cp lib* $LDIR ||errexit "cant copy library files"
+    cmake ..      || errexit "cmake failed"
+    make          || errexit "make failed"
+    cp lib* $LDIR || errexit "cant copy library files"
   popd
 }
 
+########################################################################################
 function make_directories()
 {
   echo "creating output directories"
@@ -79,35 +83,48 @@ function make_directories()
   for d in $DIRS
   do
     echo "--$d"
-    test -d $d && errexit "output directory $d already exists"
-    mkdir -p $d || errexit "unable to create directory $d"
+    test -d $d   && errexit "output directory $d already exists"
+    mkdir -p $d  || errexit "unable to create directory $d"
   done
 }
 
+########################################################################################
 function copy_utilities()
 {
   echo "Copying utilities"
   pushd event-formation-unit/utils
-    cp -r efushell $UDIR  || errexit "couldnt copy efushell to util"
+    cp -r efushell $UDIR     || errexit "couldnt copy efushell to util"
   popd
+
+  echo "Copying scripts"
   pushd event-formation-unit/dataformats/cncs2016/scripts
-    cp multigridmon.py $UDIR || echo "couldnt copy multigrid monitor to util"
-    cp nmxmon.py $UDIR || echo "couldnt copy nmx monitor to util"
+    cp multigridmon.py $UDIR || errexit "couldnt copy multigrid monitor to util"
+    cp nmxmon.py $UDIR       || errexit "couldnt copy nmx monitor to util"
+  popd
+
+  echo "Copying data files"
+  pushd event-formation-unit/prototype2
+    cp data/* $DDIR          || errexit "cant copy data files"
   popd
 }
 
+########################################################################################
 function make_tar()
 {
     tar czvf output.tar.gz output
 }
 
+#
+# Main script starts here
+#
 BASEDIR=$(pwd)
 git status &>/dev/null && errexit "will not build within git repository please call from other directory"
 
-kafkainc=$1
-kafkalib=$2
-hdf5inc=$3
-hdf5lib=$4
+DEFPATH="/opt/dm_group/usr"
+KAFKAINC=${1:-$DEFPATH/include}
+KAFKALIB=${2:-$DEFPATH/lib}
+HDF5INC=${3:-$DEFPATH/include}
+HDF5LIB=${4:-$DEFPATH/lib}
 
 clone_projects
 
