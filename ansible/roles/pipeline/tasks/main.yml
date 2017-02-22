@@ -1,4 +1,5 @@
 - name: packages are installed
   unarchive:
+    remote_src: yes
     src: https://jenkins.esss.dk/dm/job/integration_test/lastSuccessfulBuild/artifact/output.tar.gz
     dest: "~"
