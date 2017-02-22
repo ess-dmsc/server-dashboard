@@ -126,6 +126,16 @@ KAFKALIB=${2:-$DEFPATH/lib}
 HDF5INC=${3:-$DEFPATH/include}
 HDF5LIB=${4:-$DEFPATH/lib}
 
+echo "KAFKAINC: $KAFKAINC"
+echo "KAFKALIB: $KAFKALIB"
+echo "HDF5INC: $HDF5INC"
+echo "HDF5LIB: $HDF5LIB"
+
+test -d $KAFKAINC || errexit "KAFKAINC: $KAFKAINC does not exist"
+test -d $KAFKALIB || errexit "KAFKALIB: $KAFKALIB does not exist"
+test -d $HDF5INC  || errexit "HDF5INC: $HDF5INC does not exist"
+test -d $HDF5LIB  || errexit "HDF5LIB: $HDF5LIB does not exist"
+
 clone_projects
 
 make_directories
