@@ -97,7 +97,7 @@ function copy_utilities()
   popd
 
   echo "Copying scripts"
-  pushd event-formation-unit/dataformats/cncs2016/scripts
+  pushd event-formation-unit/dataformats/multigrid/scripts
     cp multigridmon.py $UDIR || errexit "couldnt copy multigrid monitor to util"
     cp nmxmon.py $UDIR       || errexit "couldnt copy nmx monitor to util"
   popd
