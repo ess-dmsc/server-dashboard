@@ -138,6 +138,9 @@ test -d $HDF5LIB  || errexit "HDF5LIB: $HDF5LIB does not exist"
 
 clone_projects
 
+# Generate line count metrics
+cloc --by-file --xml --out=cloc.xml .
+
 make_directories
 IDIR=$BASEDIR/output/inc
 ODIR=$BASEDIR/output/bin
