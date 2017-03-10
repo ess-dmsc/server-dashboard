@@ -1,6 +1,5 @@
 - name: executable is installed
-  copy:
-    remote_src: yes
-    src: https://jenkins.esss.dk/dm/job/ess-dmsc/job/forward-epics-to-kafka/job/jenkins/lastSuccessfulBuild/artifact/forward-epics-to-kafka
+  get_url:
+    url: https://jenkins.esss.dk/dm/job/ess-dmsc/job/forward-epics-to-kafka/job/jenkins/lastSuccessfulBuild/artifact/forward-epics-to-kafka
     dest: "~"
     mode: 0775
