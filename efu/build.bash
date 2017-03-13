@@ -42,13 +42,13 @@ function build_efu()
 
   echo "Building event-formation-unit"
   pushd event-formation-unit/prototype2
-    make RELEASE=y HDF5=y GRAYLOG=y V=y          \
-         KAFKAINC=$KAFKAINC KAFKALIB=$KAFKALIB   \
-         HDF5INC=$HDF5INC   HDF5LIB=$HDF5LIB     || errexit "make failed for EFU"
+    make RELEASE=y HDF5=y GRAYLOG=y EXTSCHEMAS=y V=y  \
+         KAFKAINC=$KAFKAINC KAFKALIB=$KAFKALIB        \
+         HDF5INC=$HDF5INC   HDF5LIB=$HDF5LIB         || errexit "make failed for EFU"
     for cpfile in $COPYFILES
     do
       echo "Copying "$cpfile
-      cp $cpfile $ODIR                           || errexit "cant copy $cpfile to output dir"
+      cp $cpfile $ODIR                               || errexit "cant copy $cpfile to output dir"
     done
   popd
 }
