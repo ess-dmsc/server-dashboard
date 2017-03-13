@@ -7,3 +7,6 @@
 
 [efus]
 192.168.12.21
+
+[epics-to-kafka-forwarders]
+192.168.12.23
