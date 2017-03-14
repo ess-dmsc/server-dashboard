@@ -10,3 +10,6 @@
 
 [epics-to-kafka-forwarders]
 192.168.12.23
+
+[file-writers]
+192.168.12.21
