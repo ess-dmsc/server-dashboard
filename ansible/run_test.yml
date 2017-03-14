@@ -36,4 +36,4 @@
 - hosts: file-writers
   tasks:
     - name: kill file writer
-      shell: pkill kafka-to-nexus
+      shell: pkill kafka-to-nexus || true
