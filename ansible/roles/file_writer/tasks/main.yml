@@ -10,7 +10,7 @@
     dest: "~"
     mode: 0755
 
-- name: file writer start command script is installed
+- name: file writer stop command script is installed
   copy:
     src: "send-stop-cmd.py"
     dest: "~"

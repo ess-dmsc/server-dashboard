@@ -14,6 +14,11 @@
 
 - hosts: file-writers
   tasks:
+    - name: ouput NeXus file is absent
+      file:
+        path: ~/file-writer/output.h5
+        state: absent
+
     - name: start file writer
       shell: LD_LIBRARY_PATH=/opt/dm_group/usr/lib ./kafka-to-nexus --broker-command //itest02.dm.esss.dk:9092
       args:
