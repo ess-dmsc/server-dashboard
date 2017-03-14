@@ -22,7 +22,9 @@
       poll: 0
 
     - name: send command to start writing to file
-      script: files/send-file-writer-cmd.py "itest03.dm.esss.dk" "C-SPEC_detector" "" "output.h5"
+      shell: ./send-file-writer-cmd.py "itest03.dm.esss.dk" "C-SPEC_detector" "" "output.h5"
+      args:
+        chdir: ~
 
 - hosts: data-generators
   tasks:

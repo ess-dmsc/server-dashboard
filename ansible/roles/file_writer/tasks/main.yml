@@ -3,3 +3,8 @@
     remote_src: yes
     src: https://jenkins.esss.dk/dm/job/ess-dmsc/job/kafka-to-nexus/job/jenkins/lastSuccessfulBuild/artifact/file-writer.tar.gz
     dest: "~"
+
+- name: file writer command script is installed
+  copy:
+    src: send-file-writer-cmd.py
+    dest: "~"
