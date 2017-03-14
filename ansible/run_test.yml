@@ -6,6 +6,7 @@
         chdir: ~/output/bin
       async: 20
       poll: 0
+      register: efu_pipeline
 
     - name: load cspec calibration
       shell: ./mgloadcal.py ../data/g1w113
@@ -44,3 +45,11 @@
       shell: ./send-stop-cmd.py "itest03.dm.esss.dk"
       args:
         chdir: ~
+
+- hosts: efus
+  tasks:
+    - name: 'check pipeline status'
+      async_status: jid={{ efu_pipeline.ansible_job_id }}
+      register: job_result
+      until: job_result.finished
+      retries: 30
