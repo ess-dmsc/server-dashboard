@@ -21,8 +21,8 @@
       async: 20
       poll: 0
 
-    - name: send command to start writing to file
-      shell: ./send-file-writer-cmd.py "itest03.dm.esss.dk" "C-SPEC_detector" "c_spec_data" "output.h5"
+    - name: send start command to file writer
+      shell: ./send-start-cmd.py "itest03.dm.esss.dk" "C-SPEC_detector" "c_spec_data" "output.h5"
       args:
         chdir: ~
 
@@ -35,5 +35,7 @@
 
 - hosts: file-writers
   tasks:
-    - name: kill file writer
-      shell: pkill kafka-to-nexus || true
+    - name: send stop command to file writer
+      shell: ./send-stop-cmd.py "itest03.dm.esss.dk"
+      args:
+        chdir: ~
