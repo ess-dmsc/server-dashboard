@@ -8,3 +8,4 @@
   copy:
     src: send-file-writer-cmd.py
     dest: "~"
+    mode: 0755
