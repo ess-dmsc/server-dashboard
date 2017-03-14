@@ -21,9 +21,17 @@
       async: 20
       poll: 0
 
+    - name: send command to start writing to file
+      script: files/send-file-writer-cmd.py "itest03.dm.esss.dk" "C-SPEC_detector" "" "output.h5"
+
 - hosts: data-generators
   tasks:
     - name: start data generation
       shell: LD_LIBRARY_PATH=/opt/dm_group/usr/lib:../lib ./gencspec -s 2 -t 100 -i 192.168.12.21
       args:
         chdir: ~/output/bin
+
+- hosts: file-writers
+  tasks:
+    - name: kill file writer
+      shell: pkill kafka-to-nexus
