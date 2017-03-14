@@ -7,13 +7,29 @@ import kafka
 
 if __name__ == '__main__':
     arg_parser = argparse.ArgumentParser(
-        description='Send stop command to kafka-to-nexus.')
+        description='Send commands to kafka-to-nexus.')
     arg_parser.add_argument('broker')
+    arg_parser.add_argument('topic')
+    arg_parser.add_argument('source')
+    arg_parser.add_argument('file')
     args = arg_parser.parse_args()
 
     p = kafka.KafkaProducer(bootstrap_servers=args.broker)
 
-    cmd = { "cmd": "FileWriter_exit" }
+    cmd = {
+        "cmd": "FileWriter_new",
+        "broker": args.broker,
+        "streams": [
+            {
+                "topic": args.topic,
+                "source": args.source,
+                "nexus_path": "/"
+            }
+        ],
+        "file_attributes": {
+            "file_name": args.file
+        }
+    }
 
     print("Sending command to " + args.broker + ":")
     print(cmd)
