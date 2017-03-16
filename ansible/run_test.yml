@@ -9,7 +9,7 @@
       register: efu_pipeline
 
     - name: load cspec calibration
-      shell: ./mgloadcal.py ../../../test-data/validruns_15
+      shell: ./mgloadcal.py /home/jenkins/test-data/validruns_15
       args:
         chdir: ~/output/util/efushell
 
