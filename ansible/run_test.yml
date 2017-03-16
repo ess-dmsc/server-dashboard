@@ -9,7 +9,7 @@
       register: efu_pipeline
 
     - name: load cspec calibration
-      shell: ./mgloadcal.py ../data/g1w113
+      shell: ./mgloadcal.py ../../../test-data/validruns_15
       args:
         chdir: ~/output/util/efushell
 
@@ -35,7 +35,7 @@
 - hosts: data-generators
   tasks:
     - name: start data generation
-      shell: LD_LIBRARY_PATH=/opt/dm_group/usr/lib:../lib ./gencspec -s 2 -t 100 -i 192.168.12.21
+      shell: LD_LIBRARY_PATH=/opt/dm_group/usr/lib:../lib ./gencspecfile -f ../../test-data/cncs_10_13.bin -i 192.168.12.21
       args:
         chdir: ~/output/bin
 
