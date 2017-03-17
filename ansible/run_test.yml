@@ -4,7 +4,7 @@
       shell: LD_LIBRARY_PATH=/opt/dm_group/usr/lib:../lib ./efu2 -d cspec -s 10 -b itest02.dm.esss.dk:9092 -a 192.168.12.11
       args:
         chdir: ~/output/bin
-      async: 20
+      async: 60
       poll: 0
       register: efu_pipeline
 
@@ -15,7 +15,7 @@
 
 - hosts: file-writers
   tasks:
-    - name: ouput NeXus file is absent
+    - name: output NeXus file is absent
       file:
         path: ~/file-writer/output.h5
         state: absent
@@ -24,7 +24,7 @@
       shell: LD_LIBRARY_PATH=/opt/dm_group/usr/lib ./kafka-to-nexus --broker-command //itest02.dm.esss.dk:9092
       args:
         chdir: ~/file-writer
-      async: 20
+      async: 60
       poll: 0
 
     - name: send start command to file writer
