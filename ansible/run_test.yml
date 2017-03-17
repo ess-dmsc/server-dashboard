@@ -39,6 +39,10 @@
       args:
         chdir: ~/output/bin
 
+    - name: add some time for file writer to finish writing file
+      pause:
+        seconds: 10
+
 - hosts: file-writers
   tasks:
     - name: send stop command to file writer
