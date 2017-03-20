@@ -1,0 +1,10 @@
+{
+    "mappings": [
+        {
+            "cmd": "add",
+            "channel": "SQ:AMOR:DIMETIX:DIST",
+            "topic": "amor_sim",
+            "type":"f141"
+        }
+    ]
+}
