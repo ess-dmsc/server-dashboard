@@ -3,3 +3,8 @@
     url: https://jenkins.esss.dk/dm/job/ess-dmsc/job/forward-epics-to-kafka/job/jenkins/lastSuccessfulBuild/artifact/forward-epics-to-kafka
     dest: "~"
     mode: 0775
+
+- name: configuration file is installed
+  copy:
+    src: "config.json"
+    dest: "~"
