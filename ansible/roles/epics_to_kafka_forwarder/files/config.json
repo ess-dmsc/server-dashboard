@@ -2,7 +2,7 @@
 	"broker": "itest03.dm.esss.dk:9092",
 	"streams": [
 		{
-			"channel": "EpicsPV.SQ:AMOR:DIMETIX:DIST",
+			"channel": "SQ:AMOR:DIMETIX:DIST",
 			"converter": { "schema": "f141", "topic": "amor_sim" }
 		}
 	]
