@@ -57,7 +57,10 @@
       retries: 30
       ignore_errors: yes
 
-    - name:
+    - name: set playbook_result flag
+      set_fact: playbook_result="success"
+
+    - name: set playbook_result flag if task failed
       set_fact: playbook_result="failure"
       when: efu_pipeline_result.rc!=0
 
