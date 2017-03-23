@@ -48,6 +48,7 @@
 
 # Check results
 - hosts: efus
+  tasks:
     - name: check cspec pipeline result
       async_status:
         jid: "{{ efu_pipeline.ansible_job_id }}"
