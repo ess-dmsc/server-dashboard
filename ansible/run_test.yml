@@ -57,6 +57,15 @@
       retries: 30
       ignore_errors: yes
 
+    - name:
+      set_fact: playbook_result="failure"
+      when: efu_pipeline.rc!=0
+
     - name: print task result
       debug:
         msg: "{{ efu_pipeline_result.stdout_lines }}"
+
+    - name: check playbook result
+      fail:
+        msg: playbook failed
+      when: playbook_result=="failure"
