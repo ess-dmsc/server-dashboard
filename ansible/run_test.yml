@@ -55,6 +55,7 @@
       register: efu_pipeline_result
       until: efu_pipeline_result.finished
       retries: 30
+      ignore_errors: yes
 
     - name: print task result
       debug:
