@@ -59,7 +59,7 @@
 
     - name:
       set_fact: playbook_result="failure"
-      when: efu_pipeline.rc!=0
+      when: efu_pipeline_result.rc!=0
 
     - name: print task result
       debug:
