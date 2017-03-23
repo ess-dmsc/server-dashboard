@@ -45,3 +45,16 @@
       shell: ./send-stop-cmd.py "itest03.dm.esss.dk"
       args:
         chdir: ~
+
+# Check results
+- hosts: efus
+    - name: check cspec pipeline result
+      async_status:
+        jid: "{{ efu_pipeline.ansible_job_id }}"
+      register: efu_pipeline_result
+      until: efu_pipeline_result.finished
+      retries: 30
+
+    - name: print task result
+      debug:
+        msg: "{{ efu_pipeline_result.stdout_lines }}"
