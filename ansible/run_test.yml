@@ -68,6 +68,13 @@
       debug:
         msg: "{{ efu_pipeline_result.stdout_lines }}"
 
+- hosts: file-writers
+    - name: check if NeXus file was generated
+      command: LD_LIBRARY_PATH=/opt/dm_group/usr/lib /opt/dm_group/bin/h5ls output.h5
+      args:
+        chdir: ~/file-writer
+
+- hosts: localhost
     - name: check playbook result
       fail:
         msg: playbook failed
