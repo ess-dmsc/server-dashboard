@@ -47,7 +47,7 @@
         chdir: ~
 
     - name: send command to start writing an EPICS PV to file
-      shell: ./send-pv.py "itest03.dm.esss.dk" "amor_sim" "SQ:AMOR:DIMETIX:DIST" "output.h5"
+      shell: ./send-pv.py "itest03.dm.esss.dk" "amor_sim" "SQ:AMOR:DIMETIX:DIST" "pv.h5"
       args:
         chdir: ~
 
