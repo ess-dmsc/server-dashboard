@@ -58,20 +58,20 @@
       args:
         chdir: ~/output/bin
 
-- hosts: epics-to-kafka-forwarders
+- hosts: file-writers
   tasks:
     - name: change value of EPICS PV
       shell: pvput SQ:AMOR:DIMETIX:LASER ON; sleep 1; pvput SQ:AMOR:DIMETIX:SimVal 0; sleep 1; pvput SQ:AMOR:DIMETIX:SimVal 1; sleep 1
 
-    - name: kill epics-to-kafka-forwarder
-      shell: pkill -9 forward-epics
-
-- hosts: file-writers
-  tasks:
     - name: send stop command to file writer
       shell: ./send-stop-cmd.py "itest03.dm.esss.dk"
       args:
         chdir: ~
+
+- hosts: epics-to-kafka-forwarders
+  tasks:
+    - name: kill epics-to-kafka-forwarder
+      shell: pkill -9 forward-epics
 
 # Check results
 - hosts: efus
