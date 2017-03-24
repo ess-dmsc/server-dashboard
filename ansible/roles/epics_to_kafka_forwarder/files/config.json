@@ -3,7 +3,7 @@
 	"streams": [
 		{
 			"channel": "SQ:AMOR:DIMETIX:DIST",
-			"converter": { "schema": "f141", "topic": "amor_sim" }
+			"converter": { "schema": "f142", "topic": "amor_sim" }
 		}
 	]
 }

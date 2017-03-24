@@ -1,6 +1,6 @@
 - name: executable is installed
   get_url:
-    url: https://jenkins.esss.dk/dm/job/ess-dmsc/job/forward-epics-to-kafka/job/jenkins/lastSuccessfulBuild/artifact/forward-epics-to-kafka
+    url: https://jenkins.esss.dk/dm/job/ess-dmsc/job/forward-epics-to-kafka/job/master/lastSuccessfulBuild/artifact/forward-epics-to-kafka
     dest: "~"
     mode: 0775
 
