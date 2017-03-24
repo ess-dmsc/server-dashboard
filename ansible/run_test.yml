@@ -75,7 +75,7 @@
       args:
         chdir: ~/file-writer
 
-- hosts: localhost
+- hosts: efus
   tasks:
     - name: check playbook result
       fail:
