@@ -21,7 +21,7 @@ if __name__ == '__main__':
             {
                 "topic": "C-SPEC_detector",
                 "source": "c_spec_data",
-                "nexus_path": "/"
+                "nexus_path": "/entry-01/amor/events"
             },
             {
                 "topic": "amor_sim",
@@ -36,6 +36,9 @@ if __name__ == '__main__':
                 "NX_class": "NXentry",
                 "amor": {
                     "NX_class": "NXinstrument",
+                    "events": {
+                        "NX_class": "NXevent_data"
+                    },
                     "dimetix": {
                         "NX_class": "NXevent_data"
                     }
