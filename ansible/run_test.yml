@@ -29,11 +29,6 @@
         path: ~/file-writer/output.h5
         state: absent
 
-    - name: pv NeXus file is absent
-      file:
-        path: ~/file-writer/pv.h5
-        state: absent
-
     - name: start file writer
       shell: LD_LIBRARY_PATH=/opt/dm_group/usr/lib ./kafka-to-nexus --broker-command //itest02.dm.esss.dk:9092
       args:
@@ -42,12 +37,7 @@
       poll: 0
 
     - name: send command to start writing events to file
-      shell: ./send-start-cmd.py "itest03.dm.esss.dk" "C-SPEC_detector" "c_spec_data" "output.h5"
-      args:
-        chdir: ~
-
-    - name: send command to start writing an EPICS PV to file
-      shell: ./send-pv.py "itest03.dm.esss.dk" "amor_sim" "SQ:AMOR:DIMETIX:DIST" "pv.h5"
+      shell: ./send-start-cmd.py "itest03.dm.esss.dk" "output.h5"
       args:
         chdir: ~
 

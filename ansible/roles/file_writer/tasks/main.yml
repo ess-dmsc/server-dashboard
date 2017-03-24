@@ -10,12 +10,6 @@
     dest: "~"
     mode: 0755
 
-- name: file writer send pv command script is installed
-  copy:
-    src: "send-pv.py"
-    dest: "~"
-    mode: 0755
-
 - name: file writer stop command script is installed
   copy:
     src: "send-stop-cmd.py"
