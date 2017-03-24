@@ -71,7 +71,7 @@
 - hosts: file-writers
   tasks:
     - name: check if NeXus file was generated
-      command: LD_LIBRARY_PATH=/opt/dm_group/usr/lib /opt/dm_group/bin/h5ls output.h5
+      command: LD_LIBRARY_PATH=/opt/dm_group/usr/lib /opt/dm_group/usr/bin/h5ls output.h5
       args:
         chdir: ~/file-writer
 
