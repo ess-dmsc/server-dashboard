@@ -13,11 +13,25 @@
       args:
         chdir: ~/output/util/efushell
 
+- hosts: epics-to-kafka-forwarders
+  tasks:
+    - name: start epics-to-kafka-forwarder
+      shell: LD_LIBRARY_PATH=/opt/dm_group/usr/lib:./output/lib ./forward-epics-to-kafka --config-file config.json -v
+      args:
+        chdir: ~
+      async: 60
+      poll: 0
+
 - hosts: file-writers
   tasks:
     - name: output NeXus file is absent
       file:
         path: ~/file-writer/output.h5
+        state: absent
+
+    - name: pv NeXus file is absent
+      file:
+        path: ~/file-writer/pv.h5
         state: absent
 
     - name: start file writer
@@ -27,8 +41,13 @@
       async: 60
       poll: 0
 
-    - name: send start command to file writer
+    - name: send command to start writing events to file
       shell: ./send-start-cmd.py "itest03.dm.esss.dk" "C-SPEC_detector" "c_spec_data" "output.h5"
+      args:
+        chdir: ~
+
+    - name: send command to start writing an EPICS PV to file
+      shell: ../send-pv.py "itest03.dm.esss.dk" "amor_sim" "SQ:AMOR:DIMETIX:DIST" "pv.h5"
       args:
         chdir: ~
 
@@ -38,6 +57,14 @@
       shell: LD_LIBRARY_PATH=/opt/dm_group/usr/lib:../lib ./gencspecfile -f ../../test-data/cncs_10_13.bin -i 192.168.12.22
       args:
         chdir: ~/output/bin
+
+- hosts: epics-to-kafka-forwarders
+  tasks:
+    - name: change value of EPICS PV
+      shell: pvput SQ:AMOR:DIMETIX:LASER ON; sleep 1; pvput SQ:AMOR:DIMETIX:SimVal 0; sleep 1; pvput SQ:AMOR:DIMETIX:SimVal 1; sleep 1
+
+    - name: kill epics-to-kafka-forwarder
+      shell: pkill -9 forward-epics
 
 - hosts: file-writers
   tasks:
