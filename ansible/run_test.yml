@@ -47,7 +47,7 @@
         chdir: ~
 
     - name: send command to start writing an EPICS PV to file
-      shell: ./send-pv.py "itest03.dm.esss.dk" "amor_sim" "SQ:AMOR:DIMETIX:DIST" "pv.h5"
+      shell: ./send-pv.py "itest03.dm.esss.dk" "amor_sim" "SQ:AMOR:DIMETIX:DIST" "output.h5"
       args:
         chdir: ~
 
@@ -61,7 +61,7 @@
 - hosts: file-writers
   tasks:
     - name: change value of EPICS PV
-      shell: pvput SQ:AMOR:DIMETIX:LASER ON; sleep 1; pvput SQ:AMOR:DIMETIX:SimVal 0; sleep 1; pvput SQ:AMOR:DIMETIX:SimVal 1; sleep 1
+      shell: pvput SQ:AMOR:DIMETIX:LASER ON; sleep 1; pvput SQ:AMOR:DIMETIX:SimVal 0; sleep 1; pvput SQ:AMOR:DIMETIX:SimVal 1; sleep 1; pvput SQ:AMOR:DIMETIX:SimVal 2; sleep 1
 
     - name: send stop command to file writer
       shell: ./send-stop-cmd.py "itest03.dm.esss.dk"
