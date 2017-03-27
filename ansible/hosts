@@ -14,3 +14,6 @@
 
 [file-writers]
 192.168.12.21
+
+[area-detectors]
+192.168.12.21
