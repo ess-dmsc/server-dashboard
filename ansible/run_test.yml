@@ -1,3 +1,18 @@
+- hosts: area-detectors
+  tasks:
+    - name: iocsh lock file remove cmd
+      shell: rm -f require.lock-*
+      args:
+        chdir: "~"
+
+    - name: start ioc
+      shell: /usr/local/bin/procServ 12345 /opt/epics/modules/environment/2.0.0/3.15.4/bin/centos7-x86_64/iocsh ADPluginKafka_int_test.cmd
+      args:
+        chdir: "~"
+      async: 150
+      poll: 0
+      register: area_detector_ioc
+
 - hosts: efus
   tasks:
     - name: start cspec pipeline
@@ -96,6 +111,11 @@
       shell: LD_LIBRARY_PATH=/opt/dm_group/usr/lib /opt/dm_group/usr/bin/h5ls output.h5
       args:
         chdir: ~/file-writer
+        
+- hosts: area-detectors
+  tasks:
+    - name: stop ioc
+      shell: pkill -f ADPluginKafka
 
 - hosts: efus
   tasks:

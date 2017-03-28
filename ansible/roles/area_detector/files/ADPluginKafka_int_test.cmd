@@ -1,5 +1,6 @@
 require adcore,2.6+
 require adsimdetector,2.4+
+require ADPluginKafka,local
 
 epicsEnvSet("PREFIX", "$(PREFIX=DMSC)")
 epicsEnvSet("SIMDET_PORT", "$(PREFIX)SIMDET")

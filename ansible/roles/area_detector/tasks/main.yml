@@ -1,3 +1,8 @@
+- name: modules directory is present
+  file:
+    path: "~/modules"
+    state: directory
+
 - name: packages are installed
   unarchive:
     remote_src: yes
