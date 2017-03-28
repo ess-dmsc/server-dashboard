@@ -58,12 +58,19 @@
     - name: kill epics-to-kafka-forwarder
       shell: pkill -9 forward-epics
 
-- hosts: efus
+- hosts: file-writers
   tasks:
     - name: wait for cspec pipeline to finish running
       pause:
         seconds: 30
 
+    - name: send stop command to file writer
+      shell: ./send-stop-cmd.py "itest03.dm.esss.dk"
+      args:
+        chdir: ~
+
+- hosts: efus
+  tasks:
     - name: check cspec pipeline result
       async_status:
         jid: "{{ efu_pipeline.ansible_job_id }}"
@@ -82,13 +89,6 @@
     - name: print task result
       debug:
         msg: "{{ efu_pipeline_result.stdout_lines }}"
-
-- hosts: file-writers
-  tasks:
-    - name: send stop command to file writer
-      shell: ./send-stop-cmd.py "itest03.dm.esss.dk"
-      args:
-        chdir: ~
 
 - hosts: file-writers
   tasks:
