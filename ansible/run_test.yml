@@ -33,7 +33,7 @@
       shell: LD_LIBRARY_PATH=/opt/dm_group/usr/lib ./kafka-to-nexus --broker-command //itest02.dm.esss.dk:9092
       args:
         chdir: ~/file-writer
-      async: 60
+      async: 150
       poll: 0
 
     - name: send command to start writing events to file
