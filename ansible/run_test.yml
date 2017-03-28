@@ -53,11 +53,6 @@
     - name: change value of EPICS PV
       shell: pvput SQ:AMOR:DIMETIX:LASER ON; sleep 1; pvput SQ:AMOR:DIMETIX:SimVal 0; sleep 1; pvput SQ:AMOR:DIMETIX:SimVal 1; sleep 1; pvput SQ:AMOR:DIMETIX:SimVal 2; sleep 1
 
-- hosts: epics-to-kafka-forwarders
-  tasks:
-    - name: kill epics-to-kafka-forwarder
-      shell: pkill -9 forward-epics
-
 - hosts: file-writers
   tasks:
     - name: wait for cspec pipeline to finish running
@@ -68,6 +63,11 @@
       shell: ./send-stop-cmd.py "itest03.dm.esss.dk"
       args:
         chdir: ~
+
+- hosts: epics-to-kafka-forwarders
+  tasks:
+    - name: kill epics-to-kafka-forwarder
+      shell: pkill -9 forward-epics
 
 - hosts: efus
   tasks:
