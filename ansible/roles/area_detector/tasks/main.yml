@@ -2,7 +2,7 @@
   unarchive:
     remote_src: yes
     src: https://jenkins.esss.dk/dm/job/ad-kafka-interface/lastSuccessfulBuild/artifact/ADPluginKafka.tar.gz
-    dest: "~"
+    dest: "~/modules"
 
 - name: ADPlugin start script is installed
   copy:
