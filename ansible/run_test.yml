@@ -19,7 +19,7 @@
       shell: LD_LIBRARY_PATH=/opt/dm_group/usr/lib:./output/lib ./forward-epics-to-kafka --config-file config.json -v
       args:
         chdir: ~
-      async: 60
+      async: 150
       poll: 0
 
 - hosts: file-writers
