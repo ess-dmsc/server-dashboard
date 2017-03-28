@@ -1,10 +1,10 @@
 - hosts: efus
   tasks:
     - name: start cspec pipeline
-      shell: LD_LIBRARY_PATH=/opt/dm_group/usr/lib:../lib ./efu2 -d cspec -s 50 -b itest02.dm.esss.dk:9092 -a 192.168.12.11 -g 192.168.12.31
+      shell: LD_LIBRARY_PATH=/opt/dm_group/usr/lib:../lib ./efu2 -d cspec -s 60 -b itest02.dm.esss.dk:9092 -a 192.168.12.11 -g 192.168.12.31
       args:
         chdir: ~/output/bin
-      async: 60
+      async: 70
       poll: 0
       register: efu_pipeline
 
@@ -53,22 +53,16 @@
     - name: change value of EPICS PV
       shell: pvput SQ:AMOR:DIMETIX:LASER ON; sleep 1; pvput SQ:AMOR:DIMETIX:SimVal 0; sleep 1; pvput SQ:AMOR:DIMETIX:SimVal 1; sleep 1; pvput SQ:AMOR:DIMETIX:SimVal 2; sleep 1
 
-    - name: send stop command to file writer
-      shell: ./send-stop-cmd.py "itest03.dm.esss.dk"
-      args:
-        chdir: ~
-
 - hosts: epics-to-kafka-forwarders
   tasks:
     - name: kill epics-to-kafka-forwarder
       shell: pkill -9 forward-epics
 
-# Check results
 - hosts: efus
   tasks:
     - name: wait for cspec pipeline to finish running
       pause:
-        seconds: 45
+        seconds: 50
 
     - name: check cspec pipeline result
       async_status:
@@ -88,6 +82,13 @@
     - name: print task result
       debug:
         msg: "{{ efu_pipeline_result.stdout_lines }}"
+
+- hosts: file-writers
+  tasks:
+    - name: send stop command to file writer
+      shell: ./send-stop-cmd.py "itest03.dm.esss.dk"
+      args:
+        chdir: ~
 
 - hosts: file-writers
   tasks:
