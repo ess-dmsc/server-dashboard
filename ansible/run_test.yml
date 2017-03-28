@@ -1,7 +1,7 @@
 - hosts: efus
   tasks:
     - name: start cspec pipeline
-      shell: LD_LIBRARY_PATH=/opt/dm_group/usr/lib:../lib ./efu2 -d cspec -s 10 -b itest02.dm.esss.dk:9092 -a 192.168.12.11 -g 192.168.12.31
+      shell: LD_LIBRARY_PATH=/opt/dm_group/usr/lib:../lib ./efu2 -d cspec -s 50 -b itest02.dm.esss.dk:9092 -a 192.168.12.11 -g 192.168.12.31
       args:
         chdir: ~/output/bin
       async: 60
