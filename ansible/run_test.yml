@@ -62,7 +62,7 @@
   tasks:
     - name: wait for cspec pipeline to finish running
       pause:
-        seconds: 50
+        seconds: 30
 
     - name: check cspec pipeline result
       async_status:
