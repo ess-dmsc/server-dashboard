@@ -66,6 +66,10 @@
 # Check results
 - hosts: efus
   tasks:
+    - name: wait for cspec pipeline to finish running
+      pause:
+        seconds: 45
+
     - name: check cspec pipeline result
       async_status:
         jid: "{{ efu_pipeline.ansible_job_id }}"
