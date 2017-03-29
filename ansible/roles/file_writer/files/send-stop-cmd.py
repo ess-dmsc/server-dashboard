@@ -13,7 +13,9 @@ if __name__ == '__main__':
 
     p = kafka.KafkaProducer(bootstrap_servers=args.broker)
 
-    cmd = { "cmd": "FileWriter_exit" }
+    cmd = {
+        "cmd": "FileWriter_exit"
+    }
 
     print("Sending command to " + args.broker + ":")
     print(cmd)
