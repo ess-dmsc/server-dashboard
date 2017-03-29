@@ -113,9 +113,9 @@
         chdir: ~/file-writer
 
     - name: check if NeXus contains expected data
-      shell: ./test-output-file.py output.h5
+      shell: ./file-writer/test-output-file.py output.h5
       args:
-        chdir: ~/file-writer
+        chdir: ~
 
 - hosts: area-detectors
   tasks:
