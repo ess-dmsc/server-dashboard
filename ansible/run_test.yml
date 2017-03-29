@@ -113,7 +113,7 @@
         chdir: ~/file-writer
 
     - name: check if NeXus contains expected data
-      shell: ./file-writer/test-output-file.py output.h5
+      shell: ./test-output-file.py ./file-writer/output.h5
       args:
         chdir: ~
 
