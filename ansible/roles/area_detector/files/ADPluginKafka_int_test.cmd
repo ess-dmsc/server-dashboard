@@ -1,6 +1,7 @@
 require adcore,2.6+
 require adsimdetector,2.4+
 require ADPluginKafka,local
+require recsync,1.2+
 
 epicsEnvSet("PREFIX", "$(PREFIX=DMSC)")
 epicsEnvSet("SIMDET_PORT", "$(PREFIX)SIMDET")
@@ -14,6 +15,8 @@ dbLoadRecords("simDetector.template", "P=$(PREFIX):, R=CAM:, PORT=$(SIMDET_PORT)
 
 KafkaPluginConfigure("$(K_PORT)", 3, 1, "$(SIMDET_PORT)", 0, -1, "itest03.dm.esss.dk:9092", "adplugin_integration_test")
 dbLoadRecords("ADPluginKafka.template", "P=$(PREFIX),R=:KFK:,PORT=$(K_PORT),ADDR=0,TIMEOUT=1,NDARRAY_PORT=$(SIMDET_PORT)")
+
+dbLoadRecords(reccaster.db, P=SQ:)
 
 iocInit
 
