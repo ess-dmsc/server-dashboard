@@ -1,3 +1,10 @@
+- hosts: test-orchestrators
+  tasks:
+    - name: test-results directory exists
+      file:
+        path: ~/test-results
+        state: directory
+
 - hosts: area-detectors
   tasks:
     - name: iocsh lock file remove cmd
@@ -51,6 +58,8 @@
       async: 150
       poll: 0
 
+- hosts: test-orchestrators
+  tasks:
     - name: send command to start writing events to file
       shell: ./send-start-cmd.py "itest03.dm.esss.dk" "output.h5"
       args:
@@ -74,6 +83,8 @@
       pause:
         seconds: 30
 
+- hosts: test-orchestrators
+  tasks:
     - name: send stop command to file writer
       shell: ./send-stop-cmd.py "itest03.dm.esss.dk"
       args:
@@ -112,8 +123,15 @@
       args:
         chdir: ~/file-writer
 
+    - name: copy output NeXus file
+      fetch:
+        src: ~/file-writer/output.h5
+        dest: ~/test-results
+
+- hosts: test-orchestrators
+  tasks:
     - name: check if NeXus file contains expected data
-      shell: ./test-output-file.py ./file-writer/output.h5
+      shell: ./test-output-file.py ./test-results/output.h5
       args:
         chdir: ~
 

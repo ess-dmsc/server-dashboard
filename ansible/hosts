@@ -1,3 +1,6 @@
+[test-orchestrators]
+localhost ansible_connection=local
+
 [pipeline]
 192.168.12.21
 192.168.12.22

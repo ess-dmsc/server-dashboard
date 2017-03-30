@@ -1,4 +1,4 @@
-#!/opt/dm_group/python-virtualenv/bin/python
+#!{{ test_orchestrator_virtualvenv_path }}/bin/python
 
 import argparse
 import json

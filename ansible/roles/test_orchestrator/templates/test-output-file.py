@@ -1,4 +1,4 @@
-#!/opt/dm_group/python-virtualenv/bin/python
+#!{{ test_orchestrator_virtualvenv_path }}/bin/python
 
 """A sample output NeXus file check.
 

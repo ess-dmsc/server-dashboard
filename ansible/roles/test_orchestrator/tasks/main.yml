@@ -1,0 +1,17 @@
+- name: file writer start command script is installed
+  template:
+    src: "send-start-cmd.py"
+    dest: "~"
+    mode: 0755
+
+- name: file writer stop command script is installed
+  template:
+    src: "send-stop-cmd.py"
+    dest: "~"
+    mode: 0755
+
+- name: output file test script is installed
+  template:
+    src: "test-output-file.py"
+    dest: "~"
+    mode: 0755
