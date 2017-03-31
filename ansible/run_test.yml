@@ -63,7 +63,7 @@
     - name: send command to start writing events to file
       shell: ./send-start-cmd.py "itest03.dm.esss.dk" "output.h5"
       args:
-        chdir: ~
+        chdir: /home/jenkins
 
 - hosts: data-generators
   tasks:
@@ -88,7 +88,7 @@
     - name: send stop command to file writer
       shell: ./send-stop-cmd.py "itest03.dm.esss.dk"
       args:
-        chdir: ~
+        chdir: /home/jenkins
 
 - hosts: epics-to-kafka-forwarders
   tasks:
@@ -133,7 +133,7 @@
     - name: check if NeXus file contains expected data
       shell: ./test-output-file.py ./test-results/output.h5
       args:
-        chdir: ~
+        chdir: /home/jenkins
 
 - hosts: area-detectors
   tasks:
