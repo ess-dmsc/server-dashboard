@@ -30,10 +30,10 @@ if __name__ == '__main__':
         print('  Values in file: ' + str(dimetix_values))
         sys.exit(1)
 
-    detector_ids = f['entry-01/amor/events/detector_id'][0:3]
-    if not (detector_ids == [387, 2102, 2036]).all():
-        print('ERROR: detector_id values differ from expected')
-        print('  Values in file: ' + str(detector_ids))
+    event_ids = f['entry-01/amor/events/event_id'][0:3]
+    if not (event_ids == [387, 2102, 2036]).all():
+        print('ERROR: event_id values differ from expected')
+        print('  Values in file: ' + str(event_ids))
         sys.exit(1)
 
     print('Expected output found in files.')
