@@ -126,7 +126,8 @@
     - name: copy output NeXus file
       fetch:
         src: ~/file-writer/output.h5
-        dest: ~/test-results
+        dest: ~/test-results/
+        flat: yes
 
 - hosts: test-orchestrators
   tasks:
