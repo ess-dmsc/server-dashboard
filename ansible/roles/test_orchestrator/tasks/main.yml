@@ -1,17 +1,17 @@
 - name: file writer start command script is installed
   template:
     src: "send-start-cmd.py.j2"
-    dest: "~"
+    dest: "~/send-start-cmd.py"
     mode: 0755
 
 - name: file writer stop command script is installed
   template:
     src: "send-stop-cmd.py.j2"
-    dest: "~"
+    dest: "~/send-stop-cmd.py"
     mode: 0755
 
 - name: output file test script is installed
   template:
     src: "test-output-file.py.j2"
-    dest: "~"
+    dest: "~/test-output-file.py"
     mode: 0755
