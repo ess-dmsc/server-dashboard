@@ -46,6 +46,9 @@
 
 - hosts: file-writers
   tasks:
+    - name: set initial value of EPICS PV
+      shell: pvput SQ:AMOR:DIMETIX:LASER ON; sleep 1; pvput SQ:AMOR:DIMETIX:SimVal 0; sleep 1
+
     - name: output NeXus file is absent
       file:
         path: ~/file-writer/output.h5
@@ -75,7 +78,7 @@
 - hosts: file-writers
   tasks:
     - name: change value of EPICS PV
-      shell: pvput SQ:AMOR:DIMETIX:LASER ON; sleep 1; pvput SQ:AMOR:DIMETIX:SimVal 0; sleep 1; pvput SQ:AMOR:DIMETIX:SimVal 1; sleep 1; pvput SQ:AMOR:DIMETIX:SimVal 2; sleep 1
+      shell: pvput SQ:AMOR:DIMETIX:SimVal 1; sleep 1; pvput SQ:AMOR:DIMETIX:SimVal 2; sleep 1
 
 - hosts: file-writers
   tasks:
