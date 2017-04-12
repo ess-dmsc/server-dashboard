@@ -41,10 +41,9 @@ function build_efu()
   COPYFILES="cspec.so cspec2.so nmx.so udp.so gencspec gencspecfile gennmxfile efu2"
 
   echo "Building event-formation-unit"
-  # FIXME: set BUILDSTR to something meaningful
+  # FIXME: set RELEASE=y and BUILDSTR to something meaningful
   pushd event-formation-unit/prototype2
-    make RELEASE=y HDF5=y GRAYLOG=y EXTSCHEMAS=y V=y  \
-         BUILDSTR=integration_test \
+    make HDF5=y GRAYLOG=y EXTSCHEMAS=y V=y  \
          KAFKAINC=$KAFKAINC KAFKALIB=$KAFKALIB        \
          HDF5INC=$HDF5INC   HDF5LIB=$HDF5LIB         || errexit "make failed for EFU"
     for cpfile in $COPYFILES
