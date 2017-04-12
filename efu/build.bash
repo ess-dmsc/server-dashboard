@@ -42,7 +42,7 @@ function build_efu()
 
   echo "Building event-formation-unit"
   pushd event-formation-unit/prototype2
-    make RELEASE=y HDF5=y GRAYLOG=y EXTSCHEMAS=y V=y  \
+    make RELEASE=n HDF5=y GRAYLOG=y EXTSCHEMAS=y V=y  \ # TODO: set RELEASE=y and BUILDSTR
          KAFKAINC=$KAFKAINC KAFKALIB=$KAFKALIB        \
          HDF5INC=$HDF5INC   HDF5LIB=$HDF5LIB         || errexit "make failed for EFU"
     for cpfile in $COPYFILES
