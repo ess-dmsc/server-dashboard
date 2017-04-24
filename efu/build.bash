@@ -40,11 +40,19 @@ function build_efu()
 {
   COPYFILES="cspec.so cspec2.so nmx.so udp.so gencspec gencspecfile gennmxfile efu2"
 
+  BSTR_NAME=$(shell whoami)
+  BSTR_DATE=$(shell date +%F-%H%M%S)
+  BSTR_NODE=$(shell uname -n)
+  BSTR_OS=$(shell uname -r)
+  BSTR_HASH=$(shell git log --oneline | head -n 1 | awk '{print $$1}')
+  BUILDSTR=$(BSTR_DATE)[$(BSTR_NODE):$(BSTR_NAME)][$(BSTR_OS)]$(BSTR_HASH)
+
   echo "Building event-formation-unit"
   pushd event-formation-unit/prototype2
     make RELEASE=y HDF5=y GRAYLOG=y EXTSCHEMAS=y V=y  \
          KAFKAINC=$KAFKAINC KAFKALIB=$KAFKALIB        \
-         HDF5INC=$HDF5INC   HDF5LIB=$HDF5LIB         || errexit "make failed for EFU"
+         HDF5INC=$HDF5INC   HDF5LIB=$HDF5LIB          \
+         BUILDSTR=${BUILDSTR}_${BUILD_NUMBER} || errexit "make failed for EFU"
     for cpfile in $COPYFILES
     do
       echo "Copying "$cpfile
