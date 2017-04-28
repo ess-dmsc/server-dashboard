@@ -1,7 +1,7 @@
 node {
     // Set periodic trigger at 12:15 and 23:15, from Monday to Friday.
     properties([
-        pipelineTriggers([cron('7 12,19 * * 1-5')]),
+        pipelineTriggers([cron('15 12,23 * * 1-5')]),
     ])
 
     dir('code') {
