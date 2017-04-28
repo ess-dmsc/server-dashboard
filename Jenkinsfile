@@ -17,9 +17,6 @@ node('kafka-client') {
                 ../code/efu/build.bash"
         }
     }
-
-    // Delete workspace when build is done.
-    cleanWs()
 }
 
 // This currently uses the artifact from the integration-test job.
@@ -34,3 +31,6 @@ node('integration-test') {
         }
     }
 }
+
+// Delete workspace when build is done.
+cleanWs()
