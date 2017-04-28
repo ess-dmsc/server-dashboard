@@ -66,9 +66,9 @@ function build_h5cc()
 {
   echo "Building h5cc"
   pushd h5cc/build
-    cmake ../source || errexit "cmake failed"
-    make            || errexit "make failed"
-    cp lib* $LDIR   || errexit "cant copy library files"
+    cmake ../source      || errexit "cmake failed"
+    make                 || errexit "make failed"
+    cp h5cc/lib* $LDIR   || errexit "cant copy library files"
   popd
 }
 
