@@ -4,18 +4,22 @@ node {
         pipelineTriggers([cron('15 12,23 * * 1-5')]),
     ])
 
-    stage('Checkout') {
-        checkout scm
+    dir('code') {
+        stage('Checkout') {
+            checkout scm
+        }
     }
 
-    stage('Build') {
-        sh "export PATH=$CMAKE3_ROOT/bin:$PATH:/opt/dm_group/usr/bin && \
-            export LD_LIBRARY_PATH=/opt/dm_group/usr/lib && \
-            ./efu/build.bash"
-    }
+    dir('build') {
+        stage('Build') {
+            sh "export PATH=$CMAKE3_ROOT/bin:$PATH:/opt/dm_group/usr/bin && \
+                export LD_LIBRARY_PATH=/opt/dm_group/usr/lib && \
+                ./build/efu/build.bash"
+        }
 
-    stage('Archive') {
-        archiveArtifacts artifacts: 'output.tar.gz', fingerprint: true, onlyIfSuccessful: true
+        stage('Archive') {
+            archiveArtifacts artifacts: 'output.tar.gz', fingerprint: true, onlyIfSuccessful: true
+        }
     }
 
     // Delete workspace when build is done.
