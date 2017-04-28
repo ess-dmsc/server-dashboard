@@ -6,7 +6,7 @@
 - name: packages are installed
   unarchive:
     remote_src: yes
-    src: https://jenkins.esss.dk/dm/job/ad-kafka-interface/lastSuccessfulBuild/artifact/ADPluginKafka.tar.gz
+    src: https://jenkins.esss.dk/dm/job/ess-dmsc/job/ad-kafka-interface/job/master/lastSuccessfulBuild/artifact/ADPluginKafka.tar.gz
     dest: "~/modules"
 
 - name: ADPlugin start script is installed
@@ -14,4 +14,3 @@
     src: "ADPluginKafka_int_test.cmd"
     dest: "~"
     mode: 0755
-
