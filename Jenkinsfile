@@ -17,11 +17,24 @@ node('kafka-client') {
                 ../code/efu/build.bash"
         }
     }
+
+    dir('code') {
+        stage('Stash') {
+            stash includes: 'ansible/', name: 'ansible'
+        }
+    }
+
+    // Delete workspace when build is done.
+    cleanWs()
 }
 
 // This currently uses the artifact from the integration-test job.
 node('integration-test') {
     dir('code') {
+        stage('Unstash') {
+            unstash 'ansible'
+        }
+
         stage('Deploy') {
             sh "ansible-playbook -i ansible/hosts ansible/site.yml"
         }
@@ -31,6 +44,3 @@ node('integration-test') {
         }
     }
 }
-
-// Delete workspace when build is done.
-cleanWs()
