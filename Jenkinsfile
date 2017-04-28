@@ -14,7 +14,7 @@ node {
         stage('Build') {
             sh "export PATH=$CMAKE3_ROOT/bin:$PATH:/opt/dm_group/usr/bin && \
                 export LD_LIBRARY_PATH=/opt/dm_group/usr/lib && \
-                ./build/efu/build.bash"
+                ../code/efu/build.bash"
         }
 
         stage('Archive') {
