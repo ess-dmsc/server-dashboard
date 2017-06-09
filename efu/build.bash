@@ -77,7 +77,7 @@ function build_graylog_logger()
 {
   echo "Building graylog-logger"
   pushd graylog-logger/graylog_logger/build
-    cmake ..      || errexit "cmake failed"
+    cmake ../..   || errexit "cmake failed"
     make          || errexit "make failed"
     cp lib* $LDIR || errexit "cant copy library files"
   popd
