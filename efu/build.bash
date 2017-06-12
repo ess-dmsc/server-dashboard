@@ -35,28 +35,28 @@ function build_data_types()
   popd
 }
 
-########################################################################################
 function build_efu()
 {
-  COPYFILES="cspec.so cspec2.so nmx.so udp.so gencspec gencspecfile gennmxfile efu2"
+  COPYFILES="cspec.so cspec2.so nmx.so udp.so gencspec gencspecfile efu2"
+  # FIXME add gennmxfile
+  #COPYFILES="cspec.so cspec2.so nmx.so udp.so gencspec gencspecfile gennmxfile efu2"
 
-  BSTR_NAME=$(shell whoami)
-  BSTR_DATE=$(shell date +%F-%H%M%S)
-  BSTR_NODE=$(shell uname -n)
-  BSTR_OS=$(shell uname -r)
-  BSTR_HASH=$(shell git log --oneline | head -n 1 | awk '{print $$1}')
-  BUILDSTR=$(BSTR_DATE)[$(BSTR_NODE):$(BSTR_NAME)][$(BSTR_OS)]$(BSTR_HASH)
+  BSTR_NAME=$(whoami)
+  BSTR_DATE=$(date +%F-%H%M%S)
+  BSTR_NODE=$(uname -n)
+  BSTR_OS=$(uname -r)
+  BSTR_HASH=$(git log --oneline | head -n 1 | awk '{print $$1}')
+  BUILDSTR=$BSTR_DATE[$BSTR_NODE:$BSTR_NAME][$BSTR_OS]$BSTR_HASH
 
   echo "Building event-formation-unit"
-  pushd event-formation-unit/prototype2
-    make RELEASE=y HDF5=y GRAYLOG=y EXTSCHEMAS=y V=y  \
-         KAFKAINC=$KAFKAINC KAFKALIB=$KAFKALIB        \
-         HDF5INC=$HDF5INC   HDF5LIB=$HDF5LIB          \
-         BUILDSTR=${BUILDSTR}_${BUILD_NUMBER} || errexit "make failed for EFU"
+  mkdir -p event-formation-unit/build
+  pushd event-formation-unit/build
+    cmake -DEXTSCHEMAS=ON -DCMAKE_BUILD_TYPE=Release -DBUILDSTR=$BUILDSTR -DCMAKE_PREFIX_PATH=$BASEDIR/output ..
+    make VERBOSE=y || errexit "make failed for EFU"
     for cpfile in $COPYFILES
     do
       echo "Copying "$cpfile
-      cp $cpfile $ODIR                               || errexit "cant copy $cpfile to output dir"
+      cp prototype2/$cpfile $ODIR                || errexit "cant copy $cpfile to output dir"
     done
   popd
 }
@@ -66,9 +66,9 @@ function build_h5cc()
 {
   echo "Building h5cc"
   pushd h5cc/build
-    cmake ../source      || errexit "cmake failed"
-    make                 || errexit "make failed"
-    cp h5cc/lib* $LDIR   || errexit "cant copy library files"
+    cmake ../source -DCMAKE_INSTALL_PREFIX=""     || errexit "cmake failed"
+    make  install DESTDIR=$BASEDIR/output         || errexit "make failed"
+    #cp h5cc/lib* $LDIR   || errexit "cant copy library files"
   popd
 }
 
@@ -77,9 +77,9 @@ function build_graylog_logger()
 {
   echo "Building graylog-logger"
   pushd graylog-logger/graylog_logger/build
-    cmake ../..                  || errexit "cmake failed"
-    make                         || errexit "make failed"
-    cp graylog_logger/lib* $LDIR || errexit "cant copy library files"
+    cmake ../.. -DCMAKE_INSTALL_PREFIX=""      || errexit "cmake failed"
+    make                                       || errexit "make failed"
+    make install DESTDIR=$BASEDIR/output
   popd
 }
 
@@ -87,7 +87,7 @@ function build_graylog_logger()
 function make_directories()
 {
   echo "creating output directories"
-  DIRS='output/bin output/data output/inc output/lib output/util graylog-logger/graylog_logger/build h5cc/build streaming-data-types/build'
+  DIRS='output/bin output/data output/include output/lib output/util graylog-logger/graylog_logger/build h5cc/build streaming-data-types/build'
   for d in $DIRS
   do
     echo "--$d"
@@ -128,29 +128,13 @@ function make_tar()
 BASEDIR=$(pwd)
 git status &>/dev/null && errexit "will not build within git repository please call from other directory"
 
-DEFPATH="/opt/dm_group/usr"
-KAFKAINC=${1:-$DEFPATH/include}
-KAFKALIB=${2:-$DEFPATH/lib}
-HDF5INC=${3:-$DEFPATH/include}
-HDF5LIB=${4:-$DEFPATH/lib}
-
-echo "KAFKAINC: $KAFKAINC"
-echo "KAFKALIB: $KAFKALIB"
-echo "HDF5INC: $HDF5INC"
-echo "HDF5LIB: $HDF5LIB"
-
-test -d $KAFKAINC || errexit "KAFKAINC: $KAFKAINC does not exist"
-test -d $KAFKALIB || errexit "KAFKALIB: $KAFKALIB does not exist"
-test -d $HDF5INC  || errexit "HDF5INC: $HDF5INC does not exist"
-test -d $HDF5LIB  || errexit "HDF5LIB: $HDF5LIB does not exist"
-
 clone_projects
 
 # Generate line count metrics
 cloc --by-file --xml --out=cloc.xml .
 
 make_directories
-IDIR=$BASEDIR/output/inc
+IDIR=$BASEDIR/output/include
 ODIR=$BASEDIR/output/bin
 DDIR=$BASEDIR/output/data
 LDIR=$BASEDIR/output/lib
