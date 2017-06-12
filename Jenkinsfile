@@ -4,6 +4,9 @@ properties([
 ])
 
 node('kafka-client') {
+    // Delete workspace when build is done.
+    cleanWs()
+
     dir('code') {
         stage('Checkout') {
             checkout scm
@@ -23,9 +26,6 @@ node('kafka-client') {
             stash includes: 'ansible/', name: 'ansible'
         }
     }
-
-    // Delete workspace when build is done.
-    cleanWs()
 }
 
 // This currently uses the artifact from the integration-test job.
