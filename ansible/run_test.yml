@@ -71,7 +71,7 @@
 - hosts: data-generators
   tasks:
     - name: start data generation
-      shell: LD_LIBRARY_PATH=/opt/dm_group/usr/lib:../lib ./gencspecfile -f ../../test-data/cncs_10_13.bin -i 192.168.12.22
+      shell: LD_LIBRARY_PATH=/opt/dm_group/usr/lib:../lib ./mgcncsgenfile -f ../../test-data/cncs_10_13.bin -i 192.168.12.22
       args:
         chdir: ~/output/bin
 
