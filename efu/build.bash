@@ -99,7 +99,7 @@ function copy_utilities()
 
   echo "Copying data files"
   pushd event-formation-unit/prototype2
-    cp data/* $DDIR          || errexit "cant copy data files"
+    cp multigrid/calib_data/* $DDIR          || errexit "cant copy data files"
   popd
 }
 
