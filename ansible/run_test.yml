@@ -55,7 +55,7 @@
         state: absent
 
     - name: start file writer
-      shell: LD_LIBRARY_PATH=/opt/dm_group/usr/lib ./kafka-to-nexus --broker-command //itest02.dm.esss.dk:9092
+      shell: LD_LIBRARY_PATH=/opt/dm_group/usr/lib ./kafka-to-nexus --broker-command //itest02.dm.esss.dk:9092 --graylog-logger-address 192.168.12.11:12201
       args:
         chdir: ~/file-writer
       async: 150
