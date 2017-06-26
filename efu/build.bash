@@ -46,7 +46,7 @@ function build_efu()
 
   echo "Building event-formation-unit"
   pushd event-formation-unit/build
-    cmake -DEXTSCHEMAS=ON -DCMAKE_BUILD_TYPE=Release -DBUILDSTR=$BUILDSTR -DCMAKE_INSTALL_PREFIX="" ..
+    cmake -DEXTSCHEMAS=ON -DBUILDSTR=$BUILDSTR -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=$BASEDIR/output  -DCMAKE_INSTALL_PREFIX="" ..
     make install VERBOSE=y  DESTDIR=$BASEDIR/output || errexit "make failed for EFU"
   popd
 }
