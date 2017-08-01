@@ -13,7 +13,7 @@
         chdir: "~"
 
     - name: start ioc
-      shell: /usr/local/bin/procServ 12345 /opt/epics/modules/environment/2.0.0/3.15.4/bin/centos7-x86_64/iocsh ADPluginKafka_int_test.cmd
+      shell: "/usr/local/bin/procServ {{ area_detector_procserv_port }} /opt/epics/modules/environment/2.0.0/3.15.4/bin/centos7-x86_64/iocsh ADPluginKafka_int_test.cmd"
       args:
         chdir: "~"
       async: 150
@@ -23,12 +23,14 @@
 - hosts: efus
   tasks:
     - name: start cspec pipeline
-      shell: "LD_LIBRARY_PATH=/opt/dm_group/usr/lib:../lib ./efu2 -d mgcncs -s 60 -b {{ kafka_broker_address }} -a {{ graylog_server_data_address }} -g {{ graphite_server_data_address }}"
+      shell: "./efu2 -d mgcncs -s 60 -b {{ kafka_broker_address }} -a {{ graylog_server_data_address }} -g {{ graphite_server_data_address }}"
       args:
         chdir: ~/output/bin
       async: 70
       poll: 0
       register: efu_pipeline
+      environment:
+        LD_LIBRARY_PATH: /opt/dm_group/usr/lib:../lib
 
     - name: load cspec calibration
       shell: ./mgloadcal.py /home/jenkins/test-data/validruns_15
