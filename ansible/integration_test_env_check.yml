@@ -1,9 +1,9 @@
 - hosts: zookeeper-ensemble
   tasks:
-    name: check if zookeeper is running
-    command: systemctl status dm-zookeeper
+    - name: check if zookeeper is running
+      command: systemctl status dm-zookeeper
 
 - hosts: kafka-cluster
   tasks:
-    name: check if kafka is running
-    command: systemctl status dm-kafka
+    - name: check if kafka is running
+      command: systemctl status dm-kafka
