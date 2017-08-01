@@ -37,7 +37,7 @@
         chdir: "~/output/bin"
       async: 70
       poll: 0
-      register: efu_pipeline
+      register: cspec_pipeline
       environment:
         LD_LIBRARY_PATH: "{{ ld_library_path }}"
 
@@ -140,15 +140,15 @@
   tasks:
     - name: check cspec pipeline result
       async_status:
-        jid: "{{ efu_pipeline.ansible_job_id }}"
-      register: efu_pipeline_result
-      until: efu_pipeline_result.finished
+        jid: "{{ cspec_pipeline.ansible_job_id }}"
+      register: cspec_pipeline_result
+      until: cspec_pipeline_result.finished
       retries: 30
       ignore_errors: yes
 
     - name: print cspec pipline stderr
       debug:
-        msg: "{{ efu_pipeline_result.stderr_lines }}"
+        msg: "{{ cspec_pipeline_result.stderr_lines }}"
 
 - hosts: file-writers
   tasks:
@@ -182,4 +182,4 @@
     - name: check playbook result
       fail:
         msg: playbook failed
-      when: efu_pipeline_result.rc!=1 # This is inverted and should fail.
+      when: cspec_pipeline_result.rc!=0
