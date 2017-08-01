@@ -146,9 +146,9 @@
       retries: 30
       ignore_errors: yes
 
-    - name: print task result
+    - name: print cspec pipline stderr
       debug:
-        msg: "{{ efu_pipeline_result.stdout_lines }}"
+        msg: "{{ efu_pipeline_result.stderr_lines }}"
 
 - hosts: file-writers
   tasks:
