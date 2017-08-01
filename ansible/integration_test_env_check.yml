@@ -13,10 +13,6 @@
       command: "curl -s -o /dev/null -w \"%{http_code}\" {{ channelfinder_address }}"
       register: channelfinder_request
 
-    - name: print ChannelFinder request response
-      debug:
-        msg: "{{ channelfinder_request.stdout }}"
-
     - name: check ChannelFinder request
       fail:
         msg: "ChannelFinder request failed"
