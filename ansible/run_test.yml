@@ -90,7 +90,7 @@
 - hosts: test-orchestrators
   tasks:
     - name: send command to start writing events to file
-      shell: ./send-start-cmd.py "itest03.dm.esss.dk" "{{ nexus_file_name }}"
+      shell: "./send-start-cmd.py itest03.dm.esss.dk {{ nexus_file_name }}"
       args:
         chdir: ~
 
