@@ -182,4 +182,4 @@
     - name: check playbook result
       fail:
         msg: playbook failed
-      when: efu_pipeline_result.rc!==1 # This is inverted and should fail.
+      when: efu_pipeline_result.rc!=1 # This is inverted and should fail.
