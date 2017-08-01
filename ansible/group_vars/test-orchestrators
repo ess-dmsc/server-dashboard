@@ -1,1 +1,2 @@
 test_orchestrator_virtualvenv_path: /opt/dm_group/virtualenv/test_orchestrator
+python_bin: "{{ test_orchestrator_virtualvenv_path }}/bin/python"

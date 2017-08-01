@@ -92,7 +92,7 @@
 - hosts: test-orchestrators
   tasks:
     - name: send command to start writing events to file
-      shell: "./send-start-cmd.py itest03.dm.esss.dk {{ nexus_file_name }}"
+      shell: "{{ python_bin }} ./send-start-cmd.py itest03.dm.esss.dk {{ nexus_file_name }}"
       args:
         chdir: "~"
 
@@ -129,7 +129,7 @@
 - hosts: test-orchestrators
   tasks:
     - name: send stop command to file writer
-      shell: ./send-stop-cmd.py "itest03.dm.esss.dk"
+      shell: "{{ python_bin }} ./send-stop-cmd.py itest03.dm.esss.dk"
       args:
         chdir: "~"
 
@@ -170,7 +170,7 @@
 - hosts: test-orchestrators
   tasks:
     - name: check if NeXus file contains expected data
-      shell: "./test-output-file.py {{ test_result_dir }}/{{ nexus_file_name }}"
+      shell: "{{ python_bin }} ./test-output-file.py {{ test_result_dir }}/{{ nexus_file_name }}"
       args:
         chdir: "~"
 

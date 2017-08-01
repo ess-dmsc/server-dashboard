@@ -1,5 +1,3 @@
-#!{{ test_orchestrator_virtualvenv_path }}/bin/python
-
 """A sample output NeXus file check.
 
 Return codes:

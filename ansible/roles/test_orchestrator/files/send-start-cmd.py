@@ -1,5 +1,3 @@
-#!{{ test_orchestrator_virtualvenv_path }}/bin/python
-
 import argparse
 import json
 import kafka
