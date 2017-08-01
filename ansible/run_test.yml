@@ -34,7 +34,7 @@
           -a {{ graylog_server_data_address }} \
           -g {{ graphite_server_data_address }}"
       args:
-        chdir: ~/output/bin
+        chdir: "~/output/bin"
       async: 70
       poll: 0
       register: efu_pipeline
@@ -44,7 +44,7 @@
     - name: load cspec calibration
       shell: ./mgloadcal.py ~/test-data/validruns_15
       args:
-        chdir: ~/output/util/efushell
+        chdir: "~/output/util/efushell"
 
 - hosts: epics-to-kafka-forwarders
   tasks:
@@ -81,7 +81,7 @@
           --broker-command //{{ kafka_broker_address }} \
           --graylog-logger-address {{ graylog_server_data_full_address }}"
       args:
-        chdir: ~/file-writer
+        chdir: "~/file-writer"
       async: 150
       poll: 0
       environment:
@@ -103,7 +103,7 @@
           -f ../../test-data/cncs_10_13.bin \
           -i 192.168.12.22"
       args:
-        chdir: ~/output/bin
+        chdir: "~/output/bin"
       environment:
         LD_LIBRARY_PATH: "{{ ld_library_path }}"
 
@@ -155,7 +155,7 @@
     - name: check if NeXus file was generated
       shell: "/opt/dm_group/usr/bin/h5ls {{ nexus_file_name }}"
       args:
-        chdir: ~/file-writer
+        chdir: "~/file-writer"
       environment:
         LD_LIBRARY_PATH: "{{ ld_library_path }}"
 
