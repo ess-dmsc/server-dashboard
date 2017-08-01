@@ -7,24 +7,6 @@
       args:
         chdir: "~"
 
-- hosts: file-writers
-  tasks:
-    - name: check if file writer finished
-      async_status:
-        jid: "{{ file_writer.ansible_job_id }}"
-      register: file_writer_result
-      until: file_writer_result.finished
-      retries: "{{ num_retries }}"
-      ignore_errors: yes
-
-    - name: print file writer stdout
-      debug:
-        msg: "{{ file_writer_result.stdout_lines }}"
-
-    - name: print file writer stderr
-      debug:
-        msg: "{{ file_writer_result.stderr_lines }}"
-
 - hosts: epics-to-kafka-forwarders
   tasks:
     - name: kill epics-to-kafka-forwarder
@@ -84,3 +66,34 @@
     - name: print cspec pipline stderr
       debug:
         msg: "{{ cspec_pipeline_result.stderr_lines }}"
+
+- hosts: file-writers
+  tasks:
+    - name: check if file writer finished
+      async_status:
+        jid: "{{ file_writer.ansible_job_id }}"
+      register: file_writer_result
+      until: file_writer_result.finished
+      retries: "{{ num_retries }}"
+      ignore_errors: yes
+
+    - name: print file writer stdout
+      debug:
+        msg: "{{ file_writer_result.stdout_lines }}"
+
+    - name: print file writer stderr
+      debug:
+        msg: "{{ file_writer_result.stderr_lines }}"
+
+    - name: check if NeXus file was generated
+      shell: "/opt/dm_group/usr/bin/h5ls {{ nexus_file_name }}"
+      args:
+        chdir: "~/file-writer"
+      environment:
+        LD_LIBRARY_PATH: "{{ ld_library_path }}"
+
+    - name: copy output NeXus file
+      fetch:
+        src: "~/file-writer/{{ nexus_file_name }}"
+        dest: "{{ test_result_dir }}/"
+        flat: yes

@@ -1,20 +1,5 @@
 # Check integration test results
 
-- hosts: file-writers
-  tasks:
-    - name: check if NeXus file was generated
-      shell: "/opt/dm_group/usr/bin/h5ls {{ nexus_file_name }}"
-      args:
-        chdir: "~/file-writer"
-      environment:
-        LD_LIBRARY_PATH: "{{ ld_library_path }}"
-
-    - name: copy output NeXus file
-      fetch:
-        src: "~/file-writer/{{ nexus_file_name }}"
-        dest: "{{ test_result_dir }}/"
-        flat: yes
-
 - hosts: test-orchestrators
   tasks:
     - name: check if NeXus file contains expected data
@@ -22,12 +7,30 @@
       args:
         chdir: "~"
 
+- hosts: area-detectors
+  tasks:
+    - name: check playbook result
+      fail:
+        msg: playbook failed
+      when: area_detector_ioc_result.rc!=0
+
 - hosts: efus
   tasks:
     - name: check playbook result
       fail:
         msg: playbook failed
-      when: cspec_pipeline_result.rc!=0 or
-            area_detector_ioc_result.rc!=0 or
-            epics_forwarder_result.rc!=0 or
-            file_writer_result.rc!=0
+      when: cspec_pipeline_result.rc!=0
+
+- hosts: epics-to-kafka-forwarders
+  tasks:
+    - name: check playbook result
+      fail:
+        msg: playbook failed
+      when: epics_forwarder_result.rc!=0
+
+- hosts: file-writers
+  tasks:
+    - name: check playbook result
+      fail:
+        msg: playbook failed
+      when: file_writer_result.rc!=0
