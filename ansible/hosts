@@ -20,22 +20,3 @@ localhost ansible_connection=local
 
 [area-detectors]
 192.168.12.21
-
-
-# Environment (duplicated from dm-ansible)
-
-[zookeeper-ensemble]
-192.168.12.22
-
-[kafka-cluster]
-192.168.12.22
-192.168.12.23
-
-[amor-simulator]
-192.168.12.21
-
-[channelfinder]
-192.168.12.23
-
-[recsync-server]
-192.168.12.23
