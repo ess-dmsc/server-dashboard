@@ -10,10 +10,14 @@
       command: pvget SQ:AMOR:DIMETIX:LASER
 
     - name: make a request to ChannelFinder
-      command: "curl {{ channelfinder_address }}"
+      command: "curl -s -o /dev/null -w \"%{http_code}\" {{ channelfinder_address }}"
       register: channelfinder_request
+
+    - name: print ChannelFinder request response
+      debug:
+        msg: "{{ channelfinder_request.stdout }}"
 
     - name: check ChannelFinder request
       fail:
         msg: "ChannelFinder request failed"
-      when: "'The requested resource is not available.' in channelfinder_request.stdout'"
+      when: channelfinder_request.stdout!=200
