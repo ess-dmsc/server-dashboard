@@ -54,7 +54,7 @@
           ./forward-epics-to-kafka -v \
           --config-file config.json"
       args:
-        chdir: ~
+        chdir: "~"
       async: 150
       poll: 0
       environment:
@@ -92,7 +92,7 @@
     - name: send command to start writing events to file
       shell: "./send-start-cmd.py itest03.dm.esss.dk {{ nexus_file_name }}"
       args:
-        chdir: ~
+        chdir: "~"
 
 - hosts: data-generators
   tasks:
@@ -129,7 +129,7 @@
     - name: send stop command to file writer
       shell: ./send-stop-cmd.py "itest03.dm.esss.dk"
       args:
-        chdir: ~
+        chdir: "~"
 
 - hosts: epics-to-kafka-forwarders
   tasks:
@@ -177,7 +177,7 @@
     - name: check if NeXus file contains expected data
       shell: "./test-output-file.py {{ test_result_dir }}/{{ nexus_file_name }}"
       args:
-        chdir: ~
+        chdir: "~"
 
 - hosts: area-detectors
   tasks:
