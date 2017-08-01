@@ -1,0 +1,39 @@
+# Run integration test commands
+
+- hosts: test-orchestrators
+  tasks:
+    - name: send command to start writing events to file
+      shell: "{{ python_bin }} ./send-start-cmd.py itest03.dm.esss.dk {{ nexus_file_name }}"
+      args:
+        chdir: "~"
+
+- hosts: data-generators
+  tasks:
+    - name: start data generation
+      shell: "\
+        LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
+          ./mgcncsgenfile \
+          -f ../../test-data/cncs_10_13.bin \
+          -i 192.168.12.22"
+      args:
+        chdir: "~/output/bin"
+      environment:
+        LD_LIBRARY_PATH: "{{ ld_library_path }}"
+
+- hosts: file-writers
+  tasks:
+    - name: change value of EPICS PV
+      shell: "\
+        pvput SQ:AMOR:DIMETIX:SimVal 0; \
+        sleep 1; \
+        pvput SQ:AMOR:DIMETIX:SimVal 1; \
+        sleep 1; \
+        pvput SQ:AMOR:DIMETIX:SimVal 2; \
+        sleep 1"
+
+# TODO: evaluate whether to keep this.
+- hosts: file-writers
+  tasks:
+    - name: wait for cspec pipeline to finish running
+      pause:
+        seconds: 30

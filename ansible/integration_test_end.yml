@@ -1,0 +1,86 @@
+# Stop system under test
+
+- hosts: test-orchestrators
+  tasks:
+    - name: send stop command to file writer
+      shell: "{{ python_bin }} ./send-stop-cmd.py itest03.dm.esss.dk"
+      args:
+        chdir: "~"
+
+- hosts: file-writers
+  tasks:
+    - name: check if file writer finished
+      async_status:
+        jid: "{{ file_writer.ansible_job_id }}"
+      register: file_writer_result
+      until: file_writer_result.finished
+      retries: 10
+      ignore_errors: yes
+
+    - name: print file writer stdout
+      debug:
+        msg: "{{ file_writer_result.stdout_lines }}"
+
+    - name: print file writer stderr
+      debug:
+        msg: "{{ file_writer_result.stderr_lines }}"
+
+- hosts: epics-to-kafka-forwarders
+  tasks:
+    - name: kill epics-to-kafka-forwarder
+      shell: pkill -9 forward-epics
+
+    - name: check if epics-to-kafka-forwarder finished
+      async_status:
+        jid: "{{ epics_forwarder.ansible_job_id }}"
+      register: epics_forwarder_result
+      until: epics_forwarder_result.finished
+      retries: 10
+      ignore_errors: yes
+
+    - name: print epics-to-kafka-forwarder stdout
+      debug:
+        msg: "{{ epics_forwarder_result.stdout_lines }}"
+
+    - name: print epics-to-kafka-forwarder stderr
+      debug:
+        msg: "{{ epics_forwarder_result.stderr_lines }}"
+
+- hosts: area-detectors
+  tasks:
+    - name: stop area detector ioc
+      shell: pkill -f ADPluginKafka
+
+    - name: check if area detector ioc finished
+      async_status:
+        jid: "{{ area_detector_ioc.ansible_job_id }}"
+      register: area_detector_ioc_result
+      until: area_detector_ioc_result.finished
+      retries: 10
+      ignore_errors: yes
+
+    - name: print area detector ioc stdout
+      debug:
+        msg: "{{ area_detector_ioc_result.stdout_lines }}"
+
+    - name: print area detector ioc stderr
+      debug:
+        msg: "{{ area_detector_ioc_result.stderr_lines }}"
+
+- hosts: efus
+  tasks:
+    - name: check if cspec pipeline finished
+      async_status:
+        jid: "{{ cspec_pipeline.ansible_job_id }}"
+      register: cspec_pipeline_result
+      until: cspec_pipeline_result.finished
+      retries: 10
+      ignore_errors: yes
+
+    - name: print cspec pipline stdout
+      debug:
+        msg: "{{ cspec_pipeline_result.stdout_lines }}"
+
+    - name: print cspec pipline stderr
+      debug:
+        msg: "{{ cspec_pipeline_result.stderr_lines }}"

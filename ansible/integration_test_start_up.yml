@@ -14,14 +14,14 @@
       args:
         chdir: "~"
 
-    - name: start ioc
+    - name: start area detector ioc
       shell: "\
         /usr/local/bin/procServ {{ area_detector_procserv_port }} \
           /opt/epics/modules/environment/2.0.0/3.15.4/bin/centos7-x86_64/iocsh \
           ADPluginKafka_int_test.cmd"
       args:
         chdir: "~"
-      async: 150
+      async: "{{ max_async_timeout }}"
       poll: 0
       register: area_detector_ioc
 
@@ -57,24 +57,25 @@
           --config-file config.json"
       args:
         chdir: "~"
-      async: 150
+      async: "{{ max_async_timeout }}"
       poll: 0
+      register: epics_forwarder
       environment:
         LD_LIBRARY_PATH: "{{ ld_library_path }}"
 
 - hosts: file-writers
   tasks:
+    - name: output NeXus file is absent
+      file:
+        path: "~/file-writer/{{ nexus_file_name }}"
+        state: absent
+
     - name: set initial value of EPICS PV
       shell: "\
         pvput SQ:AMOR:DIMETIX:LASER ON; \
         sleep 1; \
         pvput SQ:AMOR:DIMETIX:SimVal 3; \
         sleep 1"
-
-    - name: output NeXus file is absent
-      file:
-        path: "~/file-writer/{{ nexus_file_name }}"
-        state: absent
 
     - name: start file writer
       shell: "\
@@ -84,7 +85,8 @@
           --graylog-logger-address {{ graylog_server_data_full_address }}"
       args:
         chdir: "~/file-writer"
-      async: 150
+      async: "{{ max_async_timeout }}"
       poll: 0
+      register: file_writer
       environment:
         LD_LIBRARY_PATH: "{{ ld_library_path }}"
