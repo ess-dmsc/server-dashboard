@@ -55,7 +55,7 @@
         state: absent
 
     - name: start file writer
-      shell: "LD_LIBRARY_PATH=/opt/dm_group/usr/lib:./libs ./kafka-to-nexus --broker-command //{{ kafka_broker_address }}9092 --graylog-logger-address {{ graylog_server_data_full_address }}"
+      shell: "LD_LIBRARY_PATH=/opt/dm_group/usr/lib:./libs ./kafka-to-nexus --broker-command //{{ kafka_broker_address }} --graylog-logger-address {{ graylog_server_data_full_address }}"
       args:
         chdir: ~/file-writer
       async: 150
