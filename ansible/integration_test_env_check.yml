@@ -20,4 +20,4 @@
     - name: check ChannelFinder request
       fail:
         msg: "ChannelFinder request failed"
-      when: channelfinder_request.stdout!=200
+      when: "not ('200' in channelfinder_request.stdout)"
