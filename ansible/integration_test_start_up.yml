@@ -14,9 +14,16 @@
       args:
         chdir: "~"
 
+    - name: procserv pid file is absent
+      file:
+        path: "{{ area_detector_procserv_pid_file }}"
+        state: absent
+
     - name: start area detector ioc
       shell: "\
-        /usr/local/bin/procServ {{ area_detector_procserv_port }} \
+        /usr/local/bin/procServ \
+          --pidfile {{ area_detector_procserv_pid_file }} \
+          {{ area_detector_procserv_port }} \
           /opt/epics/modules/environment/2.0.0/3.15.4/bin/centos7-x86_64/iocsh \
           ADPluginKafka_int_test.cmd"
       args:

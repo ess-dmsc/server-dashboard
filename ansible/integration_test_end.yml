@@ -49,7 +49,7 @@
 - hosts: area-detectors
   tasks:
     - name: stop area detector ioc
-      shell: pkill -f ADPluginKafka
+      shell: "pkill --signal 2 --pidfile {{ area_detector_procserv_pid_file }}"
 
     - name: check if area detector ioc finished
       async_status:
