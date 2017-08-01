@@ -7,3 +7,7 @@ graylog_server_data_full_address: "{{ graylog_server_data_address }}:{{ graylog_
 kafka_broker_address: itest02.dm.esss.dk:9092
 
 ld_library_path: /opt/dm_group/usr/lib
+
+nexus_file_name: output.h5
+
+test_result_dir: ~/test-results

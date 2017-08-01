@@ -1,8 +1,8 @@
 - hosts: test-orchestrators
   tasks:
-    - name: test-results directory exists
+    - name: test result directory exists
       file:
-        path: ~/test-results
+        path: "{{ test_result_dir }}"
         state: directory
 
 - hosts: area-detectors
@@ -42,7 +42,7 @@
         LD_LIBRARY_PATH: "{{ ld_library_path }}"
 
     - name: load cspec calibration
-      shell: ./mgloadcal.py /home/jenkins/test-data/validruns_15
+      shell: ./mgloadcal.py ~/test-data/validruns_15
       args:
         chdir: ~/output/util/efushell
 
@@ -71,7 +71,7 @@
 
     - name: output NeXus file is absent
       file:
-        path: ~/file-writer/output.h5
+        path: "~/file-writer/{{ nexus_file_name }}"
         state: absent
 
     - name: start file writer
@@ -90,9 +90,9 @@
 - hosts: test-orchestrators
   tasks:
     - name: send command to start writing events to file
-      shell: ./send-start-cmd.py "itest03.dm.esss.dk" "output.h5"
+      shell: ./send-start-cmd.py "itest03.dm.esss.dk" "{{ nexus_file_name }}"
       args:
-        chdir: /home/jenkins
+        chdir: ~
 
 - hosts: data-generators
   tasks:
@@ -129,7 +129,7 @@
     - name: send stop command to file writer
       shell: ./send-stop-cmd.py "itest03.dm.esss.dk"
       args:
-        chdir: /home/jenkins
+        chdir: ~
 
 - hosts: epics-to-kafka-forwarders
   tasks:
@@ -160,7 +160,7 @@
 - hosts: file-writers
   tasks:
     - name: check if NeXus file was generated
-      shell: /opt/dm_group/usr/bin/h5ls output.h5
+      shell: "/opt/dm_group/usr/bin/h5ls {{ nexus_file_name }}"
       args:
         chdir: ~/file-writer
       environment:
@@ -168,16 +168,16 @@
 
     - name: copy output NeXus file
       fetch:
-        src: ~/file-writer/output.h5
-        dest: ~/test-results/
+        src: "~/file-writer/{{ nexus_file_name }}"
+        dest: "{{ test_result_dir }}/"
         flat: yes
 
 - hosts: test-orchestrators
   tasks:
     - name: check if NeXus file contains expected data
-      shell: ./test-output-file.py ./test-results/output.h5
+      shell: "./test-output-file.py {{ test_result_dir }}/{{ nexus_file_name }}"
       args:
-        chdir: /home/jenkins
+        chdir: ~
 
 - hosts: area-detectors
   tasks:
