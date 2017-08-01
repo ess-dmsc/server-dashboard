@@ -3,7 +3,8 @@
   tasks:
     - name: check if Kafka cluster is available
       command: "{{ python_bin }} check-kafka-available.py {{ kafka_broker_address }}"
-      chdir: "~"
+      args:
+        chdir: "~"
 
 # Check if AMOR IOC is running
 
