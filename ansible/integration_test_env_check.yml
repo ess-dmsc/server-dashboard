@@ -6,6 +6,14 @@
       args:
         chdir: "~"
 
-# Check if AMOR IOC is running
+    - name: check if AMOR IOC PV is available
+      command: pvget SQ:AMOR:DIMETIX:LASER
 
-# Check if ChannelFinder is running
+    - name: make a request to ChannelFinder
+      command: "curl {{ channelfinder_address }}"
+      register: channelfinder_request
+
+    - name: check ChannelFinder request
+      fail:
+        msg: "ChannelFinder request failed"
+      when: "'The requested resource is not available.' in channelfinder_request.stdout'"

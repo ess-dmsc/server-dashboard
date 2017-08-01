@@ -1,3 +1,5 @@
+channelfinder_address: 192.168.12.23:8080/ChannelFinder/
+
 graphite_server_data_address: 192.168.12.31
 
 graylog_server_data_address: 192.168.12.11
