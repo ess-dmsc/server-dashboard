@@ -31,9 +31,8 @@
         pvput SQ:AMOR:DIMETIX:SimVal 2; \
         sleep 1"
 
-# TODO: evaluate whether to keep this.
 - hosts: file-writers
   tasks:
     - name: wait for cspec pipeline to finish running
       pause:
-        seconds: 30
+        seconds: 10

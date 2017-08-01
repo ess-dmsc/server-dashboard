@@ -14,7 +14,7 @@
         jid: "{{ file_writer.ansible_job_id }}"
       register: file_writer_result
       until: file_writer_result.finished
-      retries: 10
+      retries: "{{ num_retries }}"
       ignore_errors: yes
 
     - name: print file writer stdout
@@ -35,7 +35,7 @@
         jid: "{{ epics_forwarder.ansible_job_id }}"
       register: epics_forwarder_result
       until: epics_forwarder_result.finished
-      retries: 10
+      retries: "{{ num_retries }}"
       ignore_errors: yes
 
     - name: print epics-to-kafka-forwarder stdout
@@ -56,7 +56,7 @@
         jid: "{{ area_detector_ioc.ansible_job_id }}"
       register: area_detector_ioc_result
       until: area_detector_ioc_result.finished
-      retries: 10
+      retries: "{{ num_retries }}"
       ignore_errors: yes
 
     - name: print area detector ioc stdout
@@ -74,7 +74,7 @@
         jid: "{{ cspec_pipeline.ansible_job_id }}"
       register: cspec_pipeline_result
       until: cspec_pipeline_result.finished
-      retries: 10
+      retries: "{{ num_retries }}"
       ignore_errors: yes
 
     - name: print cspec pipline stdout
