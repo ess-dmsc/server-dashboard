@@ -1,3 +1,8 @@
+- name: kafka cluster check script is installed
+  copy:
+    src: "check-kafka-available.py"
+    dest: "~/check-kafka-available.py"
+
 - name: file writer start command script is installed
   copy:
     src: "send-start-cmd.py"
