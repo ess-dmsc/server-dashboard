@@ -1,3 +1,5 @@
+- include: integration_test_env_check.yml
+
 - hosts: test-orchestrators
   tasks:
     - name: test result directory exists
