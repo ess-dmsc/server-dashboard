@@ -28,7 +28,7 @@
 - hosts: epics-to-kafka-forwarders
   tasks:
     - name: kill epics-to-kafka-forwarder
-      shell: pkill -9 forward-epics
+      shell: pkill -2 forward-epics
 
     - name: check if epics-to-kafka-forwarder finished
       async_status:
