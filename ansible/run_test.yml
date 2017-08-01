@@ -23,14 +23,19 @@
 - hosts: efus
   tasks:
     - name: start cspec pipeline
-      shell: "./efu2 -d mgcncs -s 60 -b {{ kafka_broker_address }} -a {{ graylog_server_data_address }} -g {{ graphite_server_data_address }}"
+      shell: "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
+                  ./efu2 -d mgcncs \
+                  -s 60 \
+                  -b {{ kafka_broker_address }} \
+                  -a {{ graylog_server_data_address }} \
+                  -g {{ graphite_server_data_address }}"
       args:
         chdir: ~/output/bin
       async: 70
       poll: 0
       register: efu_pipeline
       environment:
-        LD_LIBRARY_PATH: /opt/dm_group/usr/lib:../lib
+        LD_LIBRARY_PATH: "{{ ld_library_path }}"
 
     - name: load cspec calibration
       shell: ./mgloadcal.py /home/jenkins/test-data/validruns_15
@@ -40,11 +45,15 @@
 - hosts: epics-to-kafka-forwarders
   tasks:
     - name: start epics-to-kafka-forwarder
-      shell: LD_LIBRARY_PATH=/opt/dm_group/usr/lib:./output/lib ./forward-epics-to-kafka --config-file config.json -v
+      shell: "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./output/lib \
+             ./forward-epics-to-kafka -v \
+             --config-file config.json"
       args:
         chdir: ~
       async: 150
       poll: 0
+      environment:
+        LD_LIBRARY_PATH: "{{ ld_library_path }}"
 
 - hosts: file-writers
   tasks:
@@ -57,11 +66,16 @@
         state: absent
 
     - name: start file writer
-      shell: "LD_LIBRARY_PATH=/opt/dm_group/usr/lib:./libs ./kafka-to-nexus --broker-command //{{ kafka_broker_address }} --graylog-logger-address {{ graylog_server_data_full_address }}"
+      shell: "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./libs \
+                  ./kafka-to-nexus \
+                  --broker-command //{{ kafka_broker_address }} \
+                  --graylog-logger-address {{ graylog_server_data_full_address }}"
       args:
         chdir: ~/file-writer
       async: 150
       poll: 0
+      environment:
+        LD_LIBRARY_PATH: "{{ ld_library_path }}"
 
 - hosts: test-orchestrators
   tasks:
@@ -73,9 +87,14 @@
 - hosts: data-generators
   tasks:
     - name: start data generation
-      shell: LD_LIBRARY_PATH=/opt/dm_group/usr/lib:../lib ./mgcncsgenfile -f ../../test-data/cncs_10_13.bin -i 192.168.12.22
+      shell: "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
+                  ./mgcncsgenfile \
+                  -f ../../test-data/cncs_10_13.bin \
+                  -i 192.168.12.22"
       args:
         chdir: ~/output/bin
+      environment:
+        LD_LIBRARY_PATH: "{{ ld_library_path }}"
 
 - hosts: file-writers
   tasks:
@@ -124,9 +143,11 @@
 - hosts: file-writers
   tasks:
     - name: check if NeXus file was generated
-      shell: LD_LIBRARY_PATH=/opt/dm_group/usr/lib /opt/dm_group/usr/bin/h5ls output.h5
+      shell: /opt/dm_group/usr/bin/h5ls output.h5
       args:
         chdir: ~/file-writer
+      environment:
+        LD_LIBRARY_PATH: "{{ ld_library_path }}"
 
     - name: copy output NeXus file
       fetch:
