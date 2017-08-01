@@ -2,6 +2,6 @@ graphite_server_data_address: 192.168.12.31
 
 graylog_server_data_address: 192.168.12.11
 graylog_server_data_port: 12201
-graylog_server_data_full_address: {{ graylog_server_data_address }}:{{ graylog_server_data_port }}
+graylog_server_data_full_address: "{{ graylog_server_data_address }}:{{ graylog_server_data_port }}"
 
 kafka_broker_address: itest02.dm.esss.dk:9092
