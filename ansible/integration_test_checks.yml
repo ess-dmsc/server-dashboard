@@ -30,4 +30,4 @@
       when: cspec_pipeline_result.rc!=0 or
             area_detector_ioc_result.rc!=0 or
             epics_forwarder_result.rc!=0 or
-            file_writer_result!=0
+            file_writer_result.rc!=0
