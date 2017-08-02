@@ -84,16 +84,3 @@
     - name: print file writer stderr
       debug:
         msg: "{{ file_writer_result.stderr_lines }}"
-
-    - name: check if NeXus file was generated
-      shell: "/opt/dm_group/usr/bin/h5ls {{ nexus_file_name }}"
-      args:
-        chdir: "~/file-writer"
-      environment:
-        LD_LIBRARY_PATH: "{{ ld_library_path }}"
-
-    - name: copy output NeXus file
-      fetch:
-        src: "~/file-writer/{{ nexus_file_name }}"
-        dest: "{{ test_result_dir }}/"
-        flat: yes
