@@ -88,7 +88,7 @@
       shell: "\
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./libs \
           ./kafka-to-nexus \
-          --broker-command //{{ kafka_broker_address }} \
+          --command-uri //{{ kafka_broker_address }} \
           --graylog-logger-address {{ graylog_server_data_full_address }}"
       args:
         chdir: "~/file-writer"
