@@ -18,4 +18,5 @@ if __name__ == '__main__':
     print("Sending command to " + args.broker + ":")
     print(cmd)
 
-    p.send("kafka-to-nexus.command", json.dumps(cmd))
+    json_cmd = bytes(json.dumps(cmd), 'ascii')
+    p.send("kafka-to-nexus.command", json_cmd)
