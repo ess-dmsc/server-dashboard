@@ -19,4 +19,5 @@ if __name__ == '__main__':
     print(cmd)
 
     json_cmd = bytes(json.dumps(cmd), 'ascii')
-    p.send("kafka-to-nexus.command", json_cmd)
+    future = p.send("kafka-to-nexus.command", json_cmd)
+    future.get(timeout=1)  # Wait for message to be sent or timeout.
