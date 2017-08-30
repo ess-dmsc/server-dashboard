@@ -11,10 +11,10 @@ kafka_broker_address: itest02.dm.esss.dk:9092
 ld_library_path: /opt/dm_group/usr/lib
 
 # Maximum time to wait for asynchronous tasks to finish
-max_async_timeout: 150
+max_async_timeout: 3000
 
 nexus_file_name: output.h5
 
-num_retries: 10
+num_retries: 30
 
 test_result_dir: ~/test-results
