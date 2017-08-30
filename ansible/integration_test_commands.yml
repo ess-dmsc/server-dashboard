@@ -11,7 +11,6 @@
   tasks:
     - name: start data generation
       shell: "\
-        echo {{ item }}; \
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
           ./mgcncsgenfile \
           -f ../../test-data/cncs_10_13.bin \
@@ -20,10 +19,6 @@
         chdir: "~/output/bin"
       environment:
         LD_LIBRARY_PATH: "{{ ld_library_path }}"
-      # Hacked loop
-      with_items:
-        - 1
-        - 2
 
 - hosts: file-writers
   tasks:
