@@ -11,16 +11,37 @@
   tasks:
     - name: start data generation
       shell: "\
+        echo {{ item }}; \
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
-          for i in '0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19' ; do \
-            ./mgcncsgenfile; \
-            -f ../../test-data/cncs_10_13.bin; \
-            -i 192.168.12.22'; \
-          done"
+          ./mgcncsgenfile \
+          -f ../../test-data/cncs_10_13.bin \
+          -i 192.168.12.22"
       args:
         chdir: "~/output/bin"
       environment:
         LD_LIBRARY_PATH: "{{ ld_library_path }}"
+      # Hacked loop
+      with_items:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+        - 17
+        - 18
+        - 19
+        - 20
 
 - hosts: file-writers
   tasks:
