@@ -44,7 +44,7 @@
           -g {{ graphite_server_data_address }}"
       args:
         chdir: "~/output/bin"
-      async: 70
+      async: "{{ max_async_timeout }}"
       poll: 0
       register: cspec_pipeline
       environment:
