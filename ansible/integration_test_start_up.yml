@@ -38,7 +38,7 @@
       shell: "\
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
           ./efu2 -d mgcncs \
-          -s 900 \
+          -s 750 \
           -b {{ kafka_broker_address }} \
           -a {{ graylog_server_data_address }} \
           -g {{ graphite_server_data_address }}"
