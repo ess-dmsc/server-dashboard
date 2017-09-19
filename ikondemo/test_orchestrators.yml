@@ -1,0 +1,3 @@
+- hosts: test-orchestrators
+  roles:
+    - test_orchestrator

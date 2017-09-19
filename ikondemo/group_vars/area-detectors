@@ -1,0 +1,2 @@
+area_detector_procserv_port: 12345
+area_detector_procserv_pid_file: ~/ad_pid.txt

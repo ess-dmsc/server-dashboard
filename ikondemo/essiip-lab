@@ -1,0 +1,12 @@
+[test-orchestrators]
+localhost ansible_connection=local
+
+[pipeline]
+10.4.0.216
+10.4.0.215
+
+[data-generators]
+10.4.0.216
+
+[efus]
+10.4.0.215

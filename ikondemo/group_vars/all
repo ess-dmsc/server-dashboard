@@ -1,0 +1,20 @@
+channelfinder_address: 192.168.12.23:8080/ChannelFinder/
+
+graphite_server_data_address: 192.168.12.31
+
+graylog_server_data_address: 192.168.12.11
+graylog_server_data_port: 12201
+graylog_server_data_full_address: "{{ graylog_server_data_address }}:{{ graylog_server_data_port }}"
+
+kafka_broker_address: itest02.dm.esss.dk:9092
+
+ld_library_path: /opt/dm_group/usr/lib
+
+# Maximum time to wait for asynchronous tasks to finish
+max_async_timeout: 150
+
+nexus_file_name: output.h5
+
+num_retries: 10
+
+test_result_dir: ~/test-results
