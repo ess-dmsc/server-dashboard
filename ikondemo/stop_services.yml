@@ -1,0 +1,12 @@
+
+- hosts: data-generators
+  tasks:
+    - name: stop data generators
+      command: "killall datagen_multigrid.bash datagen_gdgem.bash mgcncsgenjson"
+      ignore_errors: True
+
+- hosts: efus
+  tasks:
+    - name: stop efus
+      command: "killall efu2"
+      ignore_errors: True

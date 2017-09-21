@@ -1,15 +1,15 @@
-#- hosts: efus
-  # tasks:
-  #   - name: start multigrid efu
-  #     command: "/usr/sbin/daemonize ~/dmg-build-scripts/ikondemo/demoscripts/startmgefu.bash"
+- hosts: efus
+  tasks:
+    - name: start multigrid efu
+      command: "/usr/sbin/daemonize ~/dmg-build-scripts/ikondemo/demoscripts/startmgefu.bash"
 
-    # - name: start gem efu
-      # command: "/usr/sbin/daemonize ~/dmg-build-scripts/ikondemo/demoscripts/startgemefu.bash"
+    - name: start gem efu
+      command: "/usr/sbin/daemonize ~/dmg-build-scripts/ikondemo/demoscripts/startgemefu.bash"
 
 - hosts: data-generators
   tasks:
     - name: start multigrid data
       command: "/usr/sbin/daemonize ~/dmg-build-scripts/ikondemo/demoscripts/datagen_multigrid.bash 10"
 
-    # - name: start gem data
-      # command: "/usr/sbin/daemonize ~/dmg-build-scripts/ikondemo/demoscripts/datagen_gdgem.bash"
+    - name: start gem data
+      command: "/usr/sbin/daemonize ~/dmg-build-scripts/ikondemo/demoscripts/datagen_gdgem.bash"
