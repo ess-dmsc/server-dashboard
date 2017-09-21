@@ -12,7 +12,7 @@ function loadandrun()
   CALIB=$1
   RUN=$2
   $BASE/util/efushell/mgloadcal.py -i 10.4.0.215 -p 8000 $CALIB
-  $BASE/bin/mgcncsgenjson -b ~/ikondata/MG_CNCS -r allfiles.json -j $RUN -t $throttle -i 172.24.0.201 -p 9000
+  $BASE/bin/mgcncsgenjson -b ~/ikondata/MG_CNCS -r ~/dmg-build-scripts/ikondemo/demoscripts/allfiles.json -j $RUN -t $throttle -i 172.24.0.201 -p 9000
 }
 
 

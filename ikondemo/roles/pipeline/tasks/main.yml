@@ -8,3 +8,8 @@
     remote_src: yes
     src: https://jenkins.esss.dk/dm/job/integration_test/lastSuccessfulBuild/artifact/output.tar.gz
     dest: "~"
+
+- name: git repository is available
+  git:
+    repo: 'https://github.com/ess-dmsc/dmg-build-scripts.git'
+    dest: "~/dmg-build-scripts"
