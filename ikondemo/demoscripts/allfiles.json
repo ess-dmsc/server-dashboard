@@ -23,7 +23,6 @@
       {"id": 19, "dir": "11_29/",                     "prefix": "2016_12_06_1059_sample_",  "postfix": ".bin", "start":   0, "end":  12615}
     ],
 
-
   "ikon1" :
     [
       {"id": 15, "dir": "10_13/",                     "prefix": "2016_11_07_0351_sample_",  "postfix": ".bin", "start":    0, "end":  25476}
@@ -31,7 +30,6 @@
 
   "ikon2" :
     [
-      {"id": 13, "dir": "10_13/",                     "prefix": "2016_10_21_0351_sample_",  "postfix": ".bin", "start":   0, "end":  14597},
-    ],
-
+      {"id": 13, "dir": "10_13/",                     "prefix": "2016_10_21_0351_sample_",  "postfix": ".bin", "start":   0, "end":  14597}
+    ]
 }
