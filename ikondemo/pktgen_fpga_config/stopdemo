@@ -1,0 +1,4 @@
+
+python FPGA_config/cmd_interpreter.py ikonstopdata.txt
+
+

@@ -1,4 +1,5 @@
 - hosts: efus
+  gather_facts: False
   tasks:
     - name: start multigrid efu
       command: "/usr/sbin/daemonize ~/dmg-build-scripts/ikondemo/demoscripts/startefu_multigrid.bash"
@@ -7,6 +8,7 @@
       command: "/usr/sbin/daemonize ~/dmg-build-scripts/ikondemo/demoscripts/startefu_gdgem.bash"
 
 - hosts: data-generators
+  gather_facts: False
   tasks:
     - name: start multigrid data
       command: "/usr/sbin/daemonize ~/dmg-build-scripts/ikondemo/demoscripts/datagen_multigrid.bash 10"

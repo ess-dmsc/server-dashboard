@@ -1,2 +1,2 @@
-- include: test_orchestrators.yml
-- include: pipeline.yml
+- import_playbook: test_orchestrators.yml
+- import_playbook: pipeline.yml

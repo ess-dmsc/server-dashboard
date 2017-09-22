@@ -1,0 +1,18 @@
+#!/bin/bash
+
+
+function run() 
+{
+    echo "Switching to $1 Gbps"
+    python cmd_interpreter.py $2  #&> /dev/null
+    sleep 40
+}
+
+while [[ 1 ]]
+do
+    run "100" ikondemo100g.txt
+    run "36"  ikondemo36g.txt
+    run "6"   ikondemo1g.txt
+    run "36"  ikondemo36g.txt
+done
+
