@@ -1,3 +1,4 @@
+---
 - hosts: efus
   gather_facts: False
   tasks:
@@ -20,4 +21,8 @@
   gather_facts: False
   tasks:
     - name: start carbon metrics collection
-      command: "/usr/sbin/daemonize ~/dmg-build-scripts/ikondemo/demoscripts/pktgen_fpga_config/pktgen_carbon"
+      command: "/usr/sbin/daemonize ~/dmg-build-scripts/ikondemo/demoscripts/pktgen_fpga_config/pktgen_carbon.bash"
+
+  # tasks:
+  #   - name: start packet generator
+  #     command: "/usr/sbin/daemonize ~/dmg-build-scripts/ikondemo/demoscripts/pktgen_fpga_config/pktgen_carbon"

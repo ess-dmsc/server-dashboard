@@ -16,6 +16,6 @@
 - hosts: packet-generator
   gather_facts: False
   tasks:
-    - name: stop carbon metroics collection
-      command: "killall pktgen_carbon"
+    - name: stop carbon metrics collection
+      command: "killall pktgen_carbon.bash"
       ignore_errors: True
