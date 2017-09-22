@@ -15,3 +15,9 @@
 
     - name: start gem data
       command: "/usr/sbin/daemonize ~/dmg-build-scripts/ikondemo/demoscripts/datagen_gdgem.bash"
+
+- hosts: packet-generator
+  gather_facts: False
+  tasks:
+    - name: start carbon metrics collection
+      command: "/usr/sbin/daemonize ~/dmg-build-scripts/ikondemo/demoscripts/pktgen_fpga_config/pktgen_carbon"

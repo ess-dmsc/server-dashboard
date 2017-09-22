@@ -12,3 +12,10 @@
     - name: stop efus
       command: "killall efu2"
       ignore_errors: True
+
+- hosts: packet-generator
+  gather_facts: False
+  tasks:
+    - name: stop carbon metroics collection
+      command: "killall pktgen_carbon"
+      ignore_errors: True
