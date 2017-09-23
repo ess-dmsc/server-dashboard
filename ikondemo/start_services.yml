@@ -1,24 +1,24 @@
 ---
-- hosts: efus
-  gather_facts: False
-  tasks:
-    - name: start multigrid efu
-      command: "{{daemonize_cmd}} {{script_path}}/startefu_multigrid.bash"
-
-    - name: start gem efu
-      command: "{{daemonize_cmd}} {{script_path}}/startefu_gdgem.bash"
-
-    - name: start sonde efu
-      command: "{{daemonize_cmd}} {{script_path}}/startefu_sonde.bash"
-
-- hosts: data-generators
-  gather_facts: False
-  tasks:
-    - name: start multigrid data
-      command: "{{daemonize_cmd}} {{script_path}}/datagen_multigrid.bash 10"
-
-    - name: start gem data
-      command: "{{daemonize_cmd}} {{script_path}}/datagen_gdgem.bash"
+# - hosts: efus
+#   gather_facts: False
+#   tasks:
+#     - name: start multigrid efu
+#       command: "{{daemonize_cmd}} {{script_path}}/startefu_multigrid.bash"
+#
+#     - name: start gem efu
+#       command: "{{daemonize_cmd}} {{script_path}}/startefu_gdgem.bash"
+#
+#     - name: start sonde efu
+#       command: "{{daemonize_cmd}} {{script_path}}/startefu_sonde.bash"
+#
+# - hosts: data-generators
+#   gather_facts: False
+#   tasks:
+#     - name: start multigrid data
+#       command: "{{daemonize_cmd}} {{script_path}}/datagen_multigrid.bash 10"
+#
+#     - name: start gem data
+#       command: "{{daemonize_cmd}} {{script_path}}/datagen_gdgem.bash"
 
 - hosts: packet-generator
   gather_facts: False
@@ -26,7 +26,6 @@
     - name: start carbon metrics collection
       command: "{{daemonize_cmd}} {{script_path}}/pktgen_fpga_config/pktgen_carbon.bash"
 
-  tasks:
     - name: start packet generator
       command: "{{daemonize_cmd}} {{script_path}}/pktgen_fpga_config/rundemo"
       args:

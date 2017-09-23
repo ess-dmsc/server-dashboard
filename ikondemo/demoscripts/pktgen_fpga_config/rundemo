@@ -1,9 +1,11 @@
 #!/bin/bash
 
+output=/tmp/rundemo.debug
+
 function run()
 {
     echo "Switching to $1 Gbps"
-    /usr/bin/python cmd_interpreter.py $2  #&> /dev/null
+    /usr/bin/python cmd_interpreter.py $2  >> $output 2>&1
     sleep 40
 }
 
