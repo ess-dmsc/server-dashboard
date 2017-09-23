@@ -5,14 +5,16 @@ output=/tmp/rundemo.debug
 function run()
 {
     echo "Switching to $1 Gbps"
-    /usr/bin/python cmd_interpreter.py $2  >> $output 2>&1
+    /usr/bin/python cmd_interpreter.py $2
     sleep 15
 }
 
+echo "pwd:"$(pwd) >> $output 2>&1
+
 while [[ 1 ]]
 do
-    run "100" ikondemo100g.txt
-    run "36"  ikondemo36g.txt
-    run "6"   ikondemo1g.txt
-    run "36"  ikondemo36g.txt
+    run "100" ikondemo100g.txt  >> $output 2>&1
+    run "36"  ikondemo36g.txt  >> $output 2>&1
+    run "6"   ikondemo1g.txt  >> $output 2>&1
+    run "36"  ikondemo36g.txt  >> $output 2>&1
 done
