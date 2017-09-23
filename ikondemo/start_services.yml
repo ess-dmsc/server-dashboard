@@ -11,6 +11,13 @@
     - name: start sonde efu
       command: "{{daemonize_cmd}} {{script_path}}/startefu_sonde.bash"
 
+# - hosts: sonde-gateway
+#   gather_facts: False
+#   tasks:
+#     - name: setup packet gateway for sonde
+#       shell: "{{daemonize_cmd}} nc -l -u 50011 | nc -u 10.4.0.215 9002"
+
+
 - hosts: data-generators
   gather_facts: False
   tasks:
