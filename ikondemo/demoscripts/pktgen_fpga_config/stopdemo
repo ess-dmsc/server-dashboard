@@ -1,4 +1,3 @@
+#!/bin/bash
 
-python FPGA_config/cmd_interpreter.py ikonstopdata.txt
-
-
+/usr/bin/python cmd_interpreter.py ikonstopdata.txt

@@ -16,6 +16,10 @@
 - hosts: packet-generator
   gather_facts: False
   tasks:
+    - name: stop packet generator
+      command: "{{script_path}}/pktgen_fpga_config/stopdemo"
+      become: True
+
     - name: stop carbon metrics collection
       command: "killall pktgen_carbon.bash"
       ignore_errors: True

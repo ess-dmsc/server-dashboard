@@ -26,6 +26,7 @@
     - name: start carbon metrics collection
       command: "{{daemonize_cmd}} {{script_path}}/pktgen_fpga_config/pktgen_carbon.bash"
 
-  # tasks:
-  #   - name: start packet generator
-  #     command: "{{daemonize_cmd}} {{script_path}}/pktgen_fpga_config/rundemo"
+  tasks:
+    - name: start packet generator
+      command: "{{daemonize_cmd}} {{script_path}}/pktgen_fpga_config/rundemo"
+      become: True
