@@ -6,7 +6,7 @@ function run()
 {
     echo "Switching to $1 Gbps"
     /usr/bin/python cmd_interpreter.py $2  >> $output 2>&1
-    sleep 40
+    sleep 15
 }
 
 while [[ 1 ]]
