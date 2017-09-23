@@ -15,5 +15,5 @@ After changing scripts or data files you need to deploy these changes to the ser
 
 To then start and stop the demo use the following commands
 
-      > ansible-playbook -i essiip-lab start_services.yml
-      > ansible-playbook -i essiip-lab stop_services.yml
+      > ansible-playbook -i essiip-lab start_services.yml --ask-sudo-pass
+      > ansible-playbook -i essiip-lab stop_services.yml --ask-sudo-pass
