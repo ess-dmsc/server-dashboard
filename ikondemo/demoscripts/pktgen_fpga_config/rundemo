@@ -2,10 +2,12 @@
 
 output=/tmp/rundemo.debug
 
+fpath=/home/mortenchristensen/dmg-build-scripts/ikondemo/demoscripts/pktgen_fpga_config
+
 function run()
 {
     echo "Switching to $1 Gbps"
-    /usr/bin/python cmd_interpreter.py $2
+    /usr/bin/python $fpath/cmd_interpreter.py $2
     sleep 15
 }
 
