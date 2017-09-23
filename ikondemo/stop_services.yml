@@ -16,6 +16,10 @@
 - hosts: packet-generator
   gather_facts: False
   tasks:
+    - name: stop rundemo script
+      command: "killall rundemo"
+      ignore_errors: True
+
     - name: stop packet generator
       command: "./stopdemo"
       args:

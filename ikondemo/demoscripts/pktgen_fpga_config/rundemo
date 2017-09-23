@@ -1,6 +1,6 @@
 #!/bin/bash
 
-output=/tmp/rundemo.debug
+output=/dev/null
 
 fpath=/home/mortenchristensen/dmg-build-scripts/ikondemo/demoscripts/pktgen_fpga_config
 
