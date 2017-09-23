@@ -1,0 +1,5 @@
+---
+
+daemonize_cmd: /usr/sbin/daemonize
+
+script_path: ~/dmg-build-scripts/ikondemo/demoscripts
