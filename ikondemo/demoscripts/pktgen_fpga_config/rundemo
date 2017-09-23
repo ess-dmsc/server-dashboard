@@ -1,10 +1,9 @@
 #!/bin/bash
 
-
-function run() 
+function run()
 {
     echo "Switching to $1 Gbps"
-    python cmd_interpreter.py $2  #&> /dev/null
+    /usr/bin/python cmd_interpreter.py $2  #&> /dev/null
     sleep 40
 }
 
@@ -15,4 +14,3 @@ do
     run "6"   ikondemo1g.txt
     run "36"  ikondemo36g.txt
 done
-

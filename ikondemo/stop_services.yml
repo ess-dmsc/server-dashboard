@@ -17,7 +17,9 @@
   gather_facts: False
   tasks:
     - name: stop packet generator
-      command: "{{script_path}}/pktgen_fpga_config/stopdemo"
+      command: "./stopdemo"
+      args:
+        chdir: "{{script_path}}/pktgen_fpga_config/"
       become: True
 
     - name: stop carbon metrics collection
