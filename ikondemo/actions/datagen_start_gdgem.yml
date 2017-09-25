@@ -1,0 +1,7 @@
+---
+
+- hosts: data-generators
+  gather_facts: False
+  tasks:
+    - name: start gem data
+      command: "{{daemonize_cmd}} {{script_path}}/datagen_gdgem.bash"

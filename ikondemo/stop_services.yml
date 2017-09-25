@@ -1,31 +1,9 @@
+---
+- import_playbook: actions/datagen_stop_multigrid.yml
+- import_playbook: actions/datagen_stop_gdgem.yml
+- import_playbook: actions/datagen_stop_sonde.yml
+- import_playbook: actions/datagen_stop_pktgen.yml
 
-- hosts: data-generators
-  gather_facts: False
-  tasks:
-    - name: stop data generators
-      command: "killall datagen_multigrid.bash datagen_gdgem.bash mgcncsgenjson"
-      ignore_errors: True
+- import_playbook: actions/efu_stop_all.yml
 
-- hosts: efus
-  gather_facts: False
-  tasks:
-    - name: stop efus
-      command: "killall efu2"
-      ignore_errors: True
-
-- hosts: packet-generator
-  gather_facts: False
-  tasks:
-    - name: stop rundemo script
-      command: "killall rundemo"
-      ignore_errors: True
-
-    - name: stop packet generator
-      command: "./stopdemo"
-      args:
-        chdir: "{{script_path}}/pktgen_fpga_config/"
-      become: True
-
-    - name: stop carbon metrics collection
-      command: "killall pktgen_carbon.bash"
-      ignore_errors: True
+- import_playbook: actions/utils_stop.yml

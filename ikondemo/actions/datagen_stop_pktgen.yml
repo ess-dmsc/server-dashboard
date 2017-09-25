@@ -1,0 +1,15 @@
+---
+
+- hosts: packet-generator
+  gather_facts: False
+  tasks:
+    - name: stop rundemo script
+      command: "killall rundemo"
+      ignore_errors: True
+      become: True
+
+    - name: stop packet generator
+      command: "./stopdemo"
+      args:
+        chdir: "{{script_path}}/pktgen_fpga_config/"
+      become: True

@@ -1,33 +1,11 @@
 ---
-- hosts: efus
-  gather_facts: False
-  tasks:
-    - name: start multigrid efu
-      command: "{{daemonize_cmd}} {{script_path}}/startefu_multigrid.bash"
+- import_playbook: actions/efu_start_multigrid.yml
+- import_playbook: actions/efu_start_gdgem.yml
+- import_playbook: actions/efu_start_sonde.yml
 
-    - name: start gem efu
-      command: "{{daemonize_cmd}} {{script_path}}/startefu_gdgem.bash"
+- import_playbook: actions/utils_start.yml
 
-    - name: start sonde efu
-      command: "{{daemonize_cmd}} {{script_path}}/startefu_sonde.bash"
-
-- hosts: data-generators
-  gather_facts: False
-  tasks:
-    - name: start multigrid data
-      command: "{{daemonize_cmd}} {{script_path}}/datagen_multigrid.bash 10"
-
-    - name: start gem data
-      command: "{{daemonize_cmd}} {{script_path}}/datagen_gdgem.bash"
-
-- hosts: packet-generator
-  gather_facts: False
-  tasks:
-    - name: start carbon metrics collection
-      command: "{{daemonize_cmd}} {{script_path}}/pktgen_fpga_config/pktgen_carbon.bash"
-
-    - name: start packet generator
-      command: "{{daemonize_cmd}} {{script_path}}/pktgen_fpga_config/rundemo"
-      args:
-        chdir: "{{script_path}}/pktgen_fpga_config/"
-      become: True
+- import_playbook: actions/datagen_start_multigrid.yml
+- import_playbook: actions/datagen_start_gdgem.yml
+- import_playbook: actions/datagen_start_sonde.yml
+- import_playbook: actions/datagen_start_pktgen.yml

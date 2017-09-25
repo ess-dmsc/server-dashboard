@@ -1,0 +1,6 @@
+---
+- hosts: efus
+  gather_facts: False
+  tasks:    
+    - name: start sonde efu
+      command: "{{daemonize_cmd}} {{script_path}}/startefu_sonde.bash"

@@ -3,8 +3,5 @@
   user: dmsc
   gather_facts: False
   tasks:
-    - name: setup packet gateway for sonde
-      command: "{{daemonize_cmd}} /home/dmsc/gateway"
-
     - name: start sonde readout
       shell: "/usr/bin/python /home/dmsc/essproj/event-formation-unit/utils/sondectrl/ideasctrl.py -i 10.10.0.50 -c config"

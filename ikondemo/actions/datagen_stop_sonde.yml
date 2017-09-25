@@ -3,9 +3,5 @@
   user: dmsc
   gather_facts: False
   tasks:
-    - name: stop sonde readout
+    - name: start sonde readout
       shell: "/usr/bin/python /home/dmsc/essproj/event-formation-unit/utils/sondectrl/ideasctrl.py -i 10.10.0.50 -c stop"
-
-    - name: stop sonde gateway
-      command: "killall gateway"
-      ignore_errors: True
