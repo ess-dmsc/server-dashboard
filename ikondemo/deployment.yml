@@ -1,2 +1,4 @@
-- import_playbook: test_orchestrators.yml
-- import_playbook: pipeline.yml
+- hosts: pipeline
+  gather_facts: False
+  roles:
+    - pipeline

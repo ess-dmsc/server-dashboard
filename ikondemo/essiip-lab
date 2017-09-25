@@ -1,5 +1,3 @@
-[test-orchestrators]
-localhost ansible_connection=local
 
 [pipeline]
 10.4.0.216
