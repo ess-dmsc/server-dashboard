@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sleeptime={1:-15}
+sleeptime=30
 
 output=/dev/null
 
