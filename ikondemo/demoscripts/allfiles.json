@@ -31,5 +31,10 @@
   "ikon2" :
     [
       {"id": 13, "dir": "10_13/",                     "prefix": "2016_10_21_0351_sample_",  "postfix": ".bin", "start":   0, "end":  14597}
+    ],
+
+  "ikon3" :
+    [
+      {"id": 10, "dir": "08_16/",                     "prefix": "2016_08_16_0921_sample_",  "postfix": ".bin", "start":   0, "end":  60477}
     ]
 }

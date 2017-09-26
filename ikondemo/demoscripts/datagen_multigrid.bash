@@ -21,4 +21,6 @@ while [[ 1  ]]
 do
    loadandrun ~/dmg-build-scripts/ikondemo/demoscripts/mgcalib/validruns_15 ikon1
    loadandrun ~/dmg-build-scripts/ikondemo/demoscripts/mgcalib/validruns_13 ikon2
+   loadandrun ~/dmg-build-scripts/ikondemo/demoscripts/mgcalib/validruns_19 ikon1
+   loadandrun ~/dmg-build-scripts/ikondemo/demoscripts/mgcalib/validruns_10 ikon3
 done
