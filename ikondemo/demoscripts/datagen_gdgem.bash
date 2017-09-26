@@ -1,6 +1,6 @@
 #!/bin/bash
 
-throttle={1:-1}
+throttle=10
 
 BASE=~/output
 
