@@ -4,7 +4,7 @@
   gather_facts: False
   tasks:
     - name: start packet generator
-      commdn : "{{daemonize_cmd}} {{script_path}}/pktgen_fpga_config/rundemo"
+      command : "{{daemonize_cmd}} {{script_path}}/pktgen_fpga_config/rundemo"
       args:
         chdir: "{{script_path}}/pktgen_fpga_config/"
       become: True
