@@ -50,6 +50,10 @@
       environment:
         LD_LIBRARY_PATH: "{{ ld_library_path }}"
 
+    - name: wait for cspec pipeline initialisation
+      pause:
+        seconds: 5
+
     - name: load cspec calibration
       shell: ./mgloadcal.py ~/test-data/validruns_15
       args:
