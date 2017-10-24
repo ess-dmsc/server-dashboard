@@ -1,5 +1,5 @@
 - name: packages are installed
   unarchive:
     remote_src: yes
-    src: https://jenkins.esss.dk/dm/job/ess-dmsc/job/kafka-to-nexus/job/master/lastSuccessfulBuild/artifact/file-writer.tar.gz
-    dest: "~"
+    src: https://jenkins.esss.dk/dm/job/ess-dmsc/job/kafka-to-nexus/job/essiip-deployment/lastSuccessfulBuild/artifact/file-writer-centos-gcc6.tar.gz
+    dest: "~/file-writer"
