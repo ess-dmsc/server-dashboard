@@ -87,8 +87,7 @@
 
     - name: start file writer
       shell: "\
-        LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./libs \
-          ./bin/kafka-to-nexus \
+        ./bin/kafka-to-nexus \
           --command-uri //{{ kafka_broker_address }} \
           --graylog-logger-address {{ graylog_server_data_full_address }}"
       args:
@@ -96,5 +95,3 @@
       async: "{{ max_async_timeout }}"
       poll: 0
       register: file_writer
-      environment:
-        LD_LIBRARY_PATH: "{{ ld_library_path }}"
