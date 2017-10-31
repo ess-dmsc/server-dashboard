@@ -1,8 +1,8 @@
 - name: executable is installed
-  get_url:
+  unarchive:
+    remote_src: yes
     url: https://jenkins.esss.dk/dm/job/ess-dmsc/job/forward-epics-to-kafka/job/essiip-deployment/lastSuccessfulBuild/artifact/forward-epics-to-kafka-centos.tar.gz
     dest: "~"
-    mode: 0775
 
 - name: configuration file is installed
   copy:
