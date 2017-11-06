@@ -37,7 +37,7 @@
     - name: start cspec pipeline
       shell: "\
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
-          ./efu2 -d mgcncs \
+          ./efu2 -d mgcncs2 \
           -s 60 \
           -b {{ kafka_broker_address }} \
           -a {{ graylog_server_data_address }} \
