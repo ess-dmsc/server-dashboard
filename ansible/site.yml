@@ -1,5 +1,5 @@
 - include: test_orchestrators.yml
 - include: pipeline.yml
 - include: epics_to_kafka_forwarders.yml
-- include: file_writers.yml
+- include: kafka_to_nexus.yml
 - include: area_detectors.yml

@@ -15,7 +15,7 @@ localhost ansible_connection=local
 [epics-to-kafka-forwarders]
 192.168.12.23
 
-[file-writers]
+[kafka-to-nexus]
 192.168.12.21
 
 [area-detectors]

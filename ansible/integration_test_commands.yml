@@ -20,7 +20,7 @@
       environment:
         LD_LIBRARY_PATH: "{{ ld_library_path }}"
 
-- hosts: file-writers
+- hosts: kafka-to-nexus
   tasks:
     - name: change value of EPICS PV
       shell: "\
@@ -31,7 +31,7 @@
         pvput SQ:AMOR:DIMETIX:SimVal 2; \
         sleep 1"
 
-- hosts: file-writers
+- hosts: kafka-to-nexus
   tasks:
     - name: wait for cspec pipeline to finish running
       pause:

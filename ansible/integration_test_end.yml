@@ -67,20 +67,20 @@
       debug:
         msg: "{{ cspec_pipeline_result.stderr_lines }}"
 
-- hosts: file-writers
+- hosts: kafka-to-nexus
   tasks:
     - name: check if file writer finished
       async_status:
-        jid: "{{ file_writer.ansible_job_id }}"
-      register: file_writer_result
-      until: file_writer_result.finished
+        jid: "{{ kafka_to_nexus.ansible_job_id }}"
+      register: kafka_to_nexus_result
+      until: kafka_to_nexus_result.finished
       retries: "{{ num_retries }}"
       ignore_errors: yes
 
     - name: print file writer stdout
       debug:
-        msg: "{{ file_writer_result.stdout_lines }}"
+        msg: "{{ kafka_to_nexus_result.stdout_lines }}"
 
     - name: print file writer stderr
       debug:
-        msg: "{{ file_writer_result.stderr_lines }}"
+        msg: "{{ kafka_to_nexus_result.stderr_lines }}"

@@ -71,11 +71,11 @@
       poll: 0
       register: epics_forwarder
 
-- hosts: file-writers
+- hosts: kafka-to-nexus
   tasks:
     - name: output NeXus file is absent
       file:
-        path: "~/file-writer/{{ nexus_file_name }}"
+        path: "~/kafka-to-nexus/{{ nexus_file_name }}"
         state: absent
 
     - name: set initial value of EPICS PV
@@ -91,7 +91,7 @@
           --command-uri //{{ kafka_broker_address }} \
           --graylog-logger-address {{ graylog_server_data_full_address }}"
       args:
-        chdir: "~/file-writer"
+        chdir: "~/kafka-to-nexus"
       async: "{{ max_async_timeout }}"
       poll: 0
-      register: file_writer
+      register: kafka_to_nexus
