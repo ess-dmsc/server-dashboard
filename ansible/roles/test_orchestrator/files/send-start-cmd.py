@@ -15,6 +15,7 @@ if __name__ == '__main__':
     cmd = {
         "cmd": "FileWriter_new",
         "broker": args.broker,
+        "job_id": "integration-test",
         "streams": [
             {
                 "topic": "C-SPEC_detector",
