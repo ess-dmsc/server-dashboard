@@ -36,29 +36,35 @@ if __name__ == '__main__':
                         "NX_class": "NXinstrument"
                     },
                     "children": [{
-                        "type": "stream",
+                        "type": "group",
                         "name": "events",
                         "attributes": {
                             "NX_class": "NXevent_data"
                         },
-                        "stream": {
-                            "topic": "C-SPEC_detector",
-                            "source": "c_spec_data",
-                            "writer_module": "ev42",
-                            "type": "uint32",
-                        }
+                        "children": [{
+                            "type": "stream",
+                            "stream": {
+                                "topic": "C-SPEC_detector",
+                                "source": "c_spec_data",
+                                "writer_module": "ev42",
+                                "type": "uint32",
+                            }
+                        }]
                     }, {
-                        "type": "stream",
+                        "type": "group",
                         "name": "dimetix",
                         "attributes": {
                             "NX_class": "NXevent_data"
                         },
-                        "stream": {
-                            "topic": "amor_sim",
-                            "source": "SQ:AMOR:DIMETIX:DIST",
-                            "writer_module": "f142",
-                            "type": "double",
-                        }
+                        "children": [{
+                            "type": "stream",
+                            "stream": {
+                                "topic": "amor_sim",
+                                "source": "SQ:AMOR:DIMETIX:DIST",
+                                "writer_module": "f142",
+                                "type": "double",
+                            }
+                        }]
                     }]
                 }]
             }]
