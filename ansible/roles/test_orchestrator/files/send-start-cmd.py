@@ -16,37 +16,52 @@ if __name__ == '__main__':
         "cmd": "FileWriter_new",
         "broker": args.broker,
         "job_id": "integration-test",
-        "streams": [
-            {
-                "topic": "C-SPEC_detector",
-                "source": "c_spec_data",
-                "nexus_path": "/entry-01/amor/events"
-            },
-            {
-                "topic": "amor_sim",
-                "source": "SQ:AMOR:DIMETIX:DIST",
-                "nexus_path": "/entry-01/amor/dimetix"
-            }
-        ],
-
-        "nexus_structure": {
-            "title": "test",
-            "entry-01": {
-                "NX_class": "NXentry",
-                "amor": {
-                    "NX_class": "NXinstrument",
-                    "events": {
-                        "NX_class": "NXevent_data"
-                    },
-                    "dimetix": {
-                        "NX_class": "NXevent_data"
-                    }
-                }
-            }
-        },
-
         "file_attributes": {
             "file_name": args.filename
+        },
+        "nexus_structure": {
+            "attributes": {
+                "title": "test"
+            },
+            "children": [{
+                "type": "group",
+                "name": "entry-01",
+                "attributes": {
+                    "NX_class": "NXentry"
+                },
+                "children": [{
+                    "type": "group",
+                    "name": "amor",
+                    "attributes": {
+                        "NX_class": "NXinstrument"
+                    },
+                    "children": [{
+                        "type": "stream",
+                        "name": "events",
+                        "attributes": {
+                            "NX_class": "NXevent_data"
+                        },
+                        "stream": {
+                            "topic": "C-SPEC_detector",
+                            "source": "c_spec_data",
+                            "writer_module": "ev42",
+                            "type": "uint32",
+                        }
+                    }, {
+                        "type": "stream",
+                        "name": "dimetix",
+                        "attributes": {
+                            "NX_class": "NXevent_data"
+                        },
+                        "stream": {
+                            "topic": "amor_sim",
+                            "source": "SQ:AMOR:DIMETIX:DIST",
+                            "writer_module": "f142",
+                            "type": "double",
+                        }
+                    }]
+                }]
+            }]
         }
     }
 
