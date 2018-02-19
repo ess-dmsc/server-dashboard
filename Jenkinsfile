@@ -10,6 +10,9 @@ def failure_function(exception_obj, failureMessage) {
 }
 
 node('integration-test') {
+  // Delete workspace when build is done.
+  cleanWs()
+  
   stage("Checkout") {
     checkout scm
   }  // stage
