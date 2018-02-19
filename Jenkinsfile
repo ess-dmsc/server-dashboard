@@ -12,7 +12,7 @@ def failure_function(exception_obj, failureMessage) {
 node('integration-test') {
   // Delete workspace when build is done.
   cleanWs()
-  
+
   stage("Checkout") {
     checkout scm
   }  // stage
@@ -31,8 +31,16 @@ node('integration-test') {
           ${PASSWORD} && \
         cd dm-ansible && \
         git checkout integration_test_refactoring
-        ls
       """
     }  // stage
   }  // withCredentials
+
+  stage('Run Ansible') {
+    sh """
+      ansible-playbook \
+        --inventory=integration-test \
+        --vault-password-file=~/.vault_pass.txt \
+        site.yml
+    """
+  }  // stage
 }  // node
