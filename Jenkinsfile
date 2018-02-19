@@ -37,6 +37,7 @@ node('integration-test') {
 
   stage('Run Ansible') {
     sh """
+      cd dm-ansible &&
       ansible-playbook \
         --inventory=integration-test \
         --vault-password-file=~/.vault_pass.txt \
