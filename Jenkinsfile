@@ -39,8 +39,7 @@ node('integration-test') {
     sh """
       cd dm-ansible &&
       ansible-playbook \
-        --inventory=integration-test \
-        --vault-password-file=~/.vault_pass.txt \
+        --inventory=inventories/dmsc/integration-test/deployment \
         site.yml
     """
   }  // stage
