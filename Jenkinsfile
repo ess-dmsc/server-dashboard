@@ -39,7 +39,7 @@ node('integration-test') {
     sh """
       cd dm-ansible &&
       ansible-playbook \
-        --inventory=inventories/dmsc/deployment \
+        --inventory=inventories/dmsc/integration-test/deployment \
         site.yml
     """
   }  // stage
