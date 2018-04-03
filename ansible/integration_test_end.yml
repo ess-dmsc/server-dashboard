@@ -28,27 +28,6 @@
       debug:
         msg: "{{ epics_forwarder_result.stderr_lines }}"
 
-- hosts: area-detectors
-  tasks:
-    - name: stop area detector ioc
-      shell: "pkill --signal 2 --pidfile {{ area_detector_procserv_pid_file }}"
-
-    - name: check if area detector ioc finished
-      async_status:
-        jid: "{{ area_detector_ioc.ansible_job_id }}"
-      register: area_detector_ioc_result
-      until: area_detector_ioc_result.finished
-      retries: "{{ num_retries }}"
-      ignore_errors: yes
-
-    - name: print area detector ioc stdout
-      debug:
-        msg: "{{ area_detector_ioc_result.stdout_lines }}"
-
-    - name: print area detector ioc stderr
-      debug:
-        msg: "{{ area_detector_ioc_result.stderr_lines }}"
-
 - hosts: efus
   tasks:
     - name: check if cspec pipeline finished

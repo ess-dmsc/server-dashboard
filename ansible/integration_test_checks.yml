@@ -24,14 +24,6 @@
       args:
         chdir: "~"
 
-- hosts: area-detectors
-  any_errors_fatal: true
-  tasks:
-    - name: check playbook result
-      fail:
-        msg: playbook failed
-      when: area_detector_ioc_result.rc!=0
-
 - hosts: efus
   any_errors_fatal: true
   tasks:

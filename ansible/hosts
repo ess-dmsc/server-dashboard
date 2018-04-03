@@ -17,6 +17,3 @@ localhost ansible_connection=local
 
 [kafka-to-nexus]
 192.168.12.21
-
-[area-detectors]
-192.168.12.21
