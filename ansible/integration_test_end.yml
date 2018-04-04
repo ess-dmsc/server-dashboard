@@ -17,7 +17,7 @@
         jid: "{{ epics_forwarder.ansible_job_id }}"
       register: epics_forwarder_result
       until: epics_forwarder_result.finished
-      retries: "{{ num_retries }}"
+      retries: "{{ integration_test_num_retries }}"
       ignore_errors: yes
 
     - name: print forward-epics-to-kafka stdout
@@ -35,7 +35,7 @@
         jid: "{{ cspec_pipeline.ansible_job_id }}"
       register: cspec_pipeline_result
       until: cspec_pipeline_result.finished
-      retries: "{{ num_retries }}"
+      retries: "{{ integration_test_num_retries }}"
       ignore_errors: yes
 
     - name: print cspec pipline stdout
@@ -53,7 +53,7 @@
         jid: "{{ kafka_to_nexus.ansible_job_id }}"
       register: kafka_to_nexus_result
       until: kafka_to_nexus_result.finished
-      retries: "{{ num_retries }}"
+      retries: "{{ integration_test_num_retries }}"
       ignore_errors: yes
 
     - name: print file writer stdout

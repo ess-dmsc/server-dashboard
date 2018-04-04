@@ -19,7 +19,7 @@
           -g {{ integration_test_graphite_url }}"
       args:
         chdir: "{{ event_formation_unit_install_dir }}/event-formation-unit/bin"
-      async: "{{ max_async_timeout }}"
+      async: "{{ integration_test_max_async_timeout }}"
       poll: 0
       register: cspec_pipeline
       environment:
