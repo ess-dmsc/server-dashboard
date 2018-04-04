@@ -48,7 +48,7 @@ node('integration-test') {
     sh """
       ansible-playbook \
         --inventory=dm-ansible/inventories/dmsc/integration-test/deployment \
-        run_test.yml
+        ansible/run_test.yml
     """
   }
 }  // node
