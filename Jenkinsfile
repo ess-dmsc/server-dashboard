@@ -49,7 +49,7 @@ node('integration-test') {
       cp ansible/*.yml dm-ansible/ &&
       cd dm-ansible &&
       ansible-playbook \
-        --inventory=dm-ansible/inventories/dmsc/integration-test/deployment \
+        --inventory=inventories/dmsc/integration-test/deployment \
         run_test.yml
     """
   }
