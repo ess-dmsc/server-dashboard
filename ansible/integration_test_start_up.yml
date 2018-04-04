@@ -55,9 +55,7 @@
 
     - name: set initial value of EPICS PV
       shell: "\
-        pvput SQ:AMOR:DIMETIX:LASER ON; \
-        sleep 1; \
-        pvput SQ:AMOR:DIMETIX:SimVal 3; \
+        pvput testCounter 0; \
         sleep 1"
 
     - name: start file writer

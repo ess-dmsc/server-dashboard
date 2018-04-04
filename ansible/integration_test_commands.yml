@@ -22,17 +22,6 @@
 
 - hosts: kafka-to-nexus
   tasks:
-    - name: change value of EPICS PV
-      shell: "\
-        pvput SQ:AMOR:DIMETIX:SimVal 0; \
-        sleep 1; \
-        pvput SQ:AMOR:DIMETIX:SimVal 1; \
-        sleep 1; \
-        pvput SQ:AMOR:DIMETIX:SimVal 2; \
-        sleep 1"
-
-- hosts: kafka-to-nexus
-  tasks:
     - name: wait for cspec pipeline to finish running
       pause:
         seconds: 30
