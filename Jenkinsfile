@@ -35,7 +35,7 @@ node('integration-test') {
     }  // stage
   }  // withCredentials
 
-  stage('Run Ansible') {
+  stage('Deploy') {
     sh """
       cd dm-ansible &&
       ansible-playbook \
@@ -43,4 +43,12 @@ node('integration-test') {
         site.yml
     """
   }  // stage
+
+  stage('Run tests') {
+    sh """
+      ansible-playbook \
+        --inventory=dm-ansible/inventories/dmsc/integration-test/deployment \
+        run_test.yml
+    """
+  }
 }  // node
