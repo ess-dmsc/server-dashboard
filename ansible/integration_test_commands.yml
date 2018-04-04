@@ -1,13 +1,13 @@
 # Run integration test commands
 
-- hosts: test-orchestrators
+- hosts: test-orchestrator
   tasks:
     - name: send command to start writing events to file
       shell: "{{ python_bin }} ./send-start-cmd.py itest03.dm.esss.dk {{ integration_test_nexus_file_name }}"
       args:
         chdir: "~"
 
-- hosts: data-generators
+- hosts: pipeline-data-generator
   tasks:
     - name: start data generation
       shell: "\

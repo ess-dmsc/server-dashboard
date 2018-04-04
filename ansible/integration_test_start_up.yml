@@ -1,13 +1,13 @@
 # Prepare integration test environment and start system under test
 
-- hosts: test-orchestrators
+- hosts: test-orchestrator
   tasks:
     - name: test result directory exists
       file:
         path: "{{ integration_test_result_dir }}"
         state: directory
 
-- hosts: efus
+- hosts: efu
   tasks:
     - name: start cspec pipeline
       shell: "\

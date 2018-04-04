@@ -9,7 +9,7 @@
         dest: "{{ integration_test_result_dir }}/"
         flat: yes
 
-- hosts: test-orchestrators
+- hosts: test-orchestrator
   any_errors_fatal: true
   tasks:
     - name: check if NeXus file was generated
@@ -24,7 +24,7 @@
       args:
         chdir: "~"
 
-- hosts: efus
+- hosts: efu
   any_errors_fatal: true
   tasks:
     - name: check playbook result
@@ -32,7 +32,7 @@
         msg: playbook failed
       when: cspec_pipeline_result.rc!=0
 
-- hosts: epics-to-kafka-forwarders
+- hosts: forward-epics-to-kafka
   any_errors_fatal: true
   tasks:
     - name: check playbook result

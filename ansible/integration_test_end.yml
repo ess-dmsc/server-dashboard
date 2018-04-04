@@ -1,18 +1,18 @@
 # Stop system under test
 
-- hosts: test-orchestrators
+- hosts: test-orchestrator
   tasks:
     - name: send stop command to file writer
       shell: "{{ python_bin }} ./send-stop-cmd.py itest03.dm.esss.dk"
       args:
         chdir: "~"
 
-- hosts: epics-to-kafka-forwarders
+- hosts: forward-epics-to-kafka
   tasks:
-    - name: kill epics-to-kafka-forwarder
+    - name: kill forward-epics-to-kafka
       shell: pkill -2 forward-epics
 
-    - name: check if epics-to-kafka-forwarder finished
+    - name: check if forward-epics-to-kafka finished
       async_status:
         jid: "{{ epics_forwarder.ansible_job_id }}"
       register: epics_forwarder_result
@@ -20,15 +20,15 @@
       retries: "{{ num_retries }}"
       ignore_errors: yes
 
-    - name: print epics-to-kafka-forwarder stdout
+    - name: print forward-epics-to-kafka stdout
       debug:
         msg: "{{ epics_forwarder_result.stdout_lines }}"
 
-    - name: print epics-to-kafka-forwarder stderr
+    - name: print forward-epics-to-kafka stderr
       debug:
         msg: "{{ epics_forwarder_result.stderr_lines }}"
 
-- hosts: efus
+- hosts: efu
   tasks:
     - name: check if cspec pipeline finished
       async_status:
