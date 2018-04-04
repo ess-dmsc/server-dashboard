@@ -46,11 +46,10 @@ node('integration-test') {
 
   stage('Run tests') {
     sh """
-      cp ansible/*.yml dm-ansible/ &&
       cd dm-ansible &&
       ansible-playbook \
         --inventory=inventories/dmsc/integration-test/deployment \
-        run_test.yml
+        ../ansible/run_test.yml
     """
   }
 }  // node
