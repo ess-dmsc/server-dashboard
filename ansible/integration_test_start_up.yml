@@ -4,7 +4,7 @@
   tasks:
     - name: test result directory exists
       file:
-        path: "{{ test_result_dir }}"
+        path: "{{ integration_test_result_dir }}"
         state: directory
 
 - hosts: efus
@@ -14,11 +14,11 @@
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
           ./efu2 -d mgcncs2 \
           -s 60 \
-          -b {{ kafka_broker_address }} \
-          -a {{ graylog_server_data_address }} \
-          -g {{ graphite_server_data_address }}"
+          -b {{ integration_test_kafka_bootstrap_servers }} \
+          -a {{ integration_test_graylog_host }} \
+          -g {{ integration_test_graphite_url }}"
       args:
-        chdir: "~/output/bin"
+        chdir: "{{ event_formation_unit_install_dir }}/event-formation-unit/bin"
       async: "{{ max_async_timeout }}"
       poll: 0
       register: cspec_pipeline
@@ -30,41 +30,18 @@
         seconds: 5
 
     - name: load cspec calibration
-      shell: ./mgloadcal.py ~/test-data/validruns_15
+      shell: "./mgloadcal.py {{ event_formation_unit_data_dir }}/validruns_15"
       args:
-        chdir: "~/output/util/efushell"
-
-- hosts: epics-to-kafka-forwarders
-  tasks:
-    - name: start epics-to-kafka-forwarder
-      shell: "\
-        ./bin/forward-epics-to-kafka -v \
-          --config-file config.json"
-      args:
-        chdir: "~/forward-epics-to-kafka"
-      async: "{{ max_async_timeout }}"
-      poll: 0
-      register: epics_forwarder
+        chdir: "{{ event_formation_unit_install_dir }}/event-formation-unit/bin"
 
 - hosts: kafka-to-nexus
   tasks:
     - name: output NeXus file is absent
       file:
-        path: "~/kafka-to-nexus/{{ nexus_file_name }}"
+        path: "~/{{ kafka_to_nexus_data_dir }}/{{ integration_test_nexus_file_name }}"
         state: absent
 
     - name: set initial value of EPICS PV
       shell: "\
-        pvput testCounter 0; \
+        {{ epics_install_dir }}/bin/testCounter 0; \
         sleep 1"
-
-    - name: start file writer
-      shell: "\
-        ./bin/kafka-to-nexus \
-          --command-uri //{{ kafka_broker_address }} \
-          --graylog-logger-address {{ graylog_server_data_full_address }}"
-      args:
-        chdir: "~/kafka-to-nexus"
-      async: "{{ max_async_timeout }}"
-      poll: 0
-      register: kafka_to_nexus
