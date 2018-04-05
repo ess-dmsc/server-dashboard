@@ -12,7 +12,7 @@
     - name: start cspec pipeline
       shell: "\
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
-          ./efu -d mgcncs2 \
+          ./efu -d ../lib/mgcncs2 \
           -s 60 \
           -b {{ integration_test_kafka_bootstrap_servers }} \
           -a {{ integration_test_graylog_host }} \
