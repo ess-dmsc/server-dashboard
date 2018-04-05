@@ -3,9 +3,7 @@
 - hosts: test-orchestrator
   tasks:
     - name: send command to start writing events to file
-      shell: "{{ python_bin }} ./send-start-cmd.py itest03.dm.esss.dk {{ integration_test_nexus_file_name }}"
-      args:
-        chdir: "~"
+      shell: "{{ test_orchestrator_python_bin }} {{ test_orchestrator_script_dir }}/send-start-cmd.py itest05.dm.esss.dk {{ integration_test_nexus_file_name }}"
 
 - hosts: pipeline-data-generator
   tasks:
@@ -13,10 +11,10 @@
       shell: "\
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
           ./mgcncsgenfile \
-          -f ../../test-data/cncs_10_13.bin \
-          -i 192.168.12.22"
+          -f {{ event_formation_unit_data_dir }}/cncs_10_13.bin \
+          -i 192.168.12.104"
       args:
-        chdir: "~/output/bin"
+        chdir: "{{ event_formation_unit_install_dir }}/bin"
       environment:
         LD_LIBRARY_PATH: "{{ ld_library_path }}"
 

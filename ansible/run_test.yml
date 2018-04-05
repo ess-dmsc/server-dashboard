@@ -1,5 +1,5 @@
 - include: integration_test_env_check.yml
 - include: integration_test_start_up.yml
-# - include: integration_test_commands.yml
+- include: integration_test_commands.yml
 # - include: integration_test_end.yml
 # - include: integration_test_checks.yml
