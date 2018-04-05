@@ -30,7 +30,7 @@
         seconds: 5
 
     - name: load cspec calibration
-      shell: "./mgloadcal.py {{ event_formation_unit_data_dir }}/validruns_15"
+      shell: "{{ event_formation_unit_install_dir }}/event-formation-unit/util/efushell/mgloadcal.py {{ event_formation_unit_data_dir }}/validruns_15"
       args:
         chdir: "{{ event_formation_unit_install_dir }}/event-formation-unit/bin"
 
