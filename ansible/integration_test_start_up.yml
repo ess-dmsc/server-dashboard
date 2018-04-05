@@ -37,6 +37,7 @@
 - hosts: kafka-to-nexus
   tasks:
     - name: output NeXus file is absent
+      become: yes
       file:
         path: "~/{{ kafka_to_nexus_data_dir }}/{{ integration_test_nexus_file_name }}"
         state: absent

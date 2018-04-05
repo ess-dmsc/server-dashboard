@@ -31,19 +31,3 @@
       fail:
         msg: playbook failed
       when: cspec_pipeline_result.rc!=0
-
-- hosts: forward-epics-to-kafka
-  any_errors_fatal: true
-  tasks:
-    - name: check playbook result
-      fail:
-        msg: playbook failed
-      when: epics_forwarder_result.rc!=0
-
-- hosts: kafka-to-nexus
-  any_errors_fatal: true
-  tasks:
-    - name: check playbook result
-      fail:
-        msg: playbook failed
-      when: kafka_to_nexus_result.rc!=0

@@ -8,5 +8,5 @@
       args:
         chdir: "{{ test_orchestrator_script_dir }}"
 
-    - name: check if AMOR IOC PV is available
+    - name: check if EPICS PV is available
       command: "{{ epics_install_dir }}/bin/pvget testCounter"
