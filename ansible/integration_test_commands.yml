@@ -11,10 +11,10 @@
       shell: "\
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
           ./mgcncsgenfile \
-          -f {{ event_formation_unit_data_dir }}/event-formation-unit/cncs_10_13.bin \
+          -f {{ event_formation_unit_data_dir }}/cncs_10_13.bin \
           -i 192.168.12.104"
       args:
-        chdir: "{{ event_formation_unit_install_dir }}/bin"
+        chdir: "{{ event_formation_unit_install_dir }}/event-formation-unit/bin"
       environment:
         LD_LIBRARY_PATH: "{{ ld_library_path }}"
 
