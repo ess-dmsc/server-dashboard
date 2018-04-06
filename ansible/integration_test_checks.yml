@@ -5,7 +5,7 @@
   tasks:
     - name: copy output NeXus file
       fetch:
-        src: "~/kafka-to-nexus/{{ integration_test_nexus_file_name }}"
+        src: "{{ kafka_to_nexus_data_dir }}/{{ integration_test_nexus_file_name }}"
         dest: "{{ integration_test_result_dir }}/"
         flat: yes
 
@@ -13,16 +13,14 @@
   any_errors_fatal: true
   tasks:
     - name: check if NeXus file was generated
-      shell: "/opt/dm_group/usr/bin/h5ls {{ integration_test_result_dir }}/{{ integration_test_nexus_file_name }}"
+      shell: "{{ hdf5_install_dir }}/bin/h5ls {{ integration_test_result_dir }}/{{ integration_test_nexus_file_name }}"
       args:
-        chdir: "~"
+        chdir: "{{ hdf5_install_dir }}"
       environment:
-        LD_LIBRARY_PATH: "{{ ld_library_path }}"
+        LD_LIBRARY_PATH: "{{ ld_library_path }}:../lib"
 
     - name: check if NeXus file contains expected data
-      shell: "{{ python_bin }} ./test-output-file.py {{ integration_test_result_dir }}/{{ integration_test_nexus_file_name }}"
-      args:
-        chdir: "~"
+      shell: "{{ test_orchestrator_python_bin }} {{ test_orchestrator_script_dir }}/test-output-file.py {{ integration_test_result_dir }}/{{ integration_test_nexus_file_name }}"
 
 - hosts: efu
   any_errors_fatal: true
