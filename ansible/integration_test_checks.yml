@@ -1,17 +1,30 @@
 # Check integration test results
 
+- hosts: test-orchestrator
+  tasks:
+    - name: test result dir exists
+      file:
+        path: ""{{ integration_test_result_dir }}
+        state: directory
+
 - hosts: kafka-to-nexus
   any_errors_fatal: true
-  tasks:
+    - name: copy file from kafka-to-nexus host
+      fetch:
+        src: "{{ kafka_to_nexus_data_dir }}/{{ integration_test_nexus_file_name }}"
+        dest: "{{ integration_test_result_dir }}/{{ integration_test_nexus_file_name }}"
+
+- hosts: test-orchestrator
+  any_errors_fatal: true
     - name: check if NeXus file was generated
-      shell: "{{ hdf5_install_dir }}/bin/h5ls {{ kafka_to_nexus_data_dir }}/{{ integration_test_nexus_file_name }}"
+      shell: "{{ hdf5_install_dir }}/bin/h5ls {{ integration_test_result_dir }}/{{ integration_test_nexus_file_name }}"
       args:
         chdir: "{{ hdf5_install_dir }}"
       environment:
         LD_LIBRARY_PATH: "{{ ld_library_path }}:../lib"
 
     - name: check if NeXus file contains expected data
-      shell: "{{ test_orchestrator_python_bin }} {{ test_orchestrator_script_dir }}/test-output-file.py {{ kafka_to_nexus_data_dir }}/{{ integration_test_nexus_file_name }}"
+      shell: "{{ test_orchestrator_python_bin }} {{ test_orchestrator_script_dir }}/test-output-file.py {{ integration_test_result_dir }}/{{ integration_test_nexus_file_name }}"
 
 - hosts: efu
   any_errors_fatal: true
