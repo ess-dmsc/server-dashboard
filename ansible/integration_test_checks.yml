@@ -4,7 +4,7 @@
   any_errors_fatal: true
   tasks:
     - name: copy output NeXus file
-      copy:
+      fetch:
         src: "{{ kafka_to_nexus_data_dir }}/{{ integration_test_nexus_file_name }}"
         dest: "{{ integration_test_result_dir }}/"
         flat: yes
