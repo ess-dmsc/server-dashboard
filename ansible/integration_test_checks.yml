@@ -4,12 +4,12 @@
   any_errors_fatal: true
   tasks:
     - name: copy output NeXus file
-      fetch:
+      synchronize:
         src: "{{ kafka_to_nexus_data_dir }}/{{ integration_test_nexus_file_name }}"
         dest: "{{ integration_test_result_dir }}/"
-        flat: yes
       delegate_to: kafka-to-nexus
 
+  tasks:
     - name: check if NeXus file was generated
       shell: "{{ hdf5_install_dir }}/bin/h5ls {{ integration_test_result_dir }}/{{ integration_test_nexus_file_name }}"
       args:
