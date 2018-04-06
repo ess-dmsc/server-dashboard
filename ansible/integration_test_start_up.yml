@@ -27,7 +27,7 @@
       args:
         chdir: "{{ event_formation_unit_install_dir }}/event-formation-unit/bin"
 
-- hosts: epics-test-server
+- hosts: test-orchestrator
   tasks:
     - name: output NeXus file is absent
       become: yes
