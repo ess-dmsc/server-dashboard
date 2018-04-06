@@ -27,7 +27,7 @@
       args:
         chdir: "{{ event_formation_unit_install_dir }}/event-formation-unit/bin"
 
-- hosts: test-orchestrator
+- hosts: kafka-to-nexus
   tasks:
     - name: output NeXus file is absent
       become: yes
@@ -35,6 +35,8 @@
         path: "{{ kafka_to_nexus_data_dir }}/{{ integration_test_nexus_file_name }}"
         state: absent
 
+- hosts: test-orchestrator
+  tasks:
     - name: set initial value of EPICS PV
       shell: "\
         {{ epics_install_dir }}/bin/testCounter 0; \
