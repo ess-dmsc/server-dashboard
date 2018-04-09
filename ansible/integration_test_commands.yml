@@ -3,7 +3,7 @@
 - hosts: test-orchestrator
   tasks:
     - name: send command to start writing events to file
-      shell: "{{ test_orchestrator_python_bin }} {{ test_orchestrator_script_dir }}/send-start-cmd.py itestkafka01.dm.esss.dk {{ kafka_to_nexus_data_dir }}/{{ integration_test_nexus_file_name }}"
+      shell: "{{ test_orchestrator_python_bin }} {{ test_orchestrator_script_dir }}/send-start-cmd.py itestkafka01.dm.esss.dk:9092 {{ kafka_to_nexus_data_dir }}/{{ integration_test_nexus_file_name }}"
       environment: "{{ centos_python3_env }}"
 
 - hosts: pipeline-data-generator
