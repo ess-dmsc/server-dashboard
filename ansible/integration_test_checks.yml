@@ -13,7 +13,7 @@
     - name: copy file from kafka-to-nexus host
       fetch:
         src: "{{ kafka_to_nexus_data_dir }}/{{ integration_test_nexus_file_name }}"
-        dest: "{{ integration_test_result_dir }}/{{ integration_test_nexus_file_name }}/"
+        dest: "{{ integration_test_result_dir }}/"
         flat: yes
 
 - hosts: test-orchestrator
