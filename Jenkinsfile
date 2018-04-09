@@ -1,12 +1,16 @@
-// Set periodic trigger at 12:15 and 23:15, from Monday to Friday.
 properties([
-  pipelineTriggers([cron('15 10,21 * * 1-5')]),
+  disableConcurrentBuilds(),
+  pipelineTriggers([
+    [$class: 'PeriodicFolderTrigger', interval: '1d'],
+    [$class: 'jenkins.triggers.ReverseBuildTrigger', upstreamProjects: "ess-dmsc/event-formation-unit/master", threshold: hudson.model.Result.SUCCESS]
+  ])
 ])
 
+
 def failure_function(exception_obj, failureMessage) {
-    def toEmails = [[$class: 'DevelopersRecipientProvider']]
-    emailext body: '${DEFAULT_CONTENT}\n\"' + failureMessage + '\"\n\nCheck console output at $BUILD_URL to view the results.', recipientProviders: toEmails, subject: '${DEFAULT_SUBJECT}'
-    throw exception_obj
+  def toEmails = [[$class: 'DevelopersRecipientProvider']]
+  emailext body: '${DEFAULT_CONTENT}\n\"' + failureMessage + '\"\n\nCheck console output at $BUILD_URL to view the results.', recipientProviders: toEmails, subject: '${DEFAULT_SUBJECT}'
+  throw exception_obj
 }
 
 node('integration-test') {
