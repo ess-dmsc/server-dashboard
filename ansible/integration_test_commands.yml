@@ -3,7 +3,7 @@
 - hosts: test-orchestrator
   tasks:
     - name: send command to start writing events to file
-      shell: "{{ test_orchestrator_python_bin }} {{ test_orchestrator_script_dir }}/send-start-cmd.py 192.168.12.109:9092 {{ kafka_to_nexus_data_dir }}/{{ integration_test_nexus_file_name }}"
+      shell: "{{ test_orchestrator_python_bin }} {{ test_orchestrator_script_dir }}/send-start-cmd.py {{ integration_test_kafka_bootstrap_servers }} {{ kafka_to_nexus_data_dir }}/{{ integration_test_nexus_file_name }}"
       environment: "{{ centos_python3_env }}"
 
 - hosts: pipeline-data-generator
@@ -13,7 +13,7 @@
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
           ./mgcncsgenfile \
           -f {{ event_formation_unit_data_dir }}/cncs_10_13.bin \
-          -i 192.168.12.104"
+          -i {{ integration_test_event_formation_unit_ip }}"
       args:
         chdir: "{{ event_formation_unit_install_dir }}/event-formation-unit/bin"
       environment:

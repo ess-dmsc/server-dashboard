@@ -3,7 +3,7 @@
 - hosts: test-orchestrator
   tasks:
     - name: send command to stop writing events to file
-      shell: "{{ test_orchestrator_python_bin }} {{ test_orchestrator_script_dir }}/send-stop-cmd.py 192.168.12.109:9092"
+      shell: "{{ test_orchestrator_python_bin }} {{ test_orchestrator_script_dir }}/send-stop-cmd.py {{ integration_test_kafka_bootstrap_servers }}"
       environment: "{{ centos_python3_env }}"
 
 - hosts: efu
