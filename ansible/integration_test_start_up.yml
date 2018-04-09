@@ -39,5 +39,5 @@
   tasks:
     - name: set initial value of EPICS PV
       shell: "\
-        {{ epics_install_dir }}/bin/testCounter 0; \
+        {{ epics_install_dir }}/bin/pvput testCounter 0; \
         sleep 1"
