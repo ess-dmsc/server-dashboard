@@ -28,9 +28,7 @@ node('integration-test') {
         ./jenkins/clone-repo \
           http://git.esss.dk/dm_group/dm-ansible.git \
           ${USERNAME} \
-          ${PASSWORD} && \
-        cd dm-ansible && \
-        git checkout integration_test_refactoring
+          ${PASSWORD}
       """
     }  // stage
   }  // withCredentials
