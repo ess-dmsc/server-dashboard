@@ -14,6 +14,7 @@
       fetch:
         src: "{{ kafka_to_nexus_data_dir }}/{{ integration_test_nexus_file_name }}"
         dest: "{{ integration_test_result_dir }}/{{ integration_test_nexus_file_name }}"
+        flat: yes
 
 - hosts: test-orchestrator
   any_errors_fatal: true
