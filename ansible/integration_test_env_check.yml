@@ -1,21 +1,12 @@
 # Check external services
 
-- hosts: test-orchestrators
+- hosts: test-orchestrator
   any_errors_fatal: true
   tasks:
     - name: check if Kafka cluster is available
-      command: "{{ python_bin }} check-kafka-available.py {{ kafka_broker_address }}"
+      command: "{{ test_orchestrator_python_bin }} ./check-kafka-available.py {{ integration_test_kafka_bootstrap_servers }}"
       args:
-        chdir: "~"
+        chdir: "{{ test_orchestrator_script_dir }}"
 
-    - name: check if AMOR IOC PV is available
-      command: pvget SQ:AMOR:DIMETIX:LASER
-
-    - name: make a request to ChannelFinder
-      command: "curl -s -o /dev/null -w \"%{http_code}\" {{ channelfinder_address }}"
-      register: channelfinder_request
-
-    - name: check ChannelFinder request
-      fail:
-        msg: "ChannelFinder request failed"
-      when: "not ('200' in channelfinder_request.stdout)"
+    - name: check if EPICS PV is available
+      command: "{{ epics_install_dir }}/bin/pvget testCounter"

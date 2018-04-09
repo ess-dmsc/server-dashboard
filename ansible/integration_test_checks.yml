@@ -1,57 +1,38 @@
 # Check integration test results
 
+- hosts: test-orchestrator
+  tasks:
+    - name: test result dir exists
+      file:
+        path: "{{ integration_test_result_dir }}"
+        state: directory
+
 - hosts: kafka-to-nexus
   any_errors_fatal: true
   tasks:
-    - name: copy output NeXus file
+    - name: copy file from kafka-to-nexus host
       fetch:
-        src: "~/kafka-to-nexus/{{ nexus_file_name }}"
-        dest: "{{ test_result_dir }}/"
+        src: "{{ kafka_to_nexus_data_dir }}/{{ integration_test_nexus_file_name }}"
+        dest: "{{ integration_test_result_dir }}/"
         flat: yes
 
-- hosts: test-orchestrators
+- hosts: test-orchestrator
   any_errors_fatal: true
   tasks:
     - name: check if NeXus file was generated
-      shell: "/opt/dm_group/usr/bin/h5ls {{ test_result_dir }}/{{ nexus_file_name }}"
+      shell: "{{ hdf5_install_dir }}/bin/h5ls {{ integration_test_result_dir }}/{{ integration_test_nexus_file_name }}"
       args:
-        chdir: "~"
+        chdir: "{{ hdf5_install_dir }}"
       environment:
-        LD_LIBRARY_PATH: "{{ ld_library_path }}"
+        LD_LIBRARY_PATH: "{{ ld_library_path }}:../lib"
 
     - name: check if NeXus file contains expected data
-      shell: "{{ python_bin }} ./test-output-file.py {{ test_result_dir }}/{{ nexus_file_name }}"
-      args:
-        chdir: "~"
+      shell: "{{ test_orchestrator_python_bin }} {{ test_orchestrator_script_dir }}/test-output-file.py {{ integration_test_result_dir }}/{{ integration_test_nexus_file_name }}"
 
-- hosts: area-detectors
-  any_errors_fatal: true
-  tasks:
-    - name: check playbook result
-      fail:
-        msg: playbook failed
-      when: area_detector_ioc_result.rc!=0
-
-- hosts: efus
+- hosts: efu
   any_errors_fatal: true
   tasks:
     - name: check playbook result
       fail:
         msg: playbook failed
       when: cspec_pipeline_result.rc!=0
-
-- hosts: epics-to-kafka-forwarders
-  any_errors_fatal: true
-  tasks:
-    - name: check playbook result
-      fail:
-        msg: playbook failed
-      when: epics_forwarder_result.rc!=0
-
-- hosts: kafka-to-nexus
-  any_errors_fatal: true
-  tasks:
-    - name: check playbook result
-      fail:
-        msg: playbook failed
-      when: kafka_to_nexus_result.rc!=0

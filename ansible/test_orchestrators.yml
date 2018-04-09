@@ -1,7 +1,0 @@
-- hosts: test-orchestrators
-  roles:
-    - test_orchestrator
-
-  environment:
-    http_proxy: http://192.168.1.1:8123
-    https_proxy: http://192.168.1.1:8123

@@ -1,35 +1,23 @@
 # Run integration test commands
 
-- hosts: test-orchestrators
+- hosts: test-orchestrator
   tasks:
     - name: send command to start writing events to file
-      shell: "{{ python_bin }} ./send-start-cmd.py itest03.dm.esss.dk {{ nexus_file_name }}"
-      args:
-        chdir: "~"
+      shell: "{{ test_orchestrator_python_bin }} {{ test_orchestrator_script_dir }}/send-start-cmd.py {{ integration_test_kafka_bootstrap_servers }} {{ kafka_to_nexus_data_dir }}/{{ integration_test_nexus_file_name }}"
+      environment: "{{ centos_python3_env }}"
 
-- hosts: data-generators
+- hosts: pipeline-data-generator
   tasks:
     - name: start data generation
       shell: "\
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
           ./mgcncsgenfile \
-          -f ../../test-data/cncs_10_13.bin \
-          -i 192.168.12.22"
+          -f {{ event_formation_unit_data_dir }}/cncs_10_13.bin \
+          -i {{ integration_test_event_formation_unit_ip }}"
       args:
-        chdir: "~/output/bin"
+        chdir: "{{ event_formation_unit_install_dir }}/event-formation-unit/bin"
       environment:
         LD_LIBRARY_PATH: "{{ ld_library_path }}"
-
-- hosts: kafka-to-nexus
-  tasks:
-    - name: change value of EPICS PV
-      shell: "\
-        pvput SQ:AMOR:DIMETIX:SimVal 0; \
-        sleep 1; \
-        pvput SQ:AMOR:DIMETIX:SimVal 1; \
-        sleep 1; \
-        pvput SQ:AMOR:DIMETIX:SimVal 2; \
-        sleep 1"
 
 - hosts: kafka-to-nexus
   tasks:

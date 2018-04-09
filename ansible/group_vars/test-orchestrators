@@ -1,2 +1,0 @@
-test_orchestrator_virtualvenv_path: /opt/dm_group/virtualenv/test_orchestrator
-python_bin: "scl enable rh-python35 -- {{ test_orchestrator_virtualvenv_path }}/bin/python"

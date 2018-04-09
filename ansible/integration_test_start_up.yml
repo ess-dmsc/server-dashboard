@@ -1,50 +1,18 @@
 # Prepare integration test environment and start system under test
 
-- hosts: test-orchestrators
-  tasks:
-    - name: test result directory exists
-      file:
-        path: "{{ test_result_dir }}"
-        state: directory
-
-- hosts: area-detectors
-  tasks:
-    - name: iocsh lock file remove cmd
-      shell: rm -f require.lock-*
-      args:
-        chdir: "~"
-
-    - name: procserv pid file is absent
-      file:
-        path: "{{ area_detector_procserv_pid_file }}"
-        state: absent
-
-    - name: start area detector ioc
-      shell: "\
-        /usr/local/bin/procServ \
-          --pidfile {{ area_detector_procserv_pid_file }} \
-          {{ area_detector_procserv_port }} \
-          /opt/epics/modules/environment/2.0.0/3.15.4/bin/centos7-x86_64/iocsh \
-          ADPluginKafka_int_test.cmd"
-      args:
-        chdir: "~"
-      async: "{{ max_async_timeout }}"
-      poll: 0
-      register: area_detector_ioc
-
-- hosts: efus
+- hosts: efu
   tasks:
     - name: start cspec pipeline
       shell: "\
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
-          ./efu2 -d mgcncs2 \
+          ./efu -d ../lib/mgcncs2 \
           -s 60 \
-          -b {{ kafka_broker_address }} \
-          -a {{ graylog_server_data_address }} \
-          -g {{ graphite_server_data_address }}"
+          -b {{ integration_test_kafka_bootstrap_servers }} \
+          -a {{ integration_test_graylog_host }} \
+          -g {{ integration_test_graphite_url }}"
       args:
-        chdir: "~/output/bin"
-      async: "{{ max_async_timeout }}"
+        chdir: "{{ event_formation_unit_install_dir }}/event-formation-unit/bin"
+      async: "{{ integration_test_max_async_timeout }}"
       poll: 0
       register: cspec_pipeline
       environment:
@@ -55,43 +23,21 @@
         seconds: 5
 
     - name: load cspec calibration
-      shell: ./mgloadcal.py ~/test-data/validruns_15
+      shell: "{{ event_formation_unit_install_dir }}/event-formation-unit/util/efushell/mgloadcal.py {{ event_formation_unit_data_dir }}/validruns_15"
       args:
-        chdir: "~/output/util/efushell"
-
-- hosts: epics-to-kafka-forwarders
-  tasks:
-    - name: start epics-to-kafka-forwarder
-      shell: "\
-        ./bin/forward-epics-to-kafka -v \
-          --config-file config.json"
-      args:
-        chdir: "~/forward-epics-to-kafka"
-      async: "{{ max_async_timeout }}"
-      poll: 0
-      register: epics_forwarder
+        chdir: "{{ event_formation_unit_install_dir }}/event-formation-unit/bin"
 
 - hosts: kafka-to-nexus
   tasks:
     - name: output NeXus file is absent
+      become: yes
       file:
-        path: "~/kafka-to-nexus/{{ nexus_file_name }}"
+        path: "{{ kafka_to_nexus_data_dir }}/{{ integration_test_nexus_file_name }}"
         state: absent
 
+- hosts: test-orchestrator
+  tasks:
     - name: set initial value of EPICS PV
       shell: "\
-        pvput SQ:AMOR:DIMETIX:LASER ON; \
-        sleep 1; \
-        pvput SQ:AMOR:DIMETIX:SimVal 3; \
+        {{ epics_install_dir }}/bin/pvput testCounter 0; \
         sleep 1"
-
-    - name: start file writer
-      shell: "\
-        ./bin/kafka-to-nexus \
-          --command-uri //{{ kafka_broker_address }} \
-          --graylog-logger-address {{ graylog_server_data_full_address }}"
-      args:
-        chdir: "~/kafka-to-nexus"
-      async: "{{ max_async_timeout }}"
-      poll: 0
-      register: kafka_to_nexus

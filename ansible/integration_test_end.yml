@@ -1,62 +1,19 @@
 # Stop system under test
 
-- hosts: test-orchestrators
+- hosts: test-orchestrator
   tasks:
-    - name: send stop command to file writer
-      shell: "{{ python_bin }} ./send-stop-cmd.py itest03.dm.esss.dk"
-      args:
-        chdir: "~"
+    - name: send command to stop writing events to file
+      shell: "{{ test_orchestrator_python_bin }} {{ test_orchestrator_script_dir }}/send-stop-cmd.py {{ integration_test_kafka_bootstrap_servers }}"
+      environment: "{{ centos_python3_env }}"
 
-- hosts: epics-to-kafka-forwarders
-  tasks:
-    - name: kill epics-to-kafka-forwarder
-      shell: pkill -2 forward-epics
-
-    - name: check if epics-to-kafka-forwarder finished
-      async_status:
-        jid: "{{ epics_forwarder.ansible_job_id }}"
-      register: epics_forwarder_result
-      until: epics_forwarder_result.finished
-      retries: "{{ num_retries }}"
-      ignore_errors: yes
-
-    - name: print epics-to-kafka-forwarder stdout
-      debug:
-        msg: "{{ epics_forwarder_result.stdout_lines }}"
-
-    - name: print epics-to-kafka-forwarder stderr
-      debug:
-        msg: "{{ epics_forwarder_result.stderr_lines }}"
-
-- hosts: area-detectors
-  tasks:
-    - name: stop area detector ioc
-      shell: "pkill --signal 2 --pidfile {{ area_detector_procserv_pid_file }}"
-
-    - name: check if area detector ioc finished
-      async_status:
-        jid: "{{ area_detector_ioc.ansible_job_id }}"
-      register: area_detector_ioc_result
-      until: area_detector_ioc_result.finished
-      retries: "{{ num_retries }}"
-      ignore_errors: yes
-
-    - name: print area detector ioc stdout
-      debug:
-        msg: "{{ area_detector_ioc_result.stdout_lines }}"
-
-    - name: print area detector ioc stderr
-      debug:
-        msg: "{{ area_detector_ioc_result.stderr_lines }}"
-
-- hosts: efus
+- hosts: efu
   tasks:
     - name: check if cspec pipeline finished
       async_status:
         jid: "{{ cspec_pipeline.ansible_job_id }}"
       register: cspec_pipeline_result
       until: cspec_pipeline_result.finished
-      retries: "{{ num_retries }}"
+      retries: "{{ integration_test_num_retries }}"
       ignore_errors: yes
 
     - name: print cspec pipline stdout
@@ -66,21 +23,3 @@
     - name: print cspec pipline stderr
       debug:
         msg: "{{ cspec_pipeline_result.stderr_lines }}"
-
-- hosts: kafka-to-nexus
-  tasks:
-    - name: check if file writer finished
-      async_status:
-        jid: "{{ kafka_to_nexus.ansible_job_id }}"
-      register: kafka_to_nexus_result
-      until: kafka_to_nexus_result.finished
-      retries: "{{ num_retries }}"
-      ignore_errors: yes
-
-    - name: print file writer stdout
-      debug:
-        msg: "{{ kafka_to_nexus_result.stdout_lines }}"
-
-    - name: print file writer stderr
-      debug:
-        msg: "{{ kafka_to_nexus_result.stderr_lines }}"
