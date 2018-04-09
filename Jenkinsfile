@@ -1,4 +1,4 @@
-Set periodic trigger at 12:15 and 23:15, from Monday to Friday.
+// Set periodic trigger at 12:15 and 23:15, from Monday to Friday.
 properties([
   pipelineTriggers([cron('15 10,21 * * 1-5')]),
 ])
