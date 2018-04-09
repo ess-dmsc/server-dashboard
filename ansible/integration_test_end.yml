@@ -2,8 +2,9 @@
 
 - hosts: test-orchestrator
   tasks:
-    - name: send command to start writing events to file
-      shell: "{{ test_orchestrator_python_bin }} {{ test_orchestrator_script_dir }}/send-stop-cmd.py itest05.dm.esss.dk"
+    - name: send command to stop writing events to file
+      shell: "{{ test_orchestrator_python_bin }} {{ test_orchestrator_script_dir }}/send-stop-cmd.py itestkafka01.dm.esss.dk"
+      environment: "{{ centos_python3_env }}"
 
 - hosts: efu
   tasks:
