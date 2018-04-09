@@ -2,7 +2,9 @@ properties([
   disableConcurrentBuilds(),
   pipelineTriggers([
     [$class: 'PeriodicFolderTrigger', interval: '1d'],
-    [$class: 'jenkins.triggers.ReverseBuildTrigger', upstreamProjects: "ess-dmsc/event-formation-unit/master", threshold: hudson.model.Result.SUCCESS]
+    [$class: 'jenkins.triggers.ReverseBuildTrigger', upstreamProjects: "ess-dmsc/event-formation-unit/master", threshold: hudson.model.Result.SUCCESS],
+    [$class: 'jenkins.triggers.ReverseBuildTrigger', upstreamProjects: "ess-dmsc/forward-epics-to-kafka/essiip-deployment", threshold: hudson.model.Result.SUCCESS],
+    [$class: 'jenkins.triggers.ReverseBuildTrigger', upstreamProjects: "ess-dmsc/kafka-to-nexus/essiip-deployment", threshold: hudson.model.Result.SUCCESS]
   ])
 ])
 
