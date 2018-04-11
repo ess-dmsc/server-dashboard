@@ -29,10 +29,18 @@
     - name: check if NeXus file contains expected data
       shell: "{{ test_orchestrator_python_bin }} {{ test_orchestrator_script_dir }}/test-output-file.py {{ integration_test_result_dir }}/{{ integration_test_nexus_file_name }}"
 
-- hosts: efu
+- hosts: itesteventformationunit01.dm.esss.dk
   any_errors_fatal: true
   tasks:
     - name: check playbook result
       fail:
         msg: playbook failed
       when: cspec_pipeline_result.rc!=0
+
+- hosts: itesteventformationunit02.dm.esss.dk
+  any_errors_fatal: true
+  tasks:
+    - name: check playbook result
+      fail:
+        msg: playbook failed
+      when: mesytec_pipeline_result.rc!=0
