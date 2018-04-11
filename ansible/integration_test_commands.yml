@@ -24,7 +24,8 @@
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
           ./gennmxpcap \
           -f {{ event_formation_unit_data_dir }}/test_data_mgmesytec_1.pcapng \
-          -i {{ integration_test_efu2_ip }}"
+          -i {{ integration_test_efu2_ip }} \
+          -t 1000"
       args:
         chdir: "{{ event_formation_unit_install_dir }}/event-formation-unit/bin"
       environment:
