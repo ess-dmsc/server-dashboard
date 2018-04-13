@@ -9,7 +9,7 @@
 - hosts: itesteventformationunit02.dm.esss.dk
   tasks:
     - name: check for correct counter values
-      shell: "{{ event_formation_unit_install_dir }}/event-formation-unit/util/efushell/verifymetrics.py efu.mgmesytec.rx_packets:114015 efu.mgmesytec.geometry_errors:0 efu.mgmesytec.events:227325"
+      shell: "{{ event_formation_unit_install_dir }}/event-formation-unit/util/efushell/verifymetrics.py efu.mgmesytec.rx_packets:114015 efu.mgmesytec.geometry_errors:0 efu.mgmesytec.events:227326"
 
 - hosts: itesteventformationunit01.dm.esss.dk
   tasks:
