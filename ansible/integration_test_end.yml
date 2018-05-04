@@ -44,11 +44,11 @@
       retries: "{{ integration_test_num_retries }}"
       ignore_errors: yes
 
-    - name: print mesytec pipline stdout
+    - name: print mesytec pipeline stdout
       debug:
         msg: "{{ mesytec_pipeline_result.stdout_lines }}"
 
-    - name: print mesytec pipline stderr
+    - name: print mesytec pipeline stderr
       debug:
         msg: "{{ mesytec_pipeline_result.stderr_lines }}"
 

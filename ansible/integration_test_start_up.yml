@@ -87,3 +87,11 @@
       shell: "\
         {{ epics_install_dir }}/bin/pvput testCounter 0; \
         sleep 1"
+
+- hosts: nicos
+  tasks:
+    - name: start NICOS service
+      become: yes
+      shell: "\
+        /etc/init.d/nicos-system start; \
+        sleep 1"
