@@ -8,8 +8,13 @@
 
 - hosts: itesteventformationunit02.dm.esss.dk
   tasks:
-    - name: check for correct counter values
+    - name: check mesytec pipeline for correct counter values
       shell: "{{ event_formation_unit_install_dir }}/event-formation-unit/util/efushell/verifymetrics.py efu.mgmesytec.rx_packets:114015 efu.mgmesytec.geometry_errors:0 efu.mgmesytec.events:227326"
+
+- hosts: itesteventformationunit03.dm.esss.dk
+  tasks:
+    - name: check gdgem pipeline for correct counter values
+      shell: "{{ event_formation_unit_install_dir }}/event-formation-unit/util/efushell/verifymetrics.py efu.nmx.rx_packets:9998 efu.nmx.clusters_discarded:363 efu.nmx.clusters_events:504"
 
 - hosts: itesteventformationunit01.dm.esss.dk
   tasks:
@@ -46,3 +51,21 @@
     - name: print mesytec pipline stderr
       debug:
         msg: "{{ mesytec_pipeline_result.stderr_lines }}"
+
+- hosts: itesteventformationunit03.dm.esss.dk
+  tasks:
+    - name: check if gdgem pipeline finished
+      async_status:
+        jid: "{{ gdgem_pipeline.ansible_job_id }}"
+      register: gdgem_pipeline_result
+      until: gdgem_pipeline_result.finished
+      retries: "{{ integration_test_num_retries }}"
+      ignore_errors: yes
+
+    - name: print gdgem pipline stdout
+      debug:
+        msg: "{{ gdgem_pipeline_result.stdout_lines }}"
+
+    - name: print gdgem pipline stderr
+      debug:
+        msg: "{{ gdgem_pipeline_result.stderr_lines }}"

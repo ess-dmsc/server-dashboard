@@ -44,3 +44,11 @@
       fail:
         msg: playbook failed
       when: mesytec_pipeline_result.rc!=0
+
+- hosts: itesteventformationunit03.dm.esss.dk
+  any_errors_fatal: true
+  tasks:
+    - name: check playbook result
+      fail:
+        msg: playbook failed
+      when: gdgem_pipeline_result.rc!=0

@@ -5,7 +5,7 @@
     - name: start cspec pipeline
       shell: "\
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
-          ./efu -d ../lib/mgcncs2 \
+          ./efu -d ../modules/mgcncs2 \
           -s 120 \
           -b {{ integration_test_kafka_bootstrap_servers }} \
           -a {{ integration_test_graylog_host }} \
@@ -32,7 +32,7 @@
     - name: start mgmesytec pipeline
       shell: "\
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
-          ./efu -d ../lib/mgmesytec \
+          ./efu -d ../modules/mgmesytec \
           -s 120 \
           -b {{ integration_test_kafka_bootstrap_servers }} \
           -a {{ integration_test_graylog_host }} \
@@ -46,6 +46,30 @@
         LD_LIBRARY_PATH: "{{ ld_library_path }}"
 
     - name: wait for mesytec pipeline initialisation
+      pause:
+        seconds: 5
+
+
+- hosts: itesteventformationunit03.dm.esss.dk
+  tasks:
+    - name: start gdgem pipeline
+      shell: "\
+        LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
+          ./efu -d ../modules/gdgem \
+          --file {{ event_formation_unit_data_dir }}/nmx_config.json
+          -s 120 \
+          -b {{ integration_test_kafka_bootstrap_servers }} \
+          -a {{ integration_test_graylog_host }} \
+          -g {{ integration_test_graphite_url }}"
+      args:
+        chdir: "{{ event_formation_unit_install_dir }}/event-formation-unit/bin"
+      async: "{{ integration_test_max_async_timeout }}"
+      poll: 0
+      register: gdgem_pipeline
+      environment:
+        LD_LIBRARY_PATH: "{{ ld_library_path }}"
+
+    - name: wait for gdgem pipeline initialisation
       pause:
         seconds: 5
 

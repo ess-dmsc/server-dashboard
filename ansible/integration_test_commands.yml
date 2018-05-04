@@ -31,6 +31,18 @@
       environment:
         LD_LIBRARY_PATH: "{{ ld_library_path }}"
 
+    - name: start gdgem_pipeline data generation
+      shell: "\
+        LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
+          ./gennmxpcap \
+          -f {{ event_formation_unit_data_dir }}/wireshark_VMM2_X_0_1_Y_14_15_FE55_11Gbq_col_MM_D300V_A544V.pcap \
+          -i {{ integration_test_efu3_ip }} \
+          -t 250"
+      args:
+        chdir: "{{ event_formation_unit_install_dir }}/event-formation-unit/bin"
+      environment:
+        LD_LIBRARY_PATH: "{{ ld_library_path }}"
+
 - hosts: kafka-to-nexus
   tasks:
     - name: wait for cspec pipeline to finish running
