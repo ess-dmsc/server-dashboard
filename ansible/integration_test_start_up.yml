@@ -6,7 +6,7 @@
       shell: "\
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
           ./efu -d ../modules/mgcncs2 \
-          -s 240 \
+          -s 180 \
           -b {{ integration_test_kafka_bootstrap_servers }} \
           -a {{ integration_test_graylog_host }} \
           -g {{ integration_test_graphite_url }}"
@@ -33,7 +33,7 @@
       shell: "\
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
           ./efu -d ../modules/mgmesytec \
-          -s 240 \
+          -s 180 \
           -b {{ integration_test_kafka_bootstrap_servers }} \
           -a {{ integration_test_graylog_host }} \
           -g {{ integration_test_graphite_url }}"
@@ -57,7 +57,7 @@
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
           ./efu -d ../modules/gdgem \
           --file {{ event_formation_unit_data_dir }}/nmx_config.json
-          -s 240 \
+          -s 180 \
           -b {{ integration_test_kafka_bootstrap_servers }} \
           -a {{ integration_test_graylog_host }} \
           -g {{ integration_test_graphite_url }}"
