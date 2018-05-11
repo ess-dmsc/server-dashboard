@@ -2,6 +2,5 @@
 - hosts: efus
   gather_facts: False
   tasks:
-
     - name: start gem efu
       command: "{{daemonize_cmd}} {{script_path}}/startefu_gdgem.bash"

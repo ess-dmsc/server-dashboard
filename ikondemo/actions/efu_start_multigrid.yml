@@ -4,9 +4,3 @@
   tasks:
     - name: start multigrid efu
       command: "{{daemonize_cmd}} {{script_path}}/startefu_multigrid.bash"
-
-    # - name: start gem efu
-    #   command: "{{daemonize_cmd}} {{script_path}}/startefu_gdgem.bash"
-    #
-    # - name: start sonde efu
-    #   command: "{{daemonize_cmd}} {{script_path}}/startefu_sonde.bash"

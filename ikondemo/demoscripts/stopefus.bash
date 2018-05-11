@@ -1,3 +1,3 @@
 #!/bin/bash
 
-killall efu2
+killall efu

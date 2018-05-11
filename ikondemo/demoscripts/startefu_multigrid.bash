@@ -9,5 +9,5 @@ CARBON=10.4.0.216
 
 pushd $BASE/bin
 pwd
-./efu2 -d mgcncs -p 9000 -m 8000 -b $BROKER -g $CARBON -c -5
+./efu -d ../modules/mgcncs -p 9000 -m 8000 -b $BROKER -g $CARBON -c -5
 popd
