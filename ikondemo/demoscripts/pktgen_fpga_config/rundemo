@@ -4,7 +4,7 @@ sleeptime=30
 
 output=/dev/null
 
-fpath=/home/mortenchristensen/dmg-build-scripts/ikondemo/demoscripts/pktgen_fpga_config
+fpath=/home/mortenchristensen/integration-test/ikondemo/demoscripts/pktgen_fpga_config
 
 function run()
 {

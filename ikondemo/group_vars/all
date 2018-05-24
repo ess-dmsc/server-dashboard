@@ -2,4 +2,4 @@
 
 daemonize_cmd: /usr/sbin/daemonize
 
-script_path: /home/mortenchristensen/dmg-build-scripts/ikondemo/demoscripts
+script_path: /home/mortenchristensen/integration-test/ikondemo/demoscripts

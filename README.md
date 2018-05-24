@@ -1,4 +1,4 @@
-# dmg-build-scripts
+# integration-test
 
 ess-dmsc integration test setup. These playbooks are supposed to be run from
 the test-orchestrator node.
