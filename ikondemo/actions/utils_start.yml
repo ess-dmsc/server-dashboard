@@ -1,11 +1,11 @@
 ---
 
 - hosts: sonde-gateway
-  user: dmsc
+  user: dgdaq
   gather_facts: False
   tasks:
     - name: setup packet gateway for sonde
-      command: "{{daemonize_cmd}} /home/dmsc/gateway"
+      command: "{{daemonize_cmd}} /home/dgdaq/gateway"
 
 - hosts: packet-generator
   gather_facts: False

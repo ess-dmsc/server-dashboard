@@ -1,13 +1,12 @@
 #!/bin/bash
 
-BASE=~/output
+BASE=~/deployment/event-formation-unit
 
-export LD_LIBRARY_PATH=/opt/dm_group/usr/lib:$BASE/lib
+export LD_LIBRARY_PATH=$BASE/lib
 
 BROKER=172.24.0.205:9092
 CARBON=10.4.0.216
 
 pushd $BASE/bin
-pwd
-./efu -d ../modules/mgcncs -p 9000 -m 8000 -b $BROKER -g $CARBON -c -5
+./efu -d $BASE/modules/mgcncs -p 9000 -m 8000 -b $BROKER -g $CARBON -c -5
 popd

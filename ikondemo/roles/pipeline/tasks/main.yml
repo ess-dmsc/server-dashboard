@@ -1,15 +1,20 @@
+- name: destination folder exists
+  file:
+    path: ~/deployment
+    state: directory
+
 - name: old binaries are deleted
   file:
-    path: ~/output
+    path: ~/deployment/event-formation-unit
     state: absent
 
 - name: packages are installed
   unarchive:
     remote_src: yes
-    src: https://jenkins.esss.dk/dm/job/integration_test/lastSuccessfulBuild/artifact/output.tar.gz
-    dest: "~"
+    src: https://jenkins.esss.dk/dm/job/ess-dmsc/job/event-formation-unit/job/master/lastSuccessfulBuild/artifact/event-formation-unit-centos7.tar.gz
+    dest: "~/deployment"
 
 - name: git repository is available
   git:
-    repo: 'https://github.com/ess-dmsc/dmg-build-scripts.git'
-    dest: "~/dmg-build-scripts"
+    repo: 'https://github.com/ess-dmsc/integration-test.git'
+    dest: "~/integration-test"
