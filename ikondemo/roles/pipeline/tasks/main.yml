@@ -1,3 +1,9 @@
+- name: daemonize is installed
+  become: yes
+  package:
+    name: daemonize
+    state: present
+
 - name: destination folder exists
   file:
     path: ~/deployment
