@@ -1,6 +1,6 @@
 ---
 - hosts: sonde-gateway
-  user: dmsc
+  user: dqdaq
   gather_facts: False
   tasks:
     - name: stop sonde gateway
