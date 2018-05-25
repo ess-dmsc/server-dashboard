@@ -1,10 +1,9 @@
 # Stop system under test
 
-- hosts: test-orchestrator
+- hosts: nicos
   tasks:
     - name: send command to stop writing events to file
-      shell: "{{ test_orchestrator_python_bin }} {{ test_orchestrator_script_dir }}/send-stop-cmd.py {{ integration_test_kafka_bootstrap_servers }}"
-      environment: "{{ centos_python3_env }}"
+      shell: "{{ nicos_install_dir }}/stop_file_writer.sh"
 
 - hosts: itesteventformationunit02.dm.esss.dk
   tasks:
