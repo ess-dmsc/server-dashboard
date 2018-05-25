@@ -1,1 +1,1 @@
-~/deployment/event-formation-unit/util/udpredirect 127.0.0.1 50011 10.4.0.215 9002
+~/deployment/event-formation-unit/util/udpredirect 10.10.0.100 50011 10.4.0.215 9002
