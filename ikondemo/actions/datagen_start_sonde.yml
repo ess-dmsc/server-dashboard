@@ -1,7 +1,7 @@
 ---
 - hosts: sonde-gateway
-  user: dgdaq
+  user: "{{ sonde_server_user }}"
   gather_facts: False
   tasks:
     - name: start sonde readout
-      shell: "/usr/bin/python /home/dgdaq/essproj/event-formation-unit/utils/sondectrl/ideasctrl.py -i 10.10.0.50 -c config"
+      shell: "/usr/bin/python ~/essproj/event-formation-unit/utils/sondectrl/ideasctrl.py -i 10.10.0.50 -c config"

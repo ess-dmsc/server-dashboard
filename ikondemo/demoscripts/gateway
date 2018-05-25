@@ -1,1 +1,1 @@
-/home/dgdaq/deployment/event-formation-unit/util/udpredirect 127.0.0.1 9876 10.4.0.215 9002
+~/deployment/event-formation-unit/util/udpredirect 127.0.0.1 9876 10.4.0.215 9002

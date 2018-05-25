@@ -1,5 +1,6 @@
 ---
 
 daemonize_cmd: /usr/sbin/daemonize
+sonde_server_user: dgdaq
 
 script_path: ~/integration-test/ikondemo/demoscripts
