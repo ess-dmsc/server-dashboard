@@ -2,9 +2,9 @@
 
 throttle=10
 
-BASE=~/output
+BASE=~/deployment/event-formation-unit
 
-export LD_LIBRARY_PATH=/opt/dm_group/usr/lib:$BASE/lib
+export LD_LIBRARY_PATH=$BASE/lib
 
 while [[ 1 ]]
 do
