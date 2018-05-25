@@ -1,4 +1,5 @@
 - hosts: sonde-gateway
+  user: dqdaq
   gather_facts: False
   roles:
     - pipeline
