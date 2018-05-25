@@ -12,6 +12,7 @@ in the ikondata/ folder.
 After changing scripts or data files you need to deploy these changes to the servers
 
       > ansible-playbook -i essiip-lab deployment.yml --ask-become-pass
+      > ansible-playbook -i essiip-lab sonde_deployment.yml --ask-become-pass
 
 To then start and stop the demo use the following commands
 
