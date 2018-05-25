@@ -1,0 +1,4 @@
+- hosts: sonde-gateway
+  gather_facts: False
+  roles:
+    - pipeline
