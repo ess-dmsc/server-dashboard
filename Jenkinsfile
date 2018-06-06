@@ -2,7 +2,7 @@ properties([
   disableConcurrentBuilds(),
   pipelineTriggers([[
     $class: 'jenkins.triggers.ReverseBuildTrigger',
-    upstreamProjects: "ess-dmsc/event-formation-unit/master,ess-dmsc/forward-epics-to-kafka/essiip-deployment,ess-dmsc/kafka-to-nexus/essiip-deployment",
+    upstreamProjects: "ess-dmsc/event-formation-unit/master,ess-dmsc/forward-epics-to-kafka/essiip-deployment,ess-dmsc/kafka-to-nexus/master",
     threshold: hudson.model.Result.SUCCESS
   ]])
 ])
