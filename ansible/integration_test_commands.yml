@@ -1,9 +1,16 @@
 # Run integration test commands
 
-- hosts: nicos
+# Use old python script before the NICOS command is fixed
+#
+# - hosts: nicos
+#   tasks:
+#     - name: send command to start writing events to file
+#       shell: "{{ nicos_install_dir }}/start_file_writer.sh"
+- hosts: test-orchestrator
   tasks:
     - name: send command to start writing events to file
-      shell: "{{ nicos_install_dir }}/start_file_writer.sh"
+      shell: "{{ test_orchestrator_python_bin }} {{ test_orchestrator_script_dir }}/send-start-cmd.py {{ integration_test_kafka_bootstrap_servers }} {{ kafka_to_nexus_data_dir }}/{{ integration_test_nexus_file_name }}"
+      environment: "{{ centos_python3_env }}"
 
 - hosts: pipeline-data-generator
   tasks:
