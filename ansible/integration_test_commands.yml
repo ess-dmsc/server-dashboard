@@ -28,7 +28,7 @@
     - name: start mgmesytec data generation
       shell: "\
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
-          ./gennmxpcap \
+          ./nmxgen_pcap \
           -f {{ event_formation_unit_data_dir }}/test_data_mgmesytec_1.pcapng \
           -i {{ integration_test_efu2_ip }} \
           -t 250"
@@ -40,7 +40,7 @@
     - name: start gdgem_pipeline data generation
       shell: "\
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
-          ./gennmxpcap \
+          ./nmxgen_pcap \
           -f {{ event_formation_unit_data_dir }}/wireshark_VMM2_X_0_1_Y_14_15_FE55_11Gbq_col_MM_D300V_A544V.pcap \
           -i {{ integration_test_efu3_ip }} \
           -t 250"
