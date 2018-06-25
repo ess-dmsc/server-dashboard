@@ -38,6 +38,15 @@ node('integration-test') {
     }  // stage
   }  // withCredentials
 
+  stage('Uninstall') {
+    sh """
+      cd dm-ansible &&
+      ansible-playbook \
+        --inventory=inventories/dmsc/integration-test \
+        uninstall_efu.yml
+    """
+  }  // stage
+
   stage('Deploy') {
     sh """
       cd dm-ansible &&
