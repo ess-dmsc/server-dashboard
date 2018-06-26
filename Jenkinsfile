@@ -62,17 +62,19 @@ node('integration-test') {
     """
   }  // stage
 
-  stage('Run tests') {
-    sh """
-      cd dm-ansible &&
-      cp ../ansible/*.yml . &&
-      ansible-playbook \
-        --inventory=inventories/dmsc/integration-test \
-        run_test.yml
-    """
-  }
-
-  stage('Archive') {
-    archiveArtifacts '/home/jenkins/test_results/*.log'
+  try {
+    stage('Run tests') {
+      sh """
+        cd dm-ansible &&
+        cp ../ansible/*.yml . &&
+        ansible-playbook \
+          --inventory=inventories/dmsc/integration-test \
+          run_test.yml
+      """
+    }
+  } finally {
+    stage('Archive') {
+      archiveArtifacts '/home/jenkins/test_results/*.log'
+    }
   }
 }  // node
