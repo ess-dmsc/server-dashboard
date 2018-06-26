@@ -4,7 +4,8 @@
 - hosts: test-orchestrator
   tasks:
     - name: test result is absent
-      file: "{{ integration_test_result_dir }}"
+      file:
+        path: "{{ integration_test_result_dir }}"
         state: absent
 
     - name: test result dir exists
