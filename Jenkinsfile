@@ -73,6 +73,6 @@ node('integration-test') {
   }
 
   stage('Archive') {
-    archiveArtifacts '~/test_results/*.log'
+    archiveArtifacts '/home/jenkins/test_results/*.log'
   }
 }  // node
