@@ -74,7 +74,7 @@ node('integration-test') {
     }
   } finally {
     stage('Archive') {
-      archiveArtifacts '/home/jenkins/test_results/*.log'
+      archiveArtifacts '/home/jenkins/test-results/*.log'
     }
   }
 }  // node

@@ -21,7 +21,7 @@
 
     - name: copy log file
       fetch:
-        src: "/home/jenkins/{{ ansible_hostname }}.log"
+        src: "/home/jenkins/{{ ansible_fqdn }}.log"
         dest: "{{ integration_test_result_dir }}/"
         flat: yes
 
