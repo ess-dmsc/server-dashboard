@@ -9,11 +9,31 @@
   tasks:
     - name: check mesytec pipeline for correct counter values
       shell: "{{ event_formation_unit_install_dir }}/event-formation-unit/util/efushell/verifymetrics.py efu.mgmesytec.rx_packets:114015 efu.mgmesytec.geometry_errors:0 efu.mgmesytec.events:227326"
+      register: mesytec_pipeline_counters_result
+      ignore_errors: yes
+
+    - name: print mesytec pipline counter check stdout
+      debug:
+        msg: "{{ mesytec_pipeline_counters_result.stdout_lines }}"
+
+    - name: print gdgem pipline counter check stderr
+      debug:
+        msg: "{{ mesytec_pipeline_counters_result.stderr_lines }}"
 
 - hosts: itesteventformationunit03.dm.esss.dk
   tasks:
     - name: check gdgem pipeline for correct counter values
       shell: "{{ event_formation_unit_install_dir }}/event-formation-unit/util/efushell/verifymetrics.py efu.nmx.rx_packets:9998 efu.nmx.clusters_discarded:293 efu.nmx.clusters_events:542"
+      register: gdgem_pipeline_counters_result
+      ignore_errors: yes
+
+    - name: print gdgem pipline counter check stdout
+      debug:
+        msg: "{{ gdgem_pipeline_counters_result.stdout_lines }}"
+
+    - name: print gdgem pipline counter check stderr
+      debug:
+        msg: "{{ gdgem_pipeline_counters_result.stderr_lines }}"
 
 - hosts: itesteventformationunit01.dm.esss.dk
   tasks:

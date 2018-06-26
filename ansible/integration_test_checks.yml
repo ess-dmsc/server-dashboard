@@ -69,6 +69,11 @@
         msg: playbook failed
       when: mesytec_pipeline_result.rc!=0
 
+    - name: fail test if pipeline counter check failed
+      fail:
+        msg: playbook failed
+      when: mesytec_pipeline_counters_result.rc!=0
+
 - hosts: itesteventformationunit03.dm.esss.dk
   any_errors_fatal: true
   tasks:
@@ -76,3 +81,8 @@
       fail:
         msg: playbook failed
       when: gdgem_pipeline_result.rc!=0
+
+    - name: fail test if pipeline counter check failed
+      fail:
+        msg: playbook failed
+      when: gdgem_pipeline_counters_result.rc!=0
