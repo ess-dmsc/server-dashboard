@@ -43,7 +43,13 @@ node('integration-test') {
       cd dm-ansible &&
       ansible-playbook \
         --inventory=inventories/dmsc/integration-test \
-        uninstall_efu.yml
+        uninstall_efu.yml && \
+      ansible-playbook \
+        --inventory=inventories/dmsc/integration-test \
+        uninstall_forward_epics_to_kafka.yml &&
+      ansible-playbook \
+        --inventory=inventories/dmsc/integration-test \
+        uninstall_kafka_to_nexus.yml
     """
   }  // stage
 
