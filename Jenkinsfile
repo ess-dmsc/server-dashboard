@@ -69,12 +69,13 @@ node('integration-test') {
         cp ../ansible/*.yml . &&
         ansible-playbook \
           --inventory=inventories/dmsc/integration-test \
+          --extra-vars="integration_test_result_dir=\$(pwd)/test-results"
           run_test.yml
       """
     }
   } finally {
     stage('Archive') {
-      archiveArtifacts '/home/jenkins/test-results/*.log'
+      archiveArtifacts 'test-results/*.log'
     }
   }
 }  // node
