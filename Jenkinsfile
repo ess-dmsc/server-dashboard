@@ -71,4 +71,8 @@ node('integration-test') {
         run_test.yml
     """
   }
+
+  stage('Archive') {
+    archiveArtifacts '~/test_results/*.log'
+  }
 }  // node

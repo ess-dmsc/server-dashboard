@@ -1,5 +1,11 @@
 # Prepare integration test environment and start system under test
 
+- hosts: all
+  tasks:
+    - name: get integration test start time
+      shell: "date '+%Y-%m-%d %H:%M:%S'"
+      register: integration_test_start_time
+
 - hosts: itesteventformationunit01.dm.esss.dk
   tasks:
     - name: start cspec pipeline

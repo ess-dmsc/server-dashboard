@@ -1,18 +1,33 @@
 # Check integration test results
 
+# Make sure test result directory exists and is empty
 - hosts: test-orchestrator
   tasks:
+    - name: test result is absent
+      file: "{{ integration_test_result_dir }}"
+        state: absent
+
     - name: test result dir exists
       file:
         path: "{{ integration_test_result_dir }}"
         state: directory
 
-- hosts: test-orchestrator
-  any_errors_fatal: true
+- hosts: all
   tasks:
-    - name: old NeXus file is absent
+      - name: save log to file
+        become: yes
+        shell: "journalctl --no-pager --since='{{ integration_test_start_time.stdout }}' > /home/jenkins/{{ ansible_fqdn }}.log"
+
+      - name: copy log file
+        fetch:
+          src: "/home/jenkins/{{ ansible_hostname }}.log"
+          dest: "{{ integration_test_result_dir }}/"
+          flat: yes
+
+    - name: log file is absent
+      become: yes
       file:
-        path: "{{ integration_test_result_dir }}/{{ integration_test_nexus_file_name }}"
+        path: "~/{{ ansible_hostname }}.log"
         state: absent
 
 - hosts: kafka-to-nexus
