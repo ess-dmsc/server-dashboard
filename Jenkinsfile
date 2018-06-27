@@ -40,7 +40,6 @@ node('integration-test') {
 
   stage('Uninstall') {
     sh """
-      set +e
       cd dm-ansible
       ansible-playbook \
         --inventory=inventories/dmsc/integration-test \
@@ -56,7 +55,6 @@ node('integration-test') {
 
   stage('Deploy') {
     sh """
-      set +e
       cd dm-ansible
       ansible-playbook \
         --inventory=inventories/dmsc/integration-test/deployment \
@@ -67,7 +65,6 @@ node('integration-test') {
   try {
     stage('Run tests') {
       sh """
-        set +e
         cd dm-ansible
         cp ../ansible/*.yml .
         ansible-playbook \
