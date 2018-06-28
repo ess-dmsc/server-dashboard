@@ -28,7 +28,7 @@
     - name: log file is absent
       become: yes
       file:
-        path: "~/{{ ansible_hostname }}.log"
+        path: "~/{{ ansible_fqdn }}.log"
         state: absent
 
 - hosts: nicos
