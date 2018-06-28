@@ -31,6 +31,14 @@
         path: "~/{{ ansible_hostname }}.log"
         state: absent
 
+- hosts: nicos
+  tasks:
+    - name: copy nicos log file
+      fetch:
+        src: "/opt/nicos-data/log/nicos/current"
+        dest: "{{ integration_test_result_dir }}/"
+        flat: yes
+
 - hosts: kafka-to-nexus
   any_errors_fatal: true
   tasks:
