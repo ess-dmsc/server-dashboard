@@ -36,7 +36,7 @@
     - name: copy nicos log file
       fetch:
         src: "/opt/nicos-data/log/nicos/current"
-        dest: "{{ integration_test_result_dir }}/"
+        dest: "{{ integration_test_result_dir }}/nicos.log"
         flat: yes
 
 - hosts: kafka-to-nexus
