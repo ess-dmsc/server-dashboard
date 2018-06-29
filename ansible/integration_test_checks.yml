@@ -39,6 +39,20 @@
         dest: "{{ integration_test_result_dir }}/nicos.log"
         flat: yes
 
+- hosts: itestkafka01.dm.esss.dk
+  tasks:
+    - name: copy kafka console consumer file writer command files
+      fetch:
+        src: "~/kafka_filewriter_command.log"
+        dest: "{{ integration_test_result_dir }}"
+        flat: yes
+
+    - name: copy kafka console consumer file writer status files
+      fetch:
+        src: "~/kafka_filewriter_status.log"
+        dest: "{{ integration_test_result_dir }}"
+        flat: yes
+
 - hosts: kafka-to-nexus
   any_errors_fatal: true
   tasks:

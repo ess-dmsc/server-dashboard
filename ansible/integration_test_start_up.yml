@@ -6,6 +6,32 @@
       shell: "date '+%Y-%m-%d %H:%M:%S'"
       register: integration_test_start_time
 
+- hosts: itestkafka01.dm.esss.dk
+  tasks:
+    - name: kafka file writer commands log file is absent
+      file:
+        path: "~/kafka_filewriter_command.log"
+        state: absent
+
+    - name: start writing kafka file writer commands to file
+      shell: "/opt/dm_group/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic filewriter_command > kafka_filewriter_command.log"
+      args:
+        chdir: "~"
+      async: 600
+      poll: 0
+
+    - name: kafka file writer status log file is absent
+      file:
+        path: "~/kafka_filewriter_status.log"
+        state: absent
+
+    - name: start writing kafka file writer status to file
+      shell: "/opt/dm_group/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic filewriter_status > kafka_filewriter_status.log"
+      args:
+        chdir: "~"
+      async: 600
+      poll: 0
+
 - hosts: itesteventformationunit01.dm.esss.dk
   tasks:
     - name: start cspec pipeline
