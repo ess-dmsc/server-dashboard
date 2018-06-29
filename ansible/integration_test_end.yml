@@ -94,4 +94,4 @@
     # This command is not very robust, but pgrep did not work with the more
     # specific terms in the end of the long commands, such as filewriter_status.
     - name: stop kafka console consumers
-      shell: "pkill -2 -u jenkins -f "java"
+      shell: "pkill -2 -u jenkins -f 'java'"
