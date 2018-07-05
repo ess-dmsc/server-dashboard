@@ -88,7 +88,7 @@
     - name: fail test if NeXus file h5ls failed
       fail:
         msg: playbook failed
-        when: nexus_file_h5ls_result.rc!=0
+      when: nexus_file_h5ls_result.rc!=0
 
 - hosts: itesteventformationunit01.dm.esss.dk
   any_errors_fatal: true
