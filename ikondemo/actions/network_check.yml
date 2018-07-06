@@ -1,0 +1,7 @@
+---
+
+- hosts: pipeline
+  gather_facts: False
+  tasks:
+    - name: check if we can ping the other servers with correct MTU
+      command: "~/deployment/event-formation-unit/util/hwcheck/pingcheck.bash 9000"
