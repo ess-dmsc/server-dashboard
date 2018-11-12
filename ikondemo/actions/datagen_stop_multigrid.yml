@@ -6,3 +6,5 @@
     - name: stop data generators
       command: "killall datagen_multigrid.bash mgcncsgenjson"
       ignore_errors: True
+      tags:
+        - multigrid

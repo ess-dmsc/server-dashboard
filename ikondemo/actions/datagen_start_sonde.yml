@@ -5,3 +5,5 @@
   tasks:
     - name: start sonde readout
       shell: "/usr/bin/python ~/essproj/event-formation-unit/utils/sondectrl/ideasctrl.py -i 10.10.0.50 -c start_TOF -t 15 -e 1"
+      tags:
+        - sonde

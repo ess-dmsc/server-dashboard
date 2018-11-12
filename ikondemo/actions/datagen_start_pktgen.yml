@@ -9,3 +9,5 @@
         chdir: "{{script_path}}/pktgen_fpga_config/"
       become: True
       become_method: sudo
+      tags:
+        - generator

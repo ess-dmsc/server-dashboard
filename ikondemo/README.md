@@ -11,12 +11,13 @@ in the ikondata/ folder.
 
 After changing scripts or data files you need to deploy these changes to the servers
 
-      > ansible-playbook -i essiip-lab deployment.yml --ask-become-pass
-      > ansible-playbook -i essiip-lab sonde_deployment.yml --ask-become-pass
+      > ansible-playbook -i utgard deployment.yml --ask-become-pass
+      > ansible-playbook -i utgard sonde_deployment.yml --ask-become-pass
 
 To then start and stop the demo use the following commands
 
-      > ansible-playbook -i essiip-lab start_services.yml --ask-become-pass
-      > ansible-playbook -i essiip-lab stop_services.yml --ask-become-pass
+      > ansible-playbook -i utgard start_services.yml --ask-become-pass
+      > ansible-playbook -i utgard stop_services.yml --ask-become-pass
 
-Scripts for starting individual EFUs and data generators are in te action/ directory.
+Scripts for starting individual EFUs and data generators are in the action/ directory.
+Detector types can be selected or excluded by using the `--tags` and `--skip-tags` options.

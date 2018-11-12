@@ -4,3 +4,5 @@
   tasks:
     - name: start multigrid efu
       command: "{{daemonize_cmd}} {{script_path}}/startefu_multigrid.bash"
+      tags:
+        - multigrid

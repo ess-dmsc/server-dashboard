@@ -6,3 +6,5 @@
     - name: stop data generators
       command: "killall datagen_gdgem.bash nmxgen_apv"
       ignore_errors: True
+      tags:
+        - gdgem

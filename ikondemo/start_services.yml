@@ -10,4 +10,4 @@
 - import_playbook: actions/datagen_start_multigrid.yml
 - import_playbook: actions/datagen_start_gdgem.yml
 - import_playbook: actions/datagen_start_sonde.yml
-#- import_playbook: actions/datagen_start_pktgen.yml
+- import_playbook: actions/datagen_start_pktgen.yml

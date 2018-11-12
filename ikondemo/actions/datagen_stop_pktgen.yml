@@ -7,9 +7,13 @@
       command: "killall rundemo"
       ignore_errors: True
       become: True
+      tags:
+        - generator
 
     - name: stop packet generator
       command: "./stopdemo"
       args:
         chdir: "{{script_path}}/pktgen_fpga_config/"
       become: True
+      tags:
+        - generator

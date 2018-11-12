@@ -1,3 +1,3 @@
 #!/bin/bash
 
-ansible-playbook -i essiip-lab stop_services.yml --ask-become-pass
+ansible-playbook -i utgard stop_services.yml --ask-become-pass

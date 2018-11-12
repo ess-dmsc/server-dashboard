@@ -5,3 +5,5 @@
   tasks:
     - name: start multigrid data
       command: "{{daemonize_cmd}} {{script_path}}/datagen_multigrid.bash 1"
+      tags:
+        - multigrid

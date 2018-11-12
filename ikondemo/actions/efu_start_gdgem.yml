@@ -4,3 +4,5 @@
   tasks:
     - name: start gem efu
       command: "{{daemonize_cmd}} {{script_path}}/startefu_gdgem.bash"
+      tags:
+        - gdgem
