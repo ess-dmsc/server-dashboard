@@ -8,5 +8,5 @@ BROKER=172.24.0.207:9092
 CARBON=10.4.0.216
 
 pushd $BASE/bin
-  ./efu -d ../modules/sonde -p 9002 -m 8002 -b $BROKER -g $CARBON -c -5
+  ./efu -d ../modules/sonde --min_mtu 1500 -p 9002 -m 8002 -b $BROKER -g $CARBON -c -5
 popd

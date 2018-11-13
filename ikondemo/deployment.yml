@@ -1,4 +1,3 @@
 - hosts: pipeline
-  gather_facts: False
   roles:
     - pipeline

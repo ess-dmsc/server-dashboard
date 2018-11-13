@@ -1,5 +1,5 @@
 ---
-- import_playbook: actions/network_check.yml
+# - import_playbook: actions/network_check.yml
 
 - import_playbook: actions/efu_start_multigrid.yml
 - import_playbook: actions/efu_start_gdgem.yml

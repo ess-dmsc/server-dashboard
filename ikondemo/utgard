@@ -1,13 +1,13 @@
 [pipeline]
+#10.4.0.215
 10.4.0.216
-10.4.0.215
 10.4.0.217
 
 [data-generators]
 10.4.0.216  # dmsc-test
 
 [efus]
-10.4.0.215  # dmsc-fast
+10.4.0.217
 
 [packet-generator]
 10.4.0.217
