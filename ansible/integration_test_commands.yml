@@ -7,17 +7,6 @@
 
 - hosts: pipeline-data-generator
   tasks:
-    - name: start mgcncs2 data generation
-      shell: "\
-        LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
-          ./mgcncsgenfile \
-          -f {{ event_formation_unit_data_dir }}/cncs_10_13.bin \
-          -i {{ integration_test_efu1_ip }}"
-      args:
-        chdir: "{{ event_formation_unit_install_dir }}/event-formation-unit/bin"
-      environment:
-        LD_LIBRARY_PATH: "{{ ld_library_path }}"
-
     - name: start mgmesytec data generation
       shell: "\
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
