@@ -8,7 +8,7 @@
 - hosts: itesteventformationunit02.dm.esss.dk
   tasks:
     - name: check mesytec pipeline for correct counter values
-      shell: "{{ event_formation_unit_install_dir }}/event-formation-unit/util/efushell/verifymetrics.py efu.mgmesytec.rx_packets:114015 efu.mgmesytec.geometry_errors:0 efu.mgmesytec.events:227326"
+      shell: "{{ event_formation_unit_install_dir }}/event-formation-unit/util/efushell/verifymetrics.py efu.mgmesytec.rx_packets:114015 efu.mgmesytec.geometry_errors:0 efu.mgmesytec.events:0"
       register: mesytec_pipeline_counters_result
       ignore_errors: yes
 
@@ -34,24 +34,6 @@
     - name: print gdgem pipline counter check stderr
       debug:
         msg: "{{ gdgem_pipeline_counters_result.stderr_lines }}"
-
-- hosts: itesteventformationunit01.dm.esss.dk
-  tasks:
-    - name: check if cspec pipeline finished
-      async_status:
-        jid: "{{ cspec_pipeline.ansible_job_id }}"
-      register: cspec_pipeline_result
-      until: cspec_pipeline_result.finished
-      retries: "{{ integration_test_num_retries }}"
-      ignore_errors: yes
-
-    - name: print cspec pipline stdout
-      debug:
-        msg: "{{ cspec_pipeline_result.stdout_lines }}"
-
-    - name: print cspec pipline stderr
-      debug:
-        msg: "{{ cspec_pipeline_result.stderr_lines }}"
 
 - hosts: itesteventformationunit02.dm.esss.dk
   tasks:
