@@ -42,13 +42,13 @@ node('integration-test') {
     sh """
       cd dm-ansible
       ansible-playbook \
-        --inventory=inventories/dmsc/integration-test \
+        --inventory=inventories/dmsc/jenkins/integration-test-deployment \
         uninstall_efu.yml
       ansible-playbook \
-        --inventory=inventories/dmsc/integration-test \
+        --inventory=inventories/dmsc/jenkins/integration-test-deployment \
         uninstall_forward_epics_to_kafka.yml
       ansible-playbook \
-        --inventory=inventories/dmsc/integration-test \
+        --inventory=inventories/dmsc/jenkins/integration-test-deployment \
         uninstall_kafka_to_nexus.yml
     """
   }  // stage
@@ -57,7 +57,7 @@ node('integration-test') {
     sh """
       cd dm-ansible
       ansible-playbook \
-        --inventory=inventories/dmsc/integration-test/deployment \
+        --inventory=inventories/dmsc/jenkins/integration-test-deployment \
         site.yml
     """
   }  // stage
@@ -68,7 +68,7 @@ node('integration-test') {
         cd dm-ansible
         cp ../ansible/*.yml .
         ansible-playbook \
-          --inventory=inventories/dmsc/integration-test \
+          --inventory=inventories/dmsc/jenkins/integration-test-deployment \
           --extra-vars="integration_test_result_dir=\$(pwd)/test-results" \
           run_test.yml
       """
