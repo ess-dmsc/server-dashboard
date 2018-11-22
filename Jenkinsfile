@@ -39,40 +39,66 @@ node('integration-test') {
   }  // withCredentials
 
   stage('Uninstall') {
-    sh """
-      cd dm-ansible
-      ansible-playbook \
-        --inventory=inventories/dmsc/jenkins/integration-test-deployment \
-        uninstall_efu.yml
-      ansible-playbook \
-        --inventory=inventories/dmsc/jenkins/integration-test-deployment \
-        uninstall_forward_epics_to_kafka.yml
-      ansible-playbook \
-        --inventory=inventories/dmsc/jenkins/integration-test-deployment \
-        uninstall_kafka_to_nexus.yml
-    """
+    withCredentials([
+      file(
+        credentialsId: 'dm-ansible-vault-password-file',
+        variable: 'VAULT_PASSWORD_FILE'
+      )
+    ]) {
+      sh """
+        cd dm-ansible
+        ansible-playbook \
+          --inventory=inventories/dmsc/jenkins/integration-test-deployment \
+          --vault-password-file=${VAULT_PASSWORD_FILE} \
+          uninstall_efu.yml
+        ansible-playbook \
+          --inventory=inventories/dmsc/jenkins/integration-test-deployment \
+          --vault-password-file=${VAULT_PASSWORD_FILE} \
+          uninstall_forward_epics_to_kafka.yml
+        ansible-playbook \
+          --inventory=inventories/dmsc/jenkins/integration-test-deployment \
+          --vault-password-file=${VAULT_PASSWORD_FILE} \
+          uninstall_kafka_to_nexus.yml
+      """
+    }  // withCredentials
   }  // stage
 
   stage('Deploy') {
-    sh """
-      cd dm-ansible
-      ansible-playbook \
-        --inventory=inventories/dmsc/jenkins/integration-test-deployment \
-        site.yml
-    """
+    withCredentials([
+      file(
+        credentialsId: 'dm-ansible-vault-password-file',
+        variable: 'VAULT_PASSWORD_FILE'
+      )
+    ]) {
+      sh """
+        cd dm-ansible
+        ansible-playbook \
+          --inventory=inventories/dmsc/jenkins/integration-test-deployment \
+          --vault-password-file=${VAULT_PASSWORD_FILE} \
+          site.yml
+      """
+    }  // withCredentials
   }  // stage
 
   try {
     stage('Run tests') {
-      sh """
-        cd dm-ansible
-        cp ../ansible/*.yml .
-        ansible-playbook \
-          --inventory=inventories/dmsc/jenkins/integration-test-deployment \
-          --extra-vars="integration_test_result_dir=\$(pwd)/test-results" \
-          run_test.yml
-      """
-    }
+      withCredentials([
+        file(
+          credentialsId: 'dm-ansible-vault-password-file',
+          variable: 'VAULT_PASSWORD_FILE'
+        )
+      ]) {
+        sh """
+          cd dm-ansible
+          cp ../ansible/*.yml .
+          ansible-playbook \
+            --inventory=inventories/dmsc/jenkins/integration-test-deployment \
+            --extra-vars="integration_test_result_dir=\$(pwd)/test-results" \
+            --vault-password-file=${VAULT_PASSWORD_FILE} \
+            run_test.yml
+        """
+      }  // withCredentials
+    }  // stage
   } finally {
     stage('Archive') {
       archiveArtifacts 'dm-ansible/test-results/*.log'
