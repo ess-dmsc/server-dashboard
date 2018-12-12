@@ -3,7 +3,7 @@
 # Make sure test result directory exists and is empty
 - hosts: test-orchestrator
   tasks:
-    - name: test result is absent
+    - name: test results are absent
       file:
         path: "{{ integration_test_result_dir }}"
         state: absent
@@ -41,21 +41,11 @@
 
 - hosts: itestkafka01.dm.esss.dk
   tasks:
-    - name: kafka file writer commands log file is absent
-      file:
-        path: "~/kafka_filewriter_command.log"
-        state: absent
-
     - name: copy kafka console consumer file writer command files
       fetch:
         src: "~/kafka_filewriter_command.log"
         dest: "{{ integration_test_result_dir }}/"
         flat: yes
-
-    - name: kafka file writer status log file is absent
-      file:
-        path: "~/kafka_filewriter_status.log"
-        state: absent
 
     - name: copy kafka console consumer file writer status files
       fetch:
