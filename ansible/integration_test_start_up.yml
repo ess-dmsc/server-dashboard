@@ -14,7 +14,7 @@
         state: absent
 
     - name: start writing kafka file writer commands to file
-      shell: "/opt/dm_group/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic filewriter_command > kafka_filewriter_command.log"
+      shell: "/opt/dm_group/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic {{ kafka_to_nexus_command_topic }} > kafka_filewriter_command.log"
       args:
         chdir: "~"
       async: 600
@@ -26,7 +26,7 @@
         state: absent
 
     - name: start writing kafka file writer status to file
-      shell: "/opt/dm_group/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic filewriter_status > kafka_filewriter_status.log"
+      shell: "/opt/dm_group/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic {{ kafka_to_nexus_status_topic }} > kafka_filewriter_status.log"
       args:
         chdir: "~"
       async: 600
