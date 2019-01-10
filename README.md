@@ -1,4 +1,4 @@
-# integration-test
+# Integration Test
 
 ess-dmsc integration test setup. These playbooks are supposed to be run from
 the test-orchestrator node.
@@ -31,10 +31,13 @@ Ansible
 
 ### Installing
 
+TBD 
+
 ## Running the tests
+TBD 
 
 ## Deployment
-
+TBD
 
 ## Versioning
 
