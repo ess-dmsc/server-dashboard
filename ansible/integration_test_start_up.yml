@@ -36,6 +36,7 @@
   tasks:
     - name: start mgmesytec pipeline
       shell: "\
+        echo $LD_LIBRARY_PATH && \
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
           ./efu -d ../modules/mgmesytec \
           -f ../config/ILL_mappings.json \
