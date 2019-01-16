@@ -9,6 +9,7 @@
   tasks:
     - name: start mgmesytec data generation
       shell: "\
+        echo $LD_LIBRARY_PATH && \
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
           ./udpgen_pcap \
           -f {{ event_formation_unit_data_dir }}/mgmesytec_data_capture_IV.pcapng \
