@@ -38,7 +38,7 @@
       shell: "\
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
           ./efu -d ../modules/mgmesytec \
-          -f ../configs/ILL_mappings.json \
+          -f /home/jenkins/data/EFU_reference/multigrid/2018_09_03/Sequoia_mappings.json \
           -s 150 \
           -b {{ integration_test_kafka_bootstrap_servers }} \
           -a {{ integration_test_graylog_host }} \

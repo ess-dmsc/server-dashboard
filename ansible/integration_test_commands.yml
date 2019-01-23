@@ -10,10 +10,10 @@
     - name: start mgmesytec data generation
       shell: "\
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
-          ./udpgen_pcap \
-          -f {{ event_formation_unit_data_dir }}/mgmesytec_data_capture_IV.pcapng \
+          ./bin/mggen_readouts \
+          -f /home/jenkins/data/EFU_reference/multigrid/2018_09_03/readouts/154484 \
           -i {{ integration_test_efu2_ip }} \
-          -t 250"
+          -t 1"
       args:
         chdir: "{{ event_formation_unit_install_dir }}/event-formation-unit/bin"
       environment:
