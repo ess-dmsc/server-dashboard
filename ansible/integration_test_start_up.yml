@@ -36,11 +36,9 @@
   tasks:
     - name: start mgmesytec pipeline
       shell: "\
-        env && \
-        echo $LD_LIBRARY_PATH && \
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
           ./efu -d ../modules/mgmesytec \
-          -f ../config/ILL_mappings.json \
+          -f /opt/dm_group/event-formation-unit/configs/ILL_mappings.json \
           -s 150 \
           -b {{ integration_test_kafka_bootstrap_servers }} \
           -a {{ integration_test_graylog_host }} \
