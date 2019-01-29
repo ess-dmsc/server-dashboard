@@ -1,0 +1,8 @@
+---
+- hosts: efus
+  gather_facts: False
+  tasks:
+    - name: start multiblade efu
+      command: "{{daemonize_cmd}} {{script_path}}/startefu_multiblade.bash"
+      tags:
+        - multiblade

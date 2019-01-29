@@ -8,5 +8,5 @@ BROKER=172.24.0.207:9092
 CARBON=10.4.0.216
 
 pushd $BASE/bin
-  ./efu -d ../modules/mgcncs2 --min_mtu 1500 -p 9000 -m 8000 -b $BROKER -g $CARBON -c -5
+  ./efu -d ../modules/mbcaen -f ~/integration-test/ikondemo/demoscripts/multiblade_config.json --nohwcheck -p 9003 -m 8003 -b $BROKER -g $CARBON
 popd
