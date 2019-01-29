@@ -17,7 +17,7 @@
 - name: packages are installed
   unarchive:
     remote_src: yes
-    src: https://jenkins.esss.dk/dm/job/ess-dmsc/job/event-formation-unit/job/utgard-rollback-deployment/lastSuccessfulBuild/artifact/event-formation-unit-centos7.tar.gz
+    src: https://jenkins.esss.dk/dm/job/ess-dmsc/job/event-formation-unit/job/master/lastSuccessfulBuild/artifact/event-formation-unit-centos7.tar.gz
     dest: "~/deployment"
 
 - name: git repository is available
