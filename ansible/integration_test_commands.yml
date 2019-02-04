@@ -5,36 +5,19 @@
     - name: send command to start writing events to file
       shell: "{{ nicos_install_dir }}/start_file_writer.sh"
 
-- hosts: itestgenerator02.dm.esss.dk
+- hosts: pipeline-data-generator
   tasks:
     - name: start mgmesytec data generation
       shell: "\
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
-          ./mggen_readouts \
-          -f /home/jenkins/data/EFU_reference/multigrid/2018_09_03/readouts/154484 \
-          -i {{ integration_test_efu2_ip }} \
-          -t 25"
+          ./{{ integration_test_efu_generator_bin }} \
+          -f {{ integration_test_efu_generator_data_file }} \
+          -i {{ integration_test_efu_generator_destination_ip }} \
+          -t {{ integration_test_efu_generator_throttle }}"
       args:
         chdir: "{{ event_formation_unit_install_dir }}/event-formation-unit/bin"
       async: "{{ integration_test_max_async_timeout }}"
       poll: 0
-      register: mesytec_generator
-      environment:
-        LD_LIBRARY_PATH: "{{ ld_library_path }}"
-
-- hosts: itestgenerator03.dm.esss.dk
-  tasks:
-    - name: start gdgem_pipeline data generation
-      shell: "\
-        LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
-          ./udpgen_pcap \
-          -f {{ event_formation_unit_data_dir }}/wireshark_VMM2_X_0_1_Y_14_15_FE55_11Gbq_col_MM_D300V_A544V.pcap \
-          -i {{ integration_test_efu3_ip }} \
-          -t 250"
-      args:
-        chdir: "{{ event_formation_unit_install_dir }}/event-formation-unit/bin"
-      async: "{{ integration_test_max_async_timeout }}"
-      poll: 0
-      register: gdgem_generator
+      register: efu_generator
       environment:
         LD_LIBRARY_PATH: "{{ ld_library_path }}"

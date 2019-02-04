@@ -1,40 +1,22 @@
 # Stop system under test
 
-- hosts: itestgenerator02.dm.esss.dk
+- hosts: pipeline-data-generator
   tasks:
-    - name: check if mesytec data generator finished
+    - name: check if efu data generator finished
       async_status:
-        jid: "{{ mesytec_generator.ansible_job_id }}"
-      register: mesytec_generator_result
-      until: mesytec_generator_result.finished
+        jid: "{{ efu_generator.ansible_job_id }}"
+      register: efu_generator_result
+      until: efu_generator_result.finished
       retries: "{{ integration_test_num_retries }}"
       ignore_errors: yes
 
-    - name: print mesytec data generator stdout
+    - name: print efu data generator stdout
       debug:
-        msg: "{{ mesytec_generator_result.stdout_lines }}"
+        msg: "{{ efu_generator_result.stdout_lines }}"
 
-    - name: print mesytec data generator stderr
+    - name: print efu data generator stderr
       debug:
-        msg: "{{ mesytec_generator_result.stderr_lines }}"
-
-- hosts: itestgenerator03.dm.esss.dk
-  tasks:
-    - name: check if gdgem data generator finished
-      async_status:
-        jid: "{{ gdgem_generator.ansible_job_id }}"
-      register: gdgem_generator_result
-      until: gdgem_generator_result.finished
-      retries: "{{ integration_test_num_retries }}"
-      ignore_errors: yes
-
-    - name: print gdgem data generator stdout
-      debug:
-        msg: "{{ gdgem_generator_result.stdout_lines }}"
-
-    - name: print gdgem data generator stderr
-      debug:
-        msg: "{{ gdgem_generator_result.stderr_lines }}"
+        msg: "{{ efu_generator_result.stderr_lines }}"
 
 - hosts: nicos
   tasks:
