@@ -5,7 +5,7 @@
     - name: send command to start writing events to file
       shell: "{{ nicos_install_dir }}/start_file_writer.sh"
 
-- hosts: pipeline-data-generator
+- hosts: itestgenerator02.dm.esss.dk
   tasks:
     - name: start mgmesytec data generation
       shell: "\
@@ -16,9 +16,14 @@
           -t 25"
       args:
         chdir: "{{ event_formation_unit_install_dir }}/event-formation-unit/bin"
+      async: "{{ integration_test_max_async_timeout }}"
+      poll: 0
+      register: mesytec_generator
       environment:
         LD_LIBRARY_PATH: "{{ ld_library_path }}"
 
+- hosts: itestgenerator03.dm.esss.dk
+  tasks:
     - name: start gdgem_pipeline data generation
       shell: "\
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
@@ -28,11 +33,8 @@
           -t 250"
       args:
         chdir: "{{ event_formation_unit_install_dir }}/event-formation-unit/bin"
+      async: "{{ integration_test_max_async_timeout }}"
+      poll: 0
+      register: gdgem_generator
       environment:
         LD_LIBRARY_PATH: "{{ ld_library_path }}"
-
-- hosts: kafka-to-nexus
-  tasks:
-    - name: wait for cspec pipeline to finish running
-      pause:
-        seconds: 30
