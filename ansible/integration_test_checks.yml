@@ -90,28 +90,15 @@
         msg: playbook failed
       when: nexus_file_h5ls_result.rc!=0
 
-- hosts: itesteventformationunit02.dm.esss.dk
+- hosts: efu
   any_errors_fatal: true
   tasks:
     - name: fail test if pipeline failed
       fail:
         msg: playbook failed
-      when: mesytec_pipeline_result.rc!=0
+      when: efu_pipeline_result.rc!=0
 
     - name: fail test if pipeline counter check failed
       fail:
         msg: playbook failed
-      when: mesytec_pipeline_counters_result.rc!=0
-
-- hosts: itesteventformationunit03.dm.esss.dk
-  any_errors_fatal: true
-  tasks:
-    - name: fail test if pipeline failed
-      fail:
-        msg: playbook failed
-      when: gdgem_pipeline_result.rc!=0
-
-    - name: fail test if pipeline counter check failed
-      fail:
-        msg: playbook failed
-      when: gdgem_pipeline_counters_result.rc!=0
+      when: efu_pipeline_counters_result.rc!=0

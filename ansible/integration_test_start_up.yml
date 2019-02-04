@@ -32,13 +32,13 @@
       async: 600
       poll: 0
 
-- hosts: itesteventformationunit02.dm.esss.dk
+- hosts: efu
   tasks:
-    - name: start mgmesytec pipeline
+    - name: start efu pipeline
       shell: "\
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
-          ./efu -d ../modules/mgmesytec \
-          -f /home/jenkins/data/EFU_reference/multigrid/2018_09_03/Sequoia_mappings.json \
+          ./efu -d ../modules/{{ integration_test_efu_module }} \
+          -f {{ integration_test_efu_config_file }} \
           -s 150 \
           -b {{ integration_test_kafka_bootstrap_servers }} \
           -a {{ integration_test_graylog_host }} \
@@ -47,34 +47,11 @@
         chdir: "{{ event_formation_unit_install_dir }}/event-formation-unit/bin"
       async: "{{ integration_test_max_async_timeout }}"
       poll: 0
-      register: mesytec_pipeline
+      register: efu_pipeline
       environment:
         LD_LIBRARY_PATH: "{{ ld_library_path }}"
 
-    - name: wait for mesytec pipeline initialisation
-      pause:
-        seconds: 5
-
-- hosts: itesteventformationunit03.dm.esss.dk
-  tasks:
-    - name: start gdgem pipeline
-      shell: "\
-        LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
-          ./efu -d ../modules/gdgem \
-          --file {{ event_formation_unit_data_dir }}/nmx_config.json
-          -s 150 \
-          -b {{ integration_test_kafka_bootstrap_servers }} \
-          -a {{ integration_test_graylog_host }} \
-          -g {{ integration_test_graphite_url }}"
-      args:
-        chdir: "{{ event_formation_unit_install_dir }}/event-formation-unit/bin"
-      async: "{{ integration_test_max_async_timeout }}"
-      poll: 0
-      register: gdgem_pipeline
-      environment:
-        LD_LIBRARY_PATH: "{{ ld_library_path }}"
-
-    - name: wait for gdgem pipeline initialisation
+    - name: wait for pipeline initialisation
       pause:
         seconds: 5
 

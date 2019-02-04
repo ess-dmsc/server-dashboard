@@ -71,41 +71,23 @@
       debug:
         msg: "{{ gdgem_pipeline_counters_result.stderr_lines }}"
 
-- hosts: itesteventformationunit02.dm.esss.dk
+- hosts: efu
   tasks:
-    - name: check if mesytec pipeline finished
+    - name: check if efu pipeline finished
       async_status:
-        jid: "{{ mesytec_pipeline.ansible_job_id }}"
-      register: mesytec_pipeline_result
-      until: mesytec_pipeline_result.finished
+        jid: "{{ efu_pipeline.ansible_job_id }}"
+      register: efu_pipeline_result
+      until: efu_pipeline_result.finished
       retries: "{{ integration_test_num_retries }}"
       ignore_errors: yes
 
-    - name: print mesytec pipeline stdout
+    - name: print efu pipeline stdout
       debug:
-        msg: "{{ mesytec_pipeline_result.stdout_lines }}"
+        msg: "{{ efu_pipeline_result.stdout_lines }}"
 
-    - name: print mesytec pipeline stderr
+    - name: print efu pipeline stderr
       debug:
-        msg: "{{ mesytec_pipeline_result.stderr_lines }}"
-
-- hosts: itesteventformationunit03.dm.esss.dk
-  tasks:
-    - name: check if gdgem pipeline finished
-      async_status:
-        jid: "{{ gdgem_pipeline.ansible_job_id }}"
-      register: gdgem_pipeline_result
-      until: gdgem_pipeline_result.finished
-      retries: "{{ integration_test_num_retries }}"
-      ignore_errors: yes
-
-    - name: print gdgem pipeline stdout
-      debug:
-        msg: "{{ gdgem_pipeline_result.stdout_lines }}"
-
-    - name: print gdgem pipeline stderr
-      debug:
-        msg: "{{ gdgem_pipeline_result.stderr_lines }}"
+        msg: "{{ efu_pipeline_result.stderr_lines }}"
 
 - hosts: itestkafka01.dm.esss.dk
   tasks:
