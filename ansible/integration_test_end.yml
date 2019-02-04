@@ -25,6 +25,10 @@
 
 - hosts: efu
   tasks:
+    - name: wait for pipeline to finish processing data
+      pause:
+        seconds: 5
+
     - name: check efu pipeline for correct counter values
       shell: "{{ event_formation_unit_install_dir }}/event-formation-unit/util/efushell/verifymetrics.py {{ integration_test_efu_metrics_verification_string }}"
       register: efu_pipeline_counters_result
@@ -37,6 +41,9 @@
     - name: print efu pipeline counter check stderr
       debug:
         msg: "{{ efu_pipeline_counters_result.stderr_lines }}"
+
+    - name: stop efu pipeline
+      command: pkill -2 efu
 
     - name: check if efu pipeline finished
       async_status:

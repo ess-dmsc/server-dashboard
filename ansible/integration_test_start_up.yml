@@ -39,7 +39,6 @@
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../lib \
           ./efu -d ../modules/{{ integration_test_efu_module }} \
           -f {{ integration_test_efu_config_file }} \
-          -s 150 \
           -b {{ integration_test_kafka_bootstrap_servers }} \
           -a {{ integration_test_graylog_host }} \
           -g {{ integration_test_graphite_url }}"
