@@ -16,6 +16,11 @@ ikondemo              | Bash and Ansible scripts to control the IKON13 demo
 jenkins               | Expect script for Jenkins
 
 
+## Changing EFU configuration
+
+The tests use Ansible inventories and variables defined in https://git.esss.dk/dm_group/dm-ansible. To change EFU generator and pipeline configuration, edit the files corresponding to the associated hosts in the *host_vars* folder in that repository.
+
+
 ## Additional instructions
 
 For more information, see
@@ -23,21 +28,23 @@ For more information, see
 required).
 
 
-
 ## Getting Started
 
 ### Prerequisites
-Ansible
+
+Ansible (you can obtain it via `pip`).
 
 ### Installing
 
-TBD 
+N/a.
 
 ## Running the tests
-TBD 
+
+These tests are executed by Jenkins.
 
 ## Deployment
-TBD
+
+The Jenkinsfile clones the dm-ansible repository to deploy the software to be tested.
 
 ## Versioning
 
