@@ -13,7 +13,8 @@
           ./{{ integration_test_efu_generator_bin }} \
           -f {{ integration_test_efu_generator_data_file }} \
           -i {{ integration_test_efu_generator_destination_ip }} \
-          -t {{ integration_test_efu_generator_throttle }}"
+          -t {{ integration_test_efu_generator_throttle }} \
+          -b {{ integration_test_efu_generator_packet_size }}"
       args:
         chdir: "{{ event_formation_unit_install_dir }}/event-formation-unit/bin"
       async: "{{ integration_test_max_async_timeout }}"
