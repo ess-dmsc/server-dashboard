@@ -3,7 +3,7 @@
 - hosts: test-orchestrator
   tasks:
     - name: send command to start writing events to file
-      shell: "{{ test_orchestrator_virtualenv_path }}/bin/python {{ test_orchestrator_script_dir }}/send-start-cmd.py"
+      shell: "{{ test_orchestrator_python_bin }} {{ test_orchestrator_script_dir }}/send-start-cmd.py"
 
 - hosts: pipeline-data-generator
   tasks:
