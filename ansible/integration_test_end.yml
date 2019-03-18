@@ -18,10 +18,10 @@
       debug:
         msg: "{{ efu_generator_result.stderr_lines }}"
 
-- hosts: nicos
+- hosts: test-orchestrator
   tasks:
     - name: send command to stop writing events to file
-      shell: "{{ nicos_install_dir }}/stop_file_writer.sh"
+      shell: "{{ test_orchestrator_virtualenv_path }}/bin/python {{ test_orchestrator_script_dir }}/send-stop-cmd.py"
 
 - hosts: efu
   tasks:

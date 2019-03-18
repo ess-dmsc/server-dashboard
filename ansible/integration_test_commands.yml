@@ -1,9 +1,9 @@
 # Run integration test commands
 
-- hosts: nicos
+- hosts: test-orchestrator
   tasks:
     - name: send command to start writing events to file
-      shell: "{{ nicos_install_dir }}/start_file_writer.sh"
+      shell: "{{ test_orchestrator_virtualenv_path }}/bin/python {{ test_orchestrator_script_dir }}/send-start-cmd.py"
 
 - hosts: pipeline-data-generator
   tasks:

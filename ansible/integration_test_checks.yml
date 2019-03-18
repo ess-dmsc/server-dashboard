@@ -31,14 +31,6 @@
         path: "~/{{ ansible_fqdn }}.log"
         state: absent
 
-- hosts: nicos
-  tasks:
-    - name: copy nicos log file
-      fetch:
-        src: "/opt/nicos-data/log/nicos/current"
-        dest: "{{ integration_test_result_dir }}/nicos.log"
-        flat: yes
-
 - hosts: itestkafka01.dm.esss.dk
   tasks:
     - name: copy kafka console consumer file writer command files
