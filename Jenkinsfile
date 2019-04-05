@@ -59,6 +59,14 @@ node('integration-test') {
           --inventory=inventories/dmsc/jenkins/integration-test-deployment \
           --vault-password-file=${VAULT_PASSWORD_FILE} \
           uninstall_kafka_to_nexus.yml
+        ansible-playbook \
+          --inventory=inventories/dmsc/jenkins/integration-test-services \
+          --vault-password-file=${VAULT_PASSWORD_FILE} \
+          uninstall_kafka_and_clean_all.yml.yml
+        ansible-playbook \
+          --inventory=inventories/dmsc/jenkins/integration-test-services \
+          --vault-password-file=${VAULT_PASSWORD_FILE} \
+          uninstall_zookeeper_and_clean_all.yml.yml
       """
     }  // withCredentials
   }  // stage
@@ -72,6 +80,10 @@ node('integration-test') {
     ]) {
       sh """
         cd dm-ansible
+        ansible-playbook \
+          --inventory=inventories/dmsc/jenkins/integration-test-services \
+          --vault-password-file=${VAULT_PASSWORD_FILE} \
+          site.yml
         ansible-playbook \
           --inventory=inventories/dmsc/jenkins/integration-test-deployment \
           --vault-password-file=${VAULT_PASSWORD_FILE} \
