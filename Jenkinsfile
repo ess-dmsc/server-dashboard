@@ -81,10 +81,6 @@ node('integration-test') {
       sh """
         cd dm-ansible
         ansible-playbook \
-          --inventory=inventories/dmsc/jenkins/integration-test-services \
-          --vault-password-file=${VAULT_PASSWORD_FILE} \
-          site.yml
-        ansible-playbook \
           --inventory=inventories/dmsc/jenkins/integration-test-deployment \
           --vault-password-file=${VAULT_PASSWORD_FILE} \
           site.yml
