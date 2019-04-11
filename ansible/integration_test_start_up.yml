@@ -6,6 +6,27 @@
       shell: "date '+%Y-%m-%d %H:%M:%S'"
       register: integration_test_start_time
 
+- hosts: test-orchestrator
+  tasks:
+    - name: create Kafka topics
+      command: "{{ test_orchestrator_script_dir }}/create-kafka-topics.sh"
+
+- hosts: forward-epics-to-kafka
+  tasks:
+    - name: forwarder is running
+      become: yes
+      service:
+        name: dm-forward-epics-to-kafka
+        state: started
+
+- hosts: kafka-to-nexus
+  tasks:
+    - name: file writer is running
+      become: yes
+      service:
+        name: dm-kafka-to-nexus
+        state: started
+
 - hosts: itestkafka01.dm.esss.dk
   tasks:
     - name: kafka file writer commands log file is absent
