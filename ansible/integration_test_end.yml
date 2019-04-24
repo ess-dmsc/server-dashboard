@@ -29,6 +29,7 @@
       pause:
         seconds: 5
 
+    # This has to be done before we stop the EFU.
     - name: check efu pipeline for correct counter values
       shell: "{{ event_formation_unit_install_dir }}/event-formation-unit/util/efushell/verifymetrics.py {{ integration_test_efu_metrics_verification_string }}"
       register: efu_pipeline_counters_result
