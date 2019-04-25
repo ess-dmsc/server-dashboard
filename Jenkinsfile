@@ -67,6 +67,10 @@ node('integration-test') {
           --inventory=inventories/dmsc/jenkins/integration-test-deployment \
           --vault-password-file=${VAULT_PASSWORD_FILE} \
           uninstall_zookeeper_and_clean_all.yml
+        ansible-playbook \
+          --inventory=inventories/dmsc/jenkins/integration-test-deployment \
+          --vault-password-file=${VAULT_PASSWORD_FILE} \
+          uninstall_conan.yml
       """
     }  // withCredentials
   }  // stage
