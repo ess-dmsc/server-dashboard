@@ -1,16 +1,16 @@
 [pipeline]
-#10.4.0.215
-10.4.0.216
-10.4.0.217
+#dmsc-fast.cslab.esss.lu.se
+dmsc-fast.cslab.esss.lu.se
+dmsc-parallel.cslab.esss.lu.se
 
 [data-generators]
-10.4.0.216  # dmsc-test
+dmsc-fast.cslab.esss.lu.se
 
 [efus]
-10.4.0.217
+dmsc-parallel.cslab.esss.lu.se
 
 [packet-generator]
-10.4.0.217
+dmsc-parallel.cslab.esss.lu.se
 
 [sonde-gateway]
-10.4.3.111
+#dmsc-parallel.cslab.esss.lu.se

@@ -5,7 +5,7 @@ BASE=~/deployment/event-formation-unit
 export LD_LIBRARY_PATH=$BASE/lib
 
 BROKER=172.24.0.207:9092
-CARBON=10.4.0.216
+CARBON=172.30.242.21
 
 pushd $BASE/bin
   ./efu -d ../modules/gdgem --min_mtu 1500 -p 9001 -m 8001 -b $BROKER -g $CARBON -c -5 -f ~/integration-test/ikondemo/demoscripts/nmx_config.json
