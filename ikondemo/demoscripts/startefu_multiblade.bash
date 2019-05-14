@@ -5,7 +5,7 @@ BASE=~/deployment/event-formation-unit
 export LD_LIBRARY_PATH=$BASE/lib
 
 BROKER=10.4.0.13:9092
-CARBON=10.4.0.216
+CARBON=172.30.242.21
 
 pushd $BASE/bin
   ./efu -d ../modules/mbcaen -f ~/integration-test/ikondemo/demoscripts/multiblade_config.json --nohwcheck -p 9003 -m 8003 -b $BROKER -g $CARBON
