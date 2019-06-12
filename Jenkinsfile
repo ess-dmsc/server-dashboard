@@ -81,7 +81,7 @@ node('integration-test') {
       sh """
         cd dm-ansible
         ansible-playbook \
-          --inventory=inventories/ci/04-integration-test-deployment \
+          --inventory=inventories/ci/integration-test-deployment \
           --vault-password-file=${VAULT_PASSWORD_FILE} \
           site.yml
       """
