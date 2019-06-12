@@ -48,27 +48,27 @@ node('integration-test') {
       sh """
         cd dm-ansible
         ansible-playbook \
-          --inventory=inventories/dmsc/jenkins/integration-test-deployment \
+          --inventory=inventories/ci \
           --vault-password-file=${VAULT_PASSWORD_FILE} \
           uninstall_efu.yml
         ansible-playbook \
-          --inventory=inventories/dmsc/jenkins/integration-test-deployment \
+          --inventory=inventories/ci \
           --vault-password-file=${VAULT_PASSWORD_FILE} \
           uninstall_forward_epics_to_kafka.yml
         ansible-playbook \
-          --inventory=inventories/dmsc/jenkins/integration-test-deployment \
+          --inventory=inventories/ci \
           --vault-password-file=${VAULT_PASSWORD_FILE} \
           uninstall_kafka_to_nexus.yml
         ansible-playbook \
-          --inventory=inventories/dmsc/jenkins/integration-test-deployment \
+          --inventory=inventories/ci \
           --vault-password-file=${VAULT_PASSWORD_FILE} \
           uninstall_kafka_and_clean_all.yml
         ansible-playbook \
-          --inventory=inventories/dmsc/jenkins/integration-test-deployment \
+          --inventory=inventories/ci \
           --vault-password-file=${VAULT_PASSWORD_FILE} \
           uninstall_zookeeper_and_clean_all.yml
         ansible-playbook \
-          --inventory=inventories/dmsc/jenkins/integration-test-deployment \
+          --inventory=inventories/ci \
           --vault-password-file=${VAULT_PASSWORD_FILE} \
           uninstall_conan.yml
       """
@@ -85,7 +85,7 @@ node('integration-test') {
       sh """
         cd dm-ansible
         ansible-playbook \
-          --inventory=inventories/dmsc/jenkins/integration-test-deployment \
+          --inventory=inventories/ci/04-integration-test-deployment \
           --vault-password-file=${VAULT_PASSWORD_FILE} \
           site.yml
       """
@@ -104,7 +104,7 @@ node('integration-test') {
           cd dm-ansible
           cp ../ansible/*.yml .
           ansible-playbook \
-            --inventory=inventories/dmsc/jenkins/integration-test-deployment \
+            --inventory=inventories/ci/04-integration-test-deployment \
             --extra-vars="integration_test_result_dir=\$(pwd)/test-results" \
             --vault-password-file=${VAULT_PASSWORD_FILE} \
             run_test.yml
