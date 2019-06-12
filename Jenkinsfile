@@ -67,10 +67,6 @@ node('integration-test') {
           --inventory=inventories/ci \
           --vault-password-file=${VAULT_PASSWORD_FILE} \
           uninstall_zookeeper_and_clean_all.yml
-        ansible-playbook \
-          --inventory=inventories/ci \
-          --vault-password-file=${VAULT_PASSWORD_FILE} \
-          uninstall_conan.yml
       """
     }  // withCredentials
   }  // stage
@@ -104,7 +100,7 @@ node('integration-test') {
           cd dm-ansible
           cp ../ansible/*.yml .
           ansible-playbook \
-            --inventory=inventories/ci/04-integration-test-deployment \
+            --inventory=inventories/ci \
             --extra-vars="integration_test_result_dir=\$(pwd)/test-results" \
             --vault-password-file=${VAULT_PASSWORD_FILE} \
             run_test.yml
