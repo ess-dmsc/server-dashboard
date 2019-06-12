@@ -48,25 +48,29 @@ node('integration-test') {
       sh """
         cd dm-ansible
         ansible-playbook \
-          --inventory=inventories/ci \
+          --inventory=inventories/ci/integration-test-deployment \
           --vault-password-file=${VAULT_PASSWORD_FILE} \
           uninstall_efu.yml
         ansible-playbook \
-          --inventory=inventories/ci \
+          --inventory=inventories/ci/integration-test-deployment \
           --vault-password-file=${VAULT_PASSWORD_FILE} \
           uninstall_forward_epics_to_kafka.yml
         ansible-playbook \
-          --inventory=inventories/ci \
+          --inventory=inventories/ci/integration-test-deployment \
           --vault-password-file=${VAULT_PASSWORD_FILE} \
           uninstall_kafka_to_nexus.yml
         ansible-playbook \
-          --inventory=inventories/ci \
+          --inventory=inventories/ci/integration-test-deployment \
           --vault-password-file=${VAULT_PASSWORD_FILE} \
           uninstall_kafka_and_clean_all.yml
         ansible-playbook \
-          --inventory=inventories/ci \
+          --inventory=inventories/ci/integration-test-deployment \
           --vault-password-file=${VAULT_PASSWORD_FILE} \
           uninstall_zookeeper_and_clean_all.yml
+        ansible-playbook \
+          --inventory=inventories/ci/integration-test-deployment \
+          --vault-password-file=${VAULT_PASSWORD_FILE} \
+          uninstall_conan.yml
       """
     }  // withCredentials
   }  // stage
