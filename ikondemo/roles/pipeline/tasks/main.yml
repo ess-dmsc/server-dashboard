@@ -1,7 +1,9 @@
-- name: daemonize is installed
+- name: packages are installed
   become: yes
   package:
-    name: daemonize
+    name:
+      - daemonize
+      - psmisc
     state: present
 
 - name: destination folder exists
