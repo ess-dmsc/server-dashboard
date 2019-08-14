@@ -104,7 +104,7 @@ node('integration-test') {
           cd dm-ansible
           cp ../ansible/*.yml .
           ansible-playbook \
-            --inventory=inventories/ci \
+            --inventory=inventories/ci/integration-test-deployment \
             --extra-vars="integration_test_result_dir=\$(pwd)/test-results" \
             --vault-password-file=${VAULT_PASSWORD_FILE} \
             run_test.yml
