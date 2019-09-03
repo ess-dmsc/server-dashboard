@@ -16,7 +16,7 @@ show_menu(){
     printf "${menu}**${number} 8)${menu} Not implemented ${normal}\n"
     printf "${menu}**${number} 9)${menu} Open Graylog (admin/password) ${normal}\n"
     printf "${menu}**${number} 9b)${menu} Open Grafana dashboards ${normal}\n"
-    printf "${menu}**${number} 10)${menu} Start EFU and data genetators ${normal}\n"
+    printf "${menu}**${number} 10)${menu} Start EFU and data generators ${normal}\n"
     printf "${menu}**${number} 11)${menu} Not implemented ${normal}\n"
     printf "${menu}**${number} 12)${menu} Not implemented ${normal}\n"
     printf "${menu}**${number} 13)${menu} Not implemented ${normal}\n"
