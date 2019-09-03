@@ -6,6 +6,7 @@ show_menu(){
     bgred=`echo "\033[41m"`
     fgred=`echo "\033[31m"`
     printf "\n${menu}********************************************* ${normal}\n"
+    printf "${menu}**${number} 0)${menu} Open VIP demo checklist ${normal}\n"
     printf "${menu}**${number} 1)${menu} Check Kafka server status ${normal}\n"
     printf "${menu}**${number} 2)${menu} Deploy EFUs ${normal}\n"
     printf "${menu}**${number} 3)${menu} Check if Kafka is running ${normal}\n"
@@ -74,6 +75,11 @@ while [ $opt != '' ]
       exit;
     else
       case $opt in
+        0) clear;
+            option_picked "Open VIP demo checklist";
+            open "https://confluence.esss.lu.se/pages/viewpage.action?pageId=311643683"
+            show_menu;
+        ;;
         1) clear;
             option_picked "Check Kafka server status";
             open "http://dmsc-services01.cslab.esss.lu.se:3000/d/mRMCq2Cik/utgard-overview?orgId=1&refresh=30s"
