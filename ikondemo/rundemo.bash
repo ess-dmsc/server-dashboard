@@ -11,9 +11,16 @@ show_menu(){
     printf "${menu}**${number} 3)${menu} Check if Kafka is running ${normal}\n"
     printf "${menu}**${number} 4)${menu} Not implemented ${normal}\n"
     printf "${menu}**${number} 5)${menu} Deploy/start Forwarder, FileWriter, Graphite, Grafana ${normal}\n"
+    printf "${menu}**${number} 6)${menu} Not implemented ${normal}\n"
+    printf "${menu}**${number} 7)${menu} Not implemented ${normal}\n"
+    printf "${menu}**${number} 8)${menu} Not implemented ${normal}\n"
     printf "${menu}**${number} 9)${menu} Open Graylog (admin/password) ${normal}\n"
     printf "${menu}**${number} 9b)${menu} Open Grafana dashboards ${normal}\n"
     printf "${menu}**${number} 10)${menu} Start EFU and data genetators ${normal}\n"
+    printf "${menu}**${number} 11)${menu} Not implemented ${normal}\n"
+    printf "${menu}**${number} 12)${menu} Not implemented ${normal}\n"
+    printf "${menu}**${number} 13)${menu} Not implemented ${normal}\n"
+    printf "${menu}**${number} 14)${menu} Not implemented ${normal}\n"
     printf "${menu}**${number} 15)${menu} Stop EFUs and data generators ${normal}\n"
     printf "${menu}*********************************************${normal}\n"
     printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
@@ -117,6 +124,7 @@ while [ $opt != '' ]
             option_picked "Open Grafana dashboards";
             open "http://dmsc-services01.cslab.esss.lu.se:3000/d/rvSzZNdWk/gdgem-srs?orgId=1&refresh=5s"
             open "http://dmsc-services01.cslab.esss.lu.se:3000/d/YQicRrKZk/multiblade?orgId=1&refresh=5s"
+            open "http://dmsc-services01.cslab.esss.lu.se:3000/d/mvTZWHOZk/multigrid-mesytec-sns?orgId=1&refresh=5s"
             show_menu;
         ;;
         x)exit;
