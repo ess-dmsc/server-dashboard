@@ -107,7 +107,7 @@ while [ $opt != '' ]
         ;;
         9) clear;
             option_picked "Open Graylog (admin/password)";
-            open "http://dmsc-services01.cslab.esss.lu.se:9000/search?rangetype=relative&fields=message%2Csource&width=1736&highlightMessage=&relative=7200&q=message%3A%20%22Starting%20Event%22"
+            open "http://dmsc-services01.cslab.esss.lu.se:9000/search?rangetype=relative&fields=message%2Csource&width=1827&highlightMessage=&relative=7200&q=message%3A%20%22detector%22%20OR%20message%3A%20%22Starting%20Event%20Formation%22"
             show_menu;
         ;;
         10) clear;
