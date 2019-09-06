@@ -1,6 +1,6 @@
 #!/bin/bash
 
-throttle=${1:-100}
+throttle=10000
 
 BASE=~/deployment/event-formation-unit
 
