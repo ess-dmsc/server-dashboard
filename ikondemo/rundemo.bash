@@ -101,7 +101,7 @@ while [ $opt != '' ]
         5) clear;
             option_picked "Deploy/start Forwarder, FileWriter, Graphite, Grafana";
             pushd $dmansible
-            ansible-playbook --vault-password-file $vaultfile --inventory inventories/utgard --ask-become-pass site.yml
+            ansible-playbook --vault-password-file $vaultfile --inventory inventories/utgard --ask-become-pass --forks 10 site.yml
             popd
             show_menu;
         ;;
