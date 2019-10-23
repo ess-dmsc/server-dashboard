@@ -64,7 +64,7 @@
       register: nexus_file_h5ls_result
       ignore_errors: yes
       environment:
-        LD_LIBRARY_PATH: "{{ ld_library_path }}:../lib"
+        LD_LIBRARY_PATH: ../lib
 
     - name: print NeXus file h5ls stdout
       debug:

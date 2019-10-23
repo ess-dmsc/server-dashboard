@@ -20,5 +20,3 @@
       async: "{{ integration_test_max_async_timeout }}"
       poll: 0
       register: efu_generator
-      environment:
-        LD_LIBRARY_PATH: "{{ ld_library_path }}"
