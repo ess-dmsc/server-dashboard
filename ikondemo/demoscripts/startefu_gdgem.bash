@@ -20,5 +20,5 @@ calib=/mnt/data/EFU_reference/gdgem/2019_09/readouts/Budapest_time_calib_BC_20MH
 
 
 pushd $BASE/bin
-  ./efu -d ../modules/gdgem --nohwcheck -p 9001 -m 8001 -b $BROKER -g $CARBON --file $config --calibraion $calib -a $GRAYLOG
+  ./efu -d ../modules/gdgem --nohwcheck -p 9001 -m 8001 -b $BROKER -g $CARBON --file $config --calibration $calib -a $GRAYLOG
 popd
