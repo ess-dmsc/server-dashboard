@@ -1,0 +1,9 @@
+---
+
+- hosts: data-generators
+  gather_facts: False
+  tasks:
+    - name: start gem data
+      command: "{{daemonize_cmd}} {{script_path}}/datagen_NMX_overlap.bash 1000"
+      tags:
+        - gdgem

@@ -1,0 +1,13 @@
+---
+- hosts: efus
+  gather_facts: False
+  tasks:
+    - name: start NMX efu for overlap region A
+      command: "{{daemonize_cmd}} {{script_path}}/startefu_NMX_overlap_A.bash"
+      tags:
+        - gdgem
+
+    - name: start NMX efu for overlap region B
+      command: "{{daemonize_cmd}} {{script_path}}/startefu_NMX_overlap_B.bash"
+      tags:
+        - gdgem
