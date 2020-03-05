@@ -128,9 +128,9 @@ while [ $opt != '' ]
         ;;
         9b) clear;
             option_picked "Open Grafana dashboards";
-            open "http://dmsc-services01.cslab.esss.lu.se:3000/d/rvSzZNdWk/gdgem-srs?orgId=1&refresh=5s"
             open "http://dmsc-services01.cslab.esss.lu.se:3000/d/YQicRrKZk/multiblade?orgId=1&refresh=5s"
             open "http://dmsc-services01.cslab.esss.lu.se:3000/d/mvTZWHOZk/multigrid-mesytec-sns?orgId=1&refresh=5s"
+            open "http://dmsc-services01.cslab.esss.lu.se:3000/d/rvSzZNdWk/gdgem-srs-new?orgId=1&refresh=5s"
             show_menu;
         ;;
         x)exit;
