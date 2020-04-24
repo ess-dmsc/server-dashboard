@@ -34,8 +34,6 @@ node('integration-test') {
           http://git.esss.dk/dm_group/dm-ansible.git \
           ${USERNAME} \
           ${PASSWORD}
-        cd dm-ansible
-        git checkout DM-1906_rename_i_t_group_vars
       """
     }  // stage
   }  // withCredentials
