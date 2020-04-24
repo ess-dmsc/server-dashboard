@@ -77,7 +77,7 @@ while [ $opt != '' ]
       case $opt in
         0) clear;
             option_picked "Open VIP demo checklist";
-            open "https://confluence.esss.lu.se/pages/viewpage.action?pageId=311643683"
+            open "https://confluence.esss.lu.se/display/ECDC/VIP+Demo+Days"
             show_menu;
         ;;
         1) clear;

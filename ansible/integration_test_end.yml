@@ -1,6 +1,6 @@
 # Stop system under test
 
-- hosts: pipeline-data-generator
+- hosts: pipeline_data_generator
   tasks:
     - name: check if efu data generator finished
       async_status:
@@ -18,7 +18,7 @@
       debug:
         msg: "{{ efu_generator_result.stderr_lines }}"
 
-- hosts: test-orchestrator
+- hosts: test_orchestrator
   tasks:
     - name: send command to stop writing events to file
       shell: "{{ test_orchestrator_python_bin }} {{ test_orchestrator_script_dir }}/send-stop-cmd.py {{ integration_test_kafka_bootstrap_servers }}"

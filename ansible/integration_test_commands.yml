@@ -1,11 +1,11 @@
 # Run integration test commands
 
-- hosts: test-orchestrator
+- hosts: test_orchestrator
   tasks:
     - name: send command to start writing events to file
       shell: "{{ test_orchestrator_python_bin }} {{ test_orchestrator_script_dir }}/send-start-cmd.py {{ integration_test_kafka_bootstrap_servers }} {{ kafka_to_nexus_data_dir }}/{{ integration_test_nexus_file_name }} 1"
 
-- hosts: pipeline-data-generator
+- hosts: pipeline_data_generator
   tasks:
     - name: start efu data generation
       shell: "\
