@@ -1,6 +1,6 @@
 # Check external services
 
-- hosts: test-orchestrator
+- hosts: test_orchestrator
   any_errors_fatal: true
   tasks:
     - name: check if Kafka cluster is available

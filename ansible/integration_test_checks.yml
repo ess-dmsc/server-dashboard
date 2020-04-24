@@ -1,7 +1,7 @@
 # Check integration test results
 
 # Make sure test result directory exists and is empty
-- hosts: test-orchestrator
+- hosts: test_orchestrator
   tasks:
     - name: test results are absent
       file:
@@ -45,7 +45,7 @@
         dest: "{{ integration_test_result_dir }}/"
         flat: yes
 
-- hosts: kafka-to-nexus
+- hosts: kafka_to_nexus
   any_errors_fatal: true
   tasks:
     - name: copy file from kafka-to-nexus host
@@ -54,7 +54,7 @@
         dest: "{{ integration_test_result_dir }}/"
         flat: yes
 
-- hosts: test-orchestrator
+- hosts: test_orchestrator
   any_errors_fatal: true
   tasks:
     - name: check NeXus file contents
