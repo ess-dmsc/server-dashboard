@@ -21,12 +21,12 @@
 - hosts: forwarder
   tasks:
     - name: send command to stop forwarding EPICS PVs
-      shell: "{{ forwarder_virtualenv_path }}/bin/python "{{ forwarder_script_dir }}/{{ forwarder_script_prefix }}_forwarder_stop_cmd.py""
+      shell: "{{ forwarder_virtualenv_path }}/bin/python {{ forwarder_script_dir }}/{{ forwarder_script_prefix }}_forwarder_stop_cmd.py"
 
 - hosts: test_orchestrator
   tasks:
     - name: send command to stop writing events to file
-      shell: "{{ test_orchestrator_python_bin }} {{ test_orchestrator_script_dir }}/send-stop-cmd.py {{ integration_test_kafka_bootstrap_servers }}"
+      shell: "{{ test_orchestrator_python_bin }} {{ test_orchestrator_script_dir }}/send-stop-cmd.py"
 
 - hosts: efu
   tasks:
