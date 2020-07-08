@@ -6,6 +6,15 @@
       shell: "date '+%Y-%m-%d %H:%M:%S'"
       register: integration_test_start_time
 
+- hosts: epics_test_server
+  tasks:
+    - name: IOC is running
+      docker_container:
+        name: ioc
+        image: simpleioc
+        network_mode: host
+        state: started
+
 - hosts: test_orchestrator
   tasks:
     - name: create Kafka topics
@@ -85,5 +94,5 @@
   tasks:
     - name: set initial value of EPICS PV
       shell: "\
-        {{ epics_install_dir }}/bin/pvput testCounter 0; \
+        {{ epics_install_dir }}/bin/pvput SIMPLE:VALUE1 0; \
         sleep 1"

@@ -20,3 +20,12 @@
       async: "{{ integration_test_max_async_timeout }}"
       poll: 0
       register: efu_generator
+
+- hosts: test_orchestrator
+  tasks:
+    - name: change value of EPICS PV
+      shell: "\
+        {{ epics_install_dir }}/bin/pvput SIMPLE:VALUE1 1; \
+        sleep 1; \
+        {{ epics_install_dir }}/bin/pvput SIMPLE:VALUE1 2; \
+        sleep 1"

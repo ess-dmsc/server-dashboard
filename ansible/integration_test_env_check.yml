@@ -7,6 +7,3 @@
       command: "{{ test_orchestrator_python_bin }} ./check-kafka-available.py {{ integration_test_kafka_bootstrap_servers }}"
       args:
         chdir: "{{ test_orchestrator_script_dir }}"
-
-    - name: check if EPICS PV is available
-      command: "{{ epics_install_dir }}/bin/pvget testCounter"
