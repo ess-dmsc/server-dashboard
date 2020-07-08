@@ -8,7 +8,7 @@
 - hosts: forwarder
   tasks:
     - name: send command to start forwarding EPICS PVs
-      shell: "{{ forwarder_virtualenv_path }}/bin/python {{ forwarder_script_dir }}/{{ forwarder_script_prefix }}_forwarder_start_cmd.py"
+      shell: "/opt/dm_group/virtualenv/forwarder/bin/python /opt/dm_group/scripts/forwarder/integration_test_forwarder_start_cmd.py"
 
 - hosts: pipeline_data_generator
   tasks:

@@ -21,7 +21,7 @@
 - hosts: forwarder
   tasks:
     - name: send command to stop forwarding EPICS PVs
-      shell: "{{ forwarder_virtualenv_path }}/bin/python {{ forwarder_script_dir }}/{{ forwarder_script_prefix }}_forwarder_stop_cmd.py"
+      shell: "/opt/dm_group/virtualenv/forwarder/bin/python /opt/dm_group/scripts/forwarder/integration_test_forwarder_stop_cmd.py"
 
 - hosts: test_orchestrator
   tasks:
