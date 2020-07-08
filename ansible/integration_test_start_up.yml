@@ -20,12 +20,12 @@
     - name: create Kafka topics
       command: "{{ test_orchestrator_script_dir }}/create-kafka-topics.sh"
 
-- hosts: forward_epics_to_kafka
+- hosts: forwarder
   tasks:
     - name: forwarder is running
       become: yes
       service:
-        name: dm-forward-epics-to-kafka
+        name: dm-forwarder
         state: started
 
 - hosts: kafka_to_nexus

@@ -58,7 +58,7 @@ node('integration-test') {
         ansible-playbook \
           --inventory=inventories/ci/integration-test-deployment \
           --vault-password-file=${VAULT_PASSWORD_FILE} \
-          utils/uninstall_forward_epics_to_kafka.yml
+          utils/uninstall_forwarder.yml
         ansible-playbook \
           --inventory=inventories/ci/integration-test-deployment \
           --vault-password-file=${VAULT_PASSWORD_FILE} \
