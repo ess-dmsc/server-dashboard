@@ -12,6 +12,9 @@
       docker_container:
         name: ioc
         image: simpleioc
+        working_dir: /opt/epics/iocs/SimpleIoc/iocBoot/iocSimpleIoc
+        entrypoint: /opt/epics/iocs/SimpleIoc/bin/linux-x86_64/SimpleIoc st.cmd
+        tty: yes
         network_mode: host
         state: started
 
