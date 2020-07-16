@@ -37,7 +37,6 @@ node('integration-test') {
       """
       sh """
         cd dm-ansible
-        git checkout DM-1981_file_writer_flatbuffers_commands
       """
     }  // stage
   }  // withCredentials
