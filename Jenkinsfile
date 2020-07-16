@@ -118,7 +118,7 @@ node('integration-test') {
     }  // stage
   } finally {
     stage('Archive') {
-      archiveArtifacts 'dm-ansible/test-results/*.log'
+      archiveArtifacts 'dm-ansible/test-results/*.log,dm-ansible/test-results/*.nxs'
     }
   }
 }  // node
