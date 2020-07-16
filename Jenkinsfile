@@ -37,7 +37,6 @@ node('integration-test') {
       """
       sh """
         cd dm-ansible
-        git checkout DM-1951_python_forwarder_integration_test
       """
     }  // stage
   }  // withCredentials
