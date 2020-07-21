@@ -35,9 +35,6 @@ node('integration-test') {
           ${USERNAME} \
           ${PASSWORD}
       """
-      sh """
-        cd dm-ansible
-      """
     }  // stage
   }  // withCredentials
 
