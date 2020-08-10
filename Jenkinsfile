@@ -34,6 +34,8 @@ node('integration-test') {
           http://git.esss.dk/dm_group/dm-ansible.git \
           ${USERNAME} \
           ${PASSWORD}
+        cd dm-ansible
+        git checkout DM-1996_debug_integration_test
       """
     }  // stage
   }  // withCredentials

@@ -18,11 +18,6 @@
       debug:
         msg: "{{ efu_generator_result.stderr_lines }}"
 
-- hosts: forwarder
-  tasks:
-    - name: send command to stop forwarding EPICS PVs
-      shell: "/opt/dm_group/virtualenv/forwarder/bin/python /opt/dm_group/scripts/forwarder/integration_test_forwarder_stop_cmd.py"
-
 - hosts: test_orchestrator
   tasks:
     - name: send command to stop writing events to file
