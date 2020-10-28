@@ -35,10 +35,6 @@ node('integration-test') {
           ${USERNAME} \
           ${PASSWORD}
       """
-      sh """
-        cd dm-ansible
-        git checkout ECDC-2187_fix_integration_test
-      """
     }  // stage
   }  // withCredentials
 
