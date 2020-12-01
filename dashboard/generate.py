@@ -6,6 +6,7 @@ import argparse
 
 type_efu = 1
 
+
 class ECDCServers:
     def __init__(self, filename):
         self.servers = []
@@ -54,6 +55,7 @@ class Monitor:
         self.s_stage1 = 0x01
         self.lab = serverlist
         self.debug = debug
+        self.starttime = self.gettime()
 
 
     def mprint(self, arg):
@@ -63,6 +65,11 @@ class Monitor:
     def dprint(self, arg):
         if self.debug:
             print(arg)
+
+
+    def gettime(self):
+        now = datetime.now()
+        return now.strftime("%d/%m/%Y %H:%M:%S")
 
 
     def is_offline(self, status):
@@ -201,9 +208,10 @@ class Monitor:
         self.mprint('{}   y="117" >Service error</text>'.format(common))
 
 
+
+
     def generatesvg(self):
-        now = datetime.now()
-        datestr = now.strftime("%d/%m/%Y %H:%M:%S")
+        datestr = self.gettime()
         self.mprint('<html>')
         self.mprint('<head><meta http-equiv="refresh" content="2"></head>')
         self.mprint('<body>')
@@ -220,14 +228,17 @@ class Monitor:
 
         self.mprint('<rect y="-20" width="800" height="40" fill="#0094CA"/>')
         self.mprint('<rect y="380" width="800" height="5" fill="#0094CA"/>')
-        self.mprint('<path d="M400,210 L545,115 A 168,168 45 0,0 240,150 L400,205" stroke="black" fill="transparent"/>')
-        self.mprint('<path d="M400,190 L560,255 A 170,170 45 0,1 257,287 L354,220" stroke="black" fill="transparent"/>')
+        #self.mprint('<path d="M400,210 L545,115 A 168,168 45 0,0 240,150 L400,205" stroke="black" fill="transparent"/>')
+        #self.mprint('<path d="M400,190 L560,255 A 170,170 45 0,1 257,287 L354,220" stroke="black" fill="transparent"/>')
         self.mprint('<line x1="450" y1="200" x2="700" y2="200" style="stroke:rgb(0,0,0);stroke-width:2" />')
         self.mprint('<circle cx="400" cy="200" r="48" stroke-width="1" fill="white" />')
         self.mprint('<circle cx="400" cy="200" r="45" stroke-width="1" fill="#0094CA" />')
         self.mprint('<text x="385" y="205" fill="white">ESS</text>')
         self.mprint('<text x="350" y="12" fill="white" font-size="36px">YMIR</text>')
         self.mprint('<text x="10" y="5" fill="white" font-size="16px">{}</text>'.format(datestr))
+        self.mprint('<text x="690" y="395" fill="black" font-size="8px">started {}</text>'.format(self.starttime))
+        repo = "https://github.com/ess-dmsc/integration-test/tree/master/ikondemo"
+        self.mprint('<text x="0" y="395" fill="black" font-size="8px">{}</text>'.format(repo))
         self.mprint('</svg></body></html>')
 
 
