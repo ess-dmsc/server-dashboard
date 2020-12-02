@@ -91,8 +91,8 @@ class Monitor:
 
     # Check that server can be reached (ping)
     def check_ping(self, ipaddr):
-        res = subprocess.Popen(["ping", "-c1", "-W1", ipaddr], stdout=subprocess.PIPE).stdout.read()
-        if res.find(b" 0%") != -1:
+        res = subprocess.Popen(["ping", "-c1", "-W50", ipaddr], stdout=subprocess.PIPE).stdout.read()
+        if res.find(b"1 packets transmitted, 1 ") != -1:
             return True
         else:
             self.dprint("ping failed for {}".format(ipaddr))
@@ -110,7 +110,6 @@ class Monitor:
             self.dprint(data)
             return 7
         data = int(data.split()[1])
-        self.dprint("data: {}".format(data))
         return data
 
 
@@ -147,8 +146,8 @@ class Monitor:
                     self.lab.clearstatus(idx, self.s_ping)
 
 
-    def printbox(self, x, y, a, state):
-        res = '<rect width="20" height="10" '
+    def printbox(self, x, y, a, state, width=20):
+        res = '<rect width="{}" height="10" '.format(width)
         res = res + 'x="{}" y="{}" transform="rotate({} 400 200)" '.format(x,y,a)
         res = res + 'fill="{}"'.format(state)
         res = res + '/>'
@@ -183,13 +182,14 @@ class Monitor:
         boxy = 195 + ofsy
         texty = boxy + 8
         textx = 450 + ofsx
-        self.printbox(500 + ofsx, boxy, angle, self.statetocolor(1, state))
-        self.printbox(522 + ofsx, boxy, angle, self.statetocolor(2, state))
-        self.printbox(544 + ofsx, boxy, angle, self.statetocolor(4, state))
         common = '<text  class="names" y="{}" font-size="8px"  transform="rotate({} 400 200)"'.format(texty, angle)
         if type == type_efu:
+            self.printbox(500 + ofsx, boxy, angle, self.statetocolor(1, state))
+            self.printbox(522 + ofsx, boxy, angle, self.statetocolor(2, state))
+            self.printbox(544 + ofsx, boxy, angle, self.statetocolor(4, state))
             self.mprint('{} x="450">{}</text>'.format(common, name))
         else:
+            self.printbox(500 + ofsx, boxy, angle, self.statetocolor(1, state), 35)
             self.mprint('{} x="{}">{}</text>'.format(common, textx, name))
         self.mprint('')
 
