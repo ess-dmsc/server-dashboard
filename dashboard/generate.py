@@ -46,7 +46,7 @@ class ECDCServers:
 
 
 class Monitor:
-    def __init__(self, serverlist, debug=0):
+    def __init__(self, serverlist, debug, refresh):
         self.s_ping =  0x80
         self.s_offline = 0x40
         self.s_service = 0x08
@@ -55,6 +55,7 @@ class Monitor:
         self.s_stage1 = 0x01
         self.lab = serverlist
         self.debug = debug
+        self.refresh = refresh
         self.starttime = self.gettime()
 
 
@@ -208,8 +209,6 @@ class Monitor:
         self.mprint('{}   y="117" >Service error</text>'.format(common))
 
 
-
-
     def generatesvg(self):
         datestr = self.gettime()
         self.mprint('<html>')
@@ -249,26 +248,27 @@ class Monitor:
         self.file.close()
         os.rename("tmp.svg", "index.html")
 
-    def run(self, refresh):
+    def run(self):
         while (True):
             start = time.time()
             self.one_pass()
             dt = time.time() - start
-            if (refresh - dt) > 0:
-                time.sleep(refresh - dt)
+            if (self.refresh - dt) > 0:
+                time.sleep(self.refresh - dt)
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-d', '--debug', action='store_true')
     parser.add_argument('-f', '--file', type = str, default = 'utgaard.csv')
+    parser.add_argument('-r', '--refresh', type = int, default = 5)
     args = parser.parse_args()
 
     serverlist = ECDCServers(args.file)
-    mon = Monitor(serverlist, args.debug)
+    mon = Monitor(serverlist, args.debug, args.refresh)
 
     print("Dashboard generator is running ...")
-    mon.run(5) # refresh 5s
+    mon.run()
 
 if __name__ == "__main__":
     main()
