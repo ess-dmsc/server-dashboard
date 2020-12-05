@@ -1,0 +1,8 @@
+---
+- hosts: efus
+  gather_facts: False
+  tasks:
+    - name: start loki efu
+      command: "{{daemonize_cmd}} {{script_path}}/startefu_loki.bash"
+      tags:
+        - loki

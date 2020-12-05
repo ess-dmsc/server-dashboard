@@ -6,6 +6,7 @@
 - import_playbook: actions/efu_start_NMX_overlap.yml
 - import_playbook: actions/efu_start_sonde.yml
 - import_playbook: actions/efu_start_multiblade.yml
+- import_playbook: actions/efu_start_loki.yml
 
 - import_playbook: actions/utils_start.yml
 
