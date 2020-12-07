@@ -9,5 +9,5 @@ CARBON=172.30.242.21
 GRAYLOG=172.30.242.21
 
 pushd $BASE/bin
-  ./efu -d ../modules/sonde -p 9002 -m 8002 -b $BROKER -g $CARBON -a $GRAYLOG
+  ./efu -d ../modules/sonde --nohwcheck -p 9002 -m 8002 -b $BROKER -g $CARBON -a $GRAYLOG
 popd
