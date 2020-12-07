@@ -17,5 +17,5 @@ config=/mnt/data/EFU_reference/loki/2020/wireshark/config.json
 
 
 pushd $BASE/bin
-  ./efu -d ../modules/loki --nohwcheck -p 9021 -m 8021 -b $BROKER -g $CARBON --file $config -a $GRAYLOG
+  ./efu -d ../modules/loki -p 9021 -m 8021 -f $config --nohwcheck -b $BROKER -g $CARBON -a $GRAYLOG
 popd

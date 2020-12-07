@@ -17,5 +17,5 @@ config=/mnt/data/EFU_reference/gdgem/2020_02/wireshark/GDDLAB_config.json
 calib=/mnt/data/EFU_reference/gdgem/2020_02/wireshark/GDDLAB_calib.json
 
 pushd $BASE/bin
-  ./efu -d ../modules/gdgem -r 1 --pmin 0 --pmax 63 --pwidth 32 --nohwcheck -p 9010 -m 8010 -b $BROKER -g $CARBON --file $config --calibration $calib -a $GRAYLOG
+  ./efu -d ../modules/gdgem -p 9010 -m 8010 -f $config --calibration $calib -r 1 --pmin 0 --pmax 63 --pwidth 32 --nohwcheck  -b $BROKER -g $CARBON -a $GRAYLOG
 popd
