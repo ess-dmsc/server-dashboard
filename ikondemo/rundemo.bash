@@ -120,7 +120,7 @@ while [[ $opt != '' ]]
         ;;
         15) clear;
             option_picked "Stop EFUs and data generators";
-            ansible-playbook -i utgard stop_services.yml --skip-tags=sonde,generator
+            ansible-playbook -i utgard stop_services.yml --skip-tags=generator
             printf "press enter to continue..."
             read nothing
             clear
