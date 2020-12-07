@@ -2,7 +2,6 @@
 # - import_playbook: actions/network_check.yml
 
 - import_playbook: actions/efu_start_multigrid.yml
-#- import_playbook: actions/efu_start_gdgem.yml
 - import_playbook: actions/efu_start_NMX_overlap.yml
 - import_playbook: actions/efu_start_sonde.yml
 - import_playbook: actions/efu_start_multiblade.yml
@@ -11,7 +10,6 @@
 - import_playbook: actions/utils_start.yml
 
 - import_playbook: actions/datagen_start_multigrid.yml
-#- import_playbook: actions/datagen_start_gdgem.yml
 - import_playbook: actions/datagen_start_NMX_overlap.yml
 - import_playbook: actions/datagen_start_sonde.yml
 - import_playbook: actions/datagen_start_multiblade.yml
