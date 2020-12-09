@@ -1,0 +1,9 @@
+---
+
+- hosts: data-generators
+  gather_facts: False
+  tasks:
+    - name: start dream data
+      command: "{{daemonize_cmd}} {{script_path}}/datagen_dream.bash"
+      tags:
+        - dream
