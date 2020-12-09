@@ -17,5 +17,5 @@ config=/mnt/data/EFU_reference/jalousie/2019_07/v20_mappings.json
 
 
 pushd $BASE/bin
-  ./efu -d ../modules/loki -p 9031 -m 8031 -f $config --nohwcheck -b $BROKER -g $CARBON -a $GRAYLOG
+  ./efu -d ../modules/jalousie -p 9031 -m 8031 -f $config --nohwcheck -b $BROKER -g $CARBON -a $GRAYLOG
 popd
