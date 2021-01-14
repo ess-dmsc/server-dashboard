@@ -9,7 +9,7 @@ Description=Dashboard for ECDC server monitoring
 [Service]
 Type=oneshot
 
-ExecStartPre=/usr/bin/rm -fr /tmp/integration-test/
+ExecStartPre=/usr/bin/rm -fr /tmp/dashboard
 ExecStartPre=/bin/bash -c "git clone https://github.com/ess-dmsc/integration-test /tmp/dashboard"
 ExecStart=/bin/bash -c "cd /tmp/dashboard/dashboard/ ; ./start_webserver"
 ExecStart=/bin/bash -c "cd /tmp/dashboard/dashboard/ ; ./start_dashboard"
