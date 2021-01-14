@@ -1,3 +1,3 @@
 #!/bin/bash
 
-nohup ./generate.py &>/dev/null &
+./generate.py &>/dev/null

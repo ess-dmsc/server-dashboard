@@ -12,4 +12,4 @@ WorkingDirectory=/tmp/dashboard/dashboard
 
 ExecStartPre=/usr/bin/rm -fr /tmp/dashboard
 ExecStartPre=/bin/bash -c "git clone https://github.com/ess-dmsc/integration-test /tmp/dashboard"
-ExecStart=/tmp/dashboard/dashboard/start_webserver
+ExecStart=/tmp/dashboard/dashboard/start_dashboard
