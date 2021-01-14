@@ -1,0 +1,15 @@
+#
+# dashboard service test
+# https://github.com/ess-dmsc/integration-test/dashboard
+#
+
+[Unit]
+Description=Dashboard for ECDC server monitoring
+
+[Service]
+Type=oneshot
+# extract payload
+ExecStartPre=/usr/bin/rm -fr /tmp/integration-test/
+ExecStartPre=/bin/bash -c "git clone https://github.com/ess-dmsc/integration-test /tmp/dashboard"
+ExecStart=/bin/bash -c "cd /tmp/integration-test/dashboard/ ; ./start_webserver"
+ExecStart=/bin/bash -c "cd /tmp/integration-test/dashboard/ ; ./start_dashboard"
