@@ -5,17 +5,18 @@
 # config file should always be named config.json and
 # calibration file named calibration.json
 
-BASE=~/deployment/event-formation-unit
+efubase=~/deployment/event-formation-unit
+cfgdir=/mnt/data/EFU_reference/loki/2021_01/raw
 
-export LD_LIBRARY_PATH=$BASE/lib
+export LD_LIBRARY_PATH=$efubase/lib
 
 BROKER=172.24.0.207:9094
 CARBON=172.30.242.21
 GRAYLOG=172.30.242.21
 
-config=/mnt/data/EFU_reference/loki/2020/wireshark/config.json
+config=$cfgdir/config.json
+calib=$cfgdir/calib.json
 
-
-pushd $BASE/bin
-  ./efu -d ../modules/loki -p 9021 -m 8021 -f $config --nohwcheck -b $BROKER -g $CARBON -a $GRAYLOG
+pushd $efubase/bin
+  ./efu -d ../modules/loki -p 9021 -m 8021 -f $config --calibration $calib --nohwcheck -b $BROKER -g $CARBON -a $GRAYLOG
 popd
