@@ -8,8 +8,6 @@ Description=Dashboard for ECDC server monitoring
 After=network.target
 
 [Service]
-#WorkingDirectory=/tmp/dashboard/dashboard
-
-ExecStartPre=/usr/bin/rm -fr /tmp/dashboard
-ExecStartPre=/bin/bash -c "git clone https://github.com/ess-dmsc/integration-test /tmp/dashboard"
-ExecStart=/tmp/dashboard/dashboard/start_webserver
+User=ecdcdashboard
+WorkingDirectory=/var/opt/dm_group/dashboard
+ExecStart=/opt/dm_group/integration-test/dashboard/generate.py -f /opt/dm_group/integration-test/dashboard/utgaard.csv
