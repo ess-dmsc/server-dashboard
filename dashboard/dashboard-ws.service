@@ -10,4 +10,4 @@ After=network.target
 [Service]
 User=ecdcdashboard
 WorkingDirectory=/var/opt/dm_group/dashboard
-ExecStart=python -m SimpleHTTPServer 8765
+ExecStart=/usr/bin/python3 -m SimpleHTTPServer 8765
