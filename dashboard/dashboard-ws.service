@@ -11,3 +11,5 @@ After=network.target
 User=ecdcdashboard
 WorkingDirectory=/var/opt/dm_group/dashboard
 ExecStart=/usr/bin/python -m SimpleHTTPServer 8765
+Restart=always
+RestartSec=10
