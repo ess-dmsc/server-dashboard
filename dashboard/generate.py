@@ -92,7 +92,7 @@ class Monitor:
 
     # Check that server can be reached (ping)
     def check_ping(self, ipaddr):
-        res = subprocess.Popen(["ping", "-c1", "-W50", ipaddr], stdout=subprocess.PIPE).stdout.read()
+        res = subprocess.Popen(["ping", "-c1", "-W1", ipaddr], stdout=subprocess.PIPE).stdout.read()
         if res.find(b"1 packets transmitted, 1 ") != -1:
             return True
         else:
