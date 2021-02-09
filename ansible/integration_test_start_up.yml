@@ -29,7 +29,7 @@
       become: yes
       service:
         name: dm-forwarder
-        state: started
+        state: restarted
 
 - hosts: kafka_to_nexus
   tasks:
@@ -37,7 +37,7 @@
       become: yes
       service:
         name: dm-kafka-to-nexus
-        state: started
+        state: restarted
 
 - hosts: itestkafka01.dm.esss.dk
   tasks:
