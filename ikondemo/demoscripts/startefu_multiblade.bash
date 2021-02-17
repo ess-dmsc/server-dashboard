@@ -8,7 +8,7 @@ BROKER=172.24.0.207:9094
 CARBON=172.30.242.21
 GRAYLOG=172.30.242.21
 
-config=~/integration-test/ikondemo/demoscripts/multiblade_config.json
+config=/mnt/data/EFU_reference/multiblade/2018_11_22/wireshark/MB18Freia.json
 calib=
 
 pushd $BASE/bin
