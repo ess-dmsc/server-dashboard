@@ -43,25 +43,6 @@
       debug:
         msg: "{{ efu_pipeline_counters_result.stderr_lines }}"
 
-    - name: stop efu pipeline
-      command: pkill -2 efu
-
-    - name: check if efu pipeline finished
-      async_status:
-        jid: "{{ efu_pipeline.ansible_job_id }}"
-      register: efu_pipeline_result
-      until: efu_pipeline_result.finished
-      retries: "{{ integration_test_num_retries }}"
-      ignore_errors: yes
-
-    - name: print efu pipeline stdout
-      debug:
-        msg: "{{ efu_pipeline_result.stdout_lines }}"
-
-    - name: print efu pipeline stderr
-      debug:
-        msg: "{{ efu_pipeline_result.stderr_lines }}"
-
 - hosts: itestkafka01.dm.esss.dk
   tasks:
     # This command is not very robust, but pgrep did not work with the more

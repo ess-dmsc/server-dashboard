@@ -81,16 +81,3 @@
       fail:
         msg: playbook failed
       when: nexus_file_h5ls_result.rc!=0
-
-- hosts: efu
-  any_errors_fatal: true
-  tasks:
-    - name: fail test if pipeline failed
-      fail:
-        msg: playbook failed
-      when: efu_pipeline_result.rc!=0
-
-    - name: fail test if pipeline counter check failed
-      fail:
-        msg: playbook failed
-      when: efu_pipeline_counters_result.rc!=0
