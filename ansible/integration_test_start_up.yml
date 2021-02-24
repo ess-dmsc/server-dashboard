@@ -70,7 +70,7 @@
     - name: populate service facts
       service_facts:
 
-    - name: print service facts:
+    - name: print service facts
       debug:
         var: ansible_facts.services
 
