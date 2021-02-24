@@ -1,12 +1,14 @@
 properties([
   disableConcurrentBuilds(),
-  pipelineTriggers([[
-    $class: 'jenkins.triggers.ReverseBuildTrigger',
-    upstreamProjects: "ess-dmsc/event-formation-unit/master,ess-dmsc/forwarder/master,ess-dmsc/kafka-to-nexus/master",
-    threshold: hudson.model.Result.SUCCESS
-  ]])
+  pipelineTriggers([
+    cron('11 1 * * *'),
+    [
+      $class: 'jenkins.triggers.ReverseBuildTrigger',
+      upstreamProjects: "ess-dmsc/event-formation-unit/master,ess-dmsc/forwarder/master,ess-dmsc/kafka-to-nexus/master",
+      threshold: hudson.model.Result.SUCCESS
+    ]
+  ])
 ])
-
 
 def failure_function(exception_obj, failureMessage) {
   def toEmails = [[$class: 'DevelopersRecipientProvider']]
