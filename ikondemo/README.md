@@ -12,7 +12,6 @@ in the ikondata/ folder.
 After changing scripts or data files you need to deploy these changes to the servers
 
       > ansible-playbook -i utgard deployment.yml --ask-become-pass
-      > ansible-playbook -i utgard sonde_deployment.yml --ask-become-pass
 
 To then start and stop the demo use the following commands
 

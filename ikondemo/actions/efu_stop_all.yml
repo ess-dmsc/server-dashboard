@@ -1,8 +1,0 @@
----
-
-- hosts: efus
-  gather_facts: False
-  tasks:
-    - name: stop all efus
-      command: "killall efu"
-      ignore_errors: True

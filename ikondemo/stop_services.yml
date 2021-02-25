@@ -1,12 +1,9 @@
 ---
 - import_playbook: actions/datagen_stop_multigrid.yml
 - import_playbook: actions/datagen_stop_NMX_overlap.yml
-- import_playbook: actions/datagen_stop_sonde.yml
 - import_playbook: actions/datagen_stop_multiblade.yml
 - import_playbook: actions/datagen_stop_loki.yml
 - import_playbook: actions/datagen_stop_dream.yml
 - import_playbook: actions/datagen_stop_pktgen.yml
-
-- import_playbook: actions/efu_stop_all.yml
 
 - import_playbook: actions/utils_stop.yml

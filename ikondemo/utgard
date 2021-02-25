@@ -1,16 +1,5 @@
-[pipeline]
-#dmsc-fast.cslab.esss.lu.se
-dmsc-fast.cslab.esss.lu.se
-dmsc-parallel.cslab.esss.lu.se
-
 [data-generators]
 dmsc-fast.cslab.esss.lu.se
 
-[efus]
-dmsc-parallel.cslab.esss.lu.se
-
 [packet-generator]
 dmsc-parallel.cslab.esss.lu.se
-
-[sonde-gateway]
-#dmsc-parallel.cslab.esss.lu.se

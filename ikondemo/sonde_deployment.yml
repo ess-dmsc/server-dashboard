@@ -1,4 +1,0 @@
-- hosts: sonde-gateway
-  user: "{{ sonde_server_user }}"
-  roles:
-    - pipeline

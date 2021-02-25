@@ -111,7 +111,7 @@ while [[ $opt != '' ]]
             show_menu;
         ;;
         10) clear;
-            option_picked "Start EFU and data generators";
+            option_picked "Start data generators";
             ansible-playbook -i utgard start_services.yml --skip-tags=generator
             printf "press enter to continue..."
             read nothing
@@ -119,7 +119,7 @@ while [[ $opt != '' ]]
             show_menu;
         ;;
         15) clear;
-            option_picked "Stop EFUs and data generators";
+            option_picked "Stop data generators";
             ansible-playbook -i utgard stop_services.yml --skip-tags=generator
             printf "press enter to continue..."
             read nothing
