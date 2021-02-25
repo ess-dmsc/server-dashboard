@@ -6,14 +6,21 @@ show_menu(){
     bgred=`echo "\033[41m"`
     fgred=`echo "\033[31m"`
     printf "\n${menu}********************************************* ${normal}\n"
-    printf "${menu}**${number} 0)${menu} Open VIP demo checklist ${normal}\n"
-    printf "${menu}**${number} 1)${menu} Check server status ${normal}\n"
-    printf "${menu}**${number} 2)${menu} Deploy  ${normal}\n"
-    printf "${menu}**${number} 3)${menu} Check if Kafka is running ${normal}\n"
-    printf "${menu}**${number} 5)${menu} Deploy/start EFUs, Forwarder, FileWriter, Graphite, Grafana ${normal}\n"
-    printf "${menu}**${number} 9)${menu} Open Graylog (admin/password) ${normal}\n"
-    printf "${menu}**${number} 9b)${menu} Open Grafana dashboards ${normal}\n"
-    printf "${menu}**${number} 10)${menu} Start data generators ${normal}\n"
+    printf "${menu}**${number}  0)${menu} Open VIP demo checklist ${normal}\n"
+    printf "${menu}**${number}  1)${menu} Check server status ${normal}\n"
+    printf "${menu}**${number}  2)${menu} Check if Kafka is running ${normal}\n"
+    printf "${menu}**${number}  3)${menu} Open Graylog (admin/password) ${normal}\n"
+    printf "${menu}**${number}  4)${menu} EFU Dashboard ${normal}\n"
+    printf "${menu}**${number}  5)${menu} EFU Grafana ${normal}\n"
+    printf "${menu}**${number}  6)${menu} Open Grafana dashboards ${normal}\n"
+    printf "\n"
+    printf "${menu}**${number} 10)${menu} Deploy data generators  ${normal}\n"
+    printf "${menu}**${number} 11)${menu} Deploy/start EFUs, Forwarder, FileWriter, Graphite, Grafana ${normal}\n"
+    printf "\n"
+    printf "${menu}**${number} 12)${menu} Stop individual EFUs ${normal}\n"
+    printf "${menu}**${number} 13)${menu} Start individual EFUs ${normal}\n"
+    printf "\n"
+    printf "${menu}**${number} 14)${menu} Start data generators ${normal}\n"
     printf "${menu}**${number} 15)${menu} Stop data generators ${normal}\n"
     printf "${menu}*********************************************${normal}\n"
     printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
@@ -78,6 +85,33 @@ while [[ $opt != '' ]]
             show_menu;
         ;;
         2) clear;
+            option_picked "Check if Kafka is running";
+            open "http://dmsc-services01.cslab.esss.lu.se:9001/clusters/utgard"
+            show_menu;
+        ;;
+        3) clear;
+            option_picked "Open Graylog (admin/password)";
+            open "http://dmsc-services01.cslab.esss.lu.se:9000/search?rangetype=relative&fields=message%2Csource&width=1827&highlightMessage=&relative=7200&q=message%3A%20%22detector%22%20OR%20message%3A%20%22Starting%20Event%20Formation%22"
+            show_menu;
+        ;;
+        4) clear;
+            option_picked "Open EFU Dashboard";
+            open "http://dmsc-services02.cslab.esss.lu.se:8765/"
+            show_menu;
+        ;;
+        5) clear;
+            option_picked "Open EFU overview Grafana";
+            open "http://dmsc-services01.cslab.esss.lu.se:3000/d/RytvaoyMk/efu-overview?orgId=1&from=now-5m&to=now&refresh=5s"
+            show_menu;
+        ;;
+        6) clear;
+            option_picked "Open Grafana dashboards";
+            open "http://dmsc-services01.cslab.esss.lu.se:3000/d/YQicRrKZk/multiblade?orgId=1&refresh=5s"
+            open "http://dmsc-services01.cslab.esss.lu.se:3000/d/mvTZWHOZk/multigrid-mesytec-sns?orgId=1&refresh=5s"
+            open "http://dmsc-services01.cslab.esss.lu.se:3000/d/rvSzZNdWk/gdgem-srs-new?orgId=1&refresh=5s"
+            show_menu;
+        ;;
+        10) clear;
             option_picked "Deploy data generators";
             ansible-playbook --inventory utgard --ask-become-pass deployment.yml
             printf "press enter to continue..."
@@ -85,24 +119,32 @@ while [[ $opt != '' ]]
             clear
             show_menu;
         ;;
-        3) clear;
-            option_picked "Check if Kafka is running";
-            open "http://dmsc-services01.cslab.esss.lu.se:9001/clusters/utgard"
-            show_menu;
-        ;;
-        5) clear;
+        11) clear;
             option_picked "Deploy/start EFUs, Forwarder, FileWriter, Graphite, Grafana";
             pushd $dmansible
             ansible-playbook --vault-password-file $vaultfile --inventory inventories/utgard --ask-become-pass --forks 10 site.yml
             popd
             show_menu;
         ;;
-        9) clear;
-            option_picked "Open Graylog (admin/password)";
-            open "http://dmsc-services01.cslab.esss.lu.se:9000/search?rangetype=relative&fields=message%2Csource&width=1827&highlightMessage=&relative=7200&q=message%3A%20%22detector%22%20OR%20message%3A%20%22Starting%20Event%20Formation%22"
+        12) clear;
+            option_picked "Stop individual EFUs";
+            pushd $dmansible
+            echo -n "efu: "
+            read efuname
+            ./utils/efuctl -i inventories/utgard stop $efuname 1
+            popd
             show_menu;
         ;;
-        10) clear;
+        13) clear;
+            option_picked "Start individual EFUs";
+            pushd $dmansible
+            echo -n "efu: "
+            read efuname
+            ./utils/efuctl -i inventories/utgard start $efuname 1
+            popd
+            show_menu;
+        ;;
+        14) clear;
             option_picked "Start data generators";
             ansible-playbook -i utgard start_services.yml --skip-tags=generator
             printf "press enter to continue..."
@@ -116,13 +158,6 @@ while [[ $opt != '' ]]
             printf "press enter to continue..."
             read nothing
             clear
-            show_menu;
-        ;;
-        9b) clear;
-            option_picked "Open Grafana dashboards";
-            open "http://dmsc-services01.cslab.esss.lu.se:3000/d/YQicRrKZk/multiblade?orgId=1&refresh=5s"
-            open "http://dmsc-services01.cslab.esss.lu.se:3000/d/mvTZWHOZk/multigrid-mesytec-sns?orgId=1&refresh=5s"
-            open "http://dmsc-services01.cslab.esss.lu.se:3000/d/rvSzZNdWk/gdgem-srs-new?orgId=1&refresh=5s"
             show_menu;
         ;;
         x)exit;
