@@ -8,7 +8,7 @@ show_menu(){
     printf "\n${menu}********************************************* ${normal}\n"
     printf "${menu}**${number} 0)${menu} Open VIP demo checklist ${normal}\n"
     printf "${menu}**${number} 1)${menu} Check Kafka server status ${normal}\n"
-    printf "${menu}**${number} 2)${menu} Deploy EFUs ${normal}\n"
+    printf "${menu}**${number} 2)${menu} Deploy  ${normal}\n"
     printf "${menu}**${number} 3)${menu} Check if Kafka is running ${normal}\n"
     printf "${menu}**${number} 4)${menu} Not implemented ${normal}\n"
     printf "${menu}**${number} 5)${menu} Deploy/start Forwarder, FileWriter, Graphite, Grafana ${normal}\n"
@@ -17,12 +17,12 @@ show_menu(){
     printf "${menu}**${number} 8)${menu} Not implemented ${normal}\n"
     printf "${menu}**${number} 9)${menu} Open Graylog (admin/password) ${normal}\n"
     printf "${menu}**${number} 9b)${menu} Open Grafana dashboards ${normal}\n"
-    printf "${menu}**${number} 10)${menu} Start EFU and data generators ${normal}\n"
+    printf "${menu}**${number} 10)${menu} Start data generators ${normal}\n"
     printf "${menu}**${number} 11)${menu} Not implemented ${normal}\n"
     printf "${menu}**${number} 12)${menu} Not implemented ${normal}\n"
     printf "${menu}**${number} 13)${menu} Not implemented ${normal}\n"
     printf "${menu}**${number} 14)${menu} Not implemented ${normal}\n"
-    printf "${menu}**${number} 15)${menu} Stop EFUs and data generators ${normal}\n"
+    printf "${menu}**${number} 15)${menu} Stop data generators ${normal}\n"
     printf "${menu}*********************************************${normal}\n"
     printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
     read opt
@@ -86,7 +86,7 @@ while [[ $opt != '' ]]
             show_menu;
         ;;
         2) clear;
-            option_picked "Deploy EFUs";
+            option_picked "Deploy data generators";
             ansible-playbook --inventory utgard --ask-become-pass deployment.yml
             printf "press enter to continue..."
             read nothing
