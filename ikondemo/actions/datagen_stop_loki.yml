@@ -4,7 +4,7 @@
   gather_facts: False
   tasks:
     - name: stop data generators
-      command: "killall datagen_loki.bash udpgen_pcap"
+      command: "killall datagen_loki.bash udpgen_lokiraw"
       ignore_errors: True
       tags:
         - loki
