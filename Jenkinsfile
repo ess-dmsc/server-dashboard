@@ -36,8 +36,6 @@ node('integration-test') {
           http://git.esss.dk/dm_group/dm-ansible.git \
           ${USERNAME} \
           ${PASSWORD}
-        cd dm-ansible
-        git checkout ECDC-2339_fix_efu_deployment_in_integration_test
       """
     }  // stage
   }  // withCredentials
