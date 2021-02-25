@@ -7,21 +7,13 @@ show_menu(){
     fgred=`echo "\033[31m"`
     printf "\n${menu}********************************************* ${normal}\n"
     printf "${menu}**${number} 0)${menu} Open VIP demo checklist ${normal}\n"
-    printf "${menu}**${number} 1)${menu} Check Kafka server status ${normal}\n"
+    printf "${menu}**${number} 1)${menu} Check server status ${normal}\n"
     printf "${menu}**${number} 2)${menu} Deploy  ${normal}\n"
     printf "${menu}**${number} 3)${menu} Check if Kafka is running ${normal}\n"
-    printf "${menu}**${number} 4)${menu} Not implemented ${normal}\n"
-    printf "${menu}**${number} 5)${menu} Deploy/start Forwarder, FileWriter, Graphite, Grafana ${normal}\n"
-    printf "${menu}**${number} 6)${menu} Not implemented ${normal}\n"
-    printf "${menu}**${number} 7)${menu} Not implemented ${normal}\n"
-    printf "${menu}**${number} 8)${menu} Not implemented ${normal}\n"
+    printf "${menu}**${number} 5)${menu} Deploy/start EFUs, Forwarder, FileWriter, Graphite, Grafana ${normal}\n"
     printf "${menu}**${number} 9)${menu} Open Graylog (admin/password) ${normal}\n"
     printf "${menu}**${number} 9b)${menu} Open Grafana dashboards ${normal}\n"
     printf "${menu}**${number} 10)${menu} Start data generators ${normal}\n"
-    printf "${menu}**${number} 11)${menu} Not implemented ${normal}\n"
-    printf "${menu}**${number} 12)${menu} Not implemented ${normal}\n"
-    printf "${menu}**${number} 13)${menu} Not implemented ${normal}\n"
-    printf "${menu}**${number} 14)${menu} Not implemented ${normal}\n"
     printf "${menu}**${number} 15)${menu} Stop data generators ${normal}\n"
     printf "${menu}*********************************************${normal}\n"
     printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
@@ -81,7 +73,7 @@ while [[ $opt != '' ]]
             show_menu;
         ;;
         1) clear;
-            option_picked "Check Kafka server status";
+            option_picked "Check server status";
             open "http://dmsc-services01.cslab.esss.lu.se:3000/d/mRMCq2Cik/utgard-overview?orgId=1&refresh=30s"
             show_menu;
         ;;
@@ -99,7 +91,7 @@ while [[ $opt != '' ]]
             show_menu;
         ;;
         5) clear;
-            option_picked "Deploy/start Forwarder, FileWriter, Graphite, Grafana";
+            option_picked "Deploy/start EFUs, Forwarder, FileWriter, Graphite, Grafana";
             pushd $dmansible
             ansible-playbook --vault-password-file $vaultfile --inventory inventories/utgard --ask-become-pass --forks 10 site.yml
             popd
