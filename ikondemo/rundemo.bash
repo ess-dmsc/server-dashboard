@@ -129,8 +129,9 @@ while [[ $opt != '' ]]
         12) clear;
             option_picked "Stop individual EFUs";
             pushd $dmansible
-            echo -n "efu: "
+            echo "efu: "
             read efuname
+            echo stopping efu $efuname
             ./utils/efuctl -i inventories/utgard stop $efuname 1
             popd
             show_menu;
@@ -138,7 +139,7 @@ while [[ $opt != '' ]]
         13) clear;
             option_picked "Start individual EFUs";
             pushd $dmansible
-            echo -n "efu: "
+            echo "efu: "
             read efuname
             ./utils/efuctl -i inventories/utgard start $efuname 1
             popd
