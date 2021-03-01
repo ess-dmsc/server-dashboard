@@ -54,12 +54,12 @@
         dest: "{{ integration_test_result_dir }}/"
         flat: yes
 
-- hosts: efu
+- hosts: pipeline_data_generator
   any_errors_fatal: true
   tasks:
     - name: fail test if efu data generators failed
       fail:
-        msg: playbook failed
+        msg: data generator error
       when: efu_generator_result.rc!=0
 
 - hosts: test_orchestrator
