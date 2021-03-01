@@ -62,6 +62,14 @@
         msg: data generator error
       when: efu_generator_result.rc!=0
 
+- hosts: efu
+  any_errors_fatal: true
+  tasks:
+    - name: fail test if efu counters check failed
+      fail:
+        msg: efu error
+      when: efu_pipeline_counters_result.rc!=0
+
 - hosts: test_orchestrator
   any_errors_fatal: true
   tasks:
