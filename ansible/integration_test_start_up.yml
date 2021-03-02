@@ -65,15 +65,6 @@
       async: 600
       poll: 0
 
-- hosts: efu
-  tasks:
-    - name: populate service facts
-      service_facts:
-
-    - name: print service facts
-      debug:
-        var: ansible_facts.services
-
 - hosts: kafka_to_nexus
   tasks:
     - name: output NeXus file is absent
@@ -81,6 +72,17 @@
       file:
         path: "{{ kafka_to_nexus_data_dir }}/{{ integration_test_nexus_file_name }}"
         state: absent
+
+- hosts: efu
+  tasks:
+    - name: populate service facts
+      service_facts:
+
+    - name: fail test if efu service is not running
+      fail:
+        msg: "dm-efu-{{ item.instrument }}-{{ item.region }} failed!"
+      loop: "{{ event_formation_unit_config }}"
+      when: ansible_facts.services['dm-efu-{{ item.instrument }}-{{ item.region }}.service'].state != "running"
 
 - hosts: test_orchestrator
   tasks:
