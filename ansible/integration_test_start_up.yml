@@ -82,7 +82,8 @@
       fail:
         msg: "dm-efu-{{ item.instrument }}-{{ item.region }} service is not running"
       loop: "{{ event_formation_unit_config }}"
-      when: ansible_facts.services['dm-efu-{{ item.instrument }}-{{ item.region }}.service'].state != 'running'
+      when: ansible_facts.services['dm-efu-' + item.instrument|string + '-' + item.region|string + '.service'].state != 'running'
+      any_errors_fatal: true
 
 - hosts: test_orchestrator
   tasks:
