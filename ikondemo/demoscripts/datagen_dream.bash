@@ -16,9 +16,9 @@ export LD_LIBRARY_PATH=$base/lib
 while [[ 1 ]]
 do
    $base/bin/udpgen_dreamsim -f $datafile1 $ipparms -t $throttle
-   sleep 5
+   sleep 10
    $base/bin/udpgen_dreamsim -f $datafile2 $ipparms -t $throttle
-   sleep 5
+   sleep 10
    $base/bin/udpgen_dreamsim -f $datafile3 $ipparms -t $throttle
-   sleep 5
+   sleep 10
 done
