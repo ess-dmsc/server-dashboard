@@ -101,17 +101,21 @@ class Monitor:
 
 
     def check_efu_pipeline(self, ipaddr, port):
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.connect((ipaddr, port))
-        s.send(b"RUNTIMESTATS")
-        data = s.recv(256)
-        s.close()
+        try:
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.connect((ipaddr, port))
+            s.send(b"RUNTIMESTATS")
+            data = s.recv(256)
+            s.close()
 
-        if (data.find(b"BADCMD") != -1):
-            self.dprint(data)
-            return 7
-        data = int(data.split()[1])
-        return data
+            if (data.find(b"BADCMD") != -1):
+                self.dprint(data)
+                return 7
+            data = int(data.split()[1])
+            return data
+        except:
+            self.dprint("connection reset (by peer?)")
+            return 0;
 
 
     # Check that service is running (accept tcp connection)
