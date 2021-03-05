@@ -16,6 +16,9 @@ show_menu(){
     printf "\n"
     printf "${menu}**${number} 10)${menu} Deploy data generators  ${normal}\n"
     printf "${menu}**${number} 11)${menu} Deploy/start EFUs, Forwarder, FileWriter, Graphite, Grafana ${normal}\n"
+    printf "${menu}**${number} 11a)${menu} Deploy/start only EFUs ${normal}\n"
+    printf "${menu}**${number} 11b)${menu} Deploy/start only Forwarder ${normal}\n"
+    printf "${menu}**${number} 11c)${menu} Deploy/start only FileWriter ${normal}\n"
     printf "\n"
     printf "${menu}**${number} 12)${menu} Stop individual EFUs ${normal}\n"
     printf "${menu}**${number} 13)${menu} Start individual EFUs ${normal}\n"
@@ -123,6 +126,27 @@ while [[ $opt != '' ]]
             option_picked "Deploy/start EFUs, Forwarder, FileWriter, Graphite, Grafana";
             pushd $dmansible
             ansible-playbook --vault-password-file $vaultfile --inventory inventories/utgard --ask-become-pass --forks 10 site.yml
+            popd
+            show_menu;
+        ;;
+        11a) clear;
+            option_picked "Deploy/start only EFUs";
+            pushd $dmansible
+            ansible-playbook --vault-password-file $vaultfile --inventory inventories/utgard --ask-become-pass --forks 10 efu.yml
+            popd
+            show_menu;
+        ;;
+        11b) clear;
+            option_picked "Deploy/start only Forwarder";
+            pushd $dmansible
+            ansible-playbook --vault-password-file $vaultfile --inventory inventories/utgard --ask-become-pass --forks 10 forwarder.yml
+            popd
+            show_menu;
+        ;;
+        11c) clear;
+            option_picked "Deploy/start only FileWriter";
+            pushd $dmansible
+            ansible-playbook --vault-password-file $vaultfile --inventory inventories/utgard --ask-become-pass --forks 10 kafka_to_nexus.yml
             popd
             show_menu;
         ;;
