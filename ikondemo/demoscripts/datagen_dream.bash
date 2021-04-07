@@ -9,7 +9,7 @@ datafile1=$datadir/2021/simulation/data_no_dup.txt
 datafile2=$datadir/2021/simulation/data_dream_mask1.txt
 datafile3=$datadir/2021/simulation/data_dream_mask2.txt
 
-ipparms="-i 172.24.0.205 -p 9031"
+ipparms="-i 172.24.0.203 -p 9031"
 
 export LD_LIBRARY_PATH=$base/lib
 
