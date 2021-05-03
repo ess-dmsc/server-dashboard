@@ -224,7 +224,7 @@ class Monitor:
         for name, type, status, ip, port, angle, xo, yo, grafana in self.lab.servers:
             self.dprint("{} {} {} {}".format(name, type, status, ip))
             if (grafana != "none"):
-                self.mprint('<a href="{}{}">'.format(grafanaurl, grafana))
+                self.mprint('<a href="{}{}" target="_blank">'.format(grafanaurl, grafana))
             self.printinst(name, type, status, angle, xo, yo)
             if (grafana != "none"):
                 self.mprint('</a>')
