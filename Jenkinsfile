@@ -25,18 +25,18 @@ node('integration-test') {
   }  // stage
 
   withCredentials([usernamePassword(
-    credentialsId: 'dm_jenkins_gitlab_token',
+    credentialsId: 'dm-jenkins-dmsc-gitlab-username-with-token',
     usernameVariable: 'USERNAME',
     passwordVariable: 'PASSWORD'
   )]) {
     stage("Clone dm-ansible") {
-      sh """
+      sh '''
         set +x
         ./jenkins/clone-repo \
           http://git.esss.dk/dm_group/dm-ansible.git \
-          ${USERNAME} \
-          ${PASSWORD}
-      """
+          $USERNAME \
+          $PASSWORD
+      '''
     }  // stage
   }  // withCredentials
 
@@ -47,33 +47,33 @@ node('integration-test') {
         variable: 'VAULT_PASSWORD_FILE'
       )
     ]) {
-      sh """
+      sh '''
         cd dm-ansible
         ansible-playbook \
           --inventory=inventories/ci/integration-test-deployment \
-          --vault-password-file=${VAULT_PASSWORD_FILE} \
+          --vault-password-file=$VAULT_PASSWORD_FILE \
           utils/uninstall_efu.yml
         ansible-playbook \
           --inventory=inventories/ci/integration-test-deployment \
-          --vault-password-file=${VAULT_PASSWORD_FILE} \
+          --vault-password-file=$VAULT_PASSWORD_FILE \
           utils/uninstall_forwarder.yml
         ansible-playbook \
           --inventory=inventories/ci/integration-test-deployment \
-          --vault-password-file=${VAULT_PASSWORD_FILE} \
+          --vault-password-file=$VAULT_PASSWORD_FILE \
           utils/uninstall_kafka_to_nexus.yml
         ansible-playbook \
           --inventory=inventories/ci/integration-test-deployment \
-          --vault-password-file=${VAULT_PASSWORD_FILE} \
+          --vault-password-file=$VAULT_PASSWORD_FILE \
           utils/uninstall_kafka_and_clean_all.yml
         ansible-playbook \
           --inventory=inventories/ci/integration-test-deployment \
-          --vault-password-file=${VAULT_PASSWORD_FILE} \
+          --vault-password-file=$VAULT_PASSWORD_FILE \
           utils/uninstall_zookeeper_and_clean_all.yml
         ansible-playbook \
           --inventory=inventories/ci/integration-test-deployment \
-          --vault-password-file=${VAULT_PASSWORD_FILE} \
+          --vault-password-file=$VAULT_PASSWORD_FILE \
           utils/uninstall_conan.yml
-      """
+      '''
     }  // withCredentials
   }  // stage
 
@@ -84,13 +84,13 @@ node('integration-test') {
         variable: 'VAULT_PASSWORD_FILE'
       )
     ]) {
-      sh """
+      sh '''
         cd dm-ansible
         ansible-playbook \
           --inventory=inventories/ci/integration-test-deployment \
-          --vault-password-file=${VAULT_PASSWORD_FILE} \
+          --vault-password-file=$VAULT_PASSWORD_FILE \
           site.yml
-      """
+      '''
     }  // withCredentials
   }  // stage
 
@@ -102,16 +102,16 @@ node('integration-test') {
           variable: 'VAULT_PASSWORD_FILE'
         )
       ]) {
-        sh """
+        sh '''
           cd dm-ansible
           cp ../ansible/*.yml .
           ansible-playbook \
             --inventory=inventories/ci/integration-test-services \
             --inventory=inventories/ci/integration-test-deployment \
             --extra-vars="integration_test_result_dir=\$(pwd)/test-results" \
-            --vault-password-file=${VAULT_PASSWORD_FILE} \
+            --vault-password-file=$VAULT_PASSWORD_FILE \
             run_test.yml
-        """
+        '''
       }  // withCredentials
     }  // stage
   } finally {
