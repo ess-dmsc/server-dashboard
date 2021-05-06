@@ -25,7 +25,7 @@ node('integration-test') {
   }  // stage
 
   withCredentials([usernamePassword(
-    credentialsId: 'dm-jenkins-dmsc-gitlab-username-with-token',
+    credentialsId: 'dmsc-gitlab-username-with-token',
     usernameVariable: 'USERNAME',
     passwordVariable: 'PASSWORD'
   )]) {
