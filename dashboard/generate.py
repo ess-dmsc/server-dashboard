@@ -32,14 +32,14 @@ class ECDCServers:
             line = line.replace(" ", "")
             line = line.replace("\n", "")
             if line[0] != "#" and line != "":
-                name, type, status, ip, port, angle, xoff, yoff = line.split(',')
+                name, type, status, ip, port, angle, xoff, yoff, grafana = line.split(',')
                 type = int(type)
                 status = int(status)
                 port = int(port)
                 angle = int(angle)
                 xoff = int(xoff)
                 yoff = int(yoff)
-                server = [name, type, status, ip, port, angle, xoff, yoff]
+                server = [name, type, status, ip, port, angle, xoff, yoff, grafana]
                 self.servers.append(server)
         file.close()
 
@@ -142,7 +142,7 @@ class Monitor:
 
     def getstatus(self):
         for idx, res  in enumerate(self.lab.servers):
-            name, type, status, ip, port, ang, xo, yo = res
+            name, type, status, ip, port, ang, xo, yo, grafana = res
             if not self.is_offline(status):
                 if self.check_ping(ip):
                     self.lab.setstatus(idx, self.s_ping)
@@ -215,14 +215,19 @@ class Monitor:
 
     def generatesvg(self):
         datestr = self.gettime()
+        grafanaurl = "http://dmsc-services01.cslab.esss.lu.se:3000/"
         self.mprint('<html>')
         self.mprint('<head><meta http-equiv="refresh" content="2"></head>')
         self.mprint('<body>')
         self.mprint('<svg viewBox="-20 -20 800 600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">')
 
-        for name, type, status, ip, port, angle, xo, yo in self.lab.servers:
+        for name, type, status, ip, port, angle, xo, yo, grafana in self.lab.servers:
             self.dprint("{} {} {} {}".format(name, type, status, ip))
+            if (grafana != "none"):
+                self.mprint('<a href="{}{}" target="_blank">'.format(grafanaurl, grafana))
             self.printinst(name, type, status, angle, xo, yo)
+            if (grafana != "none"):
+                self.mprint('</a>')
 
         self.mprint('<text x="50" y="45">Kafka brokers</text>')
         self.mprint('<text x="50" y="165">Other services</text>')
