@@ -208,9 +208,9 @@ class Monitor:
         self.printbox(600, 80, 0, 'blue')
         self.mprint('{}   y="87" >Service not running</text>'.format(common))
         self.printbox(600, 95, 0, 'green')
-        self.mprint('{}   y="102" >Service running</text>'.format(common))
+        self.mprint('{}   y="102" >Service running - data</text>'.format(common))
         self.printbox(600, 110, 0, 'red')
-        self.mprint('{}   y="117" >Service error</text>'.format(common))
+        self.mprint('{}   y="117" >Service running - no data</text>'.format(common))
 
 
     def generatesvg(self):
