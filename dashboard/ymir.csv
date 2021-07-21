@@ -1,0 +1,31 @@
+# name, type, status, ip, port, angle, xoffset, yoffset
+# Type: Enum see generate.py
+# Status: bitfield see generate.py
+#
+BEER,      1, 64, 10.100.1.32, 8888, -152, 0, 0, none
+MIRACLES,  1, 64, 10.100.1.32, 8888, -131, 0, 0, none
+MAGIC,     1, 64, 10.100.1.32, 8888, -124, 0, 0, none
+VESPA,     1, 64, 10.100.1.32, 8888,   64, 0, 0, none
+HEIMDAL,   1, 64, 10.100.1.32, 8888, -105, 0, 0, none
+ODIN,      1, 64, 10.100.1.32, 8888,  145, 0, 0, none
+#
+NMX-A, 1,  0, 10.100.1.32, 8010, -159, 0, 0, d/rvSzZNdWk/gdgem-srs-new?orgId=1&refresh=5s&var-region=1
+NMX-B, 1,  0, 10.100.1.32, 8011, -166, 0, 0, d/rvSzZNdWk/gdgem-srs-new?orgId=1&refresh=5s&var-region=2
+CSPEC, 1,  0, 10.100.1.32, 8000, -145, 0, 0, d/mvTZWHOZk/multigrid-mesytec-sns?orgId=1&refresh=5s&var-region=1
+T-REX, 1, 64, 10.100.1.32, 8888, -117, 0, 0, none
+LoKI,  1,  0, 10.100.1.32, 8021,  -65, 0, 0, d/1CCsbb1Zk/loki?orgId=1&refresh=5s&var-region=1
+FREIA, 1,  0, 10.100.1.32, 8003,  -35, 0, 0, d/YQicRrKZk/multiblade?orgId=1&refresh=5s
+Estia, 1, 64, 10.100.1.32, 8888,   22, 0, 0, none
+#SKADI, 1,  0, 172.30.242.25, 8002,   44, 0, 0, d/RytvaoyMk/efu-overview?orgId=1&refresh=5s
+#
+#DREAM,   1,  0, 172.30.242.25, 8031,  135, 0, 0, d/RytvaoyMk/efu-overview?orgId=1&refresh=5s
+BIFROST, 1, 64, 192.192.192.192, 8888, -138, 0, 0, none
+#
+kafka01, 2, 0, 10.100.1.19, 9092, 0, -400, -140, d/7MMlVOjik/kafka-broker?orgId=1&refresh=30s&var-server=h01-r1n19
+kafka02, 2, 0, 10.100.1.221, 9092, 0, -400, -125, d/7MMlVOjik/kafka-broker?orgId=1&refresh=30s&var-server=h01-r1n21
+#
+carbon,  3, 0, 10.100.12.184, 2003, 0, -400, -20, none
+grafana, 3, 0, 10.100.12.184, 3000, 0, -400, -5, none
+#CMAK,    3, 0, 172.30.242.21, 9001, 0, -400, 10, none
+graylog, 3, 0, 10.100.12.178, 9000, 0, -400, 25, none
+#nicos01, 3, 0, 172.30.242.28, 1301, 0, -400, 40, none

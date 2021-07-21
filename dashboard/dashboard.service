@@ -10,6 +10,6 @@ After=network.target
 [Service]
 User=ecdcdashboard
 WorkingDirectory=/var/opt/dm_group/dashboard
-ExecStart=/opt/dm_group/integration-test/dashboard/generate.py -f /opt/dm_group/integration-test/dashboard/utgaard.csv
+ExecStart=/opt/dm_group/integration-test/dashboard/generate.py -f /opt/dm_group/integration-test/dashboard/ymir.csv
 Restart=always
 RestartSec=10
