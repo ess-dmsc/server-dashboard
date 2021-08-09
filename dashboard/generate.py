@@ -5,6 +5,7 @@ from datetime import datetime
 import argparse
 
 type_efu = 1
+type_text = 4
 
 
 class ECDCServers:
@@ -182,20 +183,22 @@ class Monitor:
         else:
             return 'green'
 
-    # Coordinates are a mess - center is (400, 200)
+    # TODO Coordinates are a mess - center is (400, 200)
     def printinst(self, name, type, state, angle, ofsx, ofsy):
         boxy = 195 + ofsy
         texty = boxy + 8
         textx = 450 + ofsx
-        common = '<text  class="names" y="{}" font-size="8px"  transform="rotate({} 400 200)"'.format(texty, angle)
+        common = '<text  class="names" y="{}" transform="rotate({} 400 200)"'.format(texty, angle)
         if type == type_efu:
             self.printbox(500 + ofsx, boxy, angle, self.statetocolor(1, state))
             self.printbox(522 + ofsx, boxy, angle, self.statetocolor(2, state))
             self.printbox(544 + ofsx, boxy, angle, self.statetocolor(4, state))
-            self.mprint('{} x="450">{}</text>'.format(common, name))
+            self.mprint('{} font-size="8px" x="450">{}</text>'.format(common, name))
+        elif type == type_text:
+            self.mprint('{} font-size="16px" x="{}">{}</text>'.format(common, textx, name))
         else:
             self.printbox(500 + ofsx, boxy, angle, self.statetocolor(1, state), 35)
-            self.mprint('{} x="{}">{}</text>'.format(common, textx, name))
+            self.mprint('{} font-size="8px" x="{}">{}</text>'.format(common, textx, name))
         self.mprint('')
 
 
@@ -215,29 +218,23 @@ class Monitor:
 
     def generatesvg(self):
         datestr = self.gettime()
-        grafanaurl = "http://dmsc-services01.cslab.esss.lu.se:3000/"
         self.mprint('<html>')
         self.mprint('<head><meta http-equiv="refresh" content="2"></head>')
         self.mprint('<body>')
         self.mprint('<svg viewBox="-20 -20 800 600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">')
 
-        for name, type, status, ip, port, angle, xo, yo, grafana in self.lab.servers:
+        for name, type, status, ip, port, angle, xo, yo, url in self.lab.servers:
             self.dprint("{} {} {} {}".format(name, type, status, ip))
-            if (grafana != "none"):
-                self.mprint('<a href="{}{}" target="_blank">'.format(grafanaurl, grafana))
+            if (url != "none"):
+                self.mprint('<a href="{}" target="_blank">'.format(url))
             self.printinst(name, type, status, angle, xo, yo)
-            if (grafana != "none"):
+            if (url != "none"):
                 self.mprint('</a>')
-
-        self.mprint('<text x="50" y="45">Kafka brokers</text>')
-        self.mprint('<text x="50" y="165">Other services</text>')
 
         self.makelegend()
 
         self.mprint('<rect y="-20" width="800" height="40" fill="#0094CA"/>')
         self.mprint('<rect y="380" width="800" height="5" fill="#0094CA"/>')
-        #self.mprint('<path d="M400,210 L545,115 A 168,168 45 0,0 240,150 L400,205" stroke="black" fill="transparent"/>')
-        #self.mprint('<path d="M400,190 L560,255 A 170,170 45 0,1 257,287 L354,220" stroke="black" fill="transparent"/>')
         self.mprint('<line x1="450" y1="200" x2="700" y2="200" style="stroke:rgb(0,0,0);stroke-width:2" />')
         self.mprint('<circle cx="400" cy="200" r="48" stroke-width="1" fill="white" />')
         self.mprint('<circle cx="400" cy="200" r="45" stroke-width="1" fill="#0094CA" />')
