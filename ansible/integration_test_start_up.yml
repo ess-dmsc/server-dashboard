@@ -21,7 +21,7 @@
 - hosts: test_orchestrator
   tasks:
     - name: create Kafka topics
-      command: "{{ test_orchestrator_script_dir }}/create-kafka-topics.py {{ integration_test_kafka_bootstrap_servers }}"
+      command: "{{ test_orchestrator_virtualenv_path }}/bin/python {{ test_orchestrator_script_dir }}/create-kafka-topics.py {{ integration_test_kafka_bootstrap_servers }}"
 
 - hosts: forwarder
   tasks:
