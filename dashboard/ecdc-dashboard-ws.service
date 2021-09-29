@@ -8,8 +8,8 @@ Description=Dashboard for ECDC server monitoring
 After=network.target
 
 [Service]
-User=ecdcdashboard
-WorkingDirectory=/var/opt/dm_group/dashboard
+User=efudashboard
+WorkingDirectory=/ess/ecdc/dashboard/data
 ExecStart=/usr/bin/scl enable rh-python38 "python -m http.server 8765"
 Restart=always
 RestartSec=10
