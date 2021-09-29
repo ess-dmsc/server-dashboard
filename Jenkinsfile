@@ -58,9 +58,6 @@ node('integration-test') {
       ansible-playbook \
         --inventory=inventories/ci/integration-test-deployment \
         utils/uninstall_zookeeper_and_clean_all.yml
-      ansible-playbook \
-        --inventory=inventories/ci/integration-test-deployment \
-        utils/uninstall_conan.yml
     '''
   }  // stage
 
