@@ -41,78 +41,49 @@ node('integration-test') {
   }  // withCredentials
 
   stage('Uninstall') {
-    withCredentials([
-      string(
-        credentialsId: 'dm-ansible-vault-password-file-path',
-        variable: 'VAULT_PASSWORD_FILE_PATH'
-      )
-    ]) {
-      sh '''
-        cd dm-ansible
-        ansible-playbook \
-          --inventory=inventories/ci/integration-test-deployment \
-          --vault-password-file=$VAULT_PASSWORD_FILE_PATH \
-          utils/uninstall_efu.yml
-        ansible-playbook \
-          --inventory=inventories/ci/integration-test-deployment \
-          --vault-password-file=$VAULT_PASSWORD_FILE_PATH \
-          utils/uninstall_forwarder.yml
-        ansible-playbook \
-          --inventory=inventories/ci/integration-test-deployment \
-          --vault-password-file=$VAULT_PASSWORD_FILE_PATH \
-          utils/uninstall_kafka_to_nexus.yml
-        ansible-playbook \
-          --inventory=inventories/ci/integration-test-deployment \
-          --vault-password-file=$VAULT_PASSWORD_FILE_PATH \
-          utils/uninstall_kafka_and_clean_all.yml
-        ansible-playbook \
-          --inventory=inventories/ci/integration-test-deployment \
-          --vault-password-file=$VAULT_PASSWORD_FILE_PATH \
-          utils/uninstall_zookeeper_and_clean_all.yml
-        ansible-playbook \
-          --inventory=inventories/ci/integration-test-deployment \
-          --vault-password-file=$VAULT_PASSWORD_FILE_PATH \
-          utils/uninstall_conan.yml
-      '''
-    }  // withCredentials
+    sh '''
+      cd dm-ansible
+      ansible-playbook \
+        --inventory=inventories/ci/integration-test-deployment \
+        utils/uninstall_efu.yml
+      ansible-playbook \
+        --inventory=inventories/ci/integration-test-deployment \
+        utils/uninstall_forwarder.yml
+      ansible-playbook \
+        --inventory=inventories/ci/integration-test-deployment \
+        utils/uninstall_kafka_to_nexus.yml
+      ansible-playbook \
+        --inventory=inventories/ci/integration-test-deployment \
+        utils/uninstall_kafka_and_clean_all.yml
+      ansible-playbook \
+        --inventory=inventories/ci/integration-test-deployment \
+        utils/uninstall_zookeeper_and_clean_all.yml
+      ansible-playbook \
+        --inventory=inventories/ci/integration-test-deployment \
+        utils/uninstall_conan.yml
+    '''
   }  // stage
 
   stage('Deploy') {
-    withCredentials([
-      string(
-        credentialsId: 'dm-ansible-vault-password-file-path',
-        variable: 'VAULT_PASSWORD_FILE_PATH'
-      )
-    ]) {
-      sh '''
-        cd dm-ansible
-        ansible-playbook \
-          --inventory=inventories/ci/integration-test-deployment \
-          --vault-password-file=$VAULT_PASSWORD_FILE_PATH \
-          site.yml
-      '''
-    }  // withCredentials
+    sh '''
+      cd dm-ansible
+      ansible-playbook \
+        --inventory=inventories/ci/integration-test-deployment \
+        site.yml
+    '''
   }  // stage
 
   try {
     stage('Run tests') {
-      withCredentials([
-        string(
-          credentialsId: 'dm-ansible-vault-password-file-path',
-          variable: 'VAULT_PASSWORD_FILE_PATH'
-        )
-      ]) {
-        sh '''
-          cd dm-ansible
-          cp ../ansible/*.yml .
-          ansible-playbook \
-            --inventory=inventories/ci/integration-test-services \
-            --inventory=inventories/ci/integration-test-deployment \
-            --extra-vars="integration_test_result_dir=\$(pwd)/test-results" \
-            --vault-password-file=$VAULT_PASSWORD_FILE_PATH \
-            run_test.yml
-        '''
-      }  // withCredentials
+      sh '''
+        cd dm-ansible
+        cp ../ansible/*.yml .
+        ansible-playbook \
+          --inventory=inventories/ci/integration-test-services \
+          --inventory=inventories/ci/integration-test-deployment \
+          --extra-vars="integration_test_result_dir=\$(pwd)/test-results" \
+          run_test.yml
+      '''
     }  // stage
   } finally {
     stage('Archive') {
