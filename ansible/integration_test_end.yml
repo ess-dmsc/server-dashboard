@@ -30,7 +30,7 @@
         seconds: 5
 
     - name: check efu pipeline for correct counter values
-      shell: "{{ event_formation_unit_install_dir }}/event-formation-unit/util/efushell/verifymetrics.py {{ integration_test_efu_metrics_verification_string }}"
+      shell: "{{ event_formation_unit_base_dir }}/event-formation-unit/util/efushell/verifymetrics.py {{ integration_test_efu_metrics_verification_string }}"
       register: efu_pipeline_counters_result
       ignore_errors: yes
 
