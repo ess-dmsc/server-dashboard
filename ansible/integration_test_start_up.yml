@@ -28,7 +28,7 @@
     - name: forwarder is running
       become: yes
       service:
-        name: dm-forwarder
+        name: ecdc-forwarder
         state: restarted
 
 - hosts: kafka_to_nexus
@@ -36,7 +36,7 @@
     - name: file writer is running
       become: yes
       service:
-        name: dm-kafka-to-nexus
+        name: ecdc-kafka-to-nexus
         state: restarted
 
 - hosts: itestkafka01.dm.esss.dk
@@ -47,7 +47,7 @@
         state: absent
 
     - name: start writing kafka file writer commands to file
-      shell: "/opt/dm_group/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic {{ kafka_to_nexus_command_topic }} > kafka_filewriter_command.log"
+      shell: "/ess/ecdc/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic {{ kafka_to_nexus_command_topic }} > kafka_filewriter_command.log"
       args:
         chdir: "~"
       async: 600
@@ -59,7 +59,7 @@
         state: absent
 
     - name: start writing kafka file writer status to file
-      shell: "/opt/dm_group/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic {{ kafka_to_nexus_status_topic }} > kafka_filewriter_status.log"
+      shell: "/ess/ecdc/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic {{ kafka_to_nexus_status_topic }} > kafka_filewriter_status.log"
       args:
         chdir: "~"
       async: 600
@@ -82,30 +82,30 @@
   tasks:
     - name: fail test if efu service is not running
       fail:
-        msg: "dm-efu-{{ item.instrument }}-{{ item.region }} service is not running"
+        msg: "ecdc-efu-{{ item.instrument }}-{{ item.region }} service is not running"
       loop: "{{ event_formation_unit_config }}"
-      when: ansible_facts.services['dm-efu-' + item.instrument|string + '-' + item.region|string + '.service'].state != 'running'
+      when: ansible_facts.services['ecdc-efu-' + item.instrument|string + '-' + item.region|string + '.service'].state != 'running'
       any_errors_fatal: true
 
 - hosts: forwarder
   tasks:
     - name: fail test if forwarder service is not running
       fail:
-        msg: "dm-forwarder service is not running"
-      when: ansible_facts.services['dm-forwarder.service'].state != 'running'
+        msg: "ecdc-forwarder service is not running"
+      when: ansible_facts.services['ecdc-forwarder.service'].state != 'running'
       any_errors_fatal: true
 
 - hosts: kafka_to_nexus
   tasks:
     - name: fail test if file writer service is not running
       fail:
-        msg: "dm-kafka-to-nexus service is not running"
-      when: ansible_facts.services['dm-kafka-to-nexus.service'].state != 'running'
+        msg: "ecdc-kafka-to-nexus service is not running"
+      when: ansible_facts.services['ecdc-kafka-to-nexus.service'].state != 'running'
       any_errors_fatal: true
 
 - hosts: test_orchestrator
   tasks:
     - name: set initial value of EPICS PV
       shell: "\
-        {{ epics_install_dir }}/bin/pvput SIMPLE:VALUE1 0; \
+        {{ epics_base_dir }}/epics/bin/pvput SIMPLE:VALUE1 0; \
         sleep 1"

@@ -8,7 +8,7 @@
 - hosts: forwarder
   tasks:
     - name: send command to start forwarding EPICS PVs
-      shell: "/opt/dm_group/virtualenv/forwarder/bin/python /opt/dm_group/scripts/forwarder/integration_test_forwarder_start_cmd.py"
+      shell: "{{ forwarder_virtualenv_dir }}/bin/python {{ forwarder_script_dir }}/integration_test_forwarder_start_cmd.py"
 
 - hosts: pipeline_data_generator
   tasks:
@@ -21,7 +21,7 @@
           -t {{ integration_test_efu_generator_throttle }} \
           {{ integration_test_efu_generator_additional_args }}"
       args:
-        chdir: "{{ event_formation_unit_install_dir }}/event-formation-unit/bin"
+        chdir: "{{ event_formation_unit_base_dir }}/event-formation-unit/bin"
       async: "{{ integration_test_max_async_timeout }}"
       poll: 0
       register: efu_generator
@@ -30,7 +30,7 @@
   tasks:
     - name: change value of EPICS PV
       shell: "\
-        {{ epics_install_dir }}/bin/pvput SIMPLE:VALUE1 1; \
+        {{ epics_base_dir }}/bin/pvput SIMPLE:VALUE1 1; \
         sleep 1; \
-        {{ epics_install_dir }}/bin/pvput SIMPLE:VALUE1 2; \
+        {{ epics_base_dir }}/bin/pvput SIMPLE:VALUE1 2; \
         sleep 1"
