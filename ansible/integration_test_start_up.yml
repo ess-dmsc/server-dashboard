@@ -47,7 +47,7 @@
         state: absent
 
     - name: start writing kafka file writer commands to file
-      shell: "/ess/ecdc/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic {{ kafka_to_nexus_command_topic }} > kafka_filewriter_command.log"
+      shell: "{{ kafka_base_dir }}/kafka_{{ kafka_scala_version }}-{{ kafka_version }}/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic {{ kafka_to_nexus_command_topic }} > kafka_filewriter_command.log"
       args:
         chdir: "~"
       async: 600
