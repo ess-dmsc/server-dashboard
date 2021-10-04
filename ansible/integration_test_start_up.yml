@@ -53,18 +53,6 @@
       async: 600
       poll: 0
 
-    - name: kafka file writer status log file is absent
-      file:
-        path: "~/kafka_filewriter_status.log"
-        state: absent
-
-    - name: start writing kafka file writer status to file
-      shell: "/ess/ecdc/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic {{ kafka_to_nexus_status_topic }} > kafka_filewriter_status.log"
-      args:
-        chdir: "~"
-      async: 600
-      poll: 0
-
 - hosts: kafka_to_nexus
   tasks:
     - name: output NeXus file is absent
