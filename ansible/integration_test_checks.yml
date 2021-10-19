@@ -69,12 +69,8 @@
   tasks:
     - name: check NeXus file contents
       shell: "{{ hdf5_base_dir }}/hdf5/bin/h5ls -r {{ integration_test_result_dir }}/{{ integration_test_nexus_file_name }}"
-      args:
-        chdir: "{{ hdf5_install_dir }}"
       register: nexus_file_h5ls_result
       ignore_errors: yes
-      environment:
-        LD_LIBRARY_PATH: ../lib
 
     - name: print NeXus file h5ls stdout
       debug:
