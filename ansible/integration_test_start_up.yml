@@ -85,10 +85,10 @@
 
 - hosts: kafka_to_nexus
   tasks:
-    - name: fail test if file writer service is not running
-      fail:
-        msg: "ecdc-kafka-to-nexus service is not running"
-      when: ansible_facts.services['ecdc-kafka-to-nexus.service'].state != 'running'
+    - name: restart file writer
+      systemd:
+        name: ecdc-kafka-to-nexus
+        state: restarted
       any_errors_fatal: true
 
 - hosts: test_orchestrator
