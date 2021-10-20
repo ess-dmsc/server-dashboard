@@ -24,7 +24,7 @@
       async_status:
         jid: "{{ file_writer_command.ansible_job_id }}"
       register: file_writer_command_result
-      until: file_writer_control_result.finished
+      until: file_writer_command_result.finished
       retries: "{{ integration_test_num_retries }}"
       ignore_errors: yes
 
