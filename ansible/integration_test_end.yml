@@ -54,10 +54,3 @@
     - name: print efu pipeline counter check stderr
       debug:
         msg: "{{ efu_pipeline_counters_result.stderr_lines }}"
-
-- hosts: itestkafka01.dm.esss.dk
-  tasks:
-    # This command is not very robust, but pgrep did not work with the more
-    # specific terms in the end of the long commands, such as filewriter_status.
-    - name: stop kafka console consumers
-      shell: "pkill -2 -u jenkins -f 'java'"

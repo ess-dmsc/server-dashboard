@@ -39,22 +39,6 @@
         name: ecdc-kafka-to-nexus
         state: restarted
 
-- hosts: itestkafka01.dm.esss.dk
-  tasks:
-    - name: kafka file writer commands log file is absent
-      file:
-        path: "~/kafka_filewriter_command.log"
-        state: absent
-
-    - name: start writing kafka file writer commands to file
-      shell: "{{ kafka_base_dir }}/kafka_{{ kafka_scala_version }}-{{ kafka_version }}/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic {{ kafka_to_nexus_command_topic }} > kafka_filewriter_command.log"
-      args:
-        chdir: "~"
-      async: 600
-      poll: 0
-
-- hosts: kafka_to_nexus
-  tasks:
     - name: output NeXus file is absent
       become: yes
       file:
