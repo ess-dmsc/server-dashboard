@@ -70,6 +70,7 @@
 - hosts: kafka_to_nexus
   tasks:
     - name: restart file writer
+      become: yes
       systemd:
         name: ecdc-kafka-to-nexus
         state: restarted
