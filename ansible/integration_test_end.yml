@@ -20,8 +20,21 @@
 
 - hosts: test_orchestrator
   tasks:
-    - name: send command to stop writing events to file
-      shell: "{{ test_orchestrator_python_bin }} {{ test_orchestrator_script_dir }}/send-stop-cmd.py {{ integration_test_kafka_bootstrap_servers }}"
+    - name: check if file writer command finished
+      async_status:
+        jid: "{{ file_writer_command.ansible_job_id }}"
+      register: file_writer_command_result
+      until: file_writer_control_result.finished
+      retries: "{{ integration_test_num_retries }}"
+      ignore_errors: yes
+
+    - name: print file writer command stdout
+      debug:
+        msg: "{{ file_writer_command_result.stdout_lines }}"
+
+    - name: print file writer command stderr
+      debug:
+        msg: "{{ file_writer_command_result.stderr_lines }}"
 
 - hosts: efu
   tasks:
