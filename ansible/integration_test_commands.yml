@@ -40,3 +40,12 @@
         sleep 1; \
         {{ epics_base_dir }}/bin/pvput SIMPLE:VALUE1 2; \
         sleep 1"
+      register: pvput
+
+    - name: print pvput stdout
+      debug:
+        msg: "{{ pvput.stdout_lines }}"
+
+    - name: print pvput stderr
+      debug:
+        msg: "{{ pvput.stderr_lines }}"
