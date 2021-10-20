@@ -3,7 +3,7 @@
 - hosts: test_orchestrator
   tasks:
     - name: send command to start writing events to file
-      shell: "{{ test_orchestrator_python_bin }} {{ test_orchestrator_script_dir }}/send-file-writer-start-cmd.py {{ integration_test_kafka_bootstrap_servers }} {{ ess_filewriter_pool }} {{ inttest_filewriter }} 0.00001 '{{ kafka_to_nexus_data_dir }}/{{ integration_test_nexus_file_name }}'"
+      shell: "{{ test_orchestrator_python_bin }} {{ test_orchestrator_script_dir }}/send-file-writer-start-cmd.py {{ integration_test_kafka_bootstrap_servers }} {{ kafka_to_nexus_job_pool_topic }} {{ kafka_to_nexus_command_topic }} 0.00001 '{{ kafka_to_nexus_data_dir }}/{{ integration_test_nexus_file_name }}'"
       args:
         chdir: "{{ test_orchestrator_script_dir }}"
       async: "{{ integration_test_max_async_timeout }}"
