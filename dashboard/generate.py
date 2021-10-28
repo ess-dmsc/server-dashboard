@@ -152,10 +152,12 @@ class Monitor:
                     self.lab.clearstatus(idx, self.s_ping)
 
 
-    def printbox(self, x, y, a, state, width=20):
+    def printbox(self, x, y, a, color, motext='', width=20):
         res = '<rect width="{}" height="10" '.format(width)
         res = res + 'x="{}" y="{}" transform="rotate({} 400 200)" '.format(x,y,a)
-        res = res + 'fill="{}"'.format(state)
+        if motext != '' and color != "#C0C0C0":
+          res = res + 'onmousemove="showTooltip(evt, \'{}\');" onmouseout="hideTooltip();" '.format(motext)
+        res = res + 'fill="{}"'.format(color)
         res = res + '/>'
         self.mprint(res)
 
@@ -184,20 +186,20 @@ class Monitor:
             return 'green'
 
     # TODO Coordinates are a mess - center is (400, 200)
-    def printinst(self, name, type, state, angle, ofsx, ofsy):
+    def printinst(self, name, mouseovertext, type, state, angle, ofsx, ofsy):
         boxy = 195 + ofsy
         texty = boxy + 8
         textx = 450 + ofsx
         common = '<text  class="names" y="{}" transform="rotate({} 400 200)"'.format(texty, angle)
         if type == type_efu:
-            self.printbox(500 + ofsx, boxy, angle, self.statetocolor(1, state))
-            self.printbox(522 + ofsx, boxy, angle, self.statetocolor(2, state))
-            self.printbox(544 + ofsx, boxy, angle, self.statetocolor(4, state))
+            self.printbox(500 + ofsx, boxy, angle, self.statetocolor(1, state), mouseovertext)
+            self.printbox(522 + ofsx, boxy, angle, self.statetocolor(2, state), mouseovertext)
+            self.printbox(544 + ofsx, boxy, angle, self.statetocolor(4, state), mouseovertext)
             self.mprint('{} font-size="8px" x="450">{}</text>'.format(common, name))
         elif type == type_text:
             self.mprint('{} font-size="16px" x="{}">{}</text>'.format(common, textx, name))
         else:
-            self.printbox(500 + ofsx, boxy, angle, self.statetocolor(1, state), 35)
+            self.printbox(500 + ofsx, boxy, angle, self.statetocolor(1, state), mouseovertext, 35)
             self.mprint('{} font-size="8px" x="{}">{}</text>'.format(common, textx, name))
         self.mprint('')
 
@@ -220,14 +222,39 @@ class Monitor:
         datestr = self.gettime()
         self.mprint('<html>')
         self.mprint('<head><meta http-equiv="refresh" content="2"></head>')
+        self.mprint('  <style>')
+        self.mprint('    #tooltip {')
+        self.mprint('    background: cornsilk;')
+        self.mprint('    border: 1px solid black;')
+        self.mprint('    border-radius: 5px;')
+        self.mprint('    padding: 5px;')
+        self.mprint(' }')
+        self.mprint('  </style>')
+        self.mprint('  <script>')
+        self.mprint('    function showTooltip(evt, text) {')
+        self.mprint('      let tooltip = document.getElementById("tooltip");')
+        self.mprint('      tooltip.innerHTML = text;')
+        self.mprint('      tooltip.style.display = "block";')
+        self.mprint('      tooltip.style.left = evt.pageX + 10 + \'px\';')
+        self.mprint('      tooltip.style.top = evt.pageY + 10 + \'px\';')
+        self.mprint('    }')
+
+        self.mprint('    function hideTooltip() {')
+        self.mprint('      var tooltip = document.getElementById("tooltip");')
+        self.mprint('      tooltip.style.display = "none";')
+        self.mprint('    }')
+        self.mprint('  </script>')
+        self.mprint('</head>')
         self.mprint('<body>')
+        self.mprint('<div id="tooltip" display="none" style="position: absolute; display: none;"></div>')
         self.mprint('<svg viewBox="-20 -20 800 600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">')
 
         for name, type, status, ip, port, angle, xo, yo, url in self.lab.servers:
             self.dprint("{} {} {} {}".format(name, type, status, ip))
             if (url != "none"):
                 self.mprint('<a href="{}" target="_blank">'.format(url))
-            self.printinst(name, type, status, angle, xo, yo)
+            mouseovertext = '{}:{}'.format(ip, port)
+            self.printinst(name, mouseovertext, type, status, angle, xo, yo)
             if (url != "none"):
                 self.mprint('</a>')
 
