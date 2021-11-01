@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import htmlsvg
 import random, socket, subprocess, os, time, json
 from datetime import datetime
 import argparse
@@ -40,10 +41,9 @@ class ECDCServers:
                 angle = int(angle)
                 xoff = int(xoff)
                 yoff = int(yoff)
-                server = [name, type, status, ip, port, angle, xoff, yoff, grafana]
+                server = [name, type, status, ip, port, angle, xoff, yoff, grafana, ""]
                 self.servers.append(server)
         file.close()
-
 
 
 class Monitor:
@@ -101,6 +101,23 @@ class Monitor:
             return False
 
 
+    def efu_get_version(self, ipaddr, port):
+        try:
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.connect((ipaddr, port))
+            s.send(b"VERSION_GET")
+            data = s.recv(256)
+            s.close()
+
+            #return " ".join(data.split()[1:4])
+            test = "<br>".join(data.decode("utf-8").split()[1:4])
+            self.dprint(test)
+            return test
+        except:
+            self.dprint("connection reset (by peer?)")
+            return "connection reset (by peer?)";
+
+
     def check_efu_pipeline(self, ipaddr, port):
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -131,6 +148,8 @@ class Monitor:
                     self.lab.clearstatus(idx, self.s_stage1 | self.s_stage2 | self.s_stage3)
                 else:
                     self.lab.setstatus(idx, status)
+                self.lab.servers[idx][9] = self.efu_get_version(ipaddr, port)
+
             else:
                 self.lab.setstatus(idx, self.s_stage1 | self.s_stage2 | self.s_stage3)
         else:
@@ -138,12 +157,9 @@ class Monitor:
             self.dprint("no service for {}:{}".format(ipaddr, port))
 
 
-
-
-
     def getstatus(self):
         for idx, res  in enumerate(self.lab.servers):
-            name, type, status, ip, port, ang, xo, yo, grafana = res
+            name, type, status, ip, port, ang, xo, yo, grafana, sw = res
             if not self.is_offline(status):
                 if self.check_ping(ip):
                     self.lab.setstatus(idx, self.s_ping)
@@ -219,59 +235,22 @@ class Monitor:
 
 
     def generatesvg(self):
-        datestr = self.gettime()
-        self.mprint('<html>')
-        self.mprint('<head><meta http-equiv="refresh" content="2"></head>')
-        self.mprint('  <style>')
-        self.mprint('    #tooltip {')
-        self.mprint('    background: cornsilk;')
-        self.mprint('    border: 1px solid black;')
-        self.mprint('    border-radius: 5px;')
-        self.mprint('    padding: 5px;')
-        self.mprint(' }')
-        self.mprint('  </style>')
-        self.mprint('  <script>')
-        self.mprint('    function showTooltip(evt, text) {')
-        self.mprint('      let tooltip = document.getElementById("tooltip");')
-        self.mprint('      tooltip.innerHTML = text;')
-        self.mprint('      tooltip.style.display = "block";')
-        self.mprint('      tooltip.style.left = evt.pageX + 10 + \'px\';')
-        self.mprint('      tooltip.style.top = evt.pageY + 10 + \'px\';')
-        self.mprint('    }')
+        self.mprint(htmlsvg.header)
 
-        self.mprint('    function hideTooltip() {')
-        self.mprint('      var tooltip = document.getElementById("tooltip");')
-        self.mprint('      tooltip.style.display = "none";')
-        self.mprint('    }')
-        self.mprint('  </script>')
-        self.mprint('</head>')
-        self.mprint('<body>')
-        self.mprint('<div id="tooltip" display="none" style="position: absolute; display: none;"></div>')
-        self.mprint('<svg viewBox="-20 -20 800 600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">')
-
-        for name, type, status, ip, port, angle, xo, yo, url in self.lab.servers:
+        for name, type, status, ip, port, angle, xo, yo, url, sw in self.lab.servers:
             self.dprint("{} {} {} {}".format(name, type, status, ip))
             if (url != "none"):
                 self.mprint('<a href="{}" target="_blank">'.format(url))
-            mouseovertext = '{}:{}'.format(ip, port)
+            mouseovertext = '{}:{}<br>{}'.format(ip, port, sw)
             self.printinst(name, mouseovertext, type, status, angle, xo, yo)
             if (url != "none"):
                 self.mprint('</a>')
 
         self.makelegend()
-
-        self.mprint('<rect y="-20" width="800" height="40" fill="#0094CA"/>')
-        self.mprint('<rect y="380" width="800" height="5" fill="#0094CA"/>')
-        self.mprint('<line x1="450" y1="200" x2="700" y2="200" style="stroke:rgb(0,0,0);stroke-width:2" />')
-        self.mprint('<circle cx="400" cy="200" r="48" stroke-width="1" fill="white" />')
-        self.mprint('<circle cx="400" cy="200" r="45" stroke-width="1" fill="#0094CA" />')
-        self.mprint('<text x="385" y="205" fill="white">ESS</text>')
-        self.mprint('<text x="350" y="12" fill="white" font-size="36px">YMIR</text>')
-        self.mprint('<text x="10" y="5" fill="white" font-size="16px">{}</text>'.format(datestr))
+        self.mprint('<text x="10" y="5" fill="white" font-size="16px">{}</text>'.format(self.gettime()))
         self.mprint('<text x="690" y="395" fill="black" font-size="8px">started {}</text>'.format(self.starttime))
-        repo = "https://github.com/ess-dmsc/integration-test/tree/master/ikondemo"
-        self.mprint('<text x="0" y="395" fill="black" font-size="8px">{}</text>'.format(repo))
-        self.mprint('</svg></body></html>')
+
+        self.mprint(htmlsvg.footer)
 
 
     def one_pass(self):
