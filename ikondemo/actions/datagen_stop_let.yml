@@ -1,0 +1,10 @@
+---
+
+- hosts: data-generators
+  gather_facts: False
+  tasks:
+    - name: stop data generators
+      command: "killall datagen_let.bash udpgen_vmm3_let"
+      ignore_errors: True
+      tags:
+        - let
