@@ -11,7 +11,7 @@ ODIN,      1, 64, 10.100.1.32, 8888,  145, 0, 0, none
 #
 NMX-A, 1,  0, 10.100.1.32, 8010, -159, 0, 0, http://dmsc-services01.cslab.esss.lu.se:3000/d/rvSzZNdWk/gdgem-srs-new?orgId=1&refresh=5s&var-region=1
 NMX-B, 1,  0, 10.100.1.32, 8011, -166, 0, 0, http://dmsc-services01.cslab.esss.lu.se:3000/d/rvSzZNdWk/gdgem-srs-new?orgId=1&refresh=5s&var-region=2
-CSPEC, 1,  0, 10.100.1.32, 8000, -145, 0, 0, http://dmsc-services01.cslab.esss.lu.se:3000/d/mvTZWHOZk/multigrid-mesytec-sns?orgId=1&refresh=5s&var-region=1
+CSPEC, 1,  0, 10.100.1.32, 8001, -145, 0, 0, http://dmsc-services01.cslab.esss.lu.se:3000/d/Vuz9Qc17k/cspec?var-region=1
 T-REX, 1, 64, 10.100.1.32, 8888, -117, 0, 0, none
 LoKI,  1,  0, 10.100.1.32, 8021,  -65, 0, 0, http://dmsc-services01.cslab.esss.lu.se:3000/d/1CCsbb1Zk/loki?orgId=1&refresh=5s&var-region=1
 FREIA, 1,  0, 10.100.1.32, 8003,  -35, 0, 0, http://dmsc-services01.cslab.esss.lu.se:3000/d/YQicRrKZk/multiblade?orgId=1&refresh=5s
@@ -22,13 +22,13 @@ DREAM,   1, 64, 172.30.242.25, 8031,  135, 0, 0, http://dmsc-services01.cslab.es
 BIFROST, 1, 64, 192.192.192.192, 8888, -138, 0, 0, none
 #
 kafka01, 2, 0, 10.100.1.19, 9092, 0, -400, -140, http://dmsc-services01.cslab.esss.lu.se:3000/d/7MMlVOjik/kafka-broker?orgId=1&refresh=30s&var-server=h01-r1n19
-kafka02, 2, 0, 10.100.1.221, 9092, 0, -400, -125, http://dmsc-services01.cslab.esss.lu.se:3000/d/7MMlVOjik/kafka-broker?orgId=1&refresh=30s&var-server=h01-r1n21
+kafka02, 2, 0, 10.100.1.21, 9092, 0, -400, -125, http://dmsc-services01.cslab.esss.lu.se:3000/d/7MMlVOjik/kafka-broker?orgId=1&refresh=30s&var-server=h01-r1n21
 #
-carbon,  3, 0, 10.100.10.2, 2003, 0, -400, -20, none
-grafana, 3, 0, 10.100.10.2, 3000, 0, -400, -5, none
-AKHQ,    3, 0, 10.100.10.195, 8080, 0, -400, 10, none
-graylog, 3, 0, 10.100.10.86, 9000, 0, -400, 25, none
-nicos02, 3,64, 172.30.242.28, 1301, 0, -400, 40, none
+carbon,  3, 0, 10.100.211.201, 2003, 0, -400, -20, none
+grafana, 3, 0, 10.100.211.201, 3000, 0, -400, -5, none
+AKHQ,    3, 0, 10.100.211.193, 8080, 0, -400, 10, none
+graylog, 3, 0, 10.100.211.187, 9000, 0, -400, 25, none
+#nicos02, 3,64, 172.30.242.28, 1301, 0, -400, 40, none
 #
 Kafka &nbsp; Brokers,  4, 64, 0.0.0.0, 65535, 0, -400, -160, none
 Other &nbsp; Services, 4, 64, 0.0.0.0, 65535, 0, -400, -40, none

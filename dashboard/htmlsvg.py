@@ -35,7 +35,7 @@ header = """
 
     <body>
     <div id="tooltip" display="none" style="position: absolute; display: none;"></div>
-    <svg viewBox="-20 -20 800 600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <svg viewBox="-20 -20 800 430" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <rect y="-20" width="800" height="40" fill="#0094CA"/>
     <rect y="380" width="800" height="5" fill="#0094CA"/>
     <line x1="450" y1="200" x2="700" y2="200" style="stroke:rgb(0,0,0);stroke-width:2" />
