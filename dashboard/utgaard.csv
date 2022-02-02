@@ -11,7 +11,7 @@ ODIN,      1, 64, 172.30.242.39, 8888,  145, 0, 0, none
 #
 NMX-A, 1,  0, 172.30.242.39, 8010, -159, 0, 0, http://dmsc-services01.cslab.esss.lu.se:3000/d/rvSzZNdWk/gdgem-srs-new?orgId=1&refresh=5s&var-region=1
 NMX-B, 1,  0, 172.30.242.39, 8011, -166, 0, 0, http://dmsc-services01.cslab.esss.lu.se:3000/d/rvSzZNdWk/gdgem-srs-new?orgId=1&refresh=5s&var-region=2
-CSPEC, 1,  0, 172.30.242.39, 8000, -145, 0, 0, http://dmsc-services01.cslab.esss.lu.se:3000/d/mvTZWHOZk/multigrid-mesytec-sns?orgId=1&refresh=5s&var-region=1
+CSPEC, 1,  0, 172.30.242.39, 8001, -145, 0, 0, http://dmsc-services01.cslab.esss.lu.se:3000/d/Vuz9Qc17k/cspec?orgId=1&refresh=5s&var-region=1
 T-REX, 1, 64, 172.30.242.39, 8888, -117, 0, 0, none
 LoKI,  1,  0, 172.30.242.39, 8021,  -65, 0, 0, http://dmsc-services01.cslab.esss.lu.se:3000/d/1CCsbb1Zk/loki?orgId=1&refresh=5s&var-region=1
 FREIA, 1,  0, 172.30.242.39, 8003,  -35, 0, 0, http://dmsc-services01.cslab.esss.lu.se:3000/d/YQicRrKZk/multiblade?orgId=1&refresh=5s
