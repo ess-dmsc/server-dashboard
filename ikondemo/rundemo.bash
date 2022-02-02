@@ -71,9 +71,9 @@ clear
 echo "Ansible directory: $dmansible"
 echo "Ansible vault    : $vaultfile"
 show_menu
-while [[ $opt != '' ]]
+while [[ 1 ]]
     do
-    if [[ $opt = '' ]]; then
+    if [[ $opt = 'x' ]]; then
       exit;
     else
       case $opt in
