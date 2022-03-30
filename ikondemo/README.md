@@ -1,3 +1,4 @@
+__This setup has been deprecated; use dm-ansible instead.__
 
 This folder contains files relevent for the IKON13 demo in Utgård. The subfolder demoscripts/
 contain bash scripts to start and stop EFU's and data generators along with some configuration
