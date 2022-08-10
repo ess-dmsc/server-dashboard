@@ -9,9 +9,9 @@ VESPA,     1, 64, 10.100.1.32, 8888,   64, 0, 0, none
 HEIMDAL,   1, 64, 10.100.1.32, 8888, -105, 0, 0, none
 ODIN,      1, 64, 10.100.1.32, 8888,  145, 0, 0, none
 #
-NMX-A, 1,  0, 10.100.1.32, 8010, -159, 0, 0, http://dmsc-services01.cslab.esss.lu.se:3000/d/rvSzZNdWk/gdgem-srs-new?orgId=1&refresh=5s&var-region=1
-NMX-B, 1,  0, 10.100.1.32, 8011, -166, 0, 0, http://dmsc-services01.cslab.esss.lu.se:3000/d/rvSzZNdWk/gdgem-srs-new?orgId=1&refresh=5s&var-region=2
-CSPEC, 1,  0, 10.100.1.32, 8001, -145, 0, 0, http://dmsc-services01.cslab.esss.lu.se:3000/d/Vuz9Qc17k/cspec?var-region=1
+NMX-A, 1, 64, 10.100.1.32, 8888, -159, 0, 0, http://dmsc-services01.cslab.esss.lu.se:3000/d/rvSzZNdWk/gdgem-srs-new?orgId=1&refresh=5s&var-region=1
+NMX-B, 1, 64, 10.100.1.32, 8888, -166, 0, 0, http://dmsc-services01.cslab.esss.lu.se:3000/d/rvSzZNdWk/gdgem-srs-new?orgId=1&refresh=5s&var-region=2
+CSPEC, 1, 64, 10.100.1.32, 8888, -145, 0, 0, http://dmsc-services01.cslab.esss.lu.se:3000/d/Vuz9Qc17k/cspec?var-region=1
 T-REX, 1, 64, 10.100.1.32, 8888, -117, 0, 0, none
 LoKI,  1,  0, 10.100.1.32, 8021,  -65, 0, 0, http://dmsc-services01.cslab.esss.lu.se:3000/d/1CCsbb1Zk/loki?orgId=1&refresh=5s&var-region=1
 FREIA, 1,  0, 10.100.1.32, 8003,  -35, 0, 0, http://dmsc-services01.cslab.esss.lu.se:3000/d/YQicRrKZk/multiblade?orgId=1&refresh=5s
