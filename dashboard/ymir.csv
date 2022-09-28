@@ -26,6 +26,7 @@ h01-r1n21, 2, 0, 10.100.1.21, 9092, 0, -400, -125, http://10.100.211.201:3000/d/
 h01-r2n21, 2, 0, 10.100.2.21, 9092, 0, -400, -110, http://10.100.211.201:3000/d/7MMlVOjik/kafka-broker?orgId=1&refresh=30s&var-server=h01-r2n21_ecdcutgaard_esss_dk
 h01-r2n23, 2, 0, 10.100.2.23, 9092, 0, -400, -95, http://10.100.211.201:3000/d/7MMlVOjik/kafka-broker?orgId=1&refresh=30s&var-server=h01-r2n23_ecdcutgaard_esss_dk
 h01-r2n25, 2, 0, 10.100.2.25, 9092, 0, -400, -80, http://10.100.211.201:3000/d/7MMlVOjik/kafka-broker?orgId=1&refresh=30s&var-server=h01-r2n25_ecdcutgaard_esss_dk
+h01-r2n27, 2, 0, 10.100.2.25, 9092, 0, -400, -65, http://10.100.211.201:3000/d/7MMlVOjik/kafka-broker?orgId=1&refresh=30s&var-server=h01-r2n27_ecdcutgaard_esss_dk
 #
 carbon,  3, 0, 10.100.211.201, 2003, 0, -400, -20, none
 grafana, 3, 0, 10.100.211.201, 3000, 0, -400, -5, none
