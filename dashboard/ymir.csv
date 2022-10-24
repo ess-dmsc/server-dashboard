@@ -18,7 +18,7 @@ FREIA, 1,  0, 10.100.1.32, 8003,  -35, 0, 0, http://10.100.211.201:3000/d/IF-MdT
 Estia, 1, 64, 10.100.1.32, 8888,   22, 0, 0, none
 SKADI, 1, 64, 10.100.1.32, 8002,   44, 0, 0, none
 #
-DREAM,   1, 64, 172.30.242.25, 8031,  135, 0, 0, none
+DREAM,   1, 0, 10.100.1.32, 8031,  135, 0, 0, none
 BIFROST, 1,  0, 10.100.1.32,   8001, -138, 0, 0, http://10.100.211.201:3000/d/qOGPyHmVz/bifrost?orgId=1&refresh=5s
 #
 h01-r1n19, 2, 0, 10.100.1.19, 9092, 0, -400, -140, http://10.100.211.201:3000/d/7MMlVOjik/kafka-broker?orgId=1&refresh=30s&var-server=h01-r1n19_ecdcutgaard_esss_dk
