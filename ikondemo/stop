@@ -1,3 +1,0 @@
-#!/bin/bash
-
-ansible-playbook -i utgard stop_services.yml --ask-become-pass

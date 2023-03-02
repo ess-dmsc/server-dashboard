@@ -1,9 +1,0 @@
----
-
-- hosts: packet-generator
-  gather_facts: False
-  tasks:
-    - name: start carbon metrics collection
-      command: "{{daemonize_cmd}} {{script_path}}/pktgen_fpga_config/pktgen_carbon.bash"
-      tags:
-        - generator

@@ -1,5 +1,0 @@
----
-
-daemonize_cmd: /usr/sbin/daemonize
-
-script_path: ~/integration-test/ikondemo/demoscripts

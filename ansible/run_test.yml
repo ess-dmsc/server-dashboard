@@ -1,5 +1,0 @@
-- import_playbook: integration_test_env_check.yml
-- import_playbook: integration_test_start_up.yml
-- import_playbook: integration_test_commands.yml
-- import_playbook: integration_test_end.yml
-- import_playbook: integration_test_checks.yml

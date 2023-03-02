@@ -1,7 +1,0 @@
-#!/bin/bash
-
-fpath=/home/mortenchristensen/integration-test/ikondemo/demoscripts/pktgen_fpga_config
-
-cd $fpath
-
-/usr/bin/python cmd_interpreter.py ikonstopdata.txt

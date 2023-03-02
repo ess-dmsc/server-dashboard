@@ -1,9 +1,0 @@
----
-
-- hosts: data-generators
-  gather_facts: False
-  tasks:
-    - name: start multigrid data
-      command: "{{daemonize_cmd}} {{script_path}}/datagen_multiblade.bash"
-      tags:
-        - multiblade

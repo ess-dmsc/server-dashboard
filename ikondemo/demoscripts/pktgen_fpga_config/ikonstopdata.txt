@@ -1,2 +1,0 @@
-SET BASE 0
-SET reg_pkt_gen_rst_ena 1

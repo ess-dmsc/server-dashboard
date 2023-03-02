@@ -1,6 +1,6 @@
 BSD 2-Clause License
 
-Copyright (c) 2019, European Spallation Source - Data Management and Software Centre
+Copyright (c) 2019-2023, European Spallation Source - Data Management and Software Centre
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without

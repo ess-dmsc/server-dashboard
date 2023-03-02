@@ -1,9 +1,0 @@
-# Check external services
-
-- hosts: test_orchestrator
-  any_errors_fatal: true
-  tasks:
-    - name: check if Kafka cluster is available
-      command: "{{ test_orchestrator_python_bin }} ./check-kafka-available.py {{ integration_test_kafka_bootstrap_servers }}"
-      args:
-        chdir: "{{ test_orchestrator_script_dir }}"

@@ -1,9 +1,0 @@
----
-
-- hosts: data-generators
-  gather_facts: False
-  tasks:
-    - name: start loki data
-      command: "{{daemonize_cmd}} {{script_path}}/datagen_loki.bash"
-      tags:
-        - loki
