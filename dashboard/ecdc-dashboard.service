@@ -1,6 +1,6 @@
 #
 # dashboard service test
-# https://github.com/ess-dmsc/integration-test/dashboard
+# https://github.com/ess-dmsc/server-dashboard/dashboard
 #
 
 [Unit]
@@ -10,7 +10,7 @@ After=network.target
 [Service]
 User=efudashboard
 WorkingDirectory=/ess/ecdc/dashboard/data
-ExecStart=/usr/bin/scl enable rh-python38 "python /ess/ecdc/dashboard/integration-test/dashboard/generate.py -f /ess/ecdc/dashboard/integration-test/dashboard/ymir.csv"
+ExecStart=/usr/bin/scl enable rh-python38 "python /ess/ecdc/dashboard/server-dashboard/dashboard/generate.py -f /ess/ecdc/dashboard/server-dashboard/dashboard/ymir.csv"
 Restart=always
 RestartSec=10
 

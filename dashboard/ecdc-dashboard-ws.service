@@ -1,6 +1,6 @@
 #
 # dashboard service test
-# https://github.com/ess-dmsc/integration-test/dashboard
+# https://github.com/ess-dmsc/server-dashboard/dashboard
 #
 
 [Unit]
