@@ -138,6 +138,7 @@ class Monitor:
 
     # Check that service is running (accept tcp connection)
     def check_service(self, idx, type, ipaddr, port):
+        socket.settimeout(2)
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
         if sock.connect_ex((ipaddr, port)) == 0:
