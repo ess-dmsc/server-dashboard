@@ -1,3 +1,7 @@
 #!/bin/bash
 
-python -m SimpleHTTPServer 8765 &>/dev/null
+port=${1:-8766}
+
+
+python -m SimpleHTTPServer $port &>/dev/null
+#python3 -m http.server $port
