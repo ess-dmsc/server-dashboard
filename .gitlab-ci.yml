@@ -5,4 +5,4 @@ build:
     - docker
   stage: test
   script:
-    - echo "Test"
+    - echo "Test!"
