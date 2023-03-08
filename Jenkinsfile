@@ -22,6 +22,28 @@ builders = pipelineBuilder.createBuilders { container ->
   }  // stage
 }  // createBuilders
 
+def deploy(commit) {
+  withCredentials([string(
+    credentialsId: 'ess-gitlab-server-dashboard-deployment-url',
+    variable: 'URL'
+  )]) {
+    withCredentials([string(
+      credentialsId: 'ess-gitlab-server-dashboard-deployment-token',
+      variable: 'TOKEN'
+    )]) {
+      sh """
+        set +x
+        curl -X POST \
+          --fail \
+          -F token='$TOKEN' \
+          -F "ref=main" \
+          -F "variables[COMMIT]=$commit" \
+          '$URL'
+      """
+    }  // TOKEN
+  }  // URL
+}
+
 node {
   dir("${pipelineBuilder.project}") {
     scmVars = checkout scm
@@ -29,7 +51,7 @@ node {
 
   try {
     parallel builders
-    echo "Failed?"
+    deploy(scmVars.GIT_COMMIT)
   } catch (e) {
     throw e
   }
