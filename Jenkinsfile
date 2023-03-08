@@ -23,27 +23,25 @@ builders = pipelineBuilder.createBuilders { container ->
 }  // createBuilders
 
 def deploy(commit) {
-  stage("Deploy") {
+  withCredentials([string(
+    credentialsId: 'ess-gitlab-server-dashboard-deployment-url',
+    variable: 'URL'
+  )]) {
     withCredentials([string(
-      credentialsId: 'ess-gitlab-server-dashboard-deployment-url',
-      variable: 'URL'
+      credentialsId: 'ess-gitlab-server-dashboard-deployment-token',
+      variable: 'TOKEN'
     )]) {
-      withCredentials([string(
-        credentialsId: 'ess-gitlab-server-dashboard-deployment-token',
-        variable: 'TOKEN'
-      )]) {
-        sh """
-          set +x
-          curl -X POST \
-            --fail \
-            -F token='$TOKEN' \
-            -F "ref=main" \
-            -F "variables[COMMIT]=$commit" \
-            '$URL'
-        """
-      }  // TOKEN
-    }  // URL
-  }  // stage
+      sh """
+        set +x
+        curl -X POST \
+          --fail \
+          -F token='$TOKEN' \
+          -F "ref=main" \
+          -F "variables[COMMIT]=$commit" \
+          '$URL'
+      """
+    }  // TOKEN
+  }  // URL
 }
 
 node {
@@ -53,9 +51,12 @@ node {
 
   try {
     parallel builders
-    deploy(scmVars.GIT_COMMIT)
   } catch (e) {
     throw e
+  }
+  
+  stage("Deploy") {
+    deploy(scmVars.GIT_COMMIT)
   }
 
   // Delete workspace when build is done
