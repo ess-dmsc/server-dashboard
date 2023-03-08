@@ -35,10 +35,10 @@ def deploy(commit) {
         set +x
         curl -X POST \
           --fail \
-          -F token=$TOKEN \
+          -F token=${TOKEN} \
           -F "ref=main" \
           -F "variables[COMMIT]=$commit" \
-          $URL
+          ${URL}
       """
     }  // TOKEN
   }  // URL
