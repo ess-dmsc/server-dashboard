@@ -6,7 +6,7 @@ containerBuildNodes = [
   'centos7': ContainerBuildNode.getDefaultContainerBuildNode('centos7-gcc11')
 ]
 
-pipelineBuilder = new PipelineBuilder(this, container_build_nodes)
+pipelineBuilder = new PipelineBuilder(this, containerBuildNodes)
 pipelineBuilder.activateEmailFailureNotifications()
 
 builders = pipelineBuilder.createBuilders { container ->
