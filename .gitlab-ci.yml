@@ -1,6 +1,8 @@
 image: centos:7
 
 build:
+  only:
+    - api
   tags:
     - docker
   stage: test
