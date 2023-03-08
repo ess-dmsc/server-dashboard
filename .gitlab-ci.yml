@@ -1,0 +1,8 @@
+image: centos:7
+
+build:
+  tags:
+    - docker
+  stage: test
+  script:
+    - echo "Test"
