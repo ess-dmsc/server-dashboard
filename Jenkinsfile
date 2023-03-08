@@ -18,30 +18,32 @@ builders = pipelineBuilder.createBuilders { container ->
   }  // stage
 
   pipelineBuilder.stage("${container.key}: Test") {
-    container.sh "/usr/bin/false"
+    container.sh "/usr/bin/true"
   }  // stage
 }  // createBuilders
 
 def deploy(commit) {
-  withCredentials([string(
-    credentialsId: 'ess-gitlab-server-dashboard-deployment-url',
-    variable: 'URL'
-  )]) {
+  stage("Deploy") {
     withCredentials([string(
-      credentialsId: 'ess-gitlab-server-dashboard-deployment-token',
-      variable: 'TOKEN'
+      credentialsId: 'ess-gitlab-server-dashboard-deployment-url',
+      variable: 'URL'
     )]) {
-      sh """
-        set +x
-        curl -X POST \
-          --fail \
-          -F token='$TOKEN' \
-          -F "ref=main" \
-          -F "variables[COMMIT]=$commit" \
-          '$URL'
-      """
-    }  // TOKEN
-  }  // URL
+      withCredentials([string(
+        credentialsId: 'ess-gitlab-server-dashboard-deployment-token',
+        variable: 'TOKEN'
+      )]) {
+        sh """
+          set +x
+          curl -X POST \
+            --fail \
+            -F token='$TOKEN' \
+            -F "ref=main" \
+            -F "variables[COMMIT]=$commit" \
+            '$URL'
+        """
+      }  // TOKEN
+    }  // URL
+  }  // stage
 }
 
 node {
