@@ -25,20 +25,20 @@ builders = pipelineBuilder.createBuilders { container ->
 def deploy(commit) {
   withCredentials([string(
     credentialsId: 'ess-gitlab-server-dashboard-deployment-url',
-    variable: 'URL'
+    variable: 'TRIGGER_URL'
   )]) {
     withCredentials([string(
       credentialsId: 'ess-gitlab-server-dashboard-deployment-token',
-      variable: 'TOKEN'
+      variable: 'TRIGGER_TOKEN'
     )]) {
       sh """
         set +x
         curl -X POST \
           --fail \
-          -F token='${TOKEN}' \
+          -F token='${TRIGGER_TOKEN}' \
           -F ref=main \
           -F 'variables[COMMIT]=$commit' \
-          ${URL}
+          ${TRIGGER_URL}
       """
     }  // TOKEN
   }  // URL
