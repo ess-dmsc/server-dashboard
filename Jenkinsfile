@@ -38,7 +38,8 @@ def deploy(commit) {
           -F token='${TRIGGER_TOKEN}' \
           -F ref=main \
           -F 'variables[COMMIT]=$commit' \
-          ${TRIGGER_URL}
+          ${TRIGGER_URL} \
+          2>&1 > /dev/null
       """
     }  // TOKEN
   }  // URL
