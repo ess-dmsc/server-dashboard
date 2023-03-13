@@ -23,11 +23,6 @@ builders = pipelineBuilder.createBuilders { container ->
   }  // stage
 }  // createBuilders
 
-def deploy(version) {
-  dt = new DeploymentTrigger(this, 'server-dashboard-deployment')
-  dt.deploy(version)
-}
-
 node {
   dir("${pipelineBuilder.project}") {
     scmVars = checkout scm
@@ -40,7 +35,8 @@ node {
   }
   
   stage("Deploy") {
-    deploy(scmVars.GIT_COMMIT)
+    dt = new DeploymentTrigger(this, 'server-dashboard-deployment')
+    dt.deploy(version)
   }
 
   // Delete workspace when build is done
