@@ -1,6 +1,7 @@
 @Library('ecdc-pipeline')
 import ecdcpipeline.ContainerBuildNode
 import ecdcpipeline.PipelineBuilder
+import ecdcpipeline.DeploymentTrigger
 
 containerBuildNodes = [
   'centos7': ContainerBuildNode.getDefaultContainerBuildNode('centos7-gcc11')
@@ -22,26 +23,9 @@ builders = pipelineBuilder.createBuilders { container ->
   }  // stage
 }  // createBuilders
 
-def deploy(commit) {
-  withCredentials([string(
-    credentialsId: 'ess-gitlab-server-dashboard-deployment-url',
-    variable: 'TRIGGER_URL'
-  )]) {
-    withCredentials([string(
-      credentialsId: 'ess-gitlab-server-dashboard-deployment-token',
-      variable: 'TRIGGER_TOKEN'
-    )]) {
-      sh """
-        set +x
-        curl -X POST \
-          --fail \
-          -F token='${TRIGGER_TOKEN}' \
-          -F ref=main \
-          -F 'variables[COMMIT]=$commit' \
-          ${TRIGGER_URL} > /dev/null 2>&1
-      """
-    }  // TOKEN
-  }  // URL
+def deploy(version) {
+  dt = new DeploymentTrigger(this, 'server-dashboard-deployment')
+  dt.deploy(version)
 }
 
 node {
