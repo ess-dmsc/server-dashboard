@@ -36,7 +36,7 @@ node {
   
   stage("Deploy") {
     dt = new DeploymentTrigger(this, 'server-dashboard-deployment')
-    dt.deploy(version)
+    dt.deploy(scmVars.GIT_COMMIT)
   }
 
   // Delete workspace when build is done
