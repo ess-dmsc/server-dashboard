@@ -19,9 +19,18 @@ builders = pipelineBuilder.createBuilders { container ->
   }  // stage
 
   pipelineBuilder.stage("${container.key}: Test") {
-    container.sh "/usr/bin/true"
+    container.sh "touch TEST"
+    container.copyFrom("TEST", "TEST")
   }  // stage
 }  // createBuilders
+
+tools {
+  jfrog 'jfrog-cli'
+}
+
+environment {
+  JFROG_CLI_BUILD_NAME = "test"
+}
 
 node {
   dir("${pipelineBuilder.project}") {
@@ -32,6 +41,14 @@ node {
     parallel builders
   } catch (e) {
     throw e
+  }
+
+  stage("Publish") {
+    jf '-v'
+    jf 'c show'
+    jf 'rt ping'
+    jf 'rt u TEST ecdc-generic-release'
+    jf 'rt bp'
   }
   
   stage("Deploy") {
