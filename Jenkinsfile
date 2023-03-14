@@ -24,14 +24,6 @@ builders = pipelineBuilder.createBuilders { container ->
   }  // stage
 }  // createBuilders
 
-tools {
-  jfrog 'jfrog-cli'
-}
-
-environment {
-  JFROG_CLI_BUILD_NAME = "test"
-}
-
 node {
   dir("${pipelineBuilder.project}") {
     scmVars = checkout scm
@@ -43,14 +35,6 @@ node {
     throw e
   }
 
-  stage("Publish") {
-    jf '-v'
-    jf 'c show'
-    jf 'rt ping'
-    jf 'rt u TEST ecdc-generic-release'
-    jf 'rt bp'
-  }
-  
   stage("Deploy") {
     dt = new DeploymentTrigger(this, 'server-dashboard-deployment')
     dt.deploy(scmVars.GIT_COMMIT)
