@@ -228,7 +228,7 @@ class Monitor:
         self.printbox(600, 65, 0, 'orange')
         self.mprint('{}   y="72" >No NW connectivity</text>'.format(common))
         self.printbox(600, 80, 0, 'blue')
-        self.mprint('{}   y="87" >Service not running</text>'.format(common))
+        self.mprint('{}   y="87" >Server running</text>'.format(common))
         self.printbox(600, 95, 0, 'green')
         self.mprint('{}   y="102" >Service running - data</text>'.format(common))
         self.printbox(600, 110, 0, 'red')
