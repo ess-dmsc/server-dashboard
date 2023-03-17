@@ -180,7 +180,11 @@ class Monitor:
         res = res + 'x="{}" y="{}" transform="rotate({} 400 200)" '.format(x,y,a)
         if motext != '' and color != col1:
           res = res + 'onmousemove="showTooltip(evt, \'{}\');" onmouseout="hideTooltip();" '.format(motext)
-        res = res + 'fill="{}"'.format(color)
+
+        if color == col4:
+            res = res + 'fill="url(#diagonalHatch)"'
+        else:
+            res = res + 'fill="{}"'.format(color)
         res = res + '/>'
         self.mprint(res)
 
