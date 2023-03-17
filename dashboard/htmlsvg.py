@@ -50,6 +50,7 @@ header = """
     <circle cx="400" cy="200" r="45" stroke-width="1" fill="#0094CA" />
     <text x="385" y="205" fill="white">ESS</text>
     <text x="350" y="12" fill="white" font-size="36px">YMIR</text>
+    <image x="0" y="310" height="100" width="100" href="ymir-logo.jpeg" />
 """
 
 footer = """
