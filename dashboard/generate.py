@@ -234,15 +234,15 @@ class Monitor:
     def makelegend(self):
         common = '<text class="names" x="630" font-size="8px"'
         self.printbox(600, 50, 0, col1)
-        self.mprint('{}  y="57"  >Uncommissioned</text>'.format(common))
+        self.mprint('{}  y="57"  >uncommissioned</text>'.format(common))
         self.printbox(600, 65, 0, col2)
-        self.mprint('{}   y="72" >No NW connectivity</text>'.format(common))
+        self.mprint('{}   y="72" >no nw connectivity</text>'.format(common))
         self.printbox(600, 80, 0, col3)
-        self.mprint('{}   y="87" >Server running</text>'.format(common))
-        self.printbox(600, 95, 0, col4)
-        self.mprint('{}   y="102" >Service running - no data</text>'.format(common))
-        self.printbox(600, 110, 0, col5)
-        self.mprint('{}   y="117" >Service running - data</text>'.format(common))
+        self.mprint('{}   y="87" >server running</text>'.format(common))
+        self.printbox(600, 95, 0, col5)
+        self.mprint('{}   y="102" >service running</text>'.format(common))
+        self.printbox(600, 110, 0, col4)
+        self.mprint('{}   y="117" >service running (no data)</text>'.format(common))
 
 
     def generatesvg(self):
