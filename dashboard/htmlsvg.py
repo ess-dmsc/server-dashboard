@@ -14,6 +14,7 @@ header = """
         border: 1px solid black;
         border-radius: 5px;
         padding: 5px;
+        font-size: 12px;
      }
       </style>
 
@@ -29,7 +30,6 @@ header = """
         function hideTooltip() {
           var tooltip = document.getElementById("tooltip");
           tooltip.style.display = "none";
-          tooltip.style.font-size: 1rem;
         }
       </script>
     </head>
