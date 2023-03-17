@@ -29,6 +29,7 @@ header = """
         function hideTooltip() {
           var tooltip = document.getElementById("tooltip");
           tooltip.style.display = "none";
+          tooltip.style.font-size: 1rem;
         }
       </script>
     </head>
