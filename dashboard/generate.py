@@ -8,6 +8,12 @@ import argparse
 type_efu = 1
 type_text = 4
 
+col1='#c0c0c0'
+col2='red'
+col3='orange'
+col4='#444400'
+col5='green'
+
 
 class ECDCServers:
     def __init__(self, filename):
@@ -48,12 +54,12 @@ class ECDCServers:
 
 class Monitor:
     def __init__(self, serverlist, debug, refresh):
-        self.s_ping =  0x80
+        self.s_ping    = 0x80
         self.s_offline = 0x40
         self.s_service = 0x08
-        self.s_stage3 = 0x04
-        self.s_stage2 = 0x02
-        self.s_stage1 = 0x01
+        self.s_stage3  = 0x04
+        self.s_stage2  = 0x02
+        self.s_stage1  = 0x01
         self.lab = serverlist
         self.debug = debug
         self.refresh = refresh
@@ -172,7 +178,7 @@ class Monitor:
     def printbox(self, x, y, a, color, motext='', width=20):
         res = '<rect width="{}" height="10" '.format(width)
         res = res + 'x="{}" y="{}" transform="rotate({} 400 200)" '.format(x,y,a)
-        if motext != '' and color != "#C0C0C0":
+        if motext != '' and color != col1:
           res = res + 'onmousemove="showTooltip(evt, \'{}\');" onmouseout="hideTooltip();" '.format(motext)
         res = res + 'fill="{}"'.format(color)
         res = res + '/>'
@@ -181,18 +187,18 @@ class Monitor:
 
     def stagestatetocolor(self, stage, state):
         if state & stage:
-            return 'green'
+            return col5
         else:
-            return 'red'
+            return col4
 
 
     def statetocolor(self, stage, state):
         if self.is_offline(state):
-            return '#C0C0C0'
+            return col1
         if not self.can_ping(state):
-            return 'orange'
+            return col2
         if not self.has_service(state):
-            return 'blue'
+            return col3
         if stage == 1:
             return self.stagestatetocolor(stage, state)
         elif stage == 2:
@@ -200,7 +206,7 @@ class Monitor:
         elif stage == 4:
             return self.stagestatetocolor(stage, state)
         else:
-            return 'green'
+            return col5
 
     # TODO Coordinates are a mess - center is (400, 200)
     def printinst(self, name, mouseovertext, type, state, angle, ofsx, ofsy):
@@ -223,16 +229,16 @@ class Monitor:
 
     def makelegend(self):
         common = '<text class="names" x="630" font-size="8px"'
-        self.printbox(600, 50, 0, '#c0c0c0')
+        self.printbox(600, 50, 0, col1)
         self.mprint('{}  y="57"  >Uncommissioned</text>'.format(common))
-        self.printbox(600, 65, 0, 'orange')
+        self.printbox(600, 65, 0, col2)
         self.mprint('{}   y="72" >No NW connectivity</text>'.format(common))
-        self.printbox(600, 80, 0, 'blue')
+        self.printbox(600, 80, 0, col3)
         self.mprint('{}   y="87" >Server running</text>'.format(common))
-        self.printbox(600, 95, 0, 'green')
-        self.mprint('{}   y="102" >Service running - data</text>'.format(common))
-        self.printbox(600, 110, 0, 'red')
-        self.mprint('{}   y="117" >Service running - no data</text>'.format(common))
+        self.printbox(600, 95, 0, col4)
+        self.mprint('{}   y="102" >Service running - no data</text>'.format(common))
+        self.printbox(600, 110, 0, col5)
+        self.mprint('{}   y="117" >Service running - data</text>'.format(common))
 
 
     def generatesvg(self):
