@@ -53,7 +53,7 @@ class ECDCServers:
 
 
 class Monitor:
-    def __init__(self, serverlist, debug, refresh):
+    def __init__(self, serverlist, args):
         self.s_ping    = 0x80
         self.s_offline = 0x40
         self.s_service = 0x08
@@ -61,8 +61,9 @@ class Monitor:
         self.s_stage2  = 0x02
         self.s_stage1  = 0x01
         self.lab = serverlist
-        self.debug = debug
-        self.refresh = refresh
+        self.debug = args.debug
+        self.refresh = args.refresh
+        self.test = args.test
         self.starttime = self.gettime()
 
 
@@ -99,6 +100,8 @@ class Monitor:
 
     # Check that server can be reached (ping)
     def check_ping(self, ipaddr):
+        if self.test:
+            return True
         res = subprocess.Popen(["ping", "-c1", "-W1", ipaddr], stdout=subprocess.PIPE).stdout.read()
         if res.find(b"1 packets transmitted, 1 ") != -1:
             return True
@@ -108,6 +111,8 @@ class Monitor:
 
 
     def efu_get_version(self, ipaddr, port):
+        if self.test:
+            return "test data"
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.connect((ipaddr, port))
@@ -125,6 +130,8 @@ class Monitor:
 
 
     def check_efu_pipeline(self, ipaddr, port):
+        if self.test:
+            return 5
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.connect((ipaddr, port))
@@ -144,6 +151,8 @@ class Monitor:
 
     # Check that service is running (accept tcp connection)
     def check_service(self, idx, type, ipaddr, port):
+        if self.test:
+            return
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.settimeout(2)
 
@@ -175,14 +184,19 @@ class Monitor:
                     self.lab.clearstatus(idx, self.s_ping)
 
 
-    def printbox(self, x, y, a, color, motext='', width=20):
-        res = '<rect width="{}" height="10" '.format(width)
+    def printbox(self, x, y, a, color, efu, motext='', width=25):
+        if efu:
+            res = '<use href="#chevron" width="{}" height="10" '.format(width)
+        else:
+            res = '<rect width="{}" height="10" '.format(width)
         res = res + 'x="{}" y="{}" transform="rotate({} 400 200)" '.format(x,y,a)
         if motext != '' and color != col1:
           res = res + 'onmousemove="showTooltip(evt, \'{}\');" onmouseout="hideTooltip();" '.format(motext)
 
         if color == col4:
-            res = res + 'fill="url(#diagonalHatch)"'
+            res = res + 'fill="url(#dhatch)"'
+        elif color == 'none':
+            res = res + 'fill="none" stroke="black"'
         else:
             res = res + 'fill="{}"'.format(color)
         res = res + '/>'
@@ -219,30 +233,32 @@ class Monitor:
         textx = 450 + ofsx
         common = '<text  class="names" y="{}" transform="rotate({} 400 200)"'.format(texty, angle)
         if type == type_efu:
-            self.printbox(500 + ofsx, boxy, angle, self.statetocolor(1, state), mouseovertext)
-            self.printbox(522 + ofsx, boxy, angle, self.statetocolor(2, state), mouseovertext)
-            self.printbox(544 + ofsx, boxy, angle, self.statetocolor(4, state), mouseovertext)
+            self.printbox(500 + ofsx, boxy, angle, self.statetocolor(1, state), 1, mouseovertext)
+            self.printbox(522 + ofsx, boxy, angle, self.statetocolor(2, state), 1, mouseovertext)
+            self.printbox(544 + ofsx, boxy, angle, self.statetocolor(4, state), 1, mouseovertext)
             self.mprint('{} font-size="8px" x="450">{}</text>'.format(common, name))
         elif type == type_text:
             self.mprint('{} font-size="12px" x="{}">{}</text>'.format(common, textx, name))
         else:
-            self.printbox(500 + ofsx, boxy, angle, self.statetocolor(1, state), mouseovertext, 35)
+            self.printbox(500 + ofsx, boxy, angle, self.statetocolor(1, state), 0, mouseovertext, 35)
             self.mprint('{} font-size="8px" x="{}">{}</text>'.format(common, textx, name))
         self.mprint('')
 
 
     def makelegend(self):
         common = '<text class="names" x="630" font-size="8px"'
-        self.printbox(600, 50, 0, col1)
+        self.printbox(600, 50, 0, col1, 0)
         self.mprint('{}  y="57"  >uncommissioned</text>'.format(common))
-        self.printbox(600, 65, 0, col2)
+        self.printbox(600, 65, 0, col2, 0)
         self.mprint('{}   y="72" >no nw connectivity</text>'.format(common))
-        self.printbox(600, 80, 0, col3)
+        self.printbox(600, 80, 0, col3, 0)
         self.mprint('{}   y="87" >server running</text>'.format(common))
-        self.printbox(600, 95, 0, col5)
+        self.printbox(600, 95, 0, col5, 0)
         self.mprint('{}   y="102" >service running</text>'.format(common))
-        self.printbox(600, 110, 0, col4)
+        self.printbox(600, 110, 0, col4, 0)
         self.mprint('{}   y="117" >service running (no data)</text>'.format(common))
+        self.printbox(600, 125, 0, 'none', 1, 60)
+        self.mprint('{}   y="132" >data flow</text>'.format(common))
 
 
     def generatesvg(self):
@@ -285,10 +301,11 @@ def main():
     parser.add_argument('-d', '--debug', action='store_true')
     parser.add_argument('-f', '--file', type = str, default = 'utgaard.csv')
     parser.add_argument('-r', '--refresh', type = int, default = 5)
+    parser.add_argument('-t', '--test', action='store_true')
     args = parser.parse_args()
 
     serverlist = ECDCServers(args.file)
-    mon = Monitor(serverlist, args.debug, args.refresh)
+    mon = Monitor(serverlist, args)
 
     print("Dashboard generator is running ...")
     mon.run()
