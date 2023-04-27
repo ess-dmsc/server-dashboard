@@ -6,7 +6,7 @@
 #
 BEER,      1, 64, 10.100.1.32, 8888, -152, 0, 0, none
 MIRACLES,  1,  0, 10.100.1.32, 8008, -131, 0, 0, http://10.100.211.201:3000/d/2_K_lvH4z/miracles?orgId=1&refresh=5s
-MAGIC,     1,  0, 10.100.2.33, 8810, -124, 0, 0, none
+MAGIC,     1,  0, 10.100.2.33, 8810, -124, 0, 0, http://10.100.211.201:3000/d/QHxNKGsVk/magic?orgId=1&refresh=5s
 VESPA,     1, 64, 10.100.1.32, 8888,   64, 0, 0, none
 HEIMDAL,   1, 64, 10.100.1.32, 8888, -105, 0, 0, none
 ODIN,      1, 0, 10.100.2.33, 8888,  145, 0, 0, http://10.100.211.201:3000/d/sKsOtba4k/odin?orgId=1&refresh=5s
