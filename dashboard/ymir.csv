@@ -16,7 +16,7 @@ CSPEC, 1, 64, 10.100.1.32, 8888, -145, 0, 0, none
 T-REX, 1, 64, 10.100.1.32, 8888, -117, 0, 0, none
 LoKI,  1,  0, 10.100.1.32, 8021,  -65, 0, 0, http://10.100.211.201:3000/d/2CCsbb2Zk/loki_iv?orgId=1&refresh=5s&var-region=1
 FREIA, 1,  0, 10.100.1.32, 8003,  -35, 0, 0, http://10.100.211.201:3000/d/IF-MdT77k/freia?orgId=1&refresh=5s
-Estia, 1,  0, 10.100.1.32, 8341,   22, 0, 0, none
+Estia, 1,  0, 10.100.2.34, 8341,   22, 0, 0, none
 SKADI, 1, 64, 10.100.1.32, 8002,   44, 0, 0, none
 #
 DREAM,   1, 0, 10.100.1.32, 8006,  135, 0, 0, http://10.100.211.201:3000/d/8nvJTIH4z/dream?orgId=1&refresh=5s
