@@ -25,12 +25,12 @@ DREAM,   1, 0, 10.100.1.32, 8006,  135, 0, 0, https://10.100.211.93:3000/d/dream
 BM,      1, 0, 10.100.2.34, 8810,  125, 0, 0, none
 BIFROST, 1,  0, 10.100.1.32,   8001, -138, 0, 0, https://10.100.211.93:3000/d/bifrost/bifrost?refresh=5s
 #
-kafka0119, 2, 0, 10.100.1.19, 8093, 0, -450, -140, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=h01-r1n19_ecdcutgaard_esss_dk
-kafka0121, 2, 0, 10.100.1.21, 8093, 0, -450, -125, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=h01-r1n21_ecdcutgaard_esss_dk
-kafka0221, 2, 0, 10.100.2.21, 8093, 0, -450, -110, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=h01-r2n21_ecdcutgaard_esss_dk
-kafka0223, 2, 0, 10.100.2.23, 8093, 0, -450, -95, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=h01-r2n23_ecdcutgaard_esss_dk
-kafka0225, 2, 0, 10.100.2.25, 8093, 0, -450, -80, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=h01-r2n25_ecdcutgaard_esss_dk
-kafka0227, 2, 0, 10.100.2.25, 8093, 0, -450, -65, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=h01-r2n27_ecdcutgaard_esss_dk
+kafka0415, 2, 0, 10.100.4.15, 8093, 0, -450, -140, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0415_daq_esss_dk
+kafka0417, 2, 0, 10.100.4.17, 8093, 0, -450, -125, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0417_daq_esss_dk
+kafka0421, 2, 0, 10.100.4.21, 8093, 0, -450, -110, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0421_daq_esss_dk
+kafka0425, 2, 0, 10.100.4.25, 8093, 0, -450, -95, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0425_daq_esss_dk
+kafka0427, 2, 0, 10.100.4.27, 8093, 0, -450, -80, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0427_daq_esss_dk
+kafka0529, 2, 0, 10.100.5.29, 8093, 0, -450, -65, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0529_daq_esss_dk
 zookeeper01, 2, 0, 10.100.211.118, 2181, 0, -355, -140, none
 #
 carbon,     3, 0, 10.100.211.93, 2003, 0, -450, -20, none
