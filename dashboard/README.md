@@ -25,6 +25,11 @@ for a 'daemon' like service
     > nohup ./generate.py &
 
 
+### Starting image maker (for standalone svg images)
+
+    > sudo nohup python3 imagemaker.py &
+
+
 ### Starting a (python) webserver
 
 The following command will start a webserver on port 8765 dthat serves
