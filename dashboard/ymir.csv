@@ -31,7 +31,7 @@ kafka0421, 2, 0, 10.100.4.21, 8093, 0, -450, -110, https://10.100.211.93:3000/d/
 kafka0425, 2, 0, 10.100.4.25, 8093, 0, -450, -95, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0425_daq_esss_dk
 kafka0427, 2, 0, 10.100.4.27, 8093, 0, -450, -80, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0427_daq_esss_dk
 kafka0529, 2, 0, 10.100.5.29, 8093, 0, -450, -65, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0529_daq_esss_dk
-zookeeper01, 2, 0, 10.100.211.118, 2181, 0, -355, -140, none
+zookeeper01, 2, 0, 10.100.211.122, 2181, 0, -355, -140, none
 #
 carbon,     3, 0, 10.100.211.93, 2003, 0, -450, -20, none
 grafana,    3, 0, 10.100.211.93, 3000, 0, -450, -5, none
