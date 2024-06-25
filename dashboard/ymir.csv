@@ -3,50 +3,58 @@
 # Status: bitfield see generate.py
 #
 # from httpss://confluence.esss.lu.se/pages/viewpage.action?pageId=167903470
+# Angle Group
+# -180 - -90
+NMX,           1,  0, 10.100.1.32,   8004, -159, 0, 0, https://10.100.211.93:3000/d/nmx/nmx?refresh=5s
+BEER,          1, 64, 10.100.1.32,   8888, -152, 0, 0, none
+CSPEC,         1, 64, 10.100.1.32,   8888, -145, 0, 0, none
+BIFROST,       1,  0, 10.100.1.32,   8001, -138, 0, 0, https://10.100.211.93:3000/d/bifrost/bifrost?refresh=5s
+MIRACLES,      1,  0, 10.100.1.32,   8008, -131, 0, 0, https://10.100.211.93:3000/d/miracles/miracles?refresh=5s
+MAGIC,         1,  0, 10.100.2.33,   8820, -124, 0, 0, https://10.100.211.93:3000/d/magic/magic?refresh=5s
+MAGIC-CBM,     1,  0, 10.100.2.33,   8810, -117, 0, 0, https://10.100.211.93:3000/d/6pdWmdwIk/magic-beam-monitor?refresh=5s
+T-REX,         1, 64, 10.100.1.32,   8888, -105, 0, 0, none
+# Angle Group
+# -90 - -0
+HEIMDAL,       1, 64, 10.100.1.32,   8888, -90, 0, 0, none
+TBL-MB,        1, 64, 10.100.1.32,   8888, -81, 0, 0, none
+TBL-TP,        1, 64, 10.100.1.32,   8888, -75, 0, 0, none
+# Angle Group
+# -90 - 0
+LoKI,          1,  0, 10.100.1.32,   8021, -45, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s
+FREIA,         1,  0, 10.100.1.32,   8003, -35, 0, 0, https://10.100.211.93:3000/d/freia/freia?refresh=5s
+# Angle Group
+# 0 - 90
+Estia,         1,  0, 10.100.2.34,   8341,  22, 0, 0, none
+SKADI,         1, 64, 10.100.1.32,   8002,  44, 0, 0, none
+VESPA,         1, 64, 10.100.1.32,   8888,  64, 0, 0, none
+# Angle Group
+# 90 - 180
+CBM,           1, 0, 10.100.2.34,    8810,   90, 0, 0, https://10.100.211.93:3000/d/8lDvTOQSz/cbm?orgId=1&refresh=5s
+Dream-bwec,    1, 0, 10.100.1.32,    8030,  142, 0, 0, https://10.100.211.93:3000/d/dream/dream?refresh=5s
+Dream-fwec,    1, 0, 10.100.1.32,    8031,  136, 0, 0, https://10.100.211.93:3000/d/dream/dream?refresh=5s
+Dream-mantle,  1, 0, 10.100.1.32,    8032,  130, 0, 0, https://10.100.211.93:3000/d/dream/dream?refresh=5s
+Dream-hr,      1, 0, 10.100.1.32,    8033,  124, 0, 0, https://10.100.211.93:3000/d/dream/dream?refresh=5s
+Dream-sans,    1, 0, 10.100.1.32,    8034,  118, 0, 0, https://10.100.211.93:3000/d/dream/dream?refresh=5s
+ODIN,          1, 0, 10.100.2.33,    8888,  160, 0, 0, https://10.100.211.93:3000/d/odin/odin?refresh=5s
 #
-BEER,      1, 64, 10.100.1.32, 8888, -152, 0, 0, none
-MIRACLES,  1,  0, 10.100.1.32, 8008, -131, 0, 0, https://10.100.211.93:3000/d/miracles/miracles?refresh=5s
-MAGIC,     1,  0, 10.100.2.33, 8810, -124, 0, 0, https://10.100.211.93:3000/d/magic/magic?refresh=5s
-VESPA,     1, 64, 10.100.1.32, 8888,   64, 0, 0, none
-HEIMDAL,   1, 64, 10.100.1.32, 8888, -105, 0, 0, none
-TBL-MB,    1, 64, 10.100.1.32, 8888, -93, 0, 0, none
-TBL-TP,    1, 64, 10.100.1.32, 8888, -87, 0, 0, none
-ODIN,      1, 0, 10.100.2.33, 8888,  160, 0, 0, https://10.100.211.93:3000/d/odin/odin?refresh=5s
+kafka0415,     2, 0, 10.100.4.15,    8093,    0, -450, -140, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0415_daq_esss_dk
+kafka0417,     2, 0, 10.100.4.17,    8093,    0, -450, -125, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0417_daq_esss_dk
+kafka0421,     2, 0, 10.100.4.21,    8093,    0, -450, -110, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0421_daq_esss_dk
+kafka0425,     2, 0, 10.100.4.25,    8093,    0, -450, -95, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0425_daq_esss_dk
+kafka0427,     2, 0, 10.100.4.27,    8093,    0, -450, -80, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0427_daq_esss_dk
+kafka0529,     2, 0, 10.100.5.29,    8093,    0, -450, -65, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0529_daq_esss_dk
+zookeeper01,   2, 0, 10.100.211.122, 2181,    0, -355, -140, none
 #
-NMX,       1, 0, 10.100.1.32, 8004, -159, 0, 0,https://10.100.211.93:3000/d/nmx/nmx?refresh=5s
-CSPEC, 1, 64, 10.100.1.32, 8888, -145, 0, 0, none
-T-REX, 1, 64, 10.100.1.32, 8888, -117, 0, 0, none
-LoKI,  1,  0, 10.100.1.32, 8021,  -45, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s
-FREIA, 1,  0, 10.100.1.32, 8003,  -35, 0, 0, https://10.100.211.93:3000/d/freia/freia?refresh=5s
-Estia, 1,  0, 10.100.2.34, 8341,   22, 0, 0, none
-SKADI, 1, 64, 10.100.1.32, 8002,   44, 0, 0, none
+carbon,        3, 0, 10.100.211.224, 2003, 0, -450, -20, none
+grafana,       3, 0, 10.100.211.93, 3000, 0, -450, -5, none
+AKHQ,          3, 0, 10.100.211.94,  8443, 0, -450, 10, none
+graylog,       3, 0, 10.100.211.187, 9000, 0, -450, 25, none
+forwarder01,   2, 0, 10.102.10.244, 8093, 0, -450, 40, none
 #
-Dream-bwec,   1, 0, 10.100.1.32, 8030,  142, 0, 0, https://10.100.211.93:3000/d/dream/dream?refresh=5s
-Dream-fwec,   1, 0, 10.100.1.32, 8031,  136, 0, 0, https://10.100.211.93:3000/d/dream/dream?refresh=5s
-Dream-mantle,   1, 0, 10.100.1.32, 8032,  130, 0, 0, https://10.100.211.93:3000/d/dream/dream?refresh=5s
-Dream-hr,   1, 0, 10.100.1.32, 8033,  124, 0, 0, https://10.100.211.93:3000/d/dream/dream?refresh=5s
-Dream-sans,   1, 0, 10.100.1.32, 8034,  118, 0, 0, https://10.100.211.93:3000/d/dream/dream?refresh=5s
-BM,      1, 0, 10.100.2.34, 8810,  105, 0, 0, none
-BIFROST, 1,  0, 10.100.1.32,   8001, -138, 0, 0, https://10.100.211.93:3000/d/bifrost/bifrost?refresh=5s
+filewriter0126,        2, 0, 10.100.1.26, 8888, 0, -355, -20, none
+filewriter0128,        2, 0, 10.100.1.28, 8888, 0, -355, -5, none
+filewriter0129,        2, 0, 10.100.1.29, 8888, 0, -355, 10, none
+nicosserver01,         2, 0, 10.102.10.238, 14869, 0, -355, 25, none
 #
-kafka0415, 2, 0, 10.100.4.15, 8093, 0, -450, -140, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0415_daq_esss_dk
-kafka0417, 2, 0, 10.100.4.17, 8093, 0, -450, -125, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0417_daq_esss_dk
-kafka0421, 2, 0, 10.100.4.21, 8093, 0, -450, -110, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0421_daq_esss_dk
-kafka0425, 2, 0, 10.100.4.25, 8093, 0, -450, -95, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0425_daq_esss_dk
-kafka0427, 2, 0, 10.100.4.27, 8093, 0, -450, -80, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0427_daq_esss_dk
-kafka0529, 2, 0, 10.100.5.29, 8093, 0, -450, -65, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0529_daq_esss_dk
-zookeeper01, 2, 0, 10.100.211.122, 2181, 0, -355, -140, none
-#
-carbon,     3, 0, 10.100.211.224, 2003, 0, -450, -20, none
-grafana,    3, 0, 10.100.211.93, 3000, 0, -450, -5, none
-AKHQ,       3, 0, 10.100.211.94,  8443, 0, -450, 10, none
-graylog,    3, 0, 10.100.211.187, 9000, 0, -450, 25, none
-forwarder01,2, 0, 10.102.10.244, 8093, 0, -450, 40, none
-#
-filewriter0126,            2, 0, 10.100.1.26, 8888, 0, -355, -20, none
-filewriter0128,            2, 0, 10.100.1.28, 8888, 0, -355, -5, none
-filewriter0129,            2, 0, 10.100.1.29, 8888, 0, -355, 10, none
-nicosserver01,             2, 0, 10.102.10.238, 14869, 0, -355, 25, none
-#
-Kafka &nbsp; Brokers,      4, 64, 0.0.0.0, 65535, 0, -450, -160, none
-Other &nbsp; Services,     4, 64, 0.0.0.0, 65535, 0, -450, -40, none
+Kafka &nbsp; Brokers,  4, 64, 0.0.0.0, 65535, 0, -450, -160, none
+Other &nbsp; Services, 4, 64, 0.0.0.0, 65535, 0, -450, -40, none
