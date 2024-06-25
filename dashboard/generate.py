@@ -233,14 +233,14 @@ class Monitor:
         textx = 450 + ofsx
         common = '<text  class="names" y="{}" transform="rotate({} 400 200)"'.format(texty, angle)
         if type == type_efu:
-            self.printbox(500 + ofsx, boxy, angle, self.statetocolor(1, state), 1, mouseovertext)
-            self.printbox(522 + ofsx, boxy, angle, self.statetocolor(2, state), 1, mouseovertext)
-            self.printbox(544 + ofsx, boxy, angle, self.statetocolor(4, state), 1, mouseovertext)
+            self.printbox(506 + ofsx, boxy, angle, self.statetocolor(1, state), 1, mouseovertext)
+            self.printbox(528 + ofsx, boxy, angle, self.statetocolor(2, state), 1, mouseovertext)
+            self.printbox(550 + ofsx, boxy, angle, self.statetocolor(4, state), 1, mouseovertext)
             self.mprint('{} font-size="8px" x="450">{}</text>'.format(common, name))
         elif type == type_text:
             self.mprint('{} font-size="12px" x="{}">{}</text>'.format(common, textx, name))
         else:
-            self.printbox(500 + ofsx, boxy, angle, self.statetocolor(1, state), 0, mouseovertext, 35)
+            self.printbox(505 + ofsx, boxy, angle, self.statetocolor(1, state), 0, mouseovertext, 35)
             self.mprint('{} font-size="8px" x="{}">{}</text>'.format(common, textx, name))
         self.mprint('')
 
