@@ -18,6 +18,7 @@ T-REX,         1, 64, 10.100.1.32,   8888, -105, 0, 0, none
 HEIMDAL,       1,  0, 10.100.2.34,   8551, -90, 0, 0, https://10.100.211.93:3000/d/fnEMshlIk/heimdal?orgId=1&refresh=5s
 TBL-MB,        1, 64, 10.100.1.32,   8888, -81, 0, 0, none
 TBL-TP,        1, 64, 10.100.1.32,   8888, -75, 0, 0, none
+TBL-3HE,       1,  0, 10.100.2.34,   8662, -69, 0, 0, https://10.100.211.93:3000/d/3FvPQ0lSk/tbl3he?orgId=1&refresh=5s
 # Angle Group
 # -90 - 0
 LoKI,          1,  0, 10.100.1.32,   8021, -45, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s
