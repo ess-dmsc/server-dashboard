@@ -10,7 +10,7 @@ After=network.target
 [Service]
 User=efudashboard
 WorkingDirectory=/ess/ecdc/dashboard/data
-ExecStart=/usr/bin/scl enable rh-python38 "python /ess/ecdc/dashboard/server-dashboard/dashboard/start_dashboard -c /ess/ecdc/dashboard/server-dashboard/dashboard/config"
+ExecStart=/usr/bin/scl enable rh-python38 "/ess/ecdc/dashboard/server-dashboard/dashboard/start_dashboard -c /ess/ecdc/dashboard/server-dashboard/dashboard/config"
 Restart=always
 RestartSec=10
 
