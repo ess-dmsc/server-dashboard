@@ -6,7 +6,7 @@
 
 header = """
     <html>
-    <head><meta http-equiv="refresh" content="2"></head>
+    <head></head>
 
       <style>
         #tooltip {

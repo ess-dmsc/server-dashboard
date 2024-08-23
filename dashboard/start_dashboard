@@ -1,3 +1,21 @@
 #!/bin/bash
 
-./generate.py &>/dev/null
+csv_files=$(find . -maxdepth 1 -type f -name "*.csv")
+
+name_list=()
+
+# Process each .csv file here
+for file in $csv_files; do
+    filename=$(basename "$file")
+    name="${filename%.*}"
+    name_list+=("$name")
+done
+
+# Start the dashboard generation for each .csv file
+for name in "${name_list[@]}"; do
+    echo "Creating folder for $name"
+    if [ ! -d $name ]; then mkdir $name; fi
+    python generate.py -f $name.csv -r 2 -o $name -t &
+    echo "Dasboard generation started for $name PID $!"
+done
+

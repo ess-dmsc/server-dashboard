@@ -16,8 +16,9 @@ col5='green'
 
 
 class ECDCServers:
-    def __init__(self, filename):
+    def __init__(self, filename, directory):
         self.servers = []
+        self.directory = directory
         self.add_csv(filename)
 
 
@@ -64,6 +65,7 @@ class Monitor:
         self.debug = args.debug
         self.refresh = args.refresh
         self.test = args.test
+        self.directory = args.out
         self.starttime = self.gettime()
 
 
@@ -264,6 +266,16 @@ class Monitor:
     def generatesvg(self):
         self.mprint(htmlsvg.header)
 
+        # Use javascript to refresh the page every dynamically
+        # This reserves the url path and query string
+        self.mprint(f'''
+        <script type="text/javascript">
+            setTimeout(function() {{
+            window.location.href = window.location.href;
+            }}, {self.refresh * 1000});
+        </script>
+        ''')
+
         for name, type, status, ip, port, angle, xo, yo, url, sw in self.lab.servers:
             self.dprint("{} {} {} {}".format(name, type, status, ip))
             if (url != "none"):
@@ -281,11 +293,11 @@ class Monitor:
 
 
     def one_pass(self):
-        self.file = open("tmp.svg", "w")
+        self.file = open(f"{self.directory}/tmp.svg", "w")
         self.getstatus()
         self.generatesvg()
         self.file.close()
-        os.rename("tmp.svg", "index.html")
+        os.rename(f"{self.directory}/tmp.svg", f"{self.directory}/index.html")
 
     def run(self):
         while (True):
@@ -302,9 +314,10 @@ def main():
     parser.add_argument('-f', '--file', type = str, default = 'utgaard.csv')
     parser.add_argument('-r', '--refresh', type = int, default = 5)
     parser.add_argument('-t', '--test', action='store_true')
+    parser.add_argument('-o', '--out', type = str, default = '.')
     args = parser.parse_args()
 
-    serverlist = ECDCServers(args.file)
+    serverlist = ECDCServers(args.file, args.out)
     mon = Monitor(serverlist, args)
 
     print("Dashboard generator is running ...")

@@ -1,1 +1,7 @@
+# project specific
 *.retry
+utgaard/*
+ymir/*
+
+# python specific
+__pycache__/
