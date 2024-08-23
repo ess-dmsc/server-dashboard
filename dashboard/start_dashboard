@@ -1,6 +1,19 @@
 #!/bin/bash
 
-csv_files=$(find . -maxdepth 1 -type f -name "*.csv")
+# Command line parser
+while getopts ":c:" opt; do
+    case $opt in
+        c)
+            config_dir=$OPTARG
+            ;;
+        \?)
+            echo "Invalid option: -$OPTARG" >&2
+            exit 1
+            ;;
+    esac
+done
+
+csv_files=$(find $config_dir -maxdepth 1 -type f -name "*.csv")
 
 name_list=()
 
@@ -15,7 +28,6 @@ done
 for name in "${name_list[@]}"; do
     echo "Creating folder for $name"
     if [ ! -d $name ]; then mkdir $name; fi
-    python generate.py -f $name.csv -r 2 -o $name -t &
+    python generate.py -f $config_dir/$name.csv -r 2 -o $name -t &
     echo "Dasboard generation started for $name PID $!"
 done
-

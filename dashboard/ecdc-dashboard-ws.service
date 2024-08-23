@@ -10,7 +10,7 @@ After=network.target
 [Service]
 User=efudashboard
 WorkingDirectory=/ess/ecdc/dashboard/data
-ExecStart=/usr/bin/scl enable rh-python38 "python -m http.server 8765"
+ExecStart=/usr/bin/scl enable rh-python38 "python ./httpserver.py --port 8765"
 Restart=always
 RestartSec=10
 
