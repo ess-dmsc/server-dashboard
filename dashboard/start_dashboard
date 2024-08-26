@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ -z "$DASHBOARD_HOME" ]; then
+    DASHBOARD_HOME=./
+fi
+
 # Command line parser
 while getopts ":c:" opt; do
     case $opt in
@@ -28,6 +32,6 @@ done
 for name in "${name_list[@]}"; do
     echo "Creating folder for $name"
     if [ ! -d $name ]; then mkdir $name; fi
-    python generate.py -f $config_dir/$name.csv -r 2 -o $name -t &
+    python $DASHBOARD_HOME/generate.py -f $config_dir/$name.csv -r 2 -o $name -t &
     echo "Dasboard generation started for $name PID $!"
 done
