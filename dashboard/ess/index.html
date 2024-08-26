@@ -1,0 +1,191 @@
+
+    <html>
+    <head></head>
+
+      <style>
+        #tooltip {
+        background: cornsilk;
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 5px;
+        font-size: 12px;
+     }
+      </style>
+
+      <script>
+        function showTooltip(evt, text) {
+          let tooltip = document.getElementById("tooltip");
+          tooltip.innerHTML = text;
+          tooltip.style.display = "block";
+          tooltip.style.left = evt.pageX + 10 + 'px';
+          tooltip.style.top = evt.pageY + 10 + 'px';
+        }
+
+        function hideTooltip() {
+          var tooltip = document.getElementById("tooltip");
+          tooltip.style.display = "none";
+        }
+      </script>
+    </head>
+
+    <body>
+    <div id="tooltip" display="none" style="position: absolute; display: none;"></div>
+    <svg viewBox="-20 -20 800 430" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <pattern id="dhatch" patternUnits="userSpaceOnUse" width="4" height="4">
+            <path d="M-1,1 l2,-2
+                M0,4 l4,-4
+                M3,5 l2,-2"
+            style="stroke:green; stroke-width:1" />
+        </pattern>
+        <symbol id="chevron" width="20" height="10">
+          <polygon points="0 0, 18 0, 20 5, 18 10, 0 10, 2 5" />
+        </symbol>
+    <rect y="-20" width="800" height="40" fill="#0094CA"/>
+    <rect y="380" width="800" height="5" fill="#0094CA"/>
+    <line x1="450" y1="200" x2="700" y2="200" style="stroke:rgb(0,0,0);stroke-width:2" />
+    <circle cx="400" cy="200" r="48" stroke-width="1" fill="white" />
+    <circle cx="400" cy="200" r="45" stroke-width="1" fill="#0094CA" />
+    <text x="385" y="205" fill="white">ESS</text>
+    <image x="0" y="300" height="100" width="100" href="logo.jpeg" />
+
+<text x="350" y="12" fill="white" font-size="36px">ESS</text>
+
+        <script type="text/javascript">
+            setTimeout(function() {
+            window.location.href = window.location.href;
+            }, 5000);
+        </script>
+        
+<a href="https://10.100.211.93:3000/d/nmx/nmx?refresh=5s" target="_blank">
+<use href="#chevron" width="25" height="10" x="506" y="195" transform="rotate(-159 400 200)" onmousemove="showTooltip(evt, 'efu0436.daq.esss.dk:9000<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<use href="#chevron" width="25" height="10" x="528" y="195" transform="rotate(-159 400 200)" onmousemove="showTooltip(evt, 'efu0436.daq.esss.dk:9000<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<use href="#chevron" width="25" height="10" x="550" y="195" transform="rotate(-159 400 200)" onmousemove="showTooltip(evt, 'efu0436.daq.esss.dk:9000<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<text  class="names" y="203" transform="rotate(-159 400 200)" font-size="8px" x="450">NMX</text>
+
+</a>
+<a href="https://10.100.211.93:3000/d/bifrost/bifrost?refresh=5s" target="_blank">
+<use href="#chevron" width="25" height="10" x="506" y="195" transform="rotate(-138 400 200)" onmousemove="showTooltip(evt, 'efu0433.daq.esss.dk:9000<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<use href="#chevron" width="25" height="10" x="528" y="195" transform="rotate(-138 400 200)" onmousemove="showTooltip(evt, 'efu0433.daq.esss.dk:9000<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<use href="#chevron" width="25" height="10" x="550" y="195" transform="rotate(-138 400 200)" onmousemove="showTooltip(evt, 'efu0433.daq.esss.dk:9000<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<text  class="names" y="203" transform="rotate(-138 400 200)" font-size="8px" x="450">BIFROST</text>
+
+</a>
+<use href="#chevron" width="25" height="10" x="506" y="195" transform="rotate(-98 400 200)" fill="#c0c0c0"/>
+<use href="#chevron" width="25" height="10" x="528" y="195" transform="rotate(-98 400 200)" fill="#c0c0c0"/>
+<use href="#chevron" width="25" height="10" x="550" y="195" transform="rotate(-98 400 200)" fill="#c0c0c0"/>
+<text  class="names" y="203" transform="rotate(-98 400 200)" font-size="8px" x="450">TBL-MB</text>
+
+<use href="#chevron" width="25" height="10" x="506" y="195" transform="rotate(-90 400 200)" fill="#c0c0c0"/>
+<use href="#chevron" width="25" height="10" x="528" y="195" transform="rotate(-90 400 200)" fill="#c0c0c0"/>
+<use href="#chevron" width="25" height="10" x="550" y="195" transform="rotate(-90 400 200)" fill="#c0c0c0"/>
+<text  class="names" y="203" transform="rotate(-90 400 200)" font-size="8px" x="450">TBL-TP</text>
+
+<a href="https://10.100.211.93:3000/d/3FvPQ0lSk/tbl3he?orgId=1&refresh=5s" target="_blank">
+<use href="#chevron" width="25" height="10" x="506" y="195" transform="rotate(-82 400 200)" onmousemove="showTooltip(evt, 'efu0437.daq.esss.dk:9020<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<use href="#chevron" width="25" height="10" x="528" y="195" transform="rotate(-82 400 200)" onmousemove="showTooltip(evt, 'efu0437.daq.esss.dk:9020<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<use href="#chevron" width="25" height="10" x="550" y="195" transform="rotate(-82 400 200)" onmousemove="showTooltip(evt, 'efu0437.daq.esss.dk:9020<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<text  class="names" y="203" transform="rotate(-82 400 200)" font-size="8px" x="450">TBL-3HE</text>
+
+</a>
+<a href="https://10.100.211.93:3000/d/loki/loki?refresh=5s" target="_blank">
+<use href="#chevron" width="25" height="10" x="506" y="195" transform="rotate(-45 400 200)" onmousemove="showTooltip(evt, 'efu0434.daq.esss.dk:9000<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<use href="#chevron" width="25" height="10" x="528" y="195" transform="rotate(-45 400 200)" onmousemove="showTooltip(evt, 'efu0434.daq.esss.dk:9000<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<use href="#chevron" width="25" height="10" x="550" y="195" transform="rotate(-45 400 200)" onmousemove="showTooltip(evt, 'efu0434.daq.esss.dk:9000<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<text  class="names" y="203" transform="rotate(-45 400 200)" font-size="8px" x="450">LoKI</text>
+
+</a>
+<a href="https://10.100.211.93:3000/d/8lDvTOQSz/cbm?orgId=1&refresh=5s" target="_blank">
+<use href="#chevron" width="25" height="10" x="506" y="195" transform="rotate(152 400 200)" onmousemove="showTooltip(evt, 'efu0631.daq.esss.dk:9000<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<use href="#chevron" width="25" height="10" x="528" y="195" transform="rotate(152 400 200)" onmousemove="showTooltip(evt, 'efu0631.daq.esss.dk:9000<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<use href="#chevron" width="25" height="10" x="550" y="195" transform="rotate(152 400 200)" onmousemove="showTooltip(evt, 'efu0631.daq.esss.dk:9000<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<text  class="names" y="203" transform="rotate(152 400 200)" font-size="8px" x="450">Dream</text>
+
+</a>
+<a href="https://10.100.211.93:3000/d/odin/odin?refresh=5s" target="_blank">
+<use href="#chevron" width="25" height="10" x="506" y="195" transform="rotate(160 400 200)" onmousemove="showTooltip(evt, 'efu0435.daq.esss.dk:9000<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<use href="#chevron" width="25" height="10" x="528" y="195" transform="rotate(160 400 200)" onmousemove="showTooltip(evt, 'efu0435.daq.esss.dk:9000<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<use href="#chevron" width="25" height="10" x="550" y="195" transform="rotate(160 400 200)" onmousemove="showTooltip(evt, 'efu0435.daq.esss.dk:9000<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<text  class="names" y="203" transform="rotate(160 400 200)" font-size="8px" x="450">Odin</text>
+
+</a>
+<a href="https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0415_daq_esss_dk" target="_blank">
+<rect width="35" height="10" x="55" y="55" transform="rotate(0 400 200)" onmousemove="showTooltip(evt, '10.100.4.15:8093<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<text  class="names" y="63" transform="rotate(0 400 200)" font-size="8px" x="0">kafka0415</text>
+
+</a>
+<a href="https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0417_daq_esss_dk" target="_blank">
+<rect width="35" height="10" x="55" y="70" transform="rotate(0 400 200)" onmousemove="showTooltip(evt, '10.100.4.17:8093<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<text  class="names" y="78" transform="rotate(0 400 200)" font-size="8px" x="0">kafka0417</text>
+
+</a>
+<a href="https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0421_daq_esss_dk" target="_blank">
+<rect width="35" height="10" x="55" y="85" transform="rotate(0 400 200)" onmousemove="showTooltip(evt, '10.100.4.21:8093<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<text  class="names" y="93" transform="rotate(0 400 200)" font-size="8px" x="0">kafka0421</text>
+
+</a>
+<a href="https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0425_daq_esss_dk" target="_blank">
+<rect width="35" height="10" x="55" y="100" transform="rotate(0 400 200)" onmousemove="showTooltip(evt, '10.100.4.25:8093<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<text  class="names" y="108" transform="rotate(0 400 200)" font-size="8px" x="0">kafka0425</text>
+
+</a>
+<a href="https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0427_daq_esss_dk" target="_blank">
+<rect width="35" height="10" x="55" y="115" transform="rotate(0 400 200)" onmousemove="showTooltip(evt, '10.100.4.27:8093<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<text  class="names" y="123" transform="rotate(0 400 200)" font-size="8px" x="0">kafka0427</text>
+
+</a>
+<a href="https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0529_daq_esss_dk" target="_blank">
+<rect width="35" height="10" x="55" y="130" transform="rotate(0 400 200)" onmousemove="showTooltip(evt, '10.100.5.29:8093<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<text  class="names" y="138" transform="rotate(0 400 200)" font-size="8px" x="0">kafka0529</text>
+
+</a>
+<rect width="35" height="10" x="150" y="55" transform="rotate(0 400 200)" onmousemove="showTooltip(evt, '10.100.211.122:2181<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<text  class="names" y="63" transform="rotate(0 400 200)" font-size="8px" x="95">zookeeper01</text>
+
+<rect width="35" height="10" x="55" y="175" transform="rotate(0 400 200)" onmousemove="showTooltip(evt, '10.100.211.224:2003<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<text  class="names" y="183" transform="rotate(0 400 200)" font-size="8px" x="0">carbon</text>
+
+<rect width="35" height="10" x="55" y="190" transform="rotate(0 400 200)" onmousemove="showTooltip(evt, '10.100.211.93:3000<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<text  class="names" y="198" transform="rotate(0 400 200)" font-size="8px" x="0">grafana</text>
+
+<rect width="35" height="10" x="55" y="205" transform="rotate(0 400 200)" onmousemove="showTooltip(evt, '10.100.211.94:8443<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<text  class="names" y="213" transform="rotate(0 400 200)" font-size="8px" x="0">AKHQ</text>
+
+<rect width="35" height="10" x="55" y="220" transform="rotate(0 400 200)" onmousemove="showTooltip(evt, '10.100.211.187:9000<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<text  class="names" y="228" transform="rotate(0 400 200)" font-size="8px" x="0">graylog</text>
+
+<rect width="35" height="10" x="55" y="235" transform="rotate(0 400 200)" onmousemove="showTooltip(evt, '10.102.10.244:8093<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<text  class="names" y="243" transform="rotate(0 400 200)" font-size="8px" x="0">forwarder01</text>
+
+<rect width="35" height="10" x="150" y="175" transform="rotate(0 400 200)" onmousemove="showTooltip(evt, '10.100.1.26:8888<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<text  class="names" y="183" transform="rotate(0 400 200)" font-size="8px" x="95">filewriter0126</text>
+
+<rect width="35" height="10" x="150" y="190" transform="rotate(0 400 200)" onmousemove="showTooltip(evt, '10.100.1.28:8888<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<text  class="names" y="198" transform="rotate(0 400 200)" font-size="8px" x="95">filewriter0128</text>
+
+<rect width="35" height="10" x="150" y="205" transform="rotate(0 400 200)" onmousemove="showTooltip(evt, '10.100.1.29:8888<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<text  class="names" y="213" transform="rotate(0 400 200)" font-size="8px" x="95">filewriter0129</text>
+
+<rect width="35" height="10" x="150" y="220" transform="rotate(0 400 200)" onmousemove="showTooltip(evt, '10.102.10.238:14869<br>');" onmouseout="hideTooltip();" fill="orange"/>
+<text  class="names" y="228" transform="rotate(0 400 200)" font-size="8px" x="95">nicosserver01</text>
+
+<text  class="names" y="43" transform="rotate(0 400 200)" font-size="12px" x="0">Kafka&nbsp;Brokers</text>
+
+<text  class="names" y="163" transform="rotate(0 400 200)" font-size="12px" x="0">Other&nbsp;Services</text>
+
+<rect width="25" height="10" x="600" y="50" transform="rotate(0 400 200)" fill="#c0c0c0"/>
+<text class="names" x="630" font-size="8px"  y="57"  >uncommissioned</text>
+<rect width="25" height="10" x="600" y="65" transform="rotate(0 400 200)" fill="red"/>
+<text class="names" x="630" font-size="8px"   y="72" >no nw connectivity</text>
+<rect width="25" height="10" x="600" y="80" transform="rotate(0 400 200)" fill="orange"/>
+<text class="names" x="630" font-size="8px"   y="87" >server running</text>
+<rect width="25" height="10" x="600" y="95" transform="rotate(0 400 200)" fill="green"/>
+<text class="names" x="630" font-size="8px"   y="102" >service running</text>
+<rect width="25" height="10" x="600" y="110" transform="rotate(0 400 200)" fill="url(#dhatch)"/>
+<text class="names" x="630" font-size="8px"   y="117" >service running (no data)</text>
+<use href="#chevron" width="25" height="10" x="600" y="125" transform="rotate(0 400 200)" onmousemove="showTooltip(evt, '60');" onmouseout="hideTooltip();" fill="none" stroke="black"/>
+<text class="names" x="630" font-size="8px"   y="132" >data flow</text>
+<text x="10" y="5" fill="white" font-size="16px">26/08/2024 13:49:26</text>
+<text x="690" y="395" fill="black" font-size="8px">started 26/08/2024 13:49:16</text>
+
+        </svg></body></html>
+
