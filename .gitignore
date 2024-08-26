@@ -2,6 +2,7 @@
 *.retry
 */utgaard/*
 */ymir/*
+*/ess/*
 
 # python specific
 __pycache__/
