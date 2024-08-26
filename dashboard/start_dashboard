@@ -23,7 +23,7 @@ name_list=()
 pid_list=() # New list to store process IDs
 
 # Function to stop processes
-stop_processes() {
+stop_processes_and_exit() {
     echo "Stopping dashboard generation processes..."
     for pid in "${pid_list[@]}"; do
         kill $pid
@@ -34,7 +34,7 @@ stop_processes() {
 }
 
 # Set trap for exit call
-trap stop_processes EXIT
+trap stop_processes_and_exit EXIT
 
 # Process each .csv file here
 for file in $csv_files; do
@@ -47,7 +47,12 @@ done
 for name in "${name_list[@]}"; do
     echo "Creating folder for $name"
     if [ ! -d $name ]; then mkdir $name; fi
-    python $DASHBOARD_HOME/generate.py -f $config_dir/$name.csv -r 2 -o $name -t &
+    python $DASHBOARD_HOME/generate.py -f $config_dir/$name.csv -r 2 -o $name &
+    sleep 1
+    if [ $? -ne 0 ]; then
+        echo "Dashboard generator failed to start for $name"
+        stop_processes_and_exit
+    fi
     pid_list+=("$!") # Store the process ID in the list
     echo "Dashboard generation started for $name PID $!"
 done
