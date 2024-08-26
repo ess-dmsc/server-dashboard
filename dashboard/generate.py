@@ -267,6 +267,7 @@ class Monitor:
         self.mprint(htmlsvg.header)
         name = os.path.basename(os.path.normpath(self.directory))
         self.mprint(f'<text x="350" y="12" fill="white" font-size="36px">{name.upper()}</text>')
+        self.mprint(f'<image x="0" y="300" height="100" width="100" href="{name}/logo.jpeg" />')
 
         # Use javascript to refresh the page every dynamically
         # This reserves the url path and query string

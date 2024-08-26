@@ -52,7 +52,6 @@ header = """
     <circle cx="400" cy="200" r="48" stroke-width="1" fill="white" />
     <circle cx="400" cy="200" r="45" stroke-width="1" fill="#0094CA" />
     <text x="385" y="205" fill="white">ESS</text>
-    <image x="0" y="300" height="100" width="100" href="logo.jpeg" />
 """
 
 footer = """
