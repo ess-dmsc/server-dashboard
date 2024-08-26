@@ -20,6 +20,21 @@ done
 csv_files=$(find $config_dir -maxdepth 1 -type f -name "*.csv")
 
 name_list=()
+pid_list=() # New list to store process IDs
+
+# Function to stop processes
+stop_processes() {
+    echo "Stopping dashboard generation processes..."
+    for pid in "${pid_list[@]}"; do
+        kill $pid
+    done
+
+    echo "All processes have been stopped. Exiting..."
+    exit 0
+}
+
+# Set trap for exit call
+trap stop_processes EXIT
 
 # Process each .csv file here
 for file in $csv_files; do
@@ -33,5 +48,16 @@ for name in "${name_list[@]}"; do
     echo "Creating folder for $name"
     if [ ! -d $name ]; then mkdir $name; fi
     python $DASHBOARD_HOME/generate.py -f $config_dir/$name.csv -r 2 -o $name -t &
-    echo "Dasboard generation started for $name PID $!"
+    pid_list+=("$!") # Store the process ID in the list
+    echo "Dashboard generation started for $name PID $!"
 done
+
+# Wait until all app processes finish running
+echo "Waiting for app processes to finish..."
+for pid in "${pid_list[@]}"; do
+    wait $pid
+done
+
+echo "All app processes have finished. Exiting..."
+
+exit 0
