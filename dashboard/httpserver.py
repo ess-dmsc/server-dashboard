@@ -9,7 +9,7 @@ class CustomHTTPRequestHandler(SimpleHTTPRequestHandler):
         if self.path.startswith('/ymir'):
             self.path = './ymir/index.html'
         elif self.path.startswith('/ess'):
-            self.path = './ess' + self.path[len('/ess'):]
+            self.path = './ess/index.html'
         elif self.path.startswith('/utgaard'):
             self.path = './utgaard' + self.path[len('/utgaard'):]
         
