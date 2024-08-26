@@ -40,7 +40,7 @@ class ECDCServers:
         for line in lines:
             line = line.replace(" ", "")
             line = line.replace("\n", "")
-            if line[0] != "#" and line != "":
+            if line != "" and line[0] != "#":
                 name, type, status, ip, port, angle, xoff, yoff, grafana = line.split(',')
                 type = int(type)
                 status = int(status)
