@@ -5,10 +5,13 @@ if [ -z "$DASHBOARD_HOME" ]; then
 fi
 
 # Command line parser
-while getopts ":c:" opt; do
+while getopts ":c:t:" opt; do
     case $opt in
         c)
             config_dir=$OPTARG
+            ;;
+        t)
+            test_mode='-t'
             ;;
         \?)
             echo "Invalid option: -$OPTARG" >&2
@@ -49,7 +52,7 @@ for name in "${name_list[@]}"; do
     if [ ! -d $name ]; then mkdir $name; fi
     # Copy logos to the folder
     cp $DASHBOARD_HOME/$name-logo.jpeg $name/logo.jpeg
-    python $DASHBOARD_HOME/generate.py -f $config_dir/$name.csv -r 5 -o $name &
+    python $DASHBOARD_HOME/generate.py -f $config_dir/$name.csv -r 5 -o $name $test_mode &
     sleep 1
     if [ $? -ne 0 ]; then
         echo "Dashboard generator failed to start for $name"
