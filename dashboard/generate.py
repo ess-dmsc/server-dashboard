@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import htmlsvg
+import htmlsvg, html
 import random, socket, subprocess, os, time, json
 from datetime import datetime
 import argparse
@@ -62,16 +62,27 @@ class Monitor:
         self.s_stage2  = 0x02
         self.s_stage1  = 0x01
         self.lab = serverlist
+        self.buffer = ""
         self.debug = args.debug
         self.refresh = args.refresh
         self.test = args.test
         self.directory = args.out
         self.starttime = self.gettime()
 
-
     def mprint(self, arg):
-        self.file.write(arg + '\n')
+        self.buffer += arg + "\n"
 
+    def flush(self):
+        svg_content = self.extract_svg(self.buffer)
+
+        with open(f"{self.directory}/dashboard.svg", 'w') as file:
+            for svg in svg_content:
+                file.write(svg)
+
+        with open(f"{self.directory}/index.html", "w") as file:
+            file.write(self.buffer)
+        
+        self.buffer = ""
 
     def dprint(self, arg):
         if self.debug:
@@ -89,7 +100,6 @@ class Monitor:
 
     def can_ping(self, status):
         return status & self.s_ping
-
 
     def has_service(self, status):
         return status & self.s_service
@@ -248,7 +258,7 @@ class Monitor:
 
 
     def makelegend(self):
-        common = '<text class="names" x="630" font-size="8px"'
+        common = '<text class="names" x="630" fohtmlnt-size="8px"'
         self.printbox(600, 50, 0, col1, 0)
         self.mprint('{}  y="57"  >uncommissioned</text>'.format(common))
         self.printbox(600, 65, 0, col2, 0)
@@ -264,6 +274,9 @@ class Monitor:
 
 
     def generatesvg(self):
+
+        svg_buffer = ""
+
         self.mprint(htmlsvg.header)
         name = os.path.basename(os.path.normpath(self.directory))
         self.mprint(f'<text x="350" y="12" fill="white" font-size="36px">{name.upper()}</text>')
@@ -282,7 +295,7 @@ class Monitor:
         for name, type, status, ip, port, angle, xo, yo, url, sw in self.lab.servers:
             self.dprint("{} {} {} {}".format(name, type, status, ip))
             if (url != "none"):
-                self.mprint('<a href="{}" target="_blank">'.format(url))
+                self.mprint('<a href="{}" target="_blank">'.format(html.escape(url)))
             mouseovertext = '{}:{}<br>{}'.format(ip, port, sw)
             self.printinst(name, mouseovertext, type, status, angle, xo, yo)
             if (url != "none"):
@@ -294,13 +307,27 @@ class Monitor:
 
         self.mprint(htmlsvg.footer)
 
+        # Write the svg to the file
+        self.mprint(svg_buffer)
+
+    def extract_svg(self, html_content):
+        svgs = []
+        while '<svg' in html_content:
+            start_index = html_content.index('<svg')
+            end_index = html_content.index('</svg>') + len('</svg>')
+            svg = html_content[start_index:end_index]
+            svg = svg.replace('<svg ', '<svg style="background-color:white;" ')
+            svg = svg.replace('<br>', '&#10;')
+            svg = svg.replace('&var-server', '&#38;var-server')
+            svg = svg.replace('&nbsp;', '&#160;')
+            svgs.append(svg)
+            html_content = html_content[end_index:]
+        return svgs
 
     def one_pass(self):
-        self.file = open(f"{self.directory}/tmp.svg", "w")
         self.getstatus()
         self.generatesvg()
-        self.file.close()
-        os.rename(f"{self.directory}/tmp.svg", f"{self.directory}/index.html")
+        self.flush()
 
     def run(self):
         while (True):
