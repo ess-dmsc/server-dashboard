@@ -16,7 +16,15 @@ TBL-3HE,       1,  0, efu0437.daq.esss.dk,   9020, -82, 0, 0, https://10.100.211
 
 # Angle Group
 # -90 - 0
-LoKI,          1,  0, efu0434.daq.esss.dk,   9000, -45, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s
+LoKI_0,          1,  0, efu0434.daq.esss.dk,   9001, -61, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank0
+LoKI_1,          1,  0, efu0434.daq.esss.dk,   9002, -53, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank1
+LoKI_2,          1,  0, efu0434.daq.esss.dk,   9003, -45, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank2
+LoKI_3,          1,  0, efu0434.daq.esss.dk,   9004, -37, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank3
+LoKI_4,          1,  0, efu0434.daq.esss.dk,   9005, -29, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank4
+LoKI_5,          1,  0, efu0434.daq.esss.dk,   9006, -21, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank5
+LoKI_6,          1,  0, efu0434.daq.esss.dk,   9007, -13, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank6
+LoKI_7,          1,  0, efu0434.daq.esss.dk,   9008,  -5, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank7
+LoKI_8,          1,  0, efu0434.daq.esss.dk,   9009,   3, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank8
 
 # Angle Group
 # 0 - 90
