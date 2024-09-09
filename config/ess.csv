@@ -7,11 +7,11 @@
 # -180 - -90
 NMX,           1,  0, efu0436.daq.esss.dk,   9000, -159, 0, 0, https://10.100.211.93:3000/d/nmx/nmx?refresh=5s
 BIFROST,       1,  0, efu0433.daq.esss.dk,   9000, -138, 0, 0, https://10.100.211.93:3000/d/bifrost/bifrost?refresh=5s
-TBL-MB,        1, 64, efu0437.daq.esss.dk,   9000, -98, 0, 0, none
+TBL-MB,        1,  0, efu0437.daq.esss.dk,   9000, -98, 0, 0, none
 
 # Angle Group
 # -90 - -0
-TBL-TP,        1, 64, efu0437.daq.esss.dk,   9010, -90, 0, 0, none
+TBL-TP,        1,  0, efu0437.daq.esss.dk,   9010, -90, 0, 0, none
 TBL-3HE,       1,  0, efu0437.daq.esss.dk,   9020, -82, 0, 0, https://10.100.211.93:3000/d/3FvPQ0lSk/tbl3he?orgId=1&refresh=5s
 
 # Angle Group
