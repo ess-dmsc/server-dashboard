@@ -5,14 +5,17 @@
 # from httpss://confluence.esss.lu.se/pages/viewpage.action?pageId=167903470
 # Angle Group
 # -180 - -90
-NMX,           1,  0, efu0436.daq.esss.dk,   9000, -159, 0, 0, https://10.100.211.93:3000/d/nmx/nmx?refresh=5s
-BIFROST,       1,  0, efu0433.daq.esss.dk,   9000, -138, 0, 0, https://10.100.211.93:3000/d/bifrost/bifrost?refresh=5s
-TBL-MB,        1,  0, efu0437.daq.esss.dk,   9000, -98, 0, 0, none
+NMX,           1,  0, efu0436.daq.esss.dk,   9001, -159, 0, 0, https://10.100.211.93:3000/d/nmx/nmx?refresh=5s
+NMX-CBM,       1,  0, efu0436.daq.esss.dk,   9010, -152, 0, 0, none
+BIFROST,       1,  0, efu0433.daq.esss.dk,   9001, -138, 0, 0, https://10.100.211.93:3000/d/bifrost/bifrost?refresh=5s
+BIFROST-CBM,   1,  0, efu0433.daq.esss.dk,   9010, -131, 0, 0, none
+TBL-MB,        1,  0, efu0437.daq.esss.dk,   9001, -100, 0, 0, none
 
 # Angle Group
 # -90 - -0
-TBL-TP,        1,  0, efu0437.daq.esss.dk,   9010, -90, 0, 0, none
-TBL-3HE,       1,  0, efu0437.daq.esss.dk,   9020, -82, 0, 0, https://10.100.211.93:3000/d/3FvPQ0lSk/tbl3he?orgId=1&refresh=5s
+TBL-TP,        1,  0, efu0437.daq.esss.dk,   9002, -92, 0, 0, none
+TBL-3HE,       1,  0, efu0437.daq.esss.dk,   9003, -84, 0, 0, https://10.100.211.93:3000/d/3FvPQ0lSk/tbl3he?orgId=1&refresh=5s
+TBL-CBM,       1,  0, efu0437.daq.esss.dk,   9010, -76, 0, 0, none
 
 # Angle Group
 # -90 - 0
@@ -31,13 +34,14 @@ loki8,          1,  0, efu0434.daq.esss.dk,   9009, -13, 0, 0, https://10.100.21
 
 # Angle Group
 # 90 - 180
-#Dream-cbm,     1, 0, 10.100.6.31,    8810,  112, 0, 0, https://10.100.211.93:3000/d/8lDvTOQSz/cbm?orgId=1&refresh=5s
 dream-bwec,    1, 0, 10.100.6.31,    9000,  142, 0, 0, https://10.100.211.93:3000/d/dream/dream?refresh=5s&orgId=1&var-region=bwec
 dream-fwec,    1, 0, 10.100.6.31,    9001,  136, 0, 0, https://10.100.211.93:3000/d/dream/dream?refresh=5s&orgId=1&var-region=fwec
 dream-mantle,  1, 0, 10.100.6.31,    9002,  130, 0, 0, https://10.100.211.93:3000/d/dream/dream?refresh=5s&orgId=1&var-region=mantle
 dream-hr,      1, 0, 10.100.6.31,    9003,  124, 0, 0, https://10.100.211.93:3000/d/dream/dream?refresh=5s&orgId=1&var-region=hr
 dream-sans,    1, 0, 10.100.6.31,    9004,  118, 0, 0, https://10.100.211.93:3000/d/dream/dream?refresh=5s&orgId=1&var-region=sans
-Odin,          1, 0, efu0435.daq.esss.dk,    9000,  160, 0, 0, https://10.100.211.93:3000/d/odin/odin?refresh=5s
+dream-cbm,     1, 0, 10.100.6.31,    9010,  112, 0, 0, none
+ODIN,          1, 0, efu0435.daq.esss.dk,    9001,  158, 0, 0, https://10.100.211.93:3000/d/odin/odin?refresh=5s
+ODIN-CBM,      1, 0, efu0435.daq.esss.dk,    9010,  164, 0, 0, none
 
 # Kafka
 kafka0415,     2, 0, 10.100.4.15,    8093,    0, -450, -140, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0415_daq_esss_dk
