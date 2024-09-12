@@ -298,7 +298,8 @@ class Monitor:
             }}, {self.refresh * 1000});
         </script>
             <div style="text-align:right">
-                <input type="checkbox" id="auto-refresh-check" checked/ > <label for="auto-refresh-check">Auto-refresh</label>
+                <input type="checkbox" id="auto-refresh-check" checked/ > 
+                <label for="auto-refresh-check">Auto-refresh</label>
             </div>
         ''')
 
