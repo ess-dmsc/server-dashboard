@@ -291,7 +291,6 @@ class Monitor:
         <script type="text/javascript">
             setInterval(function() {{
                 const isChecked = document.getElementById('auto-refresh-check').checked;
-                    console.log(isChecked);
                 if (isChecked) {{
                     window.location.href = window.location.href;
                 }}
