@@ -269,16 +269,6 @@ class Monitor:
         self.mprint(f'<text x="350" y="12" fill="white" font-size="36px">{name.upper()}</text>')
         self.mprint(f'<image x="0" y="300" height="100" width="100" href="{name}/logo.jpeg" />')
 
-        # Use javascript to refresh the page every dynamically
-        # This reserves the url path and query string
-        self.mprint(f'''
-        <script type="text/javascript">
-            setTimeout(function() {{
-            window.location.href = window.location.href;
-            }}, {self.refresh * 1000});
-        </script>
-        ''')
-
         for name, type, status, ip, port, angle, xo, yo, url, sw in self.lab.servers:
             self.dprint("{} {} {} {}".format(name, type, status, ip))
             if (url != "none"):
@@ -294,11 +284,29 @@ class Monitor:
 
         self.mprint(htmlsvg.footer)
 
+    def generaterefreshcomponent(self):
+        # Use javascript to refresh the page every dynamically
+        # This reserves the url path and query string
+        self.mprint(f'''
+        <script type="text/javascript">
+            setInterval(function() {{
+                const isChecked = document.getElementById('auto-refresh-check').checked;
+                if (isChecked) {{
+                    window.location.href = window.location.href;
+                }}
+            }}, {self.refresh * 1000});
+        </script>
+            <div style="text-align:right">
+                <input type="checkbox" id="auto-refresh-check" checked/ > 
+                <label for="auto-refresh-check">Auto-refresh</label>
+            </div>
+        ''')
 
     def one_pass(self):
         self.file = open(f"{self.directory}/tmp.svg", "w")
         self.getstatus()
         self.generatesvg()
+        self.generaterefreshcomponent()
         self.file.close()
         os.rename(f"{self.directory}/tmp.svg", f"{self.directory}/index.html")
 
@@ -314,7 +322,7 @@ class Monitor:
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-d', '--debug', action='store_true')
-    parser.add_argument('-f', '--file', type = str, default = 'utgaard.csv')
+    parser.add_argument('-f', '--file', type = str, default = './config/utgaard.csv')
     parser.add_argument('-r', '--refresh', type = int, default = 5)
     parser.add_argument('-t', '--test', action='store_true')
     parser.add_argument('-o', '--out', type = str, default = '.')
