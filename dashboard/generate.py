@@ -284,7 +284,7 @@ class Monitor:
 
         self.mprint(htmlsvg.footer)
 
-    def generateRefresh(self):
+    def generaterefreshcomponent(self):
         # Use javascript to refresh the page every dynamically
         # This reserves the url path and query string
         self.mprint(f'''
@@ -306,7 +306,7 @@ class Monitor:
         self.file = open(f"{self.directory}/tmp.svg", "w")
         self.getstatus()
         self.generatesvg()
-        self.generateRefresh()
+        self.generaterefreshcomponent()
         self.file.close()
         os.rename(f"{self.directory}/tmp.svg", f"{self.directory}/index.html")
 
