@@ -269,22 +269,6 @@ class Monitor:
         self.mprint(f'<text x="350" y="12" fill="white" font-size="36px">{name.upper()}</text>')
         self.mprint(f'<image x="0" y="300" height="100" width="100" href="{name}/logo.jpeg" />')
 
-        for name, type, status, ip, port, angle, xo, yo, url, sw in self.lab.servers:
-            self.dprint("{} {} {} {}".format(name, type, status, ip))
-            if (url != "none"):
-                self.mprint('<a href="{}" target="_blank">'.format(url))
-            mouseovertext = '{}:{}<br>{}'.format(ip, port, sw)
-            self.printinst(name, mouseovertext, type, status, angle, xo, yo)
-            if (url != "none"):
-                self.mprint('</a>')
-
-        self.makelegend()
-        self.mprint('<text x="10" y="5" fill="white" font-size="16px">{}</text>'.format(self.gettime()))
-        self.mprint('<text x="690" y="395" fill="black" font-size="8px">started {}</text>'.format(self.starttime))
-
-        self.mprint(htmlsvg.footer)
-
-    def generaterefreshcomponent(self):
         # Use javascript to refresh the page every dynamically
         # This reserves the url path and query string
         self.mprint(f'''
@@ -301,12 +285,26 @@ class Monitor:
                 <label for="auto-refresh-check">Auto-refresh</label>
             </div>
         ''')
+        
+        for name, type, status, ip, port, angle, xo, yo, url, sw in self.lab.servers:
+            self.dprint("{} {} {} {}".format(name, type, status, ip))
+            if (url != "none"):
+                self.mprint('<a href="{}" target="_blank">'.format(url))
+            mouseovertext = '{}:{}<br>{}'.format(ip, port, sw)
+            self.printinst(name, mouseovertext, type, status, angle, xo, yo)
+            if (url != "none"):
+                self.mprint('</a>')
+
+        self.makelegend()
+        self.mprint('<text x="10" y="5" fill="white" font-size="16px">{}</text>'.format(self.gettime()))
+        self.mprint('<text x="690" y="395" fill="black" font-size="8px">started {}</text>'.format(self.starttime))
+
+        self.mprint(htmlsvg.footer)
 
     def one_pass(self):
         self.file = open(f"{self.directory}/tmp.svg", "w")
         self.getstatus()
         self.generatesvg()
-        self.generaterefreshcomponent()
         self.file.close()
         os.rename(f"{self.directory}/tmp.svg", f"{self.directory}/index.html")
 
@@ -317,7 +315,6 @@ class Monitor:
             dt = time.time() - start
             if (self.refresh - dt) > 0:
                 time.sleep(self.refresh - dt)
-
 
 def main():
     parser = argparse.ArgumentParser()
