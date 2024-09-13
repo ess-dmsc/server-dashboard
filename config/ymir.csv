@@ -30,7 +30,7 @@ SKADI,         1, 64, 10.100.1.32,   8002,  44, 0, 0, none
 VESPA,         1, 64, 10.100.1.32,   8888,  64, 0, 0, none
 # Angle Group
 # 90 - 180
-Dream-cbm,     1, 0, 10.100.2.32,    8810,  112, 0, 0, https://10.100.211.93:3000/d/8lDvTOQSz/dream-cbm?orgId=1&refresh=5s
+Dream-cbm,     1, 0, 10.100.1.32,    8810,  112, 0, 0, https://10.100.211.93:3000/d/8lDvTOQSz/dream-cbm?orgId=1&refresh=5s
 Dream-bwec,    1, 0, 10.100.1.32,    8030,  142, 0, 0, https://10.100.211.93:3000/d/dream/dream?refresh=5s
 Dream-fwec,    1, 0, 10.100.1.32,    8031,  136, 0, 0, https://10.100.211.93:3000/d/dream/dream?refresh=5s
 Dream-mantle,  1, 0, 10.100.1.32,    8032,  130, 0, 0, https://10.100.211.93:3000/d/dream/dream?refresh=5s
