@@ -40,22 +40,18 @@ ODIN,          1, 0, 10.100.2.33,    8888,  160, 0, 0, https://10.100.211.93:300
 #
 kafka0415,     2, 0, 10.100.4.15,    8093,    0, -450, -140, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0415_daq_esss_dk
 kafka0417,     2, 0, 10.100.4.17,    8093,    0, -450, -125, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0417_daq_esss_dk
-kafka0421,     2, 0, 10.100.4.21,    8093,    0, -450, -110, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0421_daq_esss_dk
-kafka0425,     2, 0, 10.100.4.25,    8093,    0, -450, -95, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0425_daq_esss_dk
-kafka0427,     2, 0, 10.100.4.27,    8093,    0, -450, -80, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0427_daq_esss_dk
-kafka0529,     2, 0, 10.100.5.29,    8093,    0, -450, -65, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0529_daq_esss_dk
-zookeeper01,   2, 0, 10.100.211.122, 2181,    0, -355, -140, none
+kafka0529,     2, 0, 10.100.5.29,    8093,    0, -450, -110, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0529_daq_esss_dk
+kafka0531,     2, 0, 10.100.5.31,    8093,    0, -450, -95,  https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0531_daq_esss_dk
 #
-carbon,        3, 0, 10.100.211.224, 2003, 0, -450, -20, none
-grafana,       3, 0, 10.100.211.93, 3000, 0, -450, -5, none
-AKHQ,          3, 0, 10.100.211.94,  8443, 0, -450, 10, none
-graylog,       3, 0, 10.100.211.187, 9000, 0, -450, 25, none
-forwarder01,   2, 0, 10.102.10.244, 8093, 0, -450, 40, none
+carbon,        3, 0, 10.100.211.224, 2003, 0, -450, -50, none
+grafana,       3, 0, 10.100.211.93, 3000, 0, -450, -35, none
+AKHQ,          3, 0, 10.100.211.94,  8443, 0, -450, -20, none
+graylog,       3, 0, 10.100.211.187, 9000, 0, -450, -5, none
+forwarder01,   2, 0, 10.102.10.244, 8093, 0, -450, 10, none
 #
-filewriter0126,        2, 0, 10.100.1.26, 8888, 0, -355, -20, none
-filewriter0128,        2, 0, 10.100.1.28, 8888, 0, -355, -5, none
-filewriter0129,        2, 0, 10.100.1.29, 8888, 0, -355, 10, none
-nicosserver01,         2, 0, 10.102.10.238, 14869, 0, -355, 25, none
+filewriter0625,        2, 0, 10.100.6.25, 8888, 0, -355, -50, none
+filewriter0627,        2, 0, 10.100.6.27, 8888, 0, -355, -35, none
+nicosserver01,         2, 0, 10.102.10.238, 14869, 0, -355, -20, none
 #
 Kafka &nbsp; Brokers,  4, 64, 0.0.0.0, 65535, 0, -450, -160, none
-Other &nbsp; Services, 4, 64, 0.0.0.0, 65535, 0, -450, -40, none
+Other &nbsp; Services, 4, 64, 0.0.0.0, 65535, 0, -450, -70, none
