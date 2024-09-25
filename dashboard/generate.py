@@ -328,7 +328,6 @@ class Monitor:
             setInterval(function() {{
                 const isChecked = window.parent.document.getElementById('auto-refresh-check').checked;
                 if (isChecked) {{
-                    window.parent.document.getElementById('dashboard').src = '';
                     window.parent.document.getElementById('dashboard').src = 'dashboard.svg';
                 }}
             }}, {self.refresh * 1000});
