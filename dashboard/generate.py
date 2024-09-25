@@ -114,7 +114,7 @@ class Monitor:
             s.close()
 
             # return " ".join(data.split()[1:4])
-            test = "<br>".join(data.decode("utf-8").split()[1:4])
+            test = "<br/>".join(data.decode("utf-8").split()[1:4])
             self.dprint(test)
             return test
         except:
@@ -225,7 +225,7 @@ class Monitor:
         boxy = 195 + ofsy
         texty = boxy + 8
         textx = 450 + ofsx
-        common = '<text  class="names" y="{}" transform="rotate({} 400 200)"'.format(
+        common = '<text class="names" y="{}" transform="rotate({} 400 200)"'.format(
             texty, angle
         )
         if type == type_efu:
@@ -275,7 +275,7 @@ class Monitor:
 
     def generatesvg(self):
         header = """
-            <svg viewBox="-20 -20 800 430" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <svg style="background-color:white;" viewBox="-20 -20 800 430" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <pattern id="dhatch" patternUnits="userSpaceOnUse" width="4" height="4">
                     <path d="M-1,1 l2,-2
                         M0,4 l4,-4
@@ -306,7 +306,7 @@ class Monitor:
             self.dprint("{} {} {} {}".format(name, type, status, ip))
             if url != "none":
                 self.mprint('<a href="{}" target="_blank">'.format(url))
-            mouseovertext = "{}:{}<br>{}".format(ip, port, sw)
+            mouseovertext = "{}:{}<br/>{}".format(ip, port, sw)
             self.printinst(name, mouseovertext, type, status, angle, xo, yo)
             if url != "none":
                 self.mprint("</a>")
