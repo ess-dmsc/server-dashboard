@@ -307,7 +307,7 @@ class Monitor:
             if url != "none":
                 self.mprint('<a href="{}" target="_blank">'.format(url.replace('&', '&#38;')))
             mouseovertext = "{}:{}&#10;{}".format(ip, port, sw)
-            self.printinst(name, mouseovertext, type, status, angle, xo, yo)
+            self.printinst(name.replace('&nbsp;', '&#160;'), mouseovertext, type, status, angle, xo, yo)
             if url != "none":
                 self.mprint("</a>")
 
