@@ -114,7 +114,7 @@ class Monitor:
             s.close()
 
             # return " ".join(data.split()[1:4])
-            test = "&#10;".join(data.decode("utf-8").split()[1:4])
+            test = "\n".join(data.decode("utf-8").split()[1:4])
             self.dprint(test)
             return test
         except:
@@ -299,7 +299,7 @@ class Monitor:
             f'<text x="350" y="12" fill="white" font-size="36px">{name.upper()}</text>'
         )
         self.mprint(
-            '<image x="0" y="300" height="100" width="100" href="logo.jpeg" />'
+            f'<image x="0" y="300" height="100" width="100" href="{name}/logo.jpeg" />'
         )
 
         for name, type, status, ip, port, angle, xo, yo, url, sw in self.lab.servers:
