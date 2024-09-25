@@ -184,7 +184,7 @@ class Monitor:
         if motext != "" and color != col1:
             res = (
                 res
-                + 'onmousemove="showTooltip(evt, \'{}\');" onmouseout="hideTooltip();" '.format(
+                + 'onmousemove="window.parent.showTooltip(evt, \'{}\');" onmouseout="window.parent.hideTooltip();" '.format(
                     motext
                 )
             )
