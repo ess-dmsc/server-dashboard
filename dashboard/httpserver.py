@@ -21,6 +21,8 @@ class CustomHTTPRequestHandler(SimpleHTTPRequestHandler):
     def do_GET(self):
         if self.path == '/':
             self.path = './ymir/index.html'
+        if self.path == '/dashboard.svg':
+            self.path = './ymir/dashboard.svg'
         if self.path.startswith('/ymir'):
             if self.path.endswith('/ymir'):
                 self.path = './ymir/index.html'
@@ -41,7 +43,7 @@ class CustomHTTPRequestHandler(SimpleHTTPRequestHandler):
             f'<p>Requested path: {self.path}</p>'.encode()
             logging.error(f'Failed on equested path: {self.path}')
             return
-        
+
         return super().do_GET()
 
 def run(server_class=HTTPServer, handler_class=CustomHTTPRequestHandler, port=8000):
@@ -54,5 +56,5 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--port', type=int, default=8766, help='Port number')
     args = parser.parse_args()
-    
+
     run(port=args.port)
