@@ -23,6 +23,8 @@ class CustomHTTPRequestHandler(SimpleHTTPRequestHandler):
             self.path = './ymir/index.html'
         if self.path == '/dashboard.svg':
             self.path = './ymir/dashboard.svg'
+        if self.path == '/logo.jpeg':
+            self.path = './ymir/logo.jpeg'
         if self.path.startswith('/ymir'):
             if self.path.endswith('/ymir'):
                 self.path = './ymir/index.html'
