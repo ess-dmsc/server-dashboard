@@ -114,7 +114,7 @@ class Monitor:
             s.close()
 
             # return " ".join(data.split()[1:4])
-            test = "<br/>".join(data.decode("utf-8").split()[1:4])
+            test = "<br />".join(data.decode("utf-8").split()[1:4])
             self.dprint(test)
             return test
         except:
@@ -306,7 +306,7 @@ class Monitor:
             self.dprint("{} {} {} {}".format(name, type, status, ip))
             if url != "none":
                 self.mprint('<a href="{}" target="_blank">'.format(url))
-            mouseovertext = "{}:{}<br/>{}".format(ip, port, sw)
+            mouseovertext = "{}:{}<br />{}".format(ip, port, sw)
             self.printinst(name, mouseovertext, type, status, angle, xo, yo)
             if url != "none":
                 self.mprint("</a>")
