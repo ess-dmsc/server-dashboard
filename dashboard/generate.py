@@ -306,7 +306,7 @@ class Monitor:
             self.dprint("{} {} {} {}".format(name, type, status, ip))
             if url != "none":
                 self.mprint('<a href="{}" target="_blank">'.format(url.replace('&', '&#38;')))
-            mouseovertext = "{}:{}&#10;{}".format(ip, port, sw)
+            mouseovertext = "{}:{}\n{}".format(ip, port, sw)
             self.printinst(name.replace('&nbsp;', '&#160;'), mouseovertext, type, status, angle, xo, yo)
             if url != "none":
                 self.mprint("</a>")
@@ -326,7 +326,7 @@ class Monitor:
             f"""
             <script type="text/javascript">
             setInterval(function() {{
-                const isChecked = document.getElementById('auto-refresh-check').checked;
+                const isChecked = window.parent.document.getElementById('auto-refresh-check').checked;
                 if (isChecked) {{
                     window.location.href = window.location.href;
                 }}
