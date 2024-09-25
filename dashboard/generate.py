@@ -299,7 +299,7 @@ class Monitor:
             f'<text x="350" y="12" fill="white" font-size="36px">{name.upper()}</text>'
         )
         self.mprint(
-            f'<image x="0" y="300" height="100" width="100" href="{name}/logo.jpeg" />'
+            '<image x="0" y="300" height="100" width="100" href="logo.jpeg" />'
         )
 
         for name, type, status, ip, port, angle, xo, yo, url, sw in self.lab.servers:
@@ -328,7 +328,8 @@ class Monitor:
             setInterval(function() {{
                 const isChecked = window.parent.document.getElementById('auto-refresh-check').checked;
                 if (isChecked) {{
-                    window.location.href = window.location.href;
+                    window.parent.document.getElementById('dashboard').src = '';
+                    window.parent.document.getElementById('dashboard').src = 'dashboard.svg';
                 }}
             }}, {self.refresh * 1000});
             </script>
