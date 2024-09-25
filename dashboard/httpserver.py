@@ -22,9 +22,6 @@ class CustomHTTPRequestHandler(SimpleHTTPRequestHandler):
         if self.path == '/':
             self.path = './ymir/index.html'
         if self.path == '/dashboard.svg':
-            self.send_header('Refresh', '5')
-            self.send_response(200)
-            self.end_headers()
             self.path = './ymir/dashboard.svg'
         if self.path == '/logo.jpeg':
             self.path = './ymir/logo.jpeg'
