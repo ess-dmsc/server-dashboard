@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
-import htmlsvg
-import random, socket, subprocess, os, time, json
+import socket, subprocess, os, time, json
 from datetime import datetime
 import argparse
 
