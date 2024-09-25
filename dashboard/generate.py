@@ -184,7 +184,7 @@ class Monitor:
         if motext != "" and color != col1:
             res = (
                 res
-                + 'onmousemove="if(window.parent.location.href.endsWith(\'.html\'))window.parent.showTooltip(evt, \'{}\');" onmouseout="if(window.parent.location.href.endsWith(\'.html\'))window.parent.hideTooltip();" '.format(
+                + 'onmousemove="if(!window.parent.location.href.endsWith(\'.svg\'))window.parent.showTooltip(evt, \'{}\');" onmouseout="if(!window.parent.location.href.endsWith(\'.svg\'))window.parent.hideTooltip();" '.format(
                     motext
                 )
             )
@@ -326,7 +326,7 @@ class Monitor:
             f"""
             <script type="text/javascript">
             setInterval(function() {{
-                if (window.parent.location.href.endsWith('.html')) {{
+                if (!window.parent.location.href.endsWith('.svg')) {{
                     const isChecked = window.parent.document.getElementById('auto-refresh-check').checked;
                     if (isChecked) {{
                         window.parent.document.getElementById('dashboard').src = 'dashboard.svg';
