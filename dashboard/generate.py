@@ -305,7 +305,7 @@ class Monitor:
         for name, type, status, ip, port, angle, xo, yo, url, sw in self.lab.servers:
             self.dprint("{} {} {} {}".format(name, type, status, ip))
             if url != "none":
-                self.mprint('<a href="{}" target="_blank">'.format(url))
+                self.mprint('<a href="{}" target="_blank">'.format(url.replace('&', '&#38;')))
             mouseovertext = "{}:{}&#10;{}".format(ip, port, sw)
             self.printinst(name, mouseovertext, type, status, angle, xo, yo)
             if url != "none":
