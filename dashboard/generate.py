@@ -323,35 +323,25 @@ class Monitor:
                 self.starttime
             )
         )
-        self.mprint("</svg>")
-
-    def generaterefreshcomponent(self):
-        # Use javascript to refresh the page every dynamically
-        # This reserves the url path and query string
         self.mprint(
             f"""
-        <script type="text/javascript">
+            <script type="text/javascript">
             setInterval(function() {{
                 const isChecked = document.getElementById('auto-refresh-check').checked;
                 if (isChecked) {{
                     window.location.href = window.location.href;
                 }}
             }}, {self.refresh * 1000});
-        </script>
-            <div style="text-align:right">
-                <input type="checkbox" id="auto-refresh-check" checked/ >
-                <label for="auto-refresh-check">Auto-refresh</label>
-            </div>
+            </script>
         """
         )
+        self.mprint("</svg>")
 
     def one_pass(self):
-        self.file = open(f"{self.directory}/tmp.svg", "w")
+        self.file = open(f"{self.directory}/dashboard.svg", "w")
         self.getstatus()
         self.generatesvg()
-        self.generaterefreshcomponent()
         self.file.close()
-        os.rename(f"{self.directory}/tmp.svg", f"{self.directory}/index.html")
 
     def run(self):
         while True:
