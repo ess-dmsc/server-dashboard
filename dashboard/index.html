@@ -35,12 +35,10 @@
 </div>
 <script type="text/javascript">
   setInterval(function() {
-      if (!window.parent.location.href.endsWith('.svg')) {
-          const isChecked = window.parent.document.getElementById('auto-refresh-check').checked;
-          if (isChecked) {
-              window.parent.document.getElementById('dashboard').src = 'dashboard.svg';
-          }
-      }
+    const isChecked = window.parent.document.getElementById('auto-refresh-check').checked;
+    if (isChecked) {
+        window.parent.document.getElementById('dashboard').src = 'dashboard.svg';
+    }
   }, ###refresh###);
 </script>
 </body></html>
