@@ -322,20 +322,6 @@ class Monitor:
                 self.starttime
             )
         )
-        self.mprint(
-            f"""
-            <script type="text/javascript">
-            setInterval(function() {{
-                if (!window.parent.location.href.endsWith('.svg')) {{
-                    const isChecked = window.parent.document.getElementById('auto-refresh-check').checked;
-                    if (isChecked) {{
-                        window.parent.document.getElementById('dashboard').src = 'dashboard.svg';
-                    }}
-                }}
-            }}, {self.refresh * 1000});
-            </script>
-        """
-        )
         self.mprint("</svg>")
 
     def one_pass(self):
@@ -361,7 +347,14 @@ def main():
     parser.add_argument("-t", "--test", action="store_true")
     parser.add_argument("-o", "--out", type=str, default=".")
     args = parser.parse_args()
-
+    # edit refresh into index rather than svg, in case of svg issues
+    with open(f"{args.out}/index.html","r") as f:
+        newlines = []
+        for line in f.readlines():
+            newlines.append(line.replace("###refresh###", f"{args.refresh * 1000}"))
+    with open(f"{args.out}/index.html","w") as f:
+        for line in newlines:
+            f.write(line)
     serverlist = ECDCServers(args.file, args.out)
     mon = Monitor(serverlist, args)
 
