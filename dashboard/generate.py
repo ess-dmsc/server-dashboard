@@ -263,7 +263,7 @@ class Monitor:
 
 
     def makelegend(self):
-        common = '<text class="names" x="630" fohtmlnt-size="8px"'
+        common = '<text class="names" x="630" font-size="8px"'
         self.printbox(600, 50, 0, col1, 0)
         self.mprint('{}  y="57"  >uncommissioned</text>'.format(common))
         self.printbox(600, 65, 0, col2, 0)
