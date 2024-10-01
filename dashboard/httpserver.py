@@ -21,6 +21,8 @@ class CustomHTTPRequestHandler(SimpleHTTPRequestHandler):
     def do_GET(self):
         if self.path == '/':
             self.path = './ymir/index.html'
+        if self.path == '/dashboard.svg':
+            self.path = './ymir/dashboard.svg'
         if self.path.startswith('/ymir'):
             if self.path.endswith('/ymir'):
                 self.path = './ymir/index.html'
