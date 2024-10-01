@@ -325,10 +325,12 @@ class Monitor:
         self.mprint("</svg>")
 
     def one_pass(self):
-        self.file = open(f"{self.directory}/dashboard.svg", "w")
+        self.file = open(f"{self.directory}/tmp.svg", "w")
         self.getstatus()
         self.generatesvg()
         self.file.close()
+        # ensure we always have a dashboard.svg available via atomic operation
+        os.rename(f"{self.directory}/tmp.svg", f"{self.directory}/dashboard.svg")
 
     def run(self):
         while True:
