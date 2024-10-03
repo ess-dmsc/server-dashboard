@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import htmlsvg
+import html, htmlsvg
 import socket, subprocess, os, time, json
 from datetime import datetime
 import argparse
