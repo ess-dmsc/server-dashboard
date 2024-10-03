@@ -55,7 +55,7 @@ for name in "${name_list[@]}"; do
     # Copy files to the folder
     cp $DASHBOARD_HOME/$name-logo.jpeg $name/logo.jpeg
     cp $DASHBOARD_HOME/index.html $name/index.html
-    python $DASHBOARD_HOME/generate.py -f $config_dir/$name.csv -r 1 -o $name $test_mode &
+    python $DASHBOARD_HOME/generate.py -f $config_dir/$name.csv -r 5 -o $name $test_mode &
     sleep 1
     if [ $? -ne 0 ]; then
         echo "Dashboard generator failed to start for $name"
