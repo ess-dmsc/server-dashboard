@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-
-import dashboard.htmlsvg as htmlsvg, socket, subprocess, os, time, json
+import htmlsvg
+import socket, subprocess, os, time, json
 from datetime import datetime
 import argparse
 

@@ -17,7 +17,8 @@ HEADER = """
     <text x="385" y="205" fill="white">ESS</text>
     """
 
-NOT_SUPPORTED = """<!DOCTYPE html>
+NOT_SUPPORTED = """
+<!DOCTYPE html>
 <html>
 <head>
   <title>Dashboard Site - Not Supported</title>
