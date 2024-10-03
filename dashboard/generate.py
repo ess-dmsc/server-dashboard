@@ -354,6 +354,7 @@ def main():
     parser.add_argument("-o", "--out", type=str, default=".")
     args = parser.parse_args()
     # edit refresh into index rather than svg, in case of svg issues
+    # file already in place from start-up script
     with open(f"{args.out}/index.html","r") as f:
         newlines = []
         for line in f.readlines():
