@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import socket, subprocess, os, time, json
+import htmlsvg, socket, subprocess, os, time, json
 from datetime import datetime
 import argparse
 
@@ -59,6 +59,7 @@ class Monitor:
         self.s_stage2 = 0x02
         self.s_stage1 = 0x01
         self.lab = serverlist
+        self.buffer = ""
         self.debug = args.debug
         self.refresh = args.refresh
         self.test = args.test
@@ -66,7 +67,18 @@ class Monitor:
         self.starttime = self.gettime()
 
     def mprint(self, arg):
-        self.file.write(arg + "\n")
+        self.buffer += arg + "\n"
+
+    def sync_write_fs(self, filename, content):
+        with open(f"{self.directory}/.tmp_file", "w") as file:
+            file.write(content)
+            file.flush()
+            os.fsync(file.fileno())
+        os.replace(f"{self.directory}/.tmp_file", f"{self.directory}/{filename}")
+
+    def flush(self):
+        self.sync_write_fs("dashboard.svg", self.buffer)
+        self.buffer = ""
 
     def dprint(self, arg):
         if self.debug:
@@ -274,26 +286,10 @@ class Monitor:
         self.mprint('{}   y="132" >data flow</text>'.format(common))
 
     def generatesvg(self):
-        header = """
-            <svg style="background-color:white;" viewBox="-20 -20 800 430" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <pattern id="dhatch" patternUnits="userSpaceOnUse" width="4" height="4">
-                    <path d="M-1,1 l2,-2
-                        M0,4 l4,-4
-                        M3,5 l2,-2"
-                    style="stroke:green; stroke-width:1" />
-                </pattern>
-                <symbol id="chevron" width="20" height="10">
-                  <polygon points="0 0, 18 0, 20 5, 18 10, 0 10, 2 5" />
-                </symbol>
-            <rect y="-20" width="800" height="40" fill="#0094CA"/>
-            <rect y="380" width="800" height="5" fill="#0094CA"/>
-            <line x1="450" y1="200" x2="700" y2="200" style="stroke:rgb(0,0,0);stroke-width:2" />
-            <circle cx="400" cy="200" r="48" stroke-width="1" fill="white" />
-            <circle cx="400" cy="200" r="45" stroke-width="1" fill="#0094CA" />
-            <text x="385" y="205" fill="white">ESS</text>
-            """
 
-        self.mprint(header)
+        svg_buffer = ""
+
+        self.mprint(htmlsvg.header)
         name = os.path.basename(os.path.normpath(self.directory))
         self.mprint(
             f'<text x="350" y="12" fill="white" font-size="36px">{name.upper()}</text>'
@@ -305,32 +301,41 @@ class Monitor:
         for name, type, status, ip, port, angle, xo, yo, url, sw in self.lab.servers:
             self.dprint("{} {} {} {}".format(name, type, status, ip))
             if url != "none":
-                self.mprint('<a href="{}" target="_blank">'.format(url.replace('&', '&#38;')))
+                self.mprint('<a href="{}" target="_blank">'.format(html.escape(url)))
             mouseovertext = "{}:{}&#60;br /&#62;{}".format(ip, port, sw)
             self.printinst(name.replace('&nbsp;', '&#160;'), mouseovertext, type, status, angle, xo, yo)
             if url != "none":
                 self.mprint("</a>")
 
         self.makelegend()
-        self.mprint(
-            '<text x="10" y="5" fill="white" font-size="16px">{}</text>'.format(
-                self.gettime()
-            )
-        )
-        self.mprint(
-            '<text x="690" y="395" fill="black" font-size="8px">started {}</text>'.format(
-                self.starttime
-            )
-        )
-        self.mprint("</svg>")
+        self.mprint('<text x="10" y="5" fill="white" font-size="16px">{}</text>'.format(self.gettime()))
+        self.mprint('<text x="690" y="395" fill="black" font-size="8px">started {}</text>'.format(self.starttime))
+
+        self.mprint(htmlsvg.footer)
+
+    def generaterefreshcomponent(self):
+        # Use javascript to refresh the page every dynamically
+        # This reserves the url path and query string
+        self.mprint(f'''
+        <script type="text/javascript">
+            setInterval(function() {{
+                const isChecked = document.getElementById('auto-refresh-check').checked;
+                if (isChecked) {{
+                    window.location.href = window.location.href;
+                }}
+            }}, {self.refresh * 1000});
+        </script>
+            <div style="text-align:right">
+                <input type="checkbox" id="auto-refresh-check" checked/ >
+                <label for="auto-refresh-check">Auto-refresh</label>
+            </div>
+        ''')
 
     def one_pass(self):
-        self.file = open(f"{self.directory}/tmp.svg", "w")
         self.getstatus()
         self.generatesvg()
-        self.file.close()
-        # ensure we always have a dashboard.svg available via atomic operation
-        os.rename(f"{self.directory}/tmp.svg", f"{self.directory}/dashboard.svg")
+        self.generaterefreshcomponent()
+        self.flush()
 
     def run(self):
         while True:
