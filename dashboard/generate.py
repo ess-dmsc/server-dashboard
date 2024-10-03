@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
-import html, htmlsvg
-import socket, subprocess, os, time, json
-from datetime import datetime
 import argparse
+from datetime import datetime
+import html
+import os
+import socket
+import subprocess
+import time
+import htmlsvg
 
 type_efu = 1
 type_text = 4
@@ -196,7 +200,7 @@ class Monitor:
         if motext != "" and color != col1:
             res = (
                 res
-                + 'onmousemove="if(!window.parent.location.href.endsWith(\'.svg\'))window.parent.showTooltip(evt, \'{}\');" onmouseout="if(!window.parent.location.href.endsWith(\'.svg\'))window.parent.hideTooltip();" '.format(
+                + "onmousemove=\"if(!window.parent.location.href.endsWith('.svg'))window.parent.showTooltip(evt, '{}');\" onmouseout=\"if(!window.parent.location.href.endsWith('.svg'))window.parent.hideTooltip();\" ".format(
                     motext
                 )
             )
@@ -294,23 +298,37 @@ class Monitor:
         self.mprint(
             f'<text x="350" y="12" fill="white" font-size="36px">{name.upper()}</text>'
         )
-        self.mprint(
-            '<image x="0" y="300" height="100" width="100" href="logo.jpeg" />'
-        )
+        self.mprint('<image x="0" y="300" height="100" width="100" href="logo.jpeg" />')
 
         for name, type, status, ip, port, angle, xo, yo, url, sw in self.lab.servers:
             self.dprint("{} {} {} {}".format(name, type, status, ip))
             if url != "none":
                 self.mprint('<a href="{}" target="_blank">'.format(html.escape(url)))
             mouseovertext = "{}:{}&#60;br /&#62;{}".format(ip, port, sw)
-            self.printinst(name.replace('&nbsp;', '&#160;'), mouseovertext, type, status, angle, xo, yo)
+            self.printinst(
+                name.replace("&nbsp;", "&#160;"),
+                mouseovertext,
+                type,
+                status,
+                angle,
+                xo,
+                yo,
+            )
             if url != "none":
                 self.mprint("</a>")
 
         self.makelegend()
-        self.mprint('<text x="10" y="5" fill="white" font-size="16px">{}</text>'.format(self.gettime()))
-        self.mprint('<text x="690" y="395" fill="black" font-size="8px">started {}</text>'.format(self.starttime))
-        self.mprint('</svg>')
+        self.mprint(
+            '<text x="10" y="5" fill="white" font-size="16px">{}</text>'.format(
+                self.gettime()
+            )
+        )
+        self.mprint(
+            '<text x="690" y="395" fill="black" font-size="8px">started {}</text>'.format(
+                self.starttime
+            )
+        )
+        self.mprint("</svg>")
 
     def one_pass(self):
         self.getstatus()
@@ -336,11 +354,11 @@ def main():
     args = parser.parse_args()
     # edit refresh into index rather than svg, in case of svg issues
     # file already in place from start-up script
-    with open(f"{args.out}/index.html","r") as f:
+    with open(f"{args.out}/index.html", "r") as f:
         newlines = []
         for line in f.readlines():
             newlines.append(line.replace("###refresh###", f"{args.refresh * 1000}"))
-    with open(f"{args.out}/index.html","w") as f:
+    with open(f"{args.out}/index.html", "w") as f:
         for line in newlines:
             f.write(line)
     serverlist = ECDCServers(args.file, args.out)
