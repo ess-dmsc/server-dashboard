@@ -310,8 +310,7 @@ class Monitor:
         self.makelegend()
         self.mprint('<text x="10" y="5" fill="white" font-size="16px">{}</text>'.format(self.gettime()))
         self.mprint('<text x="690" y="395" fill="black" font-size="8px">started {}</text>'.format(self.starttime))
-
-        self.mprint(htmlsvg.footer)
+        self.mprint('</svg>')
 
     def generaterefreshcomponent(self):
         # Use javascript to refresh the page every dynamically
