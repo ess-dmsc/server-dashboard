@@ -2,19 +2,9 @@ import os
 from http.server import SimpleHTTPRequestHandler, HTTPServer
 import argparse
 import logging
+import htmlsvg
 
 
-not_supported = """<!DOCTYPE html>
-<html>
-<head>
-  <title>Dashboard Site - Not Supported</title>
-</head>
-<body>
-  <h1>Dashboard Request Not Supported</h1>
-  <p>Sorry, the dasboard site your requested is not supported.</p>
-</body>
-</html>
-"""
 class CustomHTTPRequestHandler(SimpleHTTPRequestHandler):
     logging.basicConfig(level=logging.ERROR)
 
@@ -41,7 +31,7 @@ class CustomHTTPRequestHandler(SimpleHTTPRequestHandler):
             self.send_response(404)
             self.send_header('Content-type', 'text/html')
             self.end_headers()
-            self.wfile.write(not_supported.encode())
+            self.wfile.write(htmlsvg.NOT_SUPPORTED.encode())
             f'<p>Requested path: {self.path}</p>'.encode()
             logging.error(f'Failed on equested path: {self.path}')
             return

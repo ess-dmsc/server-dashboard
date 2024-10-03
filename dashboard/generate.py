@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import htmlsvg, socket, subprocess, os, time, json
+import dashboard.htmlsvg as htmlsvg, socket, subprocess, os, time, json
 from datetime import datetime
 import argparse
 
@@ -289,7 +289,7 @@ class Monitor:
 
         svg_buffer = ""
 
-        self.mprint(htmlsvg.header)
+        self.mprint(htmlsvg.HEADER)
         name = os.path.basename(os.path.normpath(self.directory))
         self.mprint(
             f'<text x="350" y="12" fill="white" font-size="36px">{name.upper()}</text>'

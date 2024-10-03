@@ -1,4 +1,4 @@
-header = """
+HEADER = """
     <svg style="background-color:white;" viewBox="-20 -20 800 430" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <pattern id="dhatch" patternUnits="userSpaceOnUse" width="4" height="4">
             <path d="M-1,1 l2,-2
@@ -16,3 +16,15 @@ header = """
     <circle cx="400" cy="200" r="45" stroke-width="1" fill="#0094CA" />
     <text x="385" y="205" fill="white">ESS</text>
     """
+
+NOT_SUPPORTED = """<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard Site - Not Supported</title>
+</head>
+<body>
+  <h1>Dashboard Request Not Supported</h1>
+  <p>Sorry, the dasboard site your requested is not supported.</p>
+</body>
+</html>
+"""
