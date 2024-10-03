@@ -44,7 +44,7 @@
   <label for="auto-refresh-check">Auto-refresh</label>
 </div>
 <script type="text/javascript">
-    window.onload(svgload());
+    document.onload(svgload());
     setInterval(function() {
     const isChecked = window.parent.document.getElementById('auto-refresh-check').checked;
     if (isChecked) {
