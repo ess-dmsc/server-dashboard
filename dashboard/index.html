@@ -45,11 +45,11 @@
   <label for="auto-refresh-check">Auto-refresh</label>
 </div>
 <script type="text/javascript">
-    document.onload = loadSvg;
+    window.onload = loadSvg;
     setInterval(function() {
     const isChecked = window.parent.document.getElementById('auto-refresh-check').checked;
     if (isChecked) {
-        svgload();
+      loadSvg();
     }
   }, ###refresh###);
 </script>
