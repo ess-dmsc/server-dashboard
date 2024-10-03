@@ -24,27 +24,28 @@
       tooltip.style.display = "none";
     }
 
-    function svgload(){
-      var ld = window.parent.document.getElementById('loading_dashboard');
-      var ldd = window.parent.document.getElementById('loading_dashboard_div');
-      var d = window.parent.document.getElementById('dashboard');
-      ld.data = 'dashboard.svg';
-      ldd.innerHTML = ld.innerHTML;
-      d.parentNode.replaceChild(ldd, d);
+    function loadSvg() {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'dashboard.svg', true);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var dashboard = document.getElementById('dashboard');
+          dashboard.innerHTML = xhr.responseText;
+        }
+      };
+      xhr.send();
     }
-</script>
+  </script>
 </head>
 <body>
 <div id="tooltip" display="none" style="position: absolute; display: none;"></div>
 <div id="dashboard"></div>
-<div id="loading_dashboard_div" style="display:none;"></div>
-<object id="loading_dashboard" style="display:none;" data="dashboard.svg"></object>
 <div style="text-align:right">
   <input type="checkbox" id="auto-refresh-check" checked />
   <label for="auto-refresh-check">Auto-refresh</label>
 </div>
 <script type="text/javascript">
-    document.onload = svgload();
+    document.onload = loadSvg;
     setInterval(function() {
     const isChecked = window.parent.document.getElementById('auto-refresh-check').checked;
     if (isChecked) {
