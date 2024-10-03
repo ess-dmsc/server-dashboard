@@ -32,8 +32,6 @@
       ldd.innerHTML = ld.innerHTML;
       d.parentNode.replaceChild(ldd, d);
     }
-
-    window.onload(svgload());
   </script>
 </head>
 <body>
@@ -46,7 +44,8 @@
   <label for="auto-refresh-check">Auto-refresh</label>
 </div>
 <script type="text/javascript">
-  setInterval(function() {
+    window.onload(svgload());
+    setInterval(function() {
     const isChecked = window.parent.document.getElementById('auto-refresh-check').checked;
     if (isChecked) {
         svgload();
