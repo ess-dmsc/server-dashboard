@@ -357,8 +357,8 @@ def main():
     with open(f"{args.out}/index.html", "r", encoding="utf8") as f:
         newlines = []
         for line in f.readlines():
-            newlines.append(line.replace("###refresh###", f"{args.refresh * 1000}"))
-            newlines.append(line.replace("dashboard.svg", f"{args.out}/dashboard.svg"))
+            newlines.append(line.replace("###refresh###", f"{args.refresh * 1000}")
+                            .replace("dashboard.svg", f"/{args.out}/dashboard.svg"))
     serverlist = ECDCServers(args.file, args.out)
     mon = Monitor(serverlist, args)
     mon.sync_write_fs("index.html", "".join(newlines))
