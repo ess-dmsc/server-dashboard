@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<head>
+  <style>
+    #tooltip {
+      background: cornsilk;
+      border: 1px solid black;
+      border-radius: 5px;
+      padding: 5px;
+      font-size: 12px;
+    }
+  </style>
+
+  <script>
+    function showTooltip ( evt, text )
+    {
+      var tooltip = document.getElementById( "tooltip" );
+      tooltip.innerHTML = text;
+      tooltip.style.display = "block";
+      tooltip.style.left = evt.pageX + 10 + 'px';
+      tooltip.style.top = evt.pageY + 10 + 'px';
+    }
+
+    function hideTooltip ()
+    {
+      var tooltip = document.getElementById( "tooltip" );
+      tooltip.style.display = "none";
+    }
+
+    function loadSvg ()
+    {
+      var xhr = new XMLHttpRequest();
+      xhr.open( 'GET', 'dashboard.svg', true );
+      xhr.onreadystatechange = function ()
+      {
+        if ( xhr.readyState === 4 && xhr.status === 200 )
+        {
+          var dashboard = document.getElementById( 'dashboard' );
+          dashboard.innerHTML = xhr.responseText;
+        }
+      };
+      xhr.send();
+    }
+  </script>
+</head>
+
+<body>
+  <div id="tooltip" display="none" style="position: absolute; display: none;"></div>
+  <div id="dashboard"><embed src="dashboard.svg"></embed></div>
+  <div style="text-align:right">
+    <input type="checkbox" id="auto-refresh-check" checked />
+    <label for="auto-refresh-check">Auto-refresh</label>
+  </div>
+  <script type="text/javascript">
+    document.addEventListener( "DOMContentLoaded", loadSvg );
+    setInterval( function ()
+    {
+      const isChecked = window.parent.document.getElementById( 'auto-refresh-check' ).checked;
+      if ( isChecked )
+      {
+        loadSvg();
+      }
+    }, ###refresh### );
+  </script>
+</body>
+
+</html>

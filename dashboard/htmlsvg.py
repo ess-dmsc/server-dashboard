@@ -1,42 +1,5 @@
-
-
-
-
-
-
-header = """
-    <html>
-    <head></head>
-
-      <style>
-        #tooltip {
-        background: cornsilk;
-        border: 1px solid black;
-        border-radius: 5px;
-        padding: 5px;
-        font-size: 12px;
-     }
-      </style>
-
-      <script>
-        function showTooltip(evt, text) {
-          let tooltip = document.getElementById("tooltip");
-          tooltip.innerHTML = text;
-          tooltip.style.display = "block";
-          tooltip.style.left = evt.pageX + 10 + \'px\';
-          tooltip.style.top = evt.pageY + 10 + \'px\';
-        }
-
-        function hideTooltip() {
-          var tooltip = document.getElementById("tooltip");
-          tooltip.style.display = "none";
-        }
-      </script>
-    </head>
-
-    <body>
-    <div id="tooltip" display="none" style="position: absolute; display: none;"></div>
-    <svg viewBox="-20 -20 800 430" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+HEADER = """
+    <svg style="background-color:white;" viewBox="-20 -20 800 430" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <pattern id="dhatch" patternUnits="userSpaceOnUse" width="4" height="4">
             <path d="M-1,1 l2,-2
                 M0,4 l4,-4
@@ -52,8 +15,17 @@ header = """
     <circle cx="400" cy="200" r="48" stroke-width="1" fill="white" />
     <circle cx="400" cy="200" r="45" stroke-width="1" fill="#0094CA" />
     <text x="385" y="205" fill="white">ESS</text>
-"""
+    """
 
-footer = """
-        </svg></body></html>
+NOT_SUPPORTED = """
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard Site - Not Supported</title>
+</head>
+<body>
+  <h1>Dashboard Request Not Supported</h1>
+  <p>Sorry, the dasboard site your requested is not supported.</p>
+</body>
+</html>
 """
