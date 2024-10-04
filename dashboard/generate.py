@@ -354,15 +354,13 @@ def main():
     args = parser.parse_args()
     # edit refresh into index rather than svg, in case of svg issues
     # file already in place from start-up script
-    with open(f"{args.out}/index.html", "r") as f:
+    with open(f"{args.out}/index.html", "r", encoding="utf8") as f:
         newlines = []
         for line in f.readlines():
             newlines.append(line.replace("###refresh###", f"{args.refresh * 1000}"))
-    with open(f"{args.out}/index.html", "w") as f:
-        for line in newlines:
-            f.write(line)
     serverlist = ECDCServers(args.file, args.out)
     mon = Monitor(serverlist, args)
+    mon.sync_write_fs("index.html", "\n".join(newlines))
 
     print("Dashboard generator is running ...")
     mon.run()
