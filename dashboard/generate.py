@@ -360,7 +360,7 @@ def main():
             newlines.append(line.replace("###refresh###", f"{args.refresh * 1000}"))
     serverlist = ECDCServers(args.file, args.out)
     mon = Monitor(serverlist, args)
-    mon.sync_write_fs("index.html", "\n".join(newlines))
+    mon.sync_write_fs("index.html", "".join(newlines))
 
     print("Dashboard generator is running ...")
     mon.run()
