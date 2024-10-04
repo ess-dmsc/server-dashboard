@@ -298,7 +298,7 @@ class Monitor:
         self.mprint(
             f'<text x="350" y="12" fill="white" font-size="36px">{name.upper()}</text>'
         )
-        self.mprint('<image x="0" y="300" height="100" width="100" href="logo.jpeg" />')
+        self.mprint(f'<image x="0" y="300" height="100" width="100" href="/{self.directory}/logo.jpeg" />')
 
         for name, type, status, ip, port, angle, xo, yo, url, sw in self.lab.servers:
             self.dprint("{} {} {} {}".format(name, type, status, ip))
@@ -358,6 +358,7 @@ def main():
         newlines = []
         for line in f.readlines():
             newlines.append(line.replace("###refresh###", f"{args.refresh * 1000}"))
+            newlines.append(line.replace("dashboard.svg", f"{args.out}/dashboard.svg"))
     serverlist = ECDCServers(args.file, args.out)
     mon = Monitor(serverlist, args)
     mon.sync_write_fs("index.html", "".join(newlines))

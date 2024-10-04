@@ -15,17 +15,15 @@ class CustomHTTPRequestHandler(SimpleHTTPRequestHandler):
             self.path = './ymir/dashboard.svg'
         if self.path == "/logo.jpeg":
             self.path = "./ymir/logo.jpeg"
-        if self.path.startswith('/ymir'):
-            if self.path.endswith('/ymir'):
-                self.path = './ymir/index.html'
-        if self.path.startswith('/ess'):
-            if self.path.endswith('/ess'):
-                self.path = './ess/index.html'
-        if self.path.startswith('./utgaard'):
-            if self.path.endswith('/utgaard'):
-                self.path = './utgaard/index.html'
+        if self.path.startswith('/ymir') and self.path.endswith('/ymir'):
+            self.path = './ymir/index.html'
+        if self.path.startswith('/ess') and self.path.endswith('/ess'):
+            self.path = './ess/index.html'
+        if self.path.startswith('/utgaard') and self.path.endswith('/utgaard'):
+            self.path = './utgaard/index.html'
         else:
             self.path = './' + self.path
+
 
         if not os.path.exists(self.path):
             self.send_response(404)
