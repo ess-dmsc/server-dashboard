@@ -18,7 +18,7 @@ class CustomHTTPRequestHandler(SimpleHTTPRequestHandler):
         if self.path.startswith("/ymir"):
             if self.path.endswith("/ymir"):
                 self.path = "./ymir/index.html"
-        if self.path.startswith("/ess"):
+        if self.path.startswith("./ess"):
             if self.path.endswith("/ess"):
                 self.path = "./ess/index.html"
         if self.path.startswith("./utgaard"):
