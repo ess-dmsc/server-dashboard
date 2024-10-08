@@ -24,7 +24,7 @@ LoKI,          1,  0, 10.100.6.33,   8021, -45, 0, 0, https://ecdcgrafana.daq.es
 FREIA,         1,  0, 10.100.6.33,   8003, -35, 0, 0, https://ecdcgrafana.daq.esss.dk:3000/d/freia/freia?refresh=5s
 # Angle Group
 # 0 - 90
-Estia,         1,  0, 10.100.6.35,   8341,  22, 0, 0, none
+Estia,         1,  0, 10.100.6.35,   8341,  22, 0, 0, https://ecdcgrafana.daq.esss.dk:3000/d/Ie9Rl8zHk/estia?orgId=1&refresh=5s
 SKADI,         1, 64, 10.100.6.33,   8002,  44, 0, 0, none
 VESPA,         1, 64, 10.100.6.33,   8888,  64, 0, 0, none
 # Angle Group
