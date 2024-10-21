@@ -10,6 +10,13 @@ class CustomHTTPRequestHandler(SimpleHTTPRequestHandler):
     logging.basicConfig(level=logging.ERROR)
 
     def do_GET(self):
+        
+        if not self.headers.get('X-Forwarded-Proto') == 'https':
+            self.send_response(301)
+            self.send_header('Location', f'https://{self.headers["Host"]}{self.path}')
+            self.end_headers()
+            return
+        
         if self.path == '/':
             self.path = './ymir/index.html'
         if self.path == '/dashboard.svg':
