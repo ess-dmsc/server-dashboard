@@ -20,16 +20,16 @@ TBL-TP,        1, 64, 10.100.6.33,   8888, -75, 0, 0, none
 TBL-3HE,       1,  0, 10.100.6.35,   8662, -69, 0, 0, https://10.100.211.93:3000/d/3FvPQ0lSk/tbl3he?orgId=1&refresh=5s
 # Angle Group
 # -90 - 0
-loki0,         1,  0, 10.100.6.34,   8021, -62, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s
-loki1,         1,  0, 10.100.6.34,   8022, -57, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s
-loki2,         1,  0, 10.100.6.34,   8023, -52, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s
-loki3,         1,  0, 10.100.6.34,   8024, -47, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s
-loki4,         1,  0, 10.100.6.34,   8025, -42, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s
-loki5,         1,  0, 10.100.6.34,   8026, -37, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s
-loki6,         1,  0, 10.100.6.34,   8027, -32, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s
-loki7,         1,  0, 10.100.6.34,   8028, -27, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s
-loki7,         1,  0, 10.100.6.34,   8029, -22, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s
-FREIA,         1,  0, 10.100.6.33,   8003, -15, 0, 0, https://10.100.211.93:3000/d/freia/freia?refresh=5s
+loki0,         1,  0, 10.100.6.34,   8021, -60, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s
+loki1,         1,  0, 10.100.6.34,   8022, -55, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s
+loki2,         1,  0, 10.100.6.34,   8023, -50, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s
+loki3,         1,  0, 10.100.6.34,   8024, -45, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s
+loki4,         1,  0, 10.100.6.34,   8025, -40, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s
+loki5,         1,  0, 10.100.6.34,   8026, -35, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s
+loki6,         1,  0, 10.100.6.34,   8027, -30, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s
+loki7,         1,  0, 10.100.6.34,   8028, -25, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s
+loki8,         1,  0, 10.100.6.34,   8029, -20, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s
+FREIA,         1,  0, 10.100.6.33,   8003, -10, 0, 0, https://10.100.211.93:3000/d/freia/freia?refresh=5s
 # Angle Group
 # 0 - 90
 Estia,         1,  0, 10.100.6.35,   8341,  22, 0, 0, https://10.100.211.93:3000/d/Ie9Rl8zHk/estia?orgId=1&refresh=5s
