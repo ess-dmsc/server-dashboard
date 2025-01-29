@@ -1,8 +1,8 @@
-# name, type, status, ip, port, angle, xoffset, yoffset
+# name, type, status, ip, port, angle, xoffset, yoffset, grafana
 # Type: Enum see generate.py
 # Status: bitfield see generate.py
 #
-# from httpss://confluence.esss.lu.se/pages/viewpage.action?pageId=167903470
+# from https://confluence.esss.lu.se/pages/viewpage.action?pageId=167903470
 # Angle Group
 # -180 - -90
 NMX,           1,  0, 10.100.6.33,   8004, -159, 0, 0, https://10.100.211.93:3000/d/nmx/nmx?refresh=5s
