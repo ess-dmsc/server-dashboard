@@ -4,7 +4,7 @@ import argparse
 import logging
 import htmlsvg
 import ssl
-
+import socket
 
 class CustomHTTPRequestHandler(SimpleHTTPRequestHandler):
     logging.basicConfig(level=logging.ERROR)
@@ -22,6 +22,10 @@ class CustomHTTPRequestHandler(SimpleHTTPRequestHandler):
             self.path = './ess/index.html'
         if self.path.startswith('/utgaard') and self.path.endswith('/utgaard'):
             self.path = './utgaard/index.html'
+        if self.path.startswith('/wsymir') and self.path.endswith('/wsymir'):
+            self.path = './wsymir/index.html'
+        if self.path.startswith('/wsess') and self.path.endswith('/wsess'):
+            self.path = './wsess/index.html'
         else:
             self.path = './' + self.path
 
@@ -42,8 +46,8 @@ def run(server_class=HTTPServer, handler_class=CustomHTTPRequestHandler, port=80
     server_address = ("", port)
     httpd = server_class(server_address, handler_class)
     httpd.socket = ssl.wrap_socket (httpd.socket,
-        keyfile="/etc/puppetlabs/puppet/ssl/private_keys/dashboard01.novalocal.pem",
-        certfile="/etc/puppetlabs/puppet/ssl/certs/dashboard01.novalocal.pem", server_side=True)
+        keyfile="/opt/ess/ecdc/dashboard/dashboard/{0}.pem".format(socket.getfqdn()),
+        certfile="/etc/puppetlabs/puppet/ssl/certs/{0}.pem".format(socket.getfqdn()), server_side=True)
     print(f"Starting httpd server on port {port}")
     httpd.serve_forever()
 
