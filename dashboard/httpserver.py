@@ -46,7 +46,7 @@ def run(server_class=HTTPServer, handler_class=CustomHTTPRequestHandler, port=80
     server_address = ("", port)
     httpd = server_class(server_address, handler_class)
     httpd.socket = ssl.wrap_socket (httpd.socket,
-        keyfile="/opt/ess/ecdc/dashboard/dashboard/{0}.pem".format(socket.getfqdn()),
+        keyfile="/etc/puppetlabs/puppet/ssl/private_keys/{0}.pem".format(socket.getfqdn()),
         certfile="/etc/puppetlabs/puppet/ssl/certs/{0}.pem".format(socket.getfqdn()), server_side=True)
     print(f"Starting httpd server on port {port}")
     httpd.serve_forever()
