@@ -1,4 +1,4 @@
-# name, type, status, ip, port, angle, xoffset, yoffset
+# name, type, status, ip, port, angle, xoffset, yoffset, grafana
 # Type: Enum see generate.py
 # Status: bitfield see generate.py
 #

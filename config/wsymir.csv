@@ -1,0 +1,64 @@
+# name, type, status, ip, port, angle, xoffset, yoffset, grafana
+# Type: Enum see generate.py
+# Status: bitfield see generate.py
+#
+# from http://confluence.esss.lu.se/pages/viewpage.action?pageId=167903470
+# Angle Group
+# -180 - -90
+NMX,           1,  0, 10.100.6.33,   8004, -159, 0, 0, http://10.10.10.142:8080/d/nmx/nmx?refresh=5s
+BEER,          1, 64, 10.100.6.33,   8888, -152, 0, 0, none
+CSPEC,         1, 64, 10.100.6.33,   8888, -145, 0, 0, none
+BIFROST,       1,  0, 10.100.6.33,   8001, -138, 0, 0, http://10.10.10.142:8080/d/bifrost/bifrost?refresh=5s
+MIRACLES,      1,  0, 10.100.6.33,   8008, -131, 0, 0, http://10.10.10.142:8080/d/miracles/miracles?refresh=5s
+MAGIC,         1,  0, 10.100.6.34,   8820, -124, 0, 0, http://10.10.10.142:8080/d/magic/magic?refresh=5s
+T-REX,         1, 64, 10.100.6.33,   8888, -105, 0, 0, none
+# Angle Group
+# -90 - -0
+HEIMDAL,       1,  0, 10.100.6.35,   8551, -90, 0, 0, http://10.10.10.142:8080/d/fnEMshlIk/heimdal?orgId=1&refresh=5s
+TBL-MB,        1, 64, 10.100.6.33,   8888, -81, 0, 0, none
+TBL-TP,        1, 64, 10.100.6.33,   8888, -75, 0, 0, none
+TBL-3HE,       1,  0, 10.100.6.35,   8662, -69, 0, 0, http://10.10.10.142:8080/d/3FvPQ0lSk/tbl3he?orgId=1&refresh=5s
+# Angle Group
+# -90 - 0
+loki0,         1,  0, 10.100.6.34,   8021, -60, 0, 0, http://10.10.10.142:8080/d/loki/loki?refresh=5s&var-region=bank0
+loki1,         1,  0, 10.100.6.34,   8022, -55, 0, 0, http://10.10.10.142:8080/d/loki/loki?refresh=5s&var-region=bank1
+loki2,         1,  0, 10.100.6.34,   8023, -50, 0, 0, http://10.10.10.142:8080/d/loki/loki?refresh=5s&var-region=bank2
+loki3,         1,  0, 10.100.6.34,   8024, -45, 0, 0, http://10.10.10.142:8080/d/loki/loki?refresh=5s&var-region=bank3
+loki4,         1,  0, 10.100.6.34,   8025, -40, 0, 0, http://10.10.10.142:8080/d/loki/loki?refresh=5s&var-region=bank4
+loki5,         1,  0, 10.100.6.34,   8026, -35, 0, 0, http://10.10.10.142:8080/d/loki/loki?refresh=5s&var-region=bank5
+loki6,         1,  0, 10.100.6.34,   8027, -30, 0, 0, http://10.10.10.142:8080/d/loki/loki?refresh=5s&var-region=bank6
+loki7,         1,  0, 10.100.6.34,   8028, -25, 0, 0, http://10.10.10.142:8080/d/loki/loki?refresh=5s&var-region=bank7
+loki8,         1,  0, 10.100.6.34,   8029, -20, 0, 0, http://10.10.10.142:8080/d/loki/loki?refresh=5s&var-region=bank8
+FREIA,         1,  0, 10.100.6.33,   8003, -10, 0, 0, http://10.10.10.142:8080/d/freia/freia?refresh=5s
+# Angle Group
+# 0 - 90
+Estia,         1,  0, 10.100.6.35,   8341,  22, 0, 0, http://10.10.10.142:8080/d/Ie9Rl8zHk/estia?orgId=1&refresh=5s
+SKADI,         1, 64, 10.100.6.33,   8002,  44, 0, 0, none
+VESPA,         1, 64, 10.100.6.33,   8888,  64, 0, 0, none
+# Angle Group
+# 90 - 180
+Dream-cbm,     1, 0, 10.100.6.33,    8810,  112, 0, 0, http://10.10.10.142:8080/d/dream/dream?orgId=1&var-region=cbm
+Dream-bwec,    1, 0, 10.100.6.33,    8030,  142, 0, 0, http://10.10.10.142:8080/d/dream/dream?orgId=1&var-region=bwec
+Dream-fwec,    1, 0, 10.100.6.33,    8031,  136, 0, 0, http://10.10.10.142:8080/d/dream/dream?orgId=1&var-region=fwec
+Dream-mantle,  1, 0, 10.100.6.33,    8032,  130, 0, 0, http://10.10.10.142:8080/d/dream/dream?orgId=1&var-region=mantle
+Dream-hr,      1, 0, 10.100.6.33,    8033,  124, 0, 0, http://10.10.10.142:8080/d/dream/dream?orgId=1&var-region=hr
+Dream-sans,    1, 0, 10.100.6.33,    8034,  118, 0, 0, http://10.10.10.142:8080/d/dream/dream?orgId=1&var-region=sans
+ODIN,          1, 0, 10.100.6.34,    8888,  160, 0, 0, http://10.10.10.142:8080/d/odin/odin?refresh=5s
+#
+kafka0415,     2, 0, 10.100.4.15,    8093,    0, -450, -140, http://10.10.10.142:8080/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0415_daq_esss_dk
+kafka0417,     2, 0, 10.100.4.17,    8093,    0, -450, -125, http://10.10.10.142:8080/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0417_daq_esss_dk
+kafka0529,     2, 0, 10.100.5.29,    8093,    0, -450, -110, http://10.10.10.142:8080/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0529_daq_esss_dk
+kafka0531,     2, 0, 10.100.5.31,    8093,    0, -450, -95,  http://10.10.10.142:8080/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0531_daq_esss_dk
+#
+carbon,        3, 0, 10.100.211.224, 2003, 0, -450, -50, none
+grafana,       3, 0, 10.10.10.142, 8080, 0, -450, -35, none
+AKHQ,          3, 0, 10.100.211.94,  8443, 0, -450, -20, none
+graylog,       3, 0, 10.100.211.187, 9000, 0, -450, -5, none
+forwarder01,   2, 0, 10.102.10.244, 8093, 0, -450, 10, none
+#
+filewriter0625,        2, 0, 10.100.6.25, 8888, 0, -355, -50, none
+filewriter0627,        2, 0, 10.100.6.27, 8888, 0, -355, -35, none
+nicosserver01,         2, 0, 10.102.10.238, 14869, 0, -355, -20, none
+#
+Kafka &nbsp; Brokers,  4, 64, 0.0.0.0, 65535, 0, -450, -160, none
+Other &nbsp; Services, 4, 64, 0.0.0.0, 65535, 0, -450, -70, none
