@@ -43,7 +43,9 @@ Dream-fwec,    1, 0, 10.100.6.33,    8031,  136, 0, 0, http://10.10.10.142:8080/
 Dream-mantle,  1, 0, 10.100.6.33,    8032,  130, 0, 0, http://10.10.10.142:8080/d/dream/dream?orgId=1&var-region=mantle
 Dream-hr,      1, 0, 10.100.6.33,    8033,  124, 0, 0, http://10.10.10.142:8080/d/dream/dream?orgId=1&var-region=hr
 Dream-sans,    1, 0, 10.100.6.33,    8034,  118, 0, 0, http://10.10.10.142:8080/d/dream/dream?orgId=1&var-region=sans
-ODIN,          1, 0, 10.100.6.34,    8888,  160, 0, 0, http://10.10.10.142:8080/d/odin/odin?refresh=5s
+ODIN-TPX,      1, 0, 10.100.5.33,    8888,  160, 0, 0, http://10.10.10.142:8080/d/odin/odin?refresh=5s
+ODIN-ORIG,     1, 0, 10.100.5.33,    8889,  167, 0, 0, http://10.10.10.142:8080/d/odin/odin?refresh=5s
+ODIN-NEXT,     1, 0, 10.100.5.33,    8890,  174, 0, 0, http://10.10.10.142:8080/d/odin/odin?refresh=5s
 #
 kafka0415,     2, 0, 10.100.4.15,    8093,    0, -450, -140, http://10.10.10.142:8080/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0415_daq_esss_dk
 kafka0417,     2, 0, 10.100.4.17,    8093,    0, -450, -125, http://10.10.10.142:8080/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0417_daq_esss_dk
