@@ -56,12 +56,12 @@ kafka0429,     2, 0,  10.100.4.29,    8093,    0, -450, -50,  https://10.100.211
 kafka0431,     2, 0,  10.100.4.31,    8093,    0, -450, -35,  https://10.100.211.107:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0431
 kafka0517,     2, 0,  10.100.5.17,    8093,    0, -355, -140, https://10.100.211.107:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0517
 kafka0519,     2, 0,  10.100.5.19,    8093,    0, -355, -125, https://10.100.211.107:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0519
-kafka0521,     2, 64, 10.100.5.21,    8093,    0, -355, -110, https://10.100.211.107:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0521
-kafka0523,     2, 64, 10.100.5.23,    8093,    0, -355, -95,  https://10.100.211.107:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0523
-kafka0525,     2, 64, 10.100.5.25,    8093,    0, -355, -80,  https://10.100.211.107:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0525
-kafka0527,     2, 64, 10.100.5.27,    8093,    0, -355, -65,  https://10.100.211.107:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0527
-kafka0619,     2, 64, 10.100.6.19,    8093,    0, -355, -50,  https://10.100.211.107:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0619
-kafka0621,     2, 64, 10.100.6.21,    8093,    0, -355, -35,  https://10.100.211.107:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0621
+kafka0521,     2, 0,  10.100.5.21,    8093,    0, -355, -110, https://10.100.211.107:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0521
+kafka0523,     2, 0,  10.100.5.23,    8093,    0, -355, -95,  https://10.100.211.107:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0523
+kafka0525,     2, 0,  10.100.5.25,    8093,    0, -355, -80,  https://10.100.211.107:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0525
+kafka0527,     2, 0,  10.100.5.27,    8093,    0, -355, -65,  https://10.100.211.107:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0527
+kafka0619,     2, 0,  10.100.6.19,    8093,    0, -355, -50,  https://10.100.211.107:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0619
+kafka0621,     2, 0,  10.100.6.21,    8093,    0, -355, -35,  https://10.100.211.107:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0621
 #
 carbon,        3, 0, 10.100.211.224, 2003, 0, -450, 10, none
 grafana,       3, 0, 10.100.211.107, 3000, 0, -450, 25, none
