@@ -5,44 +5,44 @@
 # from httpss://confluence.esss.lu.se/pages/viewpage.action?pageId=167903470
 # Angle Group
 # -180 - -90
-NMX,           1,  0, efu0436.daq.esss.dk,   9001, -159, 0, 0, https://10.100.211.107:3000/d/nmx/nmx?refresh=5s
-NMX-CBM,       1,  0, efu0436.daq.esss.dk,   9010, -152, 0, 0, none
-BIFROST,       1,  0, efu0433.daq.esss.dk,   9001, -138, 0, 0, https://10.100.211.107:3000/d/bifrost/bifrost?refresh=5s
-BIFROST-CBM,   1,  0, efu0433.daq.esss.dk,   9010, -131, 0, 0, none
-TBL-MB,        1,  0, efu0437.daq.esss.dk,   9001, -100, 0, 0, none
+nmx,           1,  0, efu0436.daq.esss.dk,   9001, -159, 0, 0, https://10.100.211.107:3000/d/nmx/nmx?refresh=5s
+nmx-cbm,       1,  0, efu0436.daq.esss.dk,   9010, -152, 0, 0, none
+bifrost,       1,  0, efu0433.daq.esss.dk,   9001, -138, 0, 0, https://10.100.211.107:3000/d/bifrost/bifrost?refresh=5s
+bifrost-cbm,   1,  0, efu0433.daq.esss.dk,   9010, -131, 0, 0, none
+tbl-mb,        1,  0, efu0437.daq.esss.dk,   9001, -100, 0, 0, none
 
 # Angle Group
 # -90 - -0
-TBL-TP,        1,  0, efu0437.daq.esss.dk,   9002, -92, 0, 0, none
-TBL-3HE,       1,  0, efu0437.daq.esss.dk,   9003, -84, 0, 0, https://10.100.211.107:3000/d/3FvPQ0lSk/tbl3he?orgId=1&refresh=5s
-TBL-CBM,       1,  0, efu0437.daq.esss.dk,   9010, -76, 0, 0, none
+tbl-tpx,       1,  0, efu0437.daq.esss.dk,   9002, -92, 0, 0, none
+tbl-3he,       1,  0, efu0437.daq.esss.dk,   9003, -84, 0, 0, https://10.100.211.107:3000/d/3FvPQ0lSk/tbl3he?orgId=1&refresh=5s
+tbl-cbm,       1,  0, efu0437.daq.esss.dk,   9010, -76, 0, 0, none
 
 # Angle Group
 # -90 - 0
-loki0,          1,  0, efu0434.daq.esss.dk,   9001, -57, 0, 0, https://10.100.211.107:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank0
-loki1,          1,  0, efu0434.daq.esss.dk,   9002, -51, 0, 0, https://10.100.211.107:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank1
-loki2,          1,  0, efu0434.daq.esss.dk,   9003, -45, 0, 0, https://10.100.211.107:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank2
-loki3,          1,  0, efu0434.daq.esss.dk,   9004, -39, 0, 0, https://10.100.211.107:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank3
-loki4,          1,  0, efu0434.daq.esss.dk,   9005, -33, 0, 0, https://10.100.211.107:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank4
-loki5,          1,  0, efu0434.daq.esss.dk,   9006, -27, 0, 0, https://10.100.211.107:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank5
-loki6,          1,  0, efu0434.daq.esss.dk,   9007, -21, 0, 0, https://10.100.211.107:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank6
-loki7,          1,  0, efu0434.daq.esss.dk,   9008, -15, 0, 0, https://10.100.211.107:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank7
-loki8,          1,  0, efu0434.daq.esss.dk,   9009, -9, 0, 0, https://10.100.211.107:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank8
-loki-cbm,       1,  0, efu0434.daq.esss.dk,   9020, -4,  0, 0, https://10.100.211.107:3000/d/loki/loki?refresh=5s&orgId=1&var-region=cbm
+loki0,         1,  0, efu0434.daq.esss.dk,   9001, -57, 0, 0, https://10.100.211.107:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank0
+loki1,         1,  0, efu0434.daq.esss.dk,   9002, -51, 0, 0, https://10.100.211.107:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank1
+loki2,         1,  0, efu0434.daq.esss.dk,   9003, -45, 0, 0, https://10.100.211.107:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank2
+loki3,         1,  0, efu0434.daq.esss.dk,   9004, -39, 0, 0, https://10.100.211.107:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank3
+loki4,         1,  0, efu0434.daq.esss.dk,   9005, -33, 0, 0, https://10.100.211.107:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank4
+loki5,         1,  0, efu0434.daq.esss.dk,   9006, -27, 0, 0, https://10.100.211.107:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank5
+loki6,         1,  0, efu0434.daq.esss.dk,   9007, -21, 0, 0, https://10.100.211.107:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank6
+loki7,         1,  0, efu0434.daq.esss.dk,   9008, -15, 0, 0, https://10.100.211.107:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank7
+loki8,         1,  0, efu0434.daq.esss.dk,   9009, -9,  0, 0, https://10.100.211.107:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank8
+loki-cbm,      1,  0, efu0434.daq.esss.dk,   9020, -4,  0, 0, https://10.100.211.107:3000/d/loki/loki?refresh=5s&orgId=1&var-region=cbm
 
 # Angle Group
 # 0 - 90
 
 # Angle Group
 # 90 - 180
-dream-bwec,    1, 0, efu0631.daq.esss.dk,    9000,  142, 0, 0, https://10.100.211.107:3000/d/dream/dream?refresh=5s&orgId=1&var-region=bwec
-dream-fwec,    1, 0, efu0631.daq.esss.dk,    9001,  136, 0, 0, https://10.100.211.107:3000/d/dream/dream?refresh=5s&orgId=1&var-region=fwec
-dream-mantle,  1, 0, efu0631.daq.esss.dk,    9002,  130, 0, 0, https://10.100.211.107:3000/d/dream/dream?refresh=5s&orgId=1&var-region=mantle
-dream-hr,      1, 0, efu0631.daq.esss.dk,    9003,  124, 0, 0, https://10.100.211.107:3000/d/dream/dream?refresh=5s&orgId=1&var-region=hr
-dream-sans,    1, 0, efu0631.daq.esss.dk,    9004,  118, 0, 0, https://10.100.211.107:3000/d/dream/dream?refresh=5s&orgId=1&var-region=sans
-dream-cbm,     1, 0, efu0631.daq.esss.dk,    9010,  112, 0, 0, none
-ODIN,          1, 0, efu0435.daq.esss.dk,    9001,  158, 0, 0, https://10.100.211.107:3000/d/odin/odin?refresh=5s
-ODIN-CBM,      1, 0, efu0435.daq.esss.dk,    9010,  164, 0, 0, none
+dream-bwec,    1, 0, efu0631.daq.esss.dk,    9000,  126, 0, 0, https://10.100.211.107:3000/d/dream/dream?refresh=5s&orgId=1&var-region=bwec
+dream-fwec,    1, 0, efu0631.daq.esss.dk,    9001,  132, 0, 0, https://10.100.211.107:3000/d/dream/dream?refresh=5s&orgId=1&var-region=fwec
+dream-mantle,  1, 0, efu0631.daq.esss.dk,    9002,  138, 0, 0, https://10.100.211.107:3000/d/dream/dream?refresh=5s&orgId=1&var-region=mantle
+dream-hr,      1, 0, efu0631.daq.esss.dk,    9003,  144, 0, 0, https://10.100.211.107:3000/d/dream/dream?refresh=5s&orgId=1&var-region=hr
+dream-sans,    1, 0, efu0631.daq.esss.dk,    9004,  150, 0, 0, https://10.100.211.107:3000/d/dream/dream?refresh=5s&orgId=1&var-region=sans
+dream-cbm,     1, 0, efu0631.daq.esss.dk,    9010,  156, 0, 0, none
+odin,          1, 0, efu0435.daq.esss.dk,    9001,  168, 0, 0, https://10.100.211.107:3000/d/odin/odin?refresh=5s
+odin-cbm,      1, 0, efu0435.daq.esss.dk,    9010,  174, 0, 0, none
 
 # Kafka
 kafka0413,     2, 0,  10.100.4.13,    8093,    0, -450, -140, https://10.100.211.107:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0413
@@ -62,16 +62,15 @@ kafka0527,     2, 0,  10.100.5.27,    8093,    0, -355, -65,  https://10.100.211
 kafka0619,     2, 0,  10.100.6.19,    8093,    0, -355, -50,  https://10.100.211.107:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0619
 kafka0621,     2, 0,  10.100.6.21,    8093,    0, -355, -35,  https://10.100.211.107:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0621
 #
-carbon,        3, 0, 10.100.211.224, 2003, 0, -450, 10, none
-grafana,       3, 0, 10.100.211.107, 3000, 0, -450, 25, none
-AKHQ,          3, 0, 10.100.211.94,  8443, 0, -450, 40, none
-graylog,       3, 0, 10.100.211.187, 9000, 0, -450, 55, none
-forwarder01,   2, 0, 10.102.10.244, 8093, 0, -450, 70, none
+graphite,      3, 0, 10.100.211.224, 2003, 0, -450, 10, none  http://10.100.211.224/
+grafana,       3, 0, 10.100.211.107, 3000, 0, -450, 25, none  https://10.100.211.107:3000
+AKHQ,          3, 0, 10.100.211.94,  8443, 0, -450, 40, none  https://10.100.211.94:8443
+graylog,       3, 0, 10.100.211.187, 9000, 0, -450, 55, none  http://10.100.211.187:9000
 #
-filewriter0626,        2, 64, 10.100.6.26, 8888, 0, -355, 10, none
-filewriter0628,        2, 64, 10.100.6.28, 8888, 0, -355, 25, none
-filewriter0628,        2, 0,  10.100.6.29, 8888, 0, -355, 40, none
-filewriter0630,        2, 0,  10.100.6.30, 8888, 0, -355, 55, none
+filewriter0626,        2, 64, 10.100.6.26, 8888, 0, -355, 10, none https://10.100.211.107:3000/d/kafka-to-nexus/kafka-to-nexus-filewriter?orgId=1&refresh=5s
+filewriter0628,        2, 64, 10.100.6.28, 8888, 0, -355, 25, none https://10.100.211.107:3000/d/kafka-to-nexus/kafka-to-nexus-filewriter?orgId=1&refresh=5s
+filewriter0628,        2, 0,  10.100.6.29, 8888, 0, -355, 40, none https://10.100.211.107:3000/d/kafka-to-nexus/kafka-to-nexus-filewriter?orgId=1&refresh=5s
+filewriter0630,        2, 0,  10.100.6.30, 8888, 0, -355, 55, none https://10.100.211.107:3000/d/kafka-to-nexus/kafka-to-nexus-filewriter?orgId=1&refresh=5s
 nicosserver01,         2, 0,  10.102.10.238, 14869, 0, -355, 70, none
 #
 Kafka &nbsp; Brokers,  4, 64, 0.0.0.0, 65535, 0, -450, -160, none
