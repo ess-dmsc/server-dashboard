@@ -8,7 +8,7 @@
 nmx,           1,  0, 10.100.6.33,   8004, -159, 0, 0, https://10.100.211.93:3000/d/nmx/nmx?refresh=5s
 beer,          1, 64, 10.100.6.33,   8888, -152, 0, 0, none
 cspec,         1, 64, 10.100.6.33,   8888, -145, 0, 0, none
-bidrost,       1,  0, 10.100.6.33,   8001, -138, 0, 0, https://10.100.211.93:3000/d/bifrost/bifrost?refresh=5s
+bifrost,       1,  0, 10.100.6.33,   8001, -138, 0, 0, https://10.100.211.93:3000/d/bifrost/bifrost?refresh=5s
 miracles,      1,  0, 10.100.6.33,   8008, -131, 0, 0, https://10.100.211.93:3000/d/miracles/miracles?refresh=5s
 magic,         1,  0, 10.100.6.34,   8820, -124, 0, 0, https://10.100.211.93:3000/d/magic/magic?refresh=5s
 t-rex,         1, 64, 10.100.6.33,   8888, -105, 0, 0, none
@@ -29,7 +29,7 @@ loki5,         1,  0, 10.100.6.34,   8026, -35, 0, 0, https://10.100.211.93:3000
 loki6,         1,  0, 10.100.6.34,   8027, -30, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s&var-region=bank6
 loki7,         1,  0, 10.100.6.34,   8028, -25, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s&var-region=bank7
 loki8,         1,  0, 10.100.6.34,   8029, -20, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s&var-region=bank8
-FREIA,         1,  0, 10.100.6.33,   8003, -10, 0, 0, https://10.100.211.93:3000/d/freia/freia?refresh=5s
+freia,         1,  0, 10.100.6.33,   8003, -10, 0, 0, https://10.100.211.93:3000/d/freia/freia?refresh=5s
 # Angle Group
 # 0 - 90
 estia,         1,  0, 10.100.6.35,   8341,  22, 0, 0, https://10.100.211.93:3000/d/Ie9Rl8zHk/estia?orgId=1&refresh=5s
@@ -52,15 +52,15 @@ kafka0417,     2, 0, 10.100.4.17,    8093,    0, -450, -125, https://10.100.211.
 kafka0529,     2, 0, 10.100.5.29,    8093,    0, -450, -110, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0529_daq_esss_dk
 kafka0531,     2, 0, 10.100.5.31,    8093,    0, -450, -95,  https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0531_daq_esss_dk
 #
-graphite,        3, 0, 10.100.211.224, 2003, 0, -450, -50, none http://10.100.211.224/
-grafana,       3, 0, 10.100.211.93, 3000, 0, -450, -35, none    https://10.100.211.93:3000
-AKHQ,          3, 0, 10.100.211.94,  8443, 0, -450, -20, none   https://10.100.211.94:8443/ui/site/topic
-graylog,       3, 0, 10.100.211.187, 9000, 0, -450, -5, none    http://10.100.211.187:9000/
-forwarder01,   2, 0, 10.102.10.244, 8093, 0, -450, 10, none
+graphite,      3, 0, 10.100.211.224, 2003, 0, -450, -50, http://10.100.211.224/
+grafana,       3, 0, 10.100.211.93,  3000, 0, -450, -35, https://10.100.211.93:3000
+AKHQ,          3, 0, 10.100.211.94,  8443, 0, -450, -20, https://10.100.211.94:8443/ui/site/topic
+graylog,       3, 0, 10.100.211.187, 9000, 0, -450, -5,  http://10.100.211.187:9000/
+forwarder01,   2, 0, 10.102.10.244,  8093, 0, -450, 10,  none
 #
-filewriter0625,        2, 0, 10.100.6.25, 8888, 0, -355, -50, none https://10.100.211.93:3000/d/kafka-to-nexus/kafka-to-nexus-filewriter?orgId=1&refresh=5s
-filewriter0627,        2, 0, 10.100.6.27, 8888, 0, -355, -35, none https://10.100.211.93:3000/d/kafka-to-nexus/kafka-to-nexus-filewriter?orgId=1&refresh=5s
+filewriter0625,        2, 0, 10.100.6.25, 8888, 0, -355, -50,    https://10.100.211.93:3000/d/kafka-to-nexus/kafka-to-nexus-filewriter?orgId=1&refresh=5s
+filewriter0627,        2, 0, 10.100.6.27, 8888, 0, -355, -35,    https://10.100.211.93:3000/d/kafka-to-nexus/kafka-to-nexus-filewriter?orgId=1&refresh=5s
 nicosserver01,         2, 0, 10.102.10.238, 14869, 0, -355, -20, none
 #
 Kafka &nbsp; Brokers,  4, 64, 0.0.0.0, 65535, 0, -450, -160, none
-Other &nbsp; Services, 4, 64, 0.0.0.0, 65535, 0, -450, -70, none
+Other &nbsp; Services, 4, 64, 0.0.0.0, 65535, 0, -450, -70,  none
