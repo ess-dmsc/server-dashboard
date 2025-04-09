@@ -15,8 +15,8 @@ t-rex,         1, 64, 10.100.6.33,   8888, -105, 0, 0, none
 # Angle Group
 # -90 - -0
 heimdal,       1,  0, 10.100.6.35,   8551, -90, 0, 0, https://10.100.211.93:3000/d/fnEMshlIk/heimdal?orgId=1&refresh=5s
-tbl-mb,        1, 64, 10.100.6.33,   8888, -81, 0, 0, none
-tbl-tpx,       1, 64, 10.100.6.33,   8888, -75, 0, 0, none
+tbl-mb,        1, 64, 10.100.6.33,   8888, -81, 0, 0, https://10.100.211.93:3000/d/3FvPQ0lSk/tblmb?orgId=1&refresh=5s
+tbl-tpx,       1, 64, 10.100.6.33,   8888, -75, 0, 0, https://10.100.211.93:3000/d/3FvPQ0lSk/tbltpx?orgId=1&refresh=5s
 tbl-3he,       1,  0, 10.100.6.35,   8662, -69, 0, 0, https://10.100.211.93:3000/d/3FvPQ0lSk/tbl3he?orgId=1&refresh=5s
 # Angle Group
 # -90 - 0
