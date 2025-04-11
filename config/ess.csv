@@ -9,13 +9,13 @@ nmx,           1,  0, efu0436.daq.esss.dk,   9001, -159, 0, 0, https://10.100.21
 nmx-cbm,       1,  0, efu0436.daq.esss.dk,   9010, -152, 0, 0, none
 bifrost,       1,  0, efu0433.daq.esss.dk,   9001, -138, 0, 0, https://10.100.211.107:3000/d/bifrost/bifrost?refresh=5s
 bifrost-cbm,   1,  0, efu0433.daq.esss.dk,   9010, -131, 0, 0, none
-tbl-mb,        1,  0, efu0437.daq.esss.dk,   9001, -100, 0, 0, none
+tbl-mb,        1,  0, efu0437.daq.esss.dk,   9001, -100, 0, 0, https://10.100.211.107:3000/d/3FvPQ0lSk/tbl?orgId=1&refresh=5s&var-region=mb
 
 # Angle Group
 # -90 - -0
-tbl-tpx,       1,  0, efu0437.daq.esss.dk,   9002, -92, 0, 0, none
-tbl-3he,       1,  0, efu0437.daq.esss.dk,   9003, -84, 0, 0, https://10.100.211.107:3000/d/3FvPQ0lSk/tbl3he?orgId=1&refresh=5s
-tbl-cbm,       1,  0, efu0437.daq.esss.dk,   9010, -76, 0, 0, none
+tbl-tpx,       1,  0, efu0437.daq.esss.dk,   9002, -92, 0, 0, https://10.100.211.107:3000/d/3FvPQ0lSk/tbl?orgId=1&refresh=5s&var-region=tp3
+tbl-3he,       1,  0, efu0437.daq.esss.dk,   9003, -84, 0, 0, https://10.100.211.107:3000/d/3FvPQ0lSk/tbl?orgId=1&refresh=5s&var-region=3he
+tbl-cbm,       1,  0, efu0437.daq.esss.dk,   9010, -76, 0, 0, https://10.100.211.107:3000/d/3FvPQ0lSk/tbl?orgId=1&refresh=5s&var-region=cbm
 
 # Angle Group
 # -90 - 0
