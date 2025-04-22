@@ -35,12 +35,12 @@ loki-cbm,      1,  0, efu0434.daq.esss.dk,   9020, -4,  0, 0, https://10.100.211
 
 # Angle Group
 # 90 - 180
-dream-bwec,    1, 0, efu0631.daq.esss.dk,    9000,  126, 0, 0, https://10.100.211.107:3000/d/dream/dream?refresh=5s&orgId=1&var-region=bwec
-dream-fwec,    1, 0, efu0631.daq.esss.dk,    9001,  132, 0, 0, https://10.100.211.107:3000/d/dream/dream?refresh=5s&orgId=1&var-region=fwec
-dream-mantle,  1, 0, efu0631.daq.esss.dk,    9002,  138, 0, 0, https://10.100.211.107:3000/d/dream/dream?refresh=5s&orgId=1&var-region=mantle
-dream-hr,      1, 0, efu0631.daq.esss.dk,    9003,  144, 0, 0, https://10.100.211.107:3000/d/dream/dream?refresh=5s&orgId=1&var-region=hr
-dream-sans,    1, 0, efu0631.daq.esss.dk,    9004,  150, 0, 0, https://10.100.211.107:3000/d/dream/dream?refresh=5s&orgId=1&var-region=sans
-dream-cbm,     1, 0, efu0631.daq.esss.dk,    9010,  156, 0, 0, none
+dream-bwec,    1, 0, efu0631.daq.esss.dk,    9001,  126, 0, 0, https://10.100.211.107:3000/d/dream/dream?refresh=5s&orgId=1&var-region=bwec
+dream-fwec,    1, 0, efu0631.daq.esss.dk,    9002,  132, 0, 0, https://10.100.211.107:3000/d/dream/dream?refresh=5s&orgId=1&var-region=fwec
+dream-mantle,  1, 0, efu0631.daq.esss.dk,    9003,  138, 0, 0, https://10.100.211.107:3000/d/dream/dream?refresh=5s&orgId=1&var-region=mantle
+dream-hr,      1, 0, efu0631.daq.esss.dk,    9004,  144, 0, 0, https://10.100.211.107:3000/d/dream/dream?refresh=5s&orgId=1&var-region=hr
+dream-sans,    1, 0, efu0631.daq.esss.dk,    9005,  150, 0, 0, https://10.100.211.107:3000/d/dream/dream?refresh=5s&orgId=1&var-region=sans
+dream-cbm,     1, 0, efu0631.daq.esss.dk,    9006,  156, 0, 0, none
 odin,          1, 0, efu0435.daq.esss.dk,    9001,  168, 0, 0, https://10.100.211.107:3000/d/odin/odin?refresh=5s
 odin-cbm,      1, 0, efu0435.daq.esss.dk,    9010,  174, 0, 0, none
 
