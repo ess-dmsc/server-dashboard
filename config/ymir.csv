@@ -52,11 +52,11 @@ kafka0417,     2, 0, 10.100.4.17,    8093,    0, -450, -125, https://10.100.211.
 kafka0529,     2, 0, 10.100.5.29,    8093,    0, -450, -110, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0529_daq_esss_dk
 kafka0531,     2, 0, 10.100.5.31,    8093,    0, -450, -95,  https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0531_daq_esss_dk
 #
-graphite,      3, 0, 10.100.211.224, 2003, 0, -450, -50, http://10.100.211.224/
-grafana,       3, 0, 10.100.211.93,  3000, 0, -450, -35, https://10.100.211.93:3000
-AKHQ,          3, 0, 10.100.211.94,  8443, 0, -450, -20, https://10.100.211.94:8443/ui/site/topic
-graylog,       3, 0, 10.100.211.187, 9000, 0, -450, -5,  http://10.100.211.187:9000/
-forwarder01,   2, 0, 10.102.10.244,  8093, 0, -450, 10,  none
+graphite,      3, 0, 10.100.211.224,           2003, 0, -450, -50, http://10.100.211.224/
+grafana,       3, 0, 10.100.211.93,            3000, 0, -450, -35, https://10.100.211.93:3000
+AKHQ,          3, 0, 10.100.211.94,            8443, 0, -450, -20, https://10.100.211.94:8443/ui/site/topic
+graylog,       3, 0, ymir-graylog.daq.esss.dk, 9000, 0, -450, -5,  http://ymir-graylog.daq.esss.dk:9000/search
+forwarder01,   2, 0, 10.102.10.244,            8093, 0, -450, 10,  none
 #
 filewriter0625,        2, 0, 10.100.6.25, 8888, 0, -355, -50,    https://10.100.211.93:3000/d/kafka-to-nexus/kafka-to-nexus-filewriter?orgId=1&refresh=5s
 filewriter0627,        2, 0, 10.100.6.27, 8888, 0, -355, -35,    https://10.100.211.93:3000/d/kafka-to-nexus/kafka-to-nexus-filewriter?orgId=1&refresh=5s
