@@ -5,19 +5,24 @@
 # from httpss://confluence.esss.lu.se/pages/viewpage.action?pageId=167903470
 # Angle Group
 # -180 - -90
-nmx,           1,  0, 10.100.6.33,   8004, -159, 0, 0, https://10.100.211.93:3000/d/nmx/nmx?refresh=5s
-beer,          1, 64, 10.100.6.33,   8888, -152, 0, 0, none
-cspec,         1, 64, 10.100.6.33,   8888, -145, 0, 0, none
-bifrost,       1,  0, 10.100.6.33,   8001, -138, 0, 0, https://10.100.211.93:3000/d/bifrost/bifrost?refresh=5s
-miracles,      1,  0, 10.100.6.33,   8008, -131, 0, 0, https://10.100.211.93:3000/d/miracles/miracles?refresh=5s
-magic,         1,  0, 10.100.6.34,   8820, -124, 0, 0, https://10.100.211.93:3000/d/magic/magic?refresh=5s
-t-rex,         1, 64, 10.100.6.33,   8888, -105, 0, 0, none
+nmx-p1,        1,  0, 10.100.6.33,   8020, -180, 0, 0, https://10.100.211.93:3000/d/nmx/nmx?refresh=5s&var-region=p0
+nmx-p2,        1,  0, 10.100.6.33,   8021, -175, 0, 0, https://10.100.211.93:3000/d/nmx/nmx?refresh=5s&var-region=p1
+nmx-p3,        1,  0, 10.100.6.33,   8022, -170, 0, 0, https://10.100.211.93:3000/d/nmx/nmx?refresh=5s&var-region=p2
+nmx-cbm,       1,  0, 10.100.6.33,   8023, -165, 0, 0, https://10.100.211.93:3000/d/nmx/nmx?refresh=5s&var-region=cbm
+beer,          1, 64, 10.100.6.33,   8888, -157, 0, 0, none
+cspec,         1, 64, 10.100.6.33,   8888, -150, 0, 0, none
+bifrost,       1,  0, 10.100.6.33,   8001, -140, 0, 0, https://10.100.211.93:3000/d/bifrost/bifrost?refresh=5s&var-region=1
+bifrost-cbm,   1,  0, 10.100.6.33,   8002, -135, 0, 0, https://10.100.211.93:3000/d/bifrost/bifrost?refresh=5s&var-region=cbm
+miracles,      1,  0, 10.100.6.33,   8040, -125, 0, 0, https://10.100.211.93:3000/d/miracles/miracles?refresh=5s
+magic,         1,  0, 10.100.6.34,   8820, -115, 0, 0, https://10.100.211.93:3000/d/magic/magic?refresh=5s
+t-rex,         1, 64, 10.100.6.33,   8888, -100,  0, 0, none
 # Angle Group
 # -90 - -0
 heimdal,       1,  0, 10.100.6.35,   8551, -90, 0, 0, https://10.100.211.93:3000/d/fnEMshlIk/heimdal?orgId=1&refresh=5s
-tbl-mb,        1,  0, 10.100.6.35,   8663, -81, 0, 0, https://10.100.211.93:3000/d/3FvPQ0lSk/tblmb?orgId=1&refresh=5s
-tbl-tpx,       1, 64, 10.100.6.33,   8888, -75, 0, 0, https://10.100.211.93:3000/d/3FvPQ0lSk/tbltpx?orgId=1&refresh=5s
-tbl-3he,       1,  0, 10.100.6.35,   8662, -69, 0, 0, https://10.100.211.93:3000/d/3FvPQ0lSk/tbl3he?orgId=1&refresh=5s
+tbl-3he,       1,  0, 10.100.6.35,   8662, -82, 0, 0, https://10.100.211.93:3000/d/3FvPQ0lSk/tbl?orgId=1&refresh=5s&var-region=3he
+tbl-mb,        1,  0, 10.100.6.35,   8663, -77, 0, 0, https://10.100.211.93:3000/d/3FvPQ0lSk/tbl?orgId=1&refresh=5s&var-region=mb
+tbl-tpx,       1, 64, 10.100.6.33,   8664, -72, 0, 0, https://10.100.211.93:3000/d/3FvPQ0lSk/tbl?orgId=1&refresh=5s&var-region=tpx
+tbl-cbm,       1,  0, 10.100.6.35,   8665, -67, 0, 0, https://10.100.211.93:3000/d/3FvPQ0lSk/tbl?orgId=1&refresh=5s&var-region=cbm
 # Angle Group
 # -90 - 0
 loki0,         1,  0, 10.100.6.34,   8021, -60, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s&var-region=bank0
@@ -29,23 +34,25 @@ loki5,         1,  0, 10.100.6.34,   8026, -35, 0, 0, https://10.100.211.93:3000
 loki6,         1,  0, 10.100.6.34,   8027, -30, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s&var-region=bank6
 loki7,         1,  0, 10.100.6.34,   8028, -25, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s&var-region=bank7
 loki8,         1,  0, 10.100.6.34,   8029, -20, 0, 0, https://10.100.211.93:3000/d/loki/loki?refresh=5s&var-region=bank8
-freia,         1,  0, 10.100.6.33,   8003, -10, 0, 0, https://10.100.211.93:3000/d/freia/freia?refresh=5s
+freia,         1,  0, 10.100.6.33,   8010, -10, 0, 0, https://10.100.211.93:3000/d/freia/freia?refresh=5s
 # Angle Group
 # 0 - 90
-estia,         1,  0, 10.100.6.35,   8341,  22, 0, 0, https://10.100.211.93:3000/d/Ie9Rl8zHk/estia?orgId=1&refresh=5s
+estia,         1,  0, 10.100.6.35,   8341,  22, 0, 0, https://10.100.211.93:3000/d/Ie9Rl8zHk/estia?orgId=1&refresh=5s&var-region=1
+estia,         1,  0, 10.100.6.35,   8342,  30, 0, 0, https://10.100.211.93:3000/d/Ie9Rl8zHk/estia?orgId=1&refresh=5s&var-region=cbm
 skadi,         1, 64, 10.100.6.33,   8002,  44, 0, 0, none
 vespa,         1, 64, 10.100.6.33,   8888,  64, 0, 0, none
 # Angle Group
 # 90 - 180
-dream-cbm,     1, 0, 10.100.6.33,    8810,  126, 0, 0, https://10.100.211.93:3000/d/dream/dream?orgId=1&var-region=cbm
-dream-bwec,    1, 0, 10.100.6.33,    8030,  132, 0, 0, https://10.100.211.93:3000/d/dream/dream?orgId=1&var-region=bwec
-dream-fwec,    1, 0, 10.100.6.33,    8031,  138, 0, 0, https://10.100.211.93:3000/d/dream/dream?orgId=1&var-region=fwec
-dream-mantle,  1, 0, 10.100.6.33,    8032,  144, 0, 0, https://10.100.211.93:3000/d/dream/dream?orgId=1&var-region=mantle
-dream-hr,      1, 0, 10.100.6.33,    8033,  150, 0, 0, https://10.100.211.93:3000/d/dream/dream?orgId=1&var-region=hr
-dream-sans,    1, 0, 10.100.6.33,    8034,  156, 0, 0, https://10.100.211.93:3000/d/dream/dream?orgId=1&var-region=sans
-odin-tpx,      1, 0, 10.100.5.33,    8888,  168, 0, 0, https://10.100.211.93:3000/d/odin/odin?orgId=1&refresh=5s&var-region=1
-odin-orig,     1, 0, 10.100.5.33,    8889,  174, 0, 0, https://10.100.211.93:3000/d/odin/odin?orgId=1&refresh=5s&var-region=2
-odin-next,     1, 0, 10.100.5.33,    8890,  180, 0, 0, https://10.100.211.93:3000/d/odin/odin?orgId=1&refresh=5s&var-region=3
+dream-bwec,    1, 0, 10.100.6.33,    8030,  120, 0, 0, https://10.100.211.93:3000/d/dream/dream?orgId=1&var-region=bwec
+dream-fwec,    1, 0, 10.100.6.33,    8031,  125, 0, 0, https://10.100.211.93:3000/d/dream/dream?orgId=1&var-region=fwec
+dream-mantle,  1, 0, 10.100.6.33,    8032,  130, 0, 0, https://10.100.211.93:3000/d/dream/dream?orgId=1&var-region=mantle
+dream-hr,      1, 0, 10.100.6.33,    8033,  135, 0, 0, https://10.100.211.93:3000/d/dream/dream?orgId=1&var-region=hr
+dream-sans,    1, 0, 10.100.6.33,    8034,  140, 0, 0, https://10.100.211.93:3000/d/dream/dream?orgId=1&var-region=sans
+dream-cbm,     1, 0, 10.100.6.33,    8835,  145, 0, 0, https://10.100.211.93:3000/d/dream/dream?orgId=1&var-region=cbm
+odin-tpx,      1, 0, 10.100.5.33,    8888,  153, 0, 0, https://10.100.211.93:3000/d/odin/odin?orgId=1&refresh=5s&var-region=tpx
+odin-orig,     1, 0, 10.100.5.33,    8889,  158, 0, 0, https://10.100.211.93:3000/d/odin/odin?orgId=1&refresh=5s&var-region=orig
+odin-next,     1, 0, 10.100.5.33,    8891,  163, 0, 0, https://10.100.211.93:3000/d/odin/odin?orgId=1&refresh=5s&var-region=next
+odin-cbm,      1, 0, 10.100.5.33,    8890,  168, 0, 0, https://10.100.211.93:3000/d/odin/odin?orgId=1&refresh=5s&var-region=cbm
 #
 kafka0415,     2, 0, 10.100.4.15,    8093,    0, -450, -140, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0415_daq_esss_dk
 kafka0417,     2, 0, 10.100.4.17,    8093,    0, -450, -125, https://10.100.211.93:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0417_daq_esss_dk
