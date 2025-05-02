@@ -45,7 +45,7 @@ vespa,         1, 64, 10.100.6.33,   8888,  64, 0, 0, none
 # 90 - 180
 dream-bwec,    1, 0, 10.100.6.33,    8030,  120, 0, 0, https://10.100.211.93:3000/d/dream/dream?orgId=1&var-region=bwec
 dream-fwec,    1, 0, 10.100.6.33,    8031,  125, 0, 0, https://10.100.211.93:3000/d/dream/dream?orgId=1&var-region=fwec
-dream-mantle,  1, 0, 10.100.6.33,    8032,  130, 0, 0, https://10.100.211.93:3000/d/dream/dream?orgId=1&var-region=mantle
+dream-man,     1, 0, 10.100.6.33,    8032,  130, 0, 0, https://10.100.211.93:3000/d/dream/dream?orgId=1&var-region=mantle
 dream-hr,      1, 0, 10.100.6.33,    8033,  135, 0, 0, https://10.100.211.93:3000/d/dream/dream?orgId=1&var-region=hr
 dream-sans,    1, 0, 10.100.6.33,    8034,  140, 0, 0, https://10.100.211.93:3000/d/dream/dream?orgId=1&var-region=sans
 dream-cbm,     1, 0, 10.100.6.33,    8835,  145, 0, 0, https://10.100.211.93:3000/d/dream/dream?orgId=1&var-region=cbm

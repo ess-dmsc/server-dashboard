@@ -239,22 +239,22 @@ class Monitor:
     # TODO Coordinates are a mess - center is (400, 200)
     def printinst(self, name, mouseovertext, type, state, angle, ofsx, ofsy):
         boxy = 195 + ofsy
-        texty = boxy + 8
+        texty = boxy + 7
         textx = 450 + ofsx
         common = '<text class="names" y="{}" transform="rotate({} 400 200)"'.format(
             texty, angle
         )
         if type == type_efu:
             self.printbox(
-                506 + ofsx, boxy, angle, self.statetocolor(1, state), 1, mouseovertext
+                510 + ofsx, boxy, angle, self.statetocolor(1, state), 1, mouseovertext
             )
             self.printbox(
-                528 + ofsx, boxy, angle, self.statetocolor(2, state), 1, mouseovertext
+                532 + ofsx, boxy, angle, self.statetocolor(2, state), 1, mouseovertext
             )
             self.printbox(
-                550 + ofsx, boxy, angle, self.statetocolor(4, state), 1, mouseovertext
+                554 + ofsx, boxy, angle, self.statetocolor(4, state), 1, mouseovertext
             )
-            self.mprint('{} font-size="8px" x="450">{}</text>'.format(common, name))
+            self.mprint('{} font-size="8px" x="460">{}</text>'.format(common, name))
         elif type == type_text:
             self.mprint(
                 '{} font-size="12px" x="{}">{}</text>'.format(common, textx, name)
