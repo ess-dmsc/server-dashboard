@@ -9,6 +9,7 @@ import time
 import htmlsvg
 
 type_efu = 1
+type_fw = 5
 type_text = 4
 
 col1 = "#c0c0c0"
@@ -137,6 +138,23 @@ class Monitor:
             self.dprint("connection reset (by peer?)")
             return "connection reset (by peer?)"
 
+
+    def check_fw_pipeline(self, ipaddr, port):
+        if self.test:
+            return 5
+        try:
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.connect((ipaddr, port))
+            s.send(b"getstatus")
+            data = s.recv(256)
+            data2 = int(data.decode("utf-8").split()[1][0])
+            s.close()
+            return data2
+        except:
+            self.dprint("connection reset (by peer?)")
+            return 0
+
+
     def check_efu_pipeline(self, ipaddr, port):
         if self.test:
             return 5
@@ -156,6 +174,7 @@ class Monitor:
             self.dprint("connection reset (by peer?)")
             return 0
 
+
     # Check that service is running (accept tcp connection)
     def check_service(self, idx, type, ipaddr, port):
         if self.test:
@@ -174,12 +193,20 @@ class Monitor:
                 else:
                     self.lab.setstatus(idx, status)
                 self.lab.servers[idx][9] = self.efu_get_version(ipaddr, port)
-
+            elif type == type_fw:
+                status = self.check_fw_pipeline(ipaddr, port)
+                if status == 0:
+                    self.lab.clearstatus(
+                        idx, self.s_stage1 | self.s_stage2 | self.s_stage3
+                    )
+                else:
+                    self.lab.setstatus(idx, status)
             else:
                 self.lab.setstatus(idx, self.s_stage1 | self.s_stage2 | self.s_stage3)
         else:
             self.lab.clearstatus(idx, self.s_service)
             self.dprint("no service for {}:{}".format(ipaddr, port))
+
 
     def getstatus(self):
         for idx, res in enumerate(self.lab.servers):
@@ -190,6 +217,7 @@ class Monitor:
                     self.check_service(idx, type, ip, port)
                 else:
                     self.lab.clearstatus(idx, self.s_ping)
+
 
     def printbox(self, x, y, a, color, efu, motext="", width=25):
         if efu:
@@ -245,33 +273,15 @@ class Monitor:
             texty, angle
         )
         if type == type_efu:
-            self.printbox(
-                510 + ofsx, boxy, angle, self.statetocolor(1, state), 1, mouseovertext
-            )
-            self.printbox(
-                532 + ofsx, boxy, angle, self.statetocolor(2, state), 1, mouseovertext
-            )
-            self.printbox(
-                554 + ofsx, boxy, angle, self.statetocolor(4, state), 1, mouseovertext
-            )
-            self.mprint('{} font-size="8px" x="460">{}</text>'.format(common, name))
+            self.printbox(506 + ofsx, boxy, angle, self.statetocolor(1, state), 1, mouseovertext)
+            self.printbox(528 + ofsx, boxy, angle, self.statetocolor(2, state), 1, mouseovertext)
+            self.printbox(550 + ofsx, boxy, angle, self.statetocolor(4, state), 1, mouseovertext)
+            self.mprint('{} font-size="8px" x="450">{}</text>'.format(common, name))
         elif type == type_text:
-            self.mprint(
-                '{} font-size="12px" x="{}">{}</text>'.format(common, textx, name)
-            )
+            self.mprint('{} font-size="12px" x="{}">{}</text>'.format(common, textx, name))
         else:
-            self.printbox(
-                505 + ofsx,
-                boxy,
-                angle,
-                self.statetocolor(1, state),
-                0,
-                mouseovertext,
-                35,
-            )
-            self.mprint(
-                '{} font-size="8px" x="{}">{}</text>'.format(common, textx, name)
-            )
+            self.printbox(505 + ofsx, boxy,angle, self.statetocolor(1, state), 0, mouseovertext)
+            self.mprint('{} font-size="8px" x="{}">{}</text>'.format(common, textx, name))
         self.mprint("")
 
     def makelegend(self):
