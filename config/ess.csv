@@ -68,7 +68,7 @@ AKHQ,          3, 0, 10.100.211.94,       8443, 0, -450, 40, https://10.100.211.
 graylog,       3, 0, graylog.daq.esss.dk, 9000, 0, -450, 55, http://graylog.daq.esss.dk:9000/search
 #
 filewriter0626,        2, 0, 10.100.6.26, 8888, 0, -355, 10, https://10.100.211.107:3000/d/kafka-to-nexus/kafka-to-nexus-filewriter?orgId=1&refresh=5s
-filewriter0628,        2, 64, 10.100.6.28, 8888, 0, -355, 25, https://10.100.211.107:3000/d/kafka-to-nexus/kafka-to-nexus-filewriter?orgId=1&refresh=5s
+filewriter0628,        2, 0, 10.100.6.28, 8888, 0, -355, 25, https://10.100.211.107:3000/d/kafka-to-nexus/kafka-to-nexus-filewriter?orgId=1&refresh=5s
 filewriter0629,        2, 0, 10.100.6.29, 8888, 0, -355, 40, https://10.100.211.107:3000/d/kafka-to-nexus/kafka-to-nexus-filewriter?orgId=1&refresh=5s
 filewriter0630,        2, 0, 10.100.6.30, 8888, 0, -355, 55, https://10.100.211.107:3000/d/kafka-to-nexus/kafka-to-nexus-filewriter?orgId=1&refresh=5s
 nicosserver01,         2, 0, 10.102.10.238, 14869, 0, -355, 70, none
