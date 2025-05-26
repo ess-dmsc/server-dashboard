@@ -145,11 +145,17 @@ class Monitor:
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.connect((ipaddr, port))
-            s.send(b"getstatus")
-            data = s.recv(256)
-            data2 = int(data.decode("utf-8").split()[1][0])
-            s.close()
-            return data2
+            s.shutdown(socket.SHUT_WR) # no data sent
+            data = b""
+            while True:
+                chunk = s.recv(4096)
+                if not chunk:
+                    break
+                data += chunk
+            lines = data.decode("utf-8", errors="ignore").strip().splitlines()
+            if lines:
+                return int(lines[-1].split()[1][0]) * 5 # will be either 0 or 1
+            return data
         except:
             self.dprint("connection reset (by peer?)")
             return 0
