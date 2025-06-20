@@ -65,8 +65,8 @@ AKHQ,          3, 0, 10.100.211.94,            8443, 0, -450, -20, https://10.10
 graylog,       3, 0, ymir-graylog.daq.esss.dk, 9000, 0, -450, -5,  http://ymir-graylog.daq.esss.dk:9000/search
 forwarder01,   2, 0, 10.102.10.244,            8093, 0, -450, 10,  none
 #
-filewriter0625,        2, 0, 10.100.6.25, 8888, 0, -355, -50,    https://10.100.211.93:3000/d/kafka-to-nexus/kafka-to-nexus-filewriter?orgId=1&refresh=5s
-filewriter0627,        2, 0, 10.100.6.27, 8888, 0, -355, -35,    https://10.100.211.93:3000/d/kafka-to-nexus/kafka-to-nexus-filewriter?orgId=1&refresh=5s
+filewriter0625,        5, 0, 10.100.6.25, 9999, 0, -355, -50,    https://10.100.211.93:3000/d/kafka-to-nexus/kafka-to-nexus-filewriter?orgId=1&refresh=5s
+filewriter0627,        5, 0, 10.100.6.27, 9999, 0, -355, -35,    https://10.100.211.93:3000/d/kafka-to-nexus/kafka-to-nexus-filewriter?orgId=1&refresh=5s
 nicosserver01,         2, 0, 10.102.10.238, 14869, 0, -355, -20, none
 #
 Kafka &nbsp; Brokers,  4, 64, 0.0.0.0, 65535, 0, -450, -160, none
