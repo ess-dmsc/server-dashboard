@@ -3,6 +3,7 @@ import argparse
 from datetime import datetime
 import html
 import os
+import re
 import socket
 import subprocess
 import time
@@ -153,9 +154,12 @@ class Monitor:
                     break
                 data += chunk
             lines = data.decode("utf-8", errors="ignore").strip().splitlines()
-            if lines:
-                return int(lines[-1].split()[1][0]) * 5 # will be either 0 or 1
-            return data
+            pattern = re.compile(r'"kafka-to-nexus\.(.+?)\.worker_state":\s*"(\d+)"')
+            for line in lines:
+                match = pattern.search(line)
+                if match:
+                    return int(match.group(2))
+            return 0
         except:
             self.dprint("connection reset (by peer?)")
             return 0
