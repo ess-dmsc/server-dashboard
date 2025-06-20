@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 import argparse
 from datetime import datetime
+import json
 import html
 import os
-import re
 import socket
 import subprocess
 import time
@@ -154,15 +154,20 @@ class Monitor:
                     break
                 data += chunk
             lines = data.decode("utf-8", errors="ignore").strip().splitlines()
-            pattern = re.compile(r'"kafka-to-nexus\.(.+?)\.worker_state":\s*"(\d+)"')
             for line in lines:
-                match = pattern.search(line)
-                if match:
-                    return int(match.group(2))
-            return 0
-        except:
-            self.dprint("connection reset (by peer?)")
-            return 0
+                try:
+                    obj = json.loads(line)
+                    # Look for any key ending with '.worker_state'
+                    for key, value in obj.items():
+                        if key.endswith(".worker_state"):
+                            return int(value)
+                except Exception as e:
+                    self.dprint(f"JSON parse error: {e}")
+            # If no worker_state found
+            return -1
+        except OSError as e:
+            self.dprint(f"Socket error: {e}")
+            return -1
 
 
     def check_efu_pipeline(self, ipaddr, port):
