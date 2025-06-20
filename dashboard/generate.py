@@ -2,7 +2,6 @@
 import argparse
 from datetime import datetime
 import html
-import json
 import os
 import socket
 import subprocess
@@ -154,17 +153,10 @@ class Monitor:
                     break
                 data += chunk
             lines = data.decode("utf-8", errors="ignore").strip().splitlines()
-            for line in lines:
-                try:
-                    obj = json.loads(line)
-                    # Look for any key ending with '.worker_state'
-                    for key, value in obj.items():
-                        if key.endswith(".worker_state"):
-                            return int(value)
-                except Exception:
-                    continue
-                return 0  # Not found
-        except Exception:
+            if lines:
+                return int(lines[-1].split()[1][0]) * 5 # will be either 0 or 1
+            return data
+        except:
             self.dprint("connection reset (by peer?)")
             return 0
 
