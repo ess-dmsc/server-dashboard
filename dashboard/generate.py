@@ -146,23 +146,36 @@ class Monitor:
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.connect((ipaddr, port))
-            s.shutdown(socket.SHUT_WR) # no data sent
+            s.shutdown(socket.SHUT_WR)  # no data sent
             data = b""
             while True:
                 chunk = s.recv(4096)
                 if not chunk:
                     break
                 data += chunk
-            lines = data.decode("utf-8", errors="ignore").strip().splitlines()
-            for line in lines:
-                try:
-                    obj = json.loads(line)
-                    # Look for any key ending with '.worker_state'
-                    for key, value in obj.items():
-                        if key.endswith(".worker_state"):
-                            return int(value)
-                except Exception as e:
-                    self.dprint(f"JSON parse error: {e}")
+            try:
+                # Try to parse as a JSON array first
+                arr = json.loads(data.decode("utf-8", errors="ignore"))
+                if isinstance(arr, list):
+                    for obj in arr:
+                        if isinstance(obj, dict):
+                            for key, value in obj.items():
+                                if key.endswith(".worker_state"):
+                                    return int(value)
+                # If not found, fall back to line-by-line parsing
+            except Exception as e:
+                self.dprint(f"JSON array parse error: {e}")
+                # Fallback: try line-by-line parsing
+                lines = data.decode("utf-8", errors="ignore").strip().splitlines()
+                for line in lines:
+                    try:
+                        obj = json.loads(line)
+                        if isinstance(obj, dict):
+                            for key, value in obj.items():
+                                if key.endswith(".worker_state"):
+                                    return int(value)
+                    except Exception as e2:
+                        self.dprint(f"JSON parse error: {e2}")
             # If no worker_state found
             return -1
         except OSError as e:
