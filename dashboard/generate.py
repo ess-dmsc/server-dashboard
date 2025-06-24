@@ -4,7 +4,9 @@ from datetime import datetime
 import json
 import html
 import os
+import re
 import socket
+import select
 import subprocess
 import time
 import htmlsvg
@@ -139,49 +141,61 @@ class Monitor:
             self.dprint("connection reset (by peer?)")
             return "connection reset (by peer?)"
 
-
     def check_fw_pipeline(self, ipaddr, port):
         if self.test:
             return 5
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            s.connect((ipaddr, port))
-            s.shutdown(socket.SHUT_WR)  # no data sent
+            s.setblocking(False)
+            try:
+                s.connect((ipaddr, port))
+            except BlockingIOError:
+                pass  # Expected for non-blocking connect
+
+            # Wait for the socket to be writable (connection complete)
+            ready = select.select([], [s], [], 3)  # 3 second timeout
+            if s not in ready[1]:
+                self.dprint(f"Non-blocking connect timeout for {ipaddr}:{port}")
+                s.close()
+                return 1
+
+            s.shutdown(socket.SHUT_WR)
             data = b""
             while True:
-                chunk = s.recv(4096)
-                if not chunk:
-                    break
-                data += chunk
+                try:
+                    chunk = s.recv(4096)
+                    if not chunk:
+                        break
+                    data += chunk
+                except BlockingIOError:
+                    # No data ready yet, wait a bit
+                    ready = select.select([s], [], [], 0.5)
+                    if s not in ready[0]:
+                        break
+            s.close()
+
+            text = data.decode("utf-8", errors="ignore")
+            last_state = None
+
+            # Try to parse as JSON array first
             try:
-                # Try to parse as a JSON array first
-                arr = json.loads(data.decode("utf-8", errors="ignore"))
+                arr = json.loads(text)
                 if isinstance(arr, list):
                     for obj in arr:
                         if isinstance(obj, dict):
-                            for key, value in obj.items():
-                                if key.endswith(".worker_state"):
-                                    return int(value)
-                # If not found, fall back to line-by-line parsing
+                            for k, v in obj.items():
+                                if k.endswith(".worker_state"):
+                                    last_state = int(v)
             except Exception as e:
                 self.dprint(f"JSON array parse error: {e}")
-                # Fallback: try line-by-line parsing
-                lines = data.decode("utf-8", errors="ignore").strip().splitlines()
-                for line in lines:
-                    try:
-                        obj = json.loads(line)
-                        if isinstance(obj, dict):
-                            for key, value in obj.items():
-                                if key.endswith(".worker_state"):
-                                    return int(value)
-                    except Exception as e2:
-                        self.dprint(f"JSON parse error: {e2}")
-            # If no worker_state found
-            return -1
+                # Fallback: search for line ending in 0.worker_state
+                match = re.search(r'"0\.worker_state"\s*:\s*"(\d+)"\s*}', text)
+                if match:
+                    last_state = int(match.group(1))
+            return last_state if last_state is not None else 0
         except OSError as e:
             self.dprint(f"Socket error: {e}")
             return -1
-
 
     def check_efu_pipeline(self, ipaddr, port):
         if self.test:
