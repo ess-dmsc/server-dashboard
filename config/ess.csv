@@ -8,14 +8,14 @@
 nmx,           1,  0, efu0436.daq.esss.dk,   9001, -159, 0, 0, https://10.100.211.107:3000/d/nmx/nmx?refresh=5s
 nmx-cbm,       1,  0, efu0436.daq.esss.dk,   9010, -152, 0, 0, none
 bifrost,       1,  0, efu0433.daq.esss.dk,   9001, -138, 0, 0, https://10.100.211.107:3000/d/bifrost/bifrost?refresh=5s
-bifrost-cbm,   1,  0, efu0433.daq.esss.dk,   9010, -131, 0, 0, none
+bifrost-cbm,   1,  0, efu0433.daq.esss.dk,   9010, -131, 0, 0, https://10.100.211.107:3000/d/8lDvTOQSz/cbm?orgId=1&refresh=5s&var-instrument=bifrost&var-serilaizer=cbm1
 tbl-mb,        1,  0, efu0437.daq.esss.dk,   9001, -100, 0, 0, https://10.100.211.107:3000/d/3FvPQ0lSk/tbl?orgId=1&refresh=5s&var-region=mb
 
 # Angle Group
 # -90 - -0
 tbl-tpx,       1,  0, efu0437.daq.esss.dk,   9002, -92, 0, 0, https://10.100.211.107:3000/d/3FvPQ0lSk/tbl?orgId=1&refresh=5s&var-region=tp3
 tbl-3he,       1,  0, efu0437.daq.esss.dk,   9003, -84, 0, 0, https://10.100.211.107:3000/d/3FvPQ0lSk/tbl?orgId=1&refresh=5s&var-region=3he
-tbl-cbm,       1,  0, efu0437.daq.esss.dk,   9010, -76, 0, 0, https://10.100.211.107:3000/d/3FvPQ0lSk/tbl?orgId=1&refresh=5s&var-region=cbm
+tbl-cbm,       1,  0, efu0437.daq.esss.dk,   9010, -76, 0, 0, https://10.100.211.107:3000/d/8lDvTOQSz/cbm?orgId=1&refresh=5s&var-instrument=tbl&var-serilaizer=cbm1
 
 # Angle Group
 # -90 - 0
@@ -28,10 +28,14 @@ loki5,         1,  0, efu0434.daq.esss.dk,   9006, -27, 0, 0, https://10.100.211
 loki6,         1,  0, efu0434.daq.esss.dk,   9007, -21, 0, 0, https://10.100.211.107:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank6
 loki7,         1,  0, efu0434.daq.esss.dk,   9008, -15, 0, 0, https://10.100.211.107:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank7
 loki8,         1,  0, efu0434.daq.esss.dk,   9009, -9,  0, 0, https://10.100.211.107:3000/d/loki/loki?refresh=5s&orgId=1&var-region=bank8
-loki-cbm,      1,  0, efu0434.daq.esss.dk,   9020, -4,  0, 0, https://10.100.211.107:3000/d/loki/loki?refresh=5s&orgId=1&var-region=cbm
+loki-cbm,      1,  0, efu0434.daq.esss.dk,   9020, -4,  0, 0, https://10.100.211.107:3000/d/8lDvTOQSz/cbm?orgId=1&refresh=5s&var-instrument=loki&var-serilaizer=cbm1
 
 # Angle Group
 # 0 - 90
+estia-cbm,     1,  0, efu0632.daq.esss.dk,   9010,  25, 0, 0, https://10.100.211.107:3000/d/Ie9Rl8zHk/estia?orgId=1&refresh=5s&var-region=cbm
+estia,         1,  0, efu0632.daq.esss.dk,   9001,  31, 0, 0, https://10.100.211.107:3000/d/estia/estia?orgId=1&refresh=5s
+skadi,         1, 64, efu0632.daq.esss.dk,   8888,  45, 0, 0, none
+vespa,         1, 64, efu0632.daq.esss.dk,   8888,  65, 0, 0, none
 
 # Angle Group
 # 90 - 180
@@ -40,9 +44,9 @@ dream-fwec,    1, 0, efu0631.daq.esss.dk,    9002,  132, 0, 0, https://10.100.21
 dream-mantle,  1, 0, efu0631.daq.esss.dk,    9003,  138, 0, 0, https://10.100.211.107:3000/d/dream/dream?refresh=5s&orgId=1&var-region=mantle
 dream-hr,      1, 0, efu0631.daq.esss.dk,    9004,  144, 0, 0, https://10.100.211.107:3000/d/dream/dream?refresh=5s&orgId=1&var-region=hr
 dream-sans,    1, 0, efu0631.daq.esss.dk,    9005,  150, 0, 0, https://10.100.211.107:3000/d/dream/dream?refresh=5s&orgId=1&var-region=sans
-dream-cbm,     1, 0, efu0631.daq.esss.dk,    9006,  156, 0, 0, none
+dream-cbm,     1, 0, efu0631.daq.esss.dk,    9006,  156, 0, 0, https://10.100.211.107:3000/d/8lDvTOQSz/cbm?orgId=1&refresh=5s&var-instrument=dream&var-serilaizer=cbm1
 odin,          1, 0, efu0435.daq.esss.dk,    9001,  168, 0, 0, https://10.100.211.107:3000/d/odin/odin?refresh=5s
-odin-cbm,      1, 0, efu0435.daq.esss.dk,    9010,  174, 0, 0, none
+odin-cbm,      1, 0, efu0435.daq.esss.dk,    9010,  174, 0, 0, https://10.100.211.107:3000/d/8lDvTOQSz/cbm?orgId=1&refresh=5s&var-instrument=odin&var-serilaizer=cbm1
 
 # Kafka
 kafka0413,     2, 0,  10.100.4.13,    8093,    0, -450, -140, https://10.100.211.107:3000/d/kafka-broker/kafka-broker?refresh=30s&var-server=kafka0413
