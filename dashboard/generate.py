@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
 import argparse
 from datetime import datetime
+import json
 import html
 import os
+import re
 import socket
+import select
 import subprocess
 import time
 import htmlsvg
 
 type_efu = 1
+type_fw = 5
 type_text = 4
 
 col1 = "#c0c0c0"
@@ -137,6 +141,62 @@ class Monitor:
             self.dprint("connection reset (by peer?)")
             return "connection reset (by peer?)"
 
+    def check_fw_pipeline(self, ipaddr, port):
+        if self.test:
+            return 5
+        try:
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.setblocking(False)
+            try:
+                s.connect((ipaddr, port))
+            except BlockingIOError:
+                pass  # Expected for non-blocking connect
+
+            # Wait for the socket to be writable (connection complete)
+            ready = select.select([], [s], [], 3)  # 3 second timeout
+            if s not in ready[1]:
+                self.dprint(f"Non-blocking connect timeout for {ipaddr}:{port}")
+                s.close()
+                return 1
+
+            s.shutdown(socket.SHUT_WR)
+            data = b""
+            while True:
+                try:
+                    chunk = s.recv(4096)
+                    if not chunk:
+                        break
+                    data += chunk
+                except BlockingIOError:
+                    # No data ready yet, wait a bit
+                    ready = select.select([s], [], [], 0.5)
+                    if s not in ready[0]:
+                        break
+            s.close()
+
+            text = data.decode("utf-8", errors="ignore")
+            last_state = None
+
+            # Try to parse as JSON array first
+            try:
+                arr = json.loads(text)
+                if isinstance(arr, list):
+                    for obj in arr:
+                        if isinstance(obj, dict):
+                            for k, v in obj.items():
+                                if k.endswith(".worker_state"):
+                                    last_state = int(v)
+            except Exception as e:
+                self.dprint(f"JSON array parse error: {e}")
+                # Fallback: search for line ending in 0.worker_state
+                match = re.search(r'"0\.worker_state"\s*:\s*"(\d+)"\s*}', text)
+                if match:
+                    last_state = int(match.group(1))
+            return last_state if last_state is not None else 0
+        except OSError as e:
+            self.dprint(f"Socket error: {e}")
+            return -1
+
     def check_efu_pipeline(self, ipaddr, port):
         if self.test:
             return 5
@@ -156,6 +216,7 @@ class Monitor:
             self.dprint("connection reset (by peer?)")
             return 0
 
+
     # Check that service is running (accept tcp connection)
     def check_service(self, idx, type, ipaddr, port):
         if self.test:
@@ -174,12 +235,20 @@ class Monitor:
                 else:
                     self.lab.setstatus(idx, status)
                 self.lab.servers[idx][9] = self.efu_get_version(ipaddr, port)
-
+            elif type == type_fw:
+                status = self.check_fw_pipeline(ipaddr, port)
+                if status == 0:
+                    self.lab.clearstatus(
+                        idx, self.s_stage1 | self.s_stage2 | self.s_stage3
+                    )
+                else:
+                    self.lab.setstatus(idx, status)
             else:
                 self.lab.setstatus(idx, self.s_stage1 | self.s_stage2 | self.s_stage3)
         else:
             self.lab.clearstatus(idx, self.s_service)
             self.dprint("no service for {}:{}".format(ipaddr, port))
+
 
     def getstatus(self):
         for idx, res in enumerate(self.lab.servers):
@@ -190,6 +259,7 @@ class Monitor:
                     self.check_service(idx, type, ip, port)
                 else:
                     self.lab.clearstatus(idx, self.s_ping)
+
 
     def printbox(self, x, y, a, color, efu, motext="", width=25):
         if efu:
@@ -245,33 +315,15 @@ class Monitor:
             texty, angle
         )
         if type == type_efu:
-            self.printbox(
-                510 + ofsx, boxy, angle, self.statetocolor(1, state), 1, mouseovertext
-            )
-            self.printbox(
-                532 + ofsx, boxy, angle, self.statetocolor(2, state), 1, mouseovertext
-            )
-            self.printbox(
-                554 + ofsx, boxy, angle, self.statetocolor(4, state), 1, mouseovertext
-            )
-            self.mprint('{} font-size="8px" x="460">{}</text>'.format(common, name))
+            self.printbox(506 + ofsx, boxy, angle, self.statetocolor(1, state), 1, mouseovertext)
+            self.printbox(528 + ofsx, boxy, angle, self.statetocolor(2, state), 1, mouseovertext)
+            self.printbox(550 + ofsx, boxy, angle, self.statetocolor(4, state), 1, mouseovertext)
+            self.mprint('{} font-size="8px" x="450">{}</text>'.format(common, name))
         elif type == type_text:
-            self.mprint(
-                '{} font-size="12px" x="{}">{}</text>'.format(common, textx, name)
-            )
+            self.mprint('{} font-size="12px" x="{}">{}</text>'.format(common, textx, name))
         else:
-            self.printbox(
-                505 + ofsx,
-                boxy,
-                angle,
-                self.statetocolor(1, state),
-                0,
-                mouseovertext,
-                35,
-            )
-            self.mprint(
-                '{} font-size="8px" x="{}">{}</text>'.format(common, textx, name)
-            )
+            self.printbox(505 + ofsx, boxy,angle, self.statetocolor(1, state), 0, mouseovertext)
+            self.mprint('{} font-size="8px" x="{}">{}</text>'.format(common, textx, name))
         self.mprint("")
 
     def makelegend(self):
