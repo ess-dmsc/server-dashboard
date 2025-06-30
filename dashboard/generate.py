@@ -144,59 +144,48 @@ class Monitor:
     def check_fw_pipeline(self, ipaddr, port):
         if self.test:
             return 5
+        
+        s = None 
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            s.setblocking(False)
-            try:
-                s.connect((ipaddr, port))
-            except BlockingIOError:
-                pass
-
-            ready_to_write, _, _ = select.select([], [s], [], 3)
-            if s not in ready_to_write:
-                self.dprint(f"Non-blocking connect timeout for {ipaddr}:{port}. Assuming the filewriter is writing to a file.")
-                s.close()
-                return 1
-
+            
+            s.settimeout(3.0)
+            s.connect((ipaddr, port))
+            self.dprint(f"Connection to {ipaddr}:{port} successful.")
+            
+            s.settimeout(20.0)
             s.shutdown(socket.SHUT_WR)
 
             data = b""
-            inactivity_timeout = 5.0
             while True:
-                ready_to_read, _, _ = select.select([s], [], [], inactivity_timeout)
-                if not ready_to_read:
-                    self.dprint(f"Inactivity timeout for {ipaddr}:{port}")
-                    break
                 chunk = s.recv(4096)
                 if not chunk:
                     break
                 data += chunk
-            s.close()
 
             text = data.decode("utf-8", errors="ignore")
-            if not text:
-                self.dprint(f"No data received from {ipaddr}:{port}")
-                return -1
-
-            last_state = None
+            
             try:
                 arr = json.loads(text)
                 if isinstance(arr, list):
                     for obj in reversed(arr):
                         if isinstance(obj, dict):
-                            for k, v in obj.items():
-                                if k.endswith(".worker_state"):
-                                    last_state = int(v)
-                                    break 
-                        if last_state is not None:
-                            break
-            except (json.JSONDecodeError, TypeError) as e:
-                self.dprint(f"Error parsing assumed-valid JSON: {e}")
-            return last_state
+                            for key, value in obj.items():
+                                if key.endswith(".worker_state"):
+                                    return int(value)
+            except json.JSONDecodeError as e:
+                self.dprint(f"Failed to parse JSON for {ipaddr}:{port}. Data might be incomplete. Error: {e}")
+                return -1
+
+            self.dprint(f"worker_state not found for {ipaddr}:{port}")
+            return -1
 
         except OSError as e:
-            self.dprint(f"Socket error: {e}")
+            self.dprint(f"Socket error for {ipaddr}:{port}: {e}")
             return -1
+        finally:
+            if s:
+                s.close()
 
     def check_efu_pipeline(self, ipaddr, port):
         if self.test:
