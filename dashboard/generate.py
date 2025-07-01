@@ -145,47 +145,82 @@ class Monitor:
         if self.test:
             return 5
         
-        s = None 
-        try:
-            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            
-            s.settimeout(3.0)
-            s.connect((ipaddr, port))
-            self.dprint(f"Connection to {ipaddr}:{port} successful.")
-            
-            s.settimeout(20.0)
-            s.shutdown(socket.SHUT_WR)
+        retry_attempts = 3
+        retry_delay = 2 
+        last_exception = None
 
-            data = b""
-            while True:
-                chunk = s.recv(4096)
-                if not chunk:
-                    break
-                data += chunk
-
-            text = data.decode("utf-8", errors="ignore")
-            
+        for attempt in range(retry_attempts):
+            s = None
             try:
-                arr = json.loads(text)
-                if isinstance(arr, list):
-                    for obj in reversed(arr):
-                        if isinstance(obj, dict):
-                            for key, value in obj.items():
-                                if key.endswith(".worker_state"):
-                                    return int(value)
-            except json.JSONDecodeError as e:
-                self.dprint(f"Failed to parse JSON for {ipaddr}:{port}. Data might be incomplete. Error: {e}")
+                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                
+                s.settimeout(3.0)
+                s.connect((ipaddr, port))
+                
+                s.settimeout(20.0)
+                s.shutdown(socket.SHUT_WR)
+
+                buffer = ""
+                while True:
+                    try:
+                        chunk = s.recv(4096).decode('utf-8', errors='ignore')
+                        if not chunk:
+                            break
+                        buffer += chunk
+                    except socket.timeout:
+                        break
+                
+                buffer = buffer.strip()
+                if not buffer:
+                    raise ConnectionError("No data received from socket")
+
+                all_objects = []
+                decoder = json.JSONDecoder()
+                pos = 0
+                while pos < len(buffer):
+                    try:
+                        obj, pos = decoder.raw_decode(buffer, pos)
+                        all_objects.append(obj)
+                    except json.JSONDecodeError:
+                        break
+                
+                if not all_objects:
+                    raise ValueError("Could not parse any JSON objects from received data")
+
+                found_val = None
+                def find_in_obj(target):
+                    nonlocal found_val
+                    if isinstance(target, list):
+                        for item in reversed(target):
+                            find_in_obj(item)
+                            if found_val is not None: return
+                    elif isinstance(target, dict):
+                        for key, value in target.items():
+                            if key.endswith(".worker_state"):
+                                found_val = int(value)
+                                return
+                
+                find_in_obj(all_objects)
+                
+                if found_val is not None:
+                    return found_val
+
+                print(f"worker_state not found for {ipaddr}:{port}. No further retries for this cycle.")
                 return -1
 
-            self.dprint(f"worker_state not found for {ipaddr}:{port}")
-            return -1
+            except (OSError, ConnectionError, ValueError) as e:
+                last_exception = e
+                print(f"Attempt {attempt + 1}/{retry_attempts} for {ipaddr}:{port} failed: {e}")
+                if attempt < retry_attempts - 1:
+                    print(f"Retrying in {retry_delay} seconds...")
+                    time.sleep(retry_delay)
 
-        except OSError as e:
-            self.dprint(f"Socket error for {ipaddr}:{port}: {e}")
-            return -1
-        finally:
-            if s:
-                s.close()
+            finally:
+                if s:
+                    s.close()
+        
+        print(f"All {retry_attempts} attempts failed for {ipaddr}:{port}. Last error: {last_exception}")
+        return -1
 
     def check_efu_pipeline(self, ipaddr, port):
         if self.test:
@@ -227,7 +262,7 @@ class Monitor:
                 self.lab.servers[idx][9] = self.efu_get_version(ipaddr, port)
             elif type == type_fw:
                 status = self.check_fw_pipeline(ipaddr, port)
-                if status == 0:
+                if status == -1 or status == 0:
                     self.lab.clearstatus(
                         idx, self.s_stage1 | self.s_stage2 | self.s_stage3
                     )
