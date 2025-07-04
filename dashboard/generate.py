@@ -2,14 +2,15 @@
 import argparse
 from datetime import datetime
 import json
+import logging
 import html
 import os
-import re
 import socket
-import select
 import subprocess
 import time
 import htmlsvg
+import sys
+from enum import Enum
 
 type_efu = 1
 type_fw = 5
@@ -21,6 +22,20 @@ col3 = "orange"
 col4 = "#444400"
 col5 = "green"
 
+# Setting up logging
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+formatter = logging.Formatter("[%(levelname)s] %(message)s")
+handler = logging.StreamHandler(sys.stdout)
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+
+class Status(Enum):
+    INVALID = -1
+    SERVER_RUNNING = 0
+    SERVICE_RUNNING = 1
+    TEST = 5
+    BAD_COMMAND = 7
 
 class ECDCServers:
     def __init__(self, filename, directory):
@@ -74,6 +89,9 @@ class Monitor:
         self.directory = args.out
         self.starttime = self.gettime()
 
+        if self.debug:
+            logger.setLevel(logging.DEBUG)
+
     def mprint(self, arg):
         self.buffer += arg + "\n"
 
@@ -87,10 +105,6 @@ class Monitor:
     def flush(self):
         self.sync_write_fs("dashboard.svg", self.buffer)
         self.buffer = ""
-
-    def dprint(self, arg):
-        if self.debug:
-            print(arg)
 
     def gettime(self):
         now = datetime.now()
@@ -120,7 +134,7 @@ class Monitor:
         if res.find(b"1 packets transmitted, 1 ") != -1:
             return True
         else:
-            self.dprint("ping failed for {}".format(ipaddr))
+            logger.error(f"ping failed for {ipaddr}")
             return False
 
     def efu_get_version(self, ipaddr, port):
@@ -135,16 +149,16 @@ class Monitor:
 
             # return " ".join(data.split()[1:4])
             test = "&#60;br /&#62;".join(data.decode("utf-8").split()[1:4])
-            self.dprint(test)
+            logger.debug(test)
             return test
-        except:
-            self.dprint("connection reset (by peer?)")
+        except Exception as e:
+            logger.error(f"connection reset (by peer?): {e}")
             return "connection reset (by peer?)"
 
    
     def check_fw_pipeline(self, ipaddr, port):
         if self.test:
-            return 5
+            return Status.TEST
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.settimeout(3.0)
@@ -157,24 +171,22 @@ class Monitor:
                 if not chunk:
                     break
                 data += chunk
-            text_data = data.decode("utf-8", errors="ignore").strip()
-            try:
-                parsed_json = json.loads(text_data)
-                for entry in parsed_json:
-                    for key, value in entry.items():
-                        if key.endswith(".worker_state"):
-                            return int(value)
-                return -1
-            except Exception as e:
-                self.dprint(f"JSON processing error: {e}")
-                return -1
+            parsed_json = json.loads(data.decode("utf-8", errors="ignore").strip())
+            for entry in parsed_json:
+                for key, value in entry.items():
+                    if key.endswith(".worker_state"):
+                        return Status(int(value))
+            return Status.SERVER_RUNNING
+        except ValueError as e:
+            logger.exception(f"Failed to load JSON response from Filewriter {ipaddr}:{port}")
+            return Status.SERVER_RUNNING
         except OSError as e:
-            self.dprint(f"Socket error: {e}")
-            return -1
+            logger.exception(f"Failed to read from Filewriter socket {ipaddr}:{port}")
+            return Status.SERVER_RUNNING
 
     def check_efu_pipeline(self, ipaddr, port):
         if self.test:
-            return 5
+            return Status.TEST.value
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.connect((ipaddr, port))
@@ -183,19 +195,19 @@ class Monitor:
             s.close()
 
             if data.find(b"BADCMD") != -1:
-                self.dprint(data)
-                return 7
+                logger.debug(data)
+                return Status.BAD_COMMAND.value
             data = int(data.split()[1])
             return data
         except:
-            self.dprint("connection reset (by peer?)")
-            return 0
+            logger.exception("connection reset (by peer?)")
+            return Status.SERVER_RUNNING.value
 
 
     # Check that service is running (accept tcp connection)
     def check_service(self, idx, type, ipaddr, port):
         if self.test:
-            return
+            return Status.TEST
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.settimeout(2)
 
@@ -212,18 +224,18 @@ class Monitor:
                 self.lab.servers[idx][9] = self.efu_get_version(ipaddr, port)
             elif type == type_fw:
                 status = self.check_fw_pipeline(ipaddr, port)
-                if status == -1 or status == 0:
+                if status in (Status.INVALID, Status.SERVER_RUNNING):
                     self.lab.clearstatus(
                         idx, self.s_stage1 | self.s_stage2 | self.s_stage3
                     )
                 else:
                     # If there is no status we change it to "server running"
-                    self.lab.setstatus(idx, status)
+                    self.lab.setstatus(idx, status.value)
             else:
                 self.lab.setstatus(idx, self.s_stage1 | self.s_stage2 | self.s_stage3)
         else:
             self.lab.clearstatus(idx, self.s_service)
-            self.dprint("no service for {}:{}".format(ipaddr, port))
+            logger.info("no service for {}:{}".format(ipaddr, port))
 
 
     def getstatus(self):
@@ -329,7 +341,7 @@ class Monitor:
         self.mprint(f'<image x="0" y="300" height="100" width="100" href="/{self.directory}/logo.jpeg" />')
 
         for name, type, status, ip, port, angle, xo, yo, url, sw in self.lab.servers:
-            self.dprint("{} {} {} {}".format(name, type, status, ip))
+            logger.debug("{} {} {} {}".format(name, type, status, ip))
             if url != "none":
                 self.mprint('<a href="{}" target="_blank">'.format(html.escape(url)))
             mouseovertext = "{}:{}&#60;br /&#62;{}".format(ip, port, sw)
