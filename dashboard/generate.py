@@ -151,9 +151,12 @@ class Monitor:
             test = "&#60;br /&#62;".join(data.decode("utf-8").split()[1:4])
             logger.debug(test)
             return test
+        except OSError as e:
+            logger.exception(f"Socket error on {ip}:{port}")
+            return e.msg
         except Exception as e:
-            logger.error(f"connection reset (by peer?): {e}")
-            return "connection reset (by peer?)"
+            logger.exception(f"Error parsing data for {ip}:{port}")
+            return e.msg
 
    
     def check_fw_pipeline(self, ipaddr, port):
