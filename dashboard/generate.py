@@ -164,16 +164,21 @@ class Monitor:
             return Status.TEST
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            s.settimeout(3.0)
+            s.settimeout(5.0)
             s.connect((ipaddr, port))
             s.settimeout(20.0)
             s.shutdown(socket.SHUT_WR)
             data = b""
             while True:
-                chunk = s.recv(4096)
+                try:
+                    chunk = s.recv(4096)
+                except socket.timeout:
+                    logger.error(f"FW: Timeout receiving from {ipaddr}:{port}")
+                    break
                 if not chunk:
                     break
                 data += chunk
+            s.close()
             parsed_json = json.loads(data.decode("utf-8", errors="ignore").strip())
             for entry in parsed_json:
                 for key, value in entry.items():
@@ -192,6 +197,7 @@ class Monitor:
             return Status.TEST.value
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.settimeout(5.0)
             s.connect((ipaddr, port))
             s.send(b"RUNTIMESTATS")
             data = s.recv(256)
@@ -200,8 +206,12 @@ class Monitor:
             if data.find(b"BADCMD") != -1:
                 logger.debug(data)
                 return Status.BAD_COMMAND.value
-            data = int(data.split()[1])
-            return data
+            try:
+                data_val = int(data.split()[1])
+                return data_val
+            except Exception as e:
+                logger.exception(f"Failed to parse data: {data}")
+                return Status.INVALID.value
         except:
             logger.exception("connection reset (by peer?)")
             return Status.SERVER_RUNNING.value
@@ -213,33 +223,34 @@ class Monitor:
             return Status.TEST
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.settimeout(2)
-
-        if sock.connect_ex((ipaddr, port)) == 0:
-            self.lab.setstatus(idx, self.s_service)  #
-            if type == type_efu:
-                status = self.check_efu_pipeline(ipaddr, port)
-                if status == 0:
-                    self.lab.clearstatus(
-                        idx, self.s_stage1 | self.s_stage2 | self.s_stage3
-                    )
+        try:
+            if sock.connect_ex((ipaddr, port)) == 0:
+                self.lab.setstatus(idx, self.s_service)
+                if type == type_efu:
+                    status = self.check_efu_pipeline(ipaddr, port)
+                    if status == 0:
+                        self.lab.clearstatus(
+                            idx, self.s_stage1 | self.s_stage2 | self.s_stage3
+                        )
+                    else:
+                        self.lab.setstatus(idx, status)
+                    self.lab.servers[idx][9] = self.efu_get_version(ipaddr, port)
+                elif type == type_fw:
+                    status = self.check_fw_pipeline(ipaddr, port)
+                    if status in (Status.INVALID, Status.SERVER_RUNNING):
+                        self.lab.clearstatus(
+                            idx, self.s_stage1 | self.s_stage2 | self.s_stage3
+                        )
+                    else:
+                        # If there is no status we change it to "server running"
+                        self.lab.setstatus(idx, status.value)
                 else:
-                    self.lab.setstatus(idx, status)
-                self.lab.servers[idx][9] = self.efu_get_version(ipaddr, port)
-            elif type == type_fw:
-                status = self.check_fw_pipeline(ipaddr, port)
-                if status in (Status.INVALID, Status.SERVER_RUNNING):
-                    self.lab.clearstatus(
-                        idx, self.s_stage1 | self.s_stage2 | self.s_stage3
-                    )
-                else:
-                    # If there is no status we change it to "server running"
-                    self.lab.setstatus(idx, status.value)
+                    self.lab.setstatus(idx, self.s_stage1 | self.s_stage2 | self.s_stage3)
             else:
-                self.lab.setstatus(idx, self.s_stage1 | self.s_stage2 | self.s_stage3)
-        else:
-            self.lab.clearstatus(idx, self.s_service)
-            logger.info("no service for {}:{}".format(ipaddr, port))
-
+                self.lab.clearstatus(idx, self.s_service)
+                logger.info("no service for {}:{}".format(ipaddr, port))
+        finally:
+            sock.close()
 
     def getstatus(self):
         for idx, res in enumerate(self.lab.servers):
