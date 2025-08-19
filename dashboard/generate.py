@@ -169,16 +169,21 @@ class Monitor:
             s.settimeout(20.0)
             s.shutdown(socket.SHUT_WR)
             data = b""
-            while True:
-                try:
-                    chunk = s.recv(4096)
-                except socket.timeout:
-                    logger.error(f"FW: Timeout receiving from {ipaddr}:{port}")
-                    break
-                if not chunk:
-                    break
-                data += chunk
-            s.close()
+            try:
+                while True:
+                    try:
+                        chunk = s.recv(4096)
+                    except socket.timeout:
+                        logger.error(f"Timeout receiving from {ipaddr}:{port}")
+                        return Status.SERVER_RUNNING
+                    if not chunk:
+                        if not data:
+                            logger.error(f"No data received from {ipaddr}:{port}")
+                            return Status.SERVER_RUNNING
+                        break
+                    data += chunk
+            finally:
+                s.close()
             parsed_json = json.loads(data.decode("utf-8", errors="ignore").strip())
             for entry in parsed_json:
                 for key, value in entry.items():
@@ -194,7 +199,7 @@ class Monitor:
 
     def check_efu_pipeline(self, ipaddr, port):
         if self.test:
-            return Status.TEST.value
+            return Status.TEST
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.settimeout(5.0)
@@ -205,35 +210,34 @@ class Monitor:
 
             if data.find(b"BADCMD") != -1:
                 logger.debug(data)
-                return Status.BAD_COMMAND.value
+                return Status.BAD_COMMAND
             try:
-                data_val = int(data.split()[1])
-                return data_val
-            except Exception as e:
+                _, value = data.split()
+                return Status(int(value))
+            except ValueError as e:
                 logger.exception(f"Failed to parse data: {data}")
-                return Status.INVALID.value
+                return Status.INVALID
         except:
             logger.exception("connection reset (by peer?)")
-            return Status.SERVER_RUNNING.value
+            return Status.SERVER_RUNNING
 
 
     # Check that service is running (accept tcp connection)
     def check_service(self, idx, type, ipaddr, port):
         if self.test:
             return Status.TEST
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(2)
-        try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            sock.settimeout(2)
             if sock.connect_ex((ipaddr, port)) == 0:
                 self.lab.setstatus(idx, self.s_service)
                 if type == type_efu:
                     status = self.check_efu_pipeline(ipaddr, port)
-                    if status == 0:
+                    if status == Status.SERVER_RUNNING:
                         self.lab.clearstatus(
                             idx, self.s_stage1 | self.s_stage2 | self.s_stage3
                         )
                     else:
-                        self.lab.setstatus(idx, status)
+                        self.lab.setstatus(idx, status.value)
                     self.lab.servers[idx][9] = self.efu_get_version(ipaddr, port)
                 elif type == type_fw:
                     status = self.check_fw_pipeline(ipaddr, port)
@@ -249,16 +253,14 @@ class Monitor:
             else:
                 self.lab.clearstatus(idx, self.s_service)
                 logger.info("no service for {}:{}".format(ipaddr, port))
-        finally:
-            sock.close()
 
     def getstatus(self):
         for idx, res in enumerate(self.lab.servers):
-            name, type, status, ip, port, ang, xo, yo, grafana, sw = res
+            name, svc_type, status, ip, port, ang, xo, yo, grafana, sw = res
             if not self.is_offline(status):
                 if self.check_ping(ip):
                     self.lab.setstatus(idx, self.s_ping)
-                    self.check_service(idx, type, ip, port)
+                    self.check_service(idx, svc_type, ip, port)
                 else:
                     self.lab.clearstatus(idx, self.s_ping)
 
