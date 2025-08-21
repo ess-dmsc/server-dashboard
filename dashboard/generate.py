@@ -199,7 +199,7 @@ class Monitor:
 
     def check_efu_pipeline(self, ipaddr, port):
         if self.test:
-            return Status.TEST
+            return Status.TEST.value
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.settimeout(5.0)
@@ -210,17 +210,16 @@ class Monitor:
 
             if data.find(b"BADCMD") != -1:
                 logger.debug(data)
-                return Status.BAD_COMMAND
+                return Status.BAD_COMMAND.value
             try:
-                _, value = data.split()
-                return Status(int(value))
-            except ValueError as e:
+                data_val = int(data.split()[1])
+                return data_val
+            except Exception as e:
                 logger.exception(f"Failed to parse data: {data}")
-                return Status.INVALID
+                return Status.INVALID.value
         except:
             logger.exception("connection reset (by peer?)")
-            return Status.SERVER_RUNNING
-
+            return Status.SERVER_RUNNING.value
 
     # Check that service is running (accept tcp connection)
     def check_service(self, idx, type, ipaddr, port):
@@ -232,12 +231,12 @@ class Monitor:
                 self.lab.setstatus(idx, self.s_service)
                 if type == type_efu:
                     status = self.check_efu_pipeline(ipaddr, port)
-                    if status == Status.SERVER_RUNNING:
+                    if status == 0:
                         self.lab.clearstatus(
                             idx, self.s_stage1 | self.s_stage2 | self.s_stage3
                         )
                     else:
-                        self.lab.setstatus(idx, status.value)
+                        self.lab.setstatus(idx, status)
                     self.lab.servers[idx][9] = self.efu_get_version(ipaddr, port)
                 elif type == type_fw:
                     status = self.check_fw_pipeline(ipaddr, port)
